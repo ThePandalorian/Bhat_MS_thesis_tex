@@ -1,0 +1,96 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Abstract}{xi}{chapter*.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Idealization and generality in ecology}{6}{section.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Coexistence of eco-variants in diverse contexts}{8}{section.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.1}Alternative Reproductive Tactics}{8}{subsection.1.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.2}Trophic resource polymorphisms}{9}{subsection.1.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.3}Mating types in isogamous species}{9}{subsection.1.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.4}Phenotypic clustering and sympatric speciation}{10}{subsection.1.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Adaptive diversification: a crash course}{13}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Adaptive diversification}{13}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.1}The `classic' adaptive dynamics approach}{14}{subsection.2.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.2}The PDE approach}{17}{subsection.2.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.3}Stochastic individual-based models}{18}{subsection.2.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Demographic stochasticity and stochastic models}{18}{section.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Diversity in multi-dimensional trait space}{21}{section.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.4}The importance of being finite (and stochastic)}{22}{section.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Population dynamics from stochastic first principles}{25}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Background and motivation}{25}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.1}Birth-death processes}{27}{subsection.3.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.2}SDEs and the Fokker-Planck equation}{28}{subsection.3.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.3}Density-dependence and the intuition for system-size expansions in ecology}{31}{subsection.3.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.4}The intuition for the weak noise approximation in ecology}{32}{subsection.3.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}One-dimensional processes for population size}{32}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.1}Description of the process and the Master Equation}{33}{subsection.3.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.2}The system-size expansion}{35}{subsection.3.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.3}Stochastic fluctuations and the weak noise approximation}{36}{subsection.3.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Multi-dimensional processes for discrete traits}{40}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.1}Description of the process and the Master Equation}{40}{subsection.3.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.2}The system-size expansion}{42}{subsection.3.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.3}The deterministic limit}{43}{subsection.3.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Some familiar faces: Replicator-mutator, quasispecies equation, and the Price equation}{44}{subsubsection*.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.4}Stochastic fluctuations and the weak noise approximation}{47}{subsection.3.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}Infinite-dimensional processes for quantitative traits}{50}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.1}Description of the process and the Master Equation}{51}{subsection.3.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.2}The functional system-size expansion}{54}{subsection.3.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.3}The deterministic limit}{56}{subsection.3.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Some familiar faces: Kimura-Crow and adaptive dynamics}{57}{subsubsection*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.4}Stochastic fluctuations and the weak noise approximation}{63}{subsection.3.4.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.5}An example: The quantitative stochastic logistic equation}{65}{subsection.3.4.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Summary}{66}{section.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Examples and Applications}{69}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Example in one dimension: The stochastic logistic equation}{69}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Example for quantitative traits}{72}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}Interlude: Detecting clusters through Fourier analysis}{72}{subsection.4.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.2}An example: The quantitative logistic equation}{76}{subsection.4.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Appendices}{79}{section*.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}Relation between Ito SDEs and Fokker-Planck equations}{79}{appendix.1.A}%

@@ -1,0 +1,200 @@
+%Packages
+
+%references
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage[
+            backend=biber, %backend to use
+            style=authoryear, %citation style
+            giveninits=true,
+            natbib,
+            block=ragged,
+            maxnames=2]{biblatex}
+
+%%%%%%%%%%%%%%
+%% Modify citations to follow the style of Cell
+%% from https://tex.stackexchange.com/a/404787
+\usepackage{xpatch}
+
+% Some general changes
+\DeclareNameAlias{sortname}{last-first}
+\renewcommand*{\bibinitdelim}{}
+\renewbibmacro*{in:}{%
+    \iffieldequalstr{entrytype}{inproceedings}{%
+        \printtext{\bibstring{in}\addspace}%
+    }{}%
+}
+
+% Changes for Book
+\csletcs{abx@macro@publisher+location+date@orig}{abx@macro@publisher+location+date}
+\renewbibmacro*{publisher+location+date}{%
+    \printtext[parens]{\usebibmacro{publisher+location+date@orig}}
+}
+\DeclareFieldFormat[book]{title}{#1\printunit{\addspace}}
+
+% Changes for inproceedings
+\DeclareFieldFormat[inproceedings]{title}{#1\isdot}
+\DeclareFieldFormat{booktitle}{#1\addcomma}
+\xpatchbibmacro{byeditor+others}{%
+    \usebibmacro{byeditor+othersstrg}%
+    \setunit{\addspace}%
+    \printnames[byeditor]{editor}%
+    \clearname{editor}%
+}{%
+    \printnames[byeditor]{editor}%
+    \clearname{editor}
+    \addcomma\addspace
+    \bibstring{editor}
+    \setunit{\addspace}%
+}{}{}
+
+% Changes in Article
+\DeclareFieldFormat[article]{title}{#1}
+\DeclareFieldFormat[article]{journaltitle}{#1\isdot}
+\DeclareFieldFormat[article]{volume}{\textit{#1}}
+\DeclareFieldFormat[article]{pages}{#1}
+
+%%%%%%%%%%%%%
+
+\usepackage{titlesec} % Format chapter headings
+%from https://tex.stackexchange.com/a/52474
+
+%Add a line b/w chapter number and heading
+%for numbered chapters
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\Huge}
+  {\chaptertitlename~\thechapter}{1pc}
+  {{\color{gray}\titlerule[2pt]}\vspace{1pc}}
+
+%Don't add a line for unnumbered chapters  
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\bfseries\Huge}{}{1pc}
+  {}
+
+%reduce spacing before and after section titles
+%this is to be read {left spacing}{before spacing}{after spacing}
+%spacing: how to read {12pt plus 4pt minus 2pt}
+%           12pt is what we would like the spacing to be
+%           plus 4pt means that TeX can stretch it by at most 4pt
+%           minus 2pt means that TeX can shrink it by at most 2pt
+\titlespacing\section{0pt}{6pt plus 1pt minus 1pt}{0pt plus 1pt minus 1pt}
+\titlespacing\subsection{0pt}{4pt plus 1pt minus 1pt}{0pt plus 1pt minus 1pt}
+\titlespacing\subsubsection{0pt}{4pt plus 1pt minus 1pt}{0pt plus 1pt minus 1pt}
+
+%%%%%%%%%%%%%
+\usepackage{epigraph} %for quotes
+\renewcommand{\textflush}{flushright} %quotes are right aligned
+
+\usepackage{amsthm, amsmath, amssymb} % Mathematical typesetting
+\usepackage{mathrsfs} %fancy fonts for sigma-algebras
+\usepackage{float} % Improved interface for floating objects
+\usepackage[final, colorlinks = true, 
+            linkcolor = black, 
+            citecolor = black,
+            breaklinks=true]{hyperref} % For hyperlinks in the PDF
+\usepackage{graphicx, multicol} % Enhanced support for graphics
+\usepackage{xcolor} % Driver-independent color extensions
+\usepackage{framed}
+\usepackage[normalem]{ulem} %underlining
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{color,soul}
+
+\usepackage[labelfont=bf]{caption} %bold captions on figures and tables
+
+%for tables
+\usepackage{makecell,tabularx}
+%\setlength{\extrarowheight}{12pt} %additive padding
+\renewcommand{\arraystretch}{2} %multiplicative padding 
+\renewcommand\theadfont{\small\bfseries}
+\usepackage{rotating}
+\usepackage{setspace}
+
+%For pseudocode
+\usepackage[boxed]{algorithm2e}
+\DontPrintSemicolon
+
+%A bunch of definitions that make my life easier
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem*{note}{Note}
+\newtheorem*{claim}{Claim}
+\newcommand{\bproof}{\bigskip {\bf Proof. }}
+\newcommand{\eproof}{\hfill\qedsymbol}
+\newcommand{\Disp}{\displaystyle}
+\newcommand{\qe}{\hfill\(\bigtriangledown\)}
+\setlength{\columnseprule}{1 pt}
+
+%for characters inside circles
+%syntax is \circled{character}
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+
+
+\usepackage[mode=buildnew]{standalone} %for loading precompiled tikz figures
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Defines the `mycase` environment for cases in proofs
+\newcounter{cases}
+\newcounter{subcases}[cases]
+\newenvironment{mycase}
+{
+    \setcounter{cases}{0}
+    \setcounter{subcases}{0}
+    \newcommand{\case}
+    {
+        \stepcounter{cases}\textbf{Case \thecases.}
+    }
+    \newcommand{\subcase}
+    {
+        \par\indent\stepcounter{subcases}\textit{Subcase (\thesubcases):}
+    }
+}
+{
+    \par
+}
+\renewcommand*\thecases{\arabic{cases}}
+\renewcommand*\thesubcases{\roman{subcases}}
+
+%For easily making figures
+%syntax is:
+%\myfig{scaling_factor}{name_of_file}{caption}{label}
+\newcommand{\myfig}[4]{\begin{figure}[h] \begin{center} \includegraphics[width=#1\textwidth]{#2} \caption{#3} \label{#4} \end{center} \end{figure}}
+
+% horizontal line across the page
+\newcommand{\horz}{
+\vspace{-.4in}
+\begin{center}
+\begin{tabular}{p{\textwidth}}\\
+\hline
+\end{tabular}
+\end{center}
+}
+
+%Resize the summation symbol
+%syntax is \sum[size] 
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newlength{\totalheightofsumsign}
+\newlength{\heightanddepthofargument}
+\newcommand{\bigsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}

@@ -1,0 +1,54 @@
+\section*{Appendix A: From It\^{o} to Fokker-Planck}\label{sec_Ito_to_FPE}
+Here, I present a simple (informal) derivation of the Fokker-Planck equation (FPE) for a one-dimensional It\^{o} process. The result for the multi-dimensional case follows from the same logic but is more notationally cumbersome.
+\\
+Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dB_t$ on a filtered probability space $\Omega \subseteq \mathbb{R}$ with probability measure $\mathbb{P}$ such that $\mathbb{P}(\cdot) \equiv 0$ on $\partial \Omega$ and $\mathbb{P} \ll m$, where $m$ is the Lebesgue measure. The latter requirement allows us to use the Radon-Nikodym theorem to write $\int \ \cdot \ d\mathbb{P} = \int \ \cdot \ P(x,t)dx$, where $P(x,t)$ is a `probability density function' defined at every point in $\Omega \times [0,\infty)$. Now, Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s lemma, we have:
+\begin{equation*}
+    df(X_t) = f'dX_t + \frac{1}{2}f''d\langle X\rangle_t
+\end{equation*}
+where $\langle \cdot \rangle$ denotes the quadratic variation. For $dX_t = \mu dt + \sigma dB_t$, it is clear that $d\langle X\rangle_t = \sigma^2d\langle B\rangle_t = \sigma^2dt$, and thus, we obtain:
+\begin{align*}
+    df(X_t) = \left(\mu f' + \frac{\sigma^2}{2}f''\right)dt + \sigma f' dB_t
+\end{align*}
+Writing this in integral form and taking expectations on both sides yields:
+\begin{align}
+\label{eq_expectation_Ito}
+    \mathbb{E}[f(X_t)] = \mathbb{E}\left[\int\limits_{0}^{t}\left(\mu f' + \frac{\sigma^2}{2}f''\right)ds\right] + \mathbb{E}\left[\int\limits_{0}^{t}\sigma f' dB_s\right]
+\end{align}
+Since the Brownian motion is a martingale, as long as $X_t$ and $\sigma(X_t,t)$ are reasonably `nice'\footnote{We require $\sigma(X_t,t)f'(X_t) \in \mathcal{L}^*(B)$, which is a highly technical condition. Since existence/uniqueness of solutions for the SDE already requires Lipschitz continuity of $\sigma(X_t,t)$, this seems like a reasonable assumption to make.}, the stochastic integral in the second term of the RHS of \eqref{eq_expectation_Ito} will be a continuous $L^2(\mathbb{P})$ martingale starting at the origin, and its expectation will therefore be 0. Using the definition of the expectation value, we are thus left with:
+\begin{equation*}
+    \int\limits_{\Omega}f(X_t)P(x,t)dx = \int\limits_{\Omega}\left(\int\limits_{0}^{t}\mu f' + \frac{\sigma^2}{2}f''ds\right)P(x,t)dx
+\end{equation*}
+Assuming derivatives and expectations commute, we can now differentiate with respect to time on both sides and use the fundamental theorem of calculus to write
+\begin{equation}
+\label{eq_Ito_to_FPE_for_parts}
+\int\limits_{\Omega}f(X_t)\frac{\partial P}{\partial t}(x,t)dx = \underbrace{\int\limits_{\Omega}\mu f'P(x,t)dx}_{I(x,t)} + \underbrace{\int\limits_{\Omega}\frac{\sigma^2}{2}f''P(x,t)dx}_{J(x,t)}
+\end{equation}
+We will now use integration by parts to further evaluate $I(x,t)$ and $J(x,t)$. Recall that the general formula for integration by parts is given by:
+\begin{equation*}
+    \int\limits_{\Omega}u_{x_i}vdx = -\int\limits_{\Omega}uv_{x_i}dx + \int\limits_{\partial\Omega}uv\gamma_{i}dS(x)
+\end{equation*}
+where subscript indicates differentiation and $\gamma$ is the unit outward normal. In our case, assuming that $P(x,t) \equiv 0$ on $\partial \Omega$, the boundary term (second term of the RHS) vanishes and we can use integration by parts once on $I(x,t)$ to obtain
+\begin{equation}
+\label{eq_Ito_to_FPE_I_term}
+    I(x,t) = - \int\limits_{\Omega}f(X_t)\left(\frac{\partial}{\partial x}\mu P(x,t)\right)dx
+\end{equation}
+and twice on $J(x,t)$ to obtain
+\begin{align}
+    J(x,t) &= - \frac{1}{2}\int\limits_{\Omega}f'(X_t)\left(\frac{\partial}{\partial x}\sigma^2 P(x,t)\right)dx\nonumber\\
+    &= \frac{1}{2}\int\limits_{\Omega}f(X_t)\left(\frac{\partial^2}{\partial x^2}\sigma^2 P(x,t)\right)dx\label{eq_Ito_to_FPE_J_term}
+\end{align}
+Substituting \eqref{eq_Ito_to_FPE_I_term} and \eqref{eq_Ito_to_FPE_J_term} into \eqref{eq_Ito_to_FPE_for_parts} and collecting terms yields
+\begin{equation*}
+    \int\limits_{\Omega}f(X_t)\frac{\partial P}{\partial t}(x,t)dx = \int\limits_{\Omega}f(X_t)\left[-\frac{\partial}{\partial x}(\mu P(x,t)) + \frac{1}{2}\frac{\partial^2}{\partial x^2}(\sigma^2P(x,t))\right]dx
+\end{equation*}
+Since this is true for an arbitrary choice of $f(x)$ (as long as $f$ is $C^2$), we are thus led to conclude that the density function $P(x,t)$ must satisfy:
+\begin{equation}
+\label{FPE}
+\frac{\partial P}{\partial t}(x,t) =-\frac{\partial}{\partial x}\left(\mu(x,t) P(x,t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left((\sigma(x,t))^2P(x,t)\right)
+\end{equation}
+Equation \eqref{FPE} is the Fokker-Planck equation in one dimension. Using the exact same strategy, the multidimensional Fokker-Planck equation for the $n$ dimensional It\^{o} Process $d\mathbf{X}_t = \mu(\mathbf{X}_t,t)dt + \sigma(\mathbf{X}_t,t)dB_t$ is found to be:
+\begin{equation}
+\label{FPE_ndim}
+\frac{\partial P}{\partial t}(\mathbf{x},t) =-\sum\limits_{i=1}^{n}\frac{\partial}{\partial x_i}\left(\mu_i(\mathbf{x},t) P(\mathbf{x},t)\right) + \frac{1}{2}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\frac{\partial^2}{\partial x_ix_j}\left(D_{ij}P(\mathbf{x},t)\right)
+\end{equation}
+where $\mathbf{D} = \mathbf{\sigma}\mathbf{\sigma}^T$.

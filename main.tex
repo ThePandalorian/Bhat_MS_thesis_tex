@@ -1,0 +1,76 @@
+\documentclass[twoside, 12pt]{iiser-thesis}
+
+%Bio dept wants all font in Arial (ew)
+%Will keep it commented until the v end for my own sanity. I refuse to actively change a tex file to Arial permanently. Change compiler to XeLaTeX or LuaLaTeX for this to work
+%\usepackage{fontspec}
+%\setmainfont{Arial}
+
+%my own list of packages
+\input{head}
+
+%this file contains the bibliography
+\addbibresource{refs.bib}
+
+%%%%%%%%%%%%%%%%%%%
+% Packages/Macros %
+%%%%%%%%%%%%%%%%%%%
+\usepackage{fullpage}
+\setlength{\parskip}{1em}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage[toc]{appendix}
+\setcounter{tocdepth}{3}
+
+\catcode`\@=11
+\catcode`\@=12
+
+%%%%%%%%%%%%
+% Document %
+%%%%%%%%%%%%
+%\setcounter{chapter}{-1}
+
+\title{Eco-evolutionary dynamics of finite populations from demographic first principles}
+
+
+\author{Ananda Shikhara Bhat}
+\coordinator{Coordinator} \supervisor{Vishwesha Guttal}\cosupervisor{Rohini Balakrishnan} \sdesignation{}
+\department{Centre for Ecological Sciences, Indian Institute of Science} \reader{Sutirth Dey}
+%\reader{Reader 2}
+\dedication{This thesis is dedicated to ?}
+\graduationyear{2023}
+\academicyear{2022-2023}
+\graduationmonth{April}
+
+\thesisabstract{
+Some central questions of ecology and evolution ask how many distinct variants of an entity can emerge and coexist in sympatry. Examples include the study of diversity in standing genetic variation (alleles), polymorphisms (genotypes/phenotypes), and sympatric speciation (species). Historically, these questions have often been studied through phenomenological models formulated for infinitely large populations. Stochastic individual-based models (IbMs), where ecological rules are specified for each individual, are more realistic but are rarely studied analytically.
+In this thesis, I present a review and synthesis of how ideas from statistical physics can be used to analytically formulate and study IbMs from biological first principles. Starting from a stochastic ‘birth-death process’, I show how density dependence of the population dynamics can be used to obtain a continuous approximation of the system. I then show how well-known equations such as the replicator-mutator and Price equations are recovered in the infinite population limit. The dynamics of large, finite populations can be expressed as stochastic deviations from the deterministic result predicted by these well-known models using a ‘weak noise approximation’. As an application, I show how this formalism can be used to describe a version of the logistic equation for finite populations. Finally, I extend this theory to study quantitative traits through a stochastic field equation. In the infinite population limit, I recover well-known models such as Kimura's continuum-of-alleles and the canonical equation of adaptive dynamics. As an application, I show how to study finite-population effects on evolutionary branching, a process considered important for sympatric speciation.
+}
+
+\acknowledgments{Not more than 250 words}
+\allowdisplaybreaks %allow align envts to go across pages   
+
+\begin{document}
+\thesisfront
+\listoftables
+\listoffigures	
+\chapter{Introduction}
+\input{ind_files/01_Introduction}
+\chapter{Adaptive diversification: a crash course}\label{chap_AD}
+\input{ind_files/02_Foundations}
+\chapter{Population dynamics from stochastic first principles}\label{chap_BD}
+\input{ind_files/03_BD_processes.tex}
+\chapter{Examples and Applications}\label{chap_examples}
+\input{ind_files/04_polymorphisms}
+% \chapter{}
+% \input{ind_files/chapter_03}
+% \chapter{} <-- uncomment and add as required
+% \input{ind_files/chapter_04}
+
+\begin{appendices}
+\chapter{Relation between Ito SDEs and Fokker-Planck equations}\label{App_SDE_FPE}
+\input{ind_files/99_Appendix_A}
+\end{appendices}
+\printbibliography[title=References]
+\end{document}

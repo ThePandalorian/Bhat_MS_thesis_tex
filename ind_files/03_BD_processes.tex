@@ -1,0 +1,919 @@
+\section{Background and motivation}
+
+\epigraph{\justifying ``What we want to know is how the biological forces of natality and mortality are so integrated and correlated in their action as to lead to a final result in size of population which follows this particular curve rather than some other one"}{Raymond Pearl}
+
+Raymond Pearl was one of the pioneers of mathematical ecology as a discipline, and the quote in the epigraph is from his 1927 book titled \textit{The Growth of Populations}. Pearl realized 95 years ago that population dynamics must be ultimately explained by the mechanistic processes of birth and death. Today, there are mounting calls for more mechanistic models of evolution that are grounded in these fundamental processes of birth and death \citep{geritz_mathematical_2012,doebeli_towards_2017}. Ecologists also increasingly recognize that incorporating stochasticity is vital to developing more realistic ecological models \citep{hastings_transients_2004, coulson_skeletons_2004, boettiger_noise_2018, shoemaker_integrating_2020,schreiber_does_2022} and does more than `add noise' to deterministic expectations. Individual-based models, where ecological rules are specified at the level of the individual, are a powerful mathematical tool for mechanistic descriptions of stochastic population dynamics \citep{black_stochastic_2012}. Birth-death processes are a very general class of stochastic processes that can be used to capture a wide range of eco-evolutionary processes. `System-size expansions' and their subsequent analysis using the `weak noise approximation' are common tools for analyzing stochastic birth-death processes that are well-known in the statistical physics and applied mathematics communities \citep{gardiner_stochastic_2009}. However, these tools remain relatively underappreciated in ecology, despite being relatively easy to understand and extremely well-motivated in scenarios germane to ecology and evolution. Here, I present a formulation of population dynamics constructed from first principles grounded in birth-death processes. To facilitate readership by a broad audience, only passing familiarity with calculus (derivatives, integrals, Taylor expansions) and probability are assumed. Familiarity with stochastic calculus is helpful for some sections but is not required, and I provide a brief introduction below. I begin by introducing birth-death processes, SDEs, and the Fokker-Planck equation in a non-technical manner, and providing the intuition for system-size expansions and weak noise analysis in ecological systems. In section \ref{sec_1D_processes}, I show how fluctuating population size of populations of identical individuals can be tracked through a one-dimensional birth-death process. I introduce a description of the system via a `master equation', and then conduct a `system-size expansion' to obtain a Fokker-Planck equation for the system. Finally, I conduct a weak noise approximation to arrive at a linear Fokker-Planck equation which can be solved exactly using some stochastic calculus to arrive at a closed-form solution given by a time-dependent Ornstein-Uhlenbeck process. As an example, I illustrate the complete process for a stochastic version of the logistic equation. In section \ref{sec_nD_processes}, I present a multivariate process to describe the evolution of discretely varying traits, and, as before, illustrate the system size expansion and the weak noise approximation. Under mild assumptions, we show that the deterministic limit of this process is the well-known replicator-mutator equation (or equivalently, Eigen's quasispecies equation), thus establishing the microscopic basis of well-known equations in evolutionary game theory. I also show that the mean value of the trait in the population changes according to the Price equation in the deterministic limit. Section \ref{sec_infD_processes} introduces a function-valued process to model the evolution of quantitative traits such as body size, which can take on uncountably many values. This function-valued process can then also be analyzed via a system-size approximation to arrive at a `functional' Fokker-Planck equation, in terms of functional derivatives. Under mild assumptions, we show that classic equations such as Kimura's infinite alleles model and the canonical equation of adaptive dynamics can be derived as the deterministic limits of this stochastic process. We also conduct a weak noise approximation to arrive at a linear functional Fokker-Planck equation and illustrate the process using the stochastic quantitative logistic equation introduced by \citep{doebeli_adaptive_2011} and \citep{rogers_demographic_2012} as an example.  Sections \ref{sec_1D_processes} and \ref{sec_nD_processes} provide a unified, pedagogical review and conceptual synthesis of techniques that are well-known in physics, as applied to population biology. Section \ref{sec_infD_processes}, to the best of my knowledge, is entirely original. Section \ref{sec_infD_processes} also presents a simple heuristic derivation of quantitative genetics models and adaptive dynamics from stochastic first principles that is simpler than the rigorous mathematical derivations grounded in measure theory and martingale/markov theory that are currently standard reference in theoretical ecology \citep{champagnat_individual_2008}.
+
+\subsection{Birth-death processes}
+Mathematically, a birth-death process is a so-called `continuous-time Markov chain' in which only transitions between local states are allowed. In other words, a birth-death process is a stochastic process unfolding in continuous time such that
+\begin{itemize}
+    \item The process is `Markov', meaning that the future is statistically independent of the past given the present. In more mathematical terms, if the value of the stochastic process at time $t$ is given by $X_t$, $\mathbb{P}(\cdot | E)$ denotes probability conditioned on $E$, and $u < s \leq t$, then
+    \begin{equation*}
+        \mathbb{P}(X_t | X_s, X_u) = \mathbb{P}(X_t | X_s)
+    \end{equation*}
+    \item Direct transitions must be `local'. Mathematicians usually reserve the phrase `birth-death process' to processes that take values in the non-negative integers $\{0,1,2,3,4,\ldots\}$. In this case, only direct transitions from $n$ to $n \pm 1$ are allowed to occur. Biologically, this is saying that we observe the population on a fine enough timescale that the probability of two or more births/deaths occurring at the exact same time is very low and we can disallow it entirely in our models. The conditions for higher dimensional birth-death processes look similar.
+\end{itemize}
+Since these processes unfold in continuous time, they are characterized not by transition probabilities but by transition \emph{rates}, which can be thought of as the probability of transition `per unit time'. The quantity of interest is usually the probability of being in a particular state at a given point in time. The entire birth-death process can be described in terms of such a quantity, through a so-called `Master equation'. The master equation is a partial differential equation (PDE) for the probability of being in a given state at a given time, However, in all but the simplest cases, we can't actually solve this PDE, because it is simply too hard. The primary source of difficulty is non-linearity in the transition rates and the fact that transitions occur in discrete, discontinuous `jumps'. It is much easier to describe and analyze systems by using tools from stochastic calculus and partial differential equations, as we describe below.
+
+\subsection{SDEs and the Fokker-Planck equation}\label{intro_SDE}
+Stochastic systems which change continuously (in the state space) can be described in terms of a `stochastic differential equation' (SDE), which here is interchangeable with the phrase `It\^o process'. An SDE for a stochastic process $\{X_t\}_{t \geq 0}$ is an equation of the form
+\begin{equation}
+\label{ito_SDE_integral}
+    X_t = \int\limits_{0}^{t} F(s,X_s)ds + \int\limits_{0}^{t} G(s,X_s)dB_s
+\end{equation}
+where $F(t,x)$ and $G(t,x)$ are `nice' functions\footnote{For the mathematically oriented reader, there are two requirements: Firstly, we require the functions to have `linear growth', meaning that we can find a constant $C > 0$ such that $\|F(t,x)\| + \|G(t,x)\| \leq C(1+\|x\|)$ for every $x \in \mathbb{R}^{d}$ and $t > 0$. We also require `Lipschitz continuity', which means that we can find a constant $L > 0$ such that $\|F(t,x) - F(t,y)\| + \|G(t,x)-G(t,y)\| \leq L\|x-y\|$ for every pair $x,y \in \mathbb{R}^d$ and $t > 0$. Here, $\|\cdot\|$ denotes the natural norm on the space under consideration. For most of our biological cases, both of these conditions will be satisfied, and so we assume going further that all our SDEs are always well defined and admit solutions.} and $B_t$ is the so-called `standard Brownian motion'. Named after the botanist Robert Brown (who was looking at the random erratic motion of pollen grains in water under a microscope), $\{B_t\}_{t \geq 0}$ is a stochastic process that is supposed to model `random noise' or `undirected diffusion' of a particle. If one imagines $B_t$ as recording the position of a small pollen grain at time $t$, then $B_t$ can be formally thought of as a process that has the following properties:
+\begin{itemize}
+    \item It starts at the origin, \emph{i.e} $B_0 = 0$. This is a harmless assumption made for convenience and amounts to a choice of coordinate system.
+    \item It moves continuously, without sudden jumps across regions of space, \emph{i.e} the map $t \to B_t$ is continuous. This simply says that our pollen grain moves short distances in short intervals of time.
+    \item The future movement is independent of past history. That is, given times $u < s < t$, the displacement $B_t - B_s$ is independent of the past position $B_u$.
+    \item The movement is directionless and random, and displacement is normally distributed. More precisely, given two times $s < t$, the displacement $B_t - B_s$ follows a normal distribution with a mean of $0$ (this is the `directionless' part) and a variance of $t-s$ (this is the `random' part).
+\end{itemize}
+It can then be shown that since the motion is equally likely to be in any direction, the expected position at any point of time is the same as the initial position, \emph{i.e} $\mathbb{E}[B_t | B_0] = B_0 = 0$.\\
+The second integral in equation \eqref{ito_SDE_integral} is It\^o's `stochastic integral', and is to be interpreted in the following sense: Fix a time $T > 0$. Partition the interval $[0,T]$ into $n$ intervals of the form $[t_i,t_{i+1}]$ such that $0 = t_0 < t_1 < t_2 < \ldots < t_n = T$. Then, the (It\^o) stochastic integral from $0$ to $T$ can be thought of as:
+\begin{equation*}
+\int\limits_{0}^{T} G(s,X_s)dB_s \coloneqq \lim_{n \to \infty} \sum\limits_{i=1}^{n}G(t_i,X_{t_i})(B_{t_{i+1}}-B_{t_i})  
+\end{equation*}
+That is to say, it is obtained by making successively finer partitions of the form $[t_i,t_{i+1}]$, and then computing the `area of the rectangle' formed with $B_{t_{i+1}}-B_{t_i}$ and $G(t_i,X_{t_i})$ as sides. This should look similar to the classic Riemann integral, with the uniform width $t_{i+1}-t_i$ of the Riemann integral replaced by a random width corresponding to the random displacement of a Brownian particle during the uniform time interval $[t_i,t_{i+1}]$.\\
+\\
+Equation \eqref{ito_SDE_integral} is often represented in the compact form:
+\begin{equation}
+\label{ito_SDE_diff}
+    dX_t = F(t,X_t)dt + G(t,X_t)dB_t
+\end{equation}
+. The physics literature also often uses the `Langevin form':
+\begin{equation}
+\label{ito_langevin}
+\frac{dx}{dt} = F(t,x) + G(t,x)\eta(t)
+\end{equation}
+where $\eta(t)$ is supposed to be `Gaussian white noise', defined indirectly such that $\int_0^{t}G(s,x)\eta(s)ds$ behaves the same as $\int_0^{t}G(s,X_s)dB_s$. However, it is important to remember that these are both purely formal expressions - Equation \eqref{ito_SDE_diff} is meaningless on its own and is really just shorthand for equation \eqref{ito_SDE_integral}, which is well-defined as explained above; Equation \eqref{ito_langevin} is even worse, because the Brownian motion is known to be non-differentiable, and as such, $\eta(t)$ cannot really exist - Both equations are thus to be interpreted as shorthand for equation \eqref{ito_SDE_integral}, which formally `makes sense'. SDEs are convenient because they satisfy several `nice' analytical properties. For example, using the fact that the Brownian motion has no expected change in value (\emph{i.e} $\mathbb{E}[B_t | B_0] = B_0 = 0$), it can be shown\footnote{We can actually prove something stronger: We can show under rather mild regularity assumptions on $X_t$ and $G(t,x)$ that the stochastic integral is a continuous square-integrable martingale starting at the origin - This means that the map $t \to \int_0^{t}G(s,X_s)dB_s$ is continuous, starts at the origin, and always has an expectation value of $0$.} that the stochastic integral also has an expectation value of $0$ for all $t$, \emph{i.e}:
+\begin{equation*}
+    \mathbb{E}\left[\int\limits_{0}^{t} G(s,X_s)dB_s \bigg{|} X_0\right] = 0
+\end{equation*}
+Using this, and the fact that the future path of the Brownian motion itself is independent of its history, one can derive the following `notational algebra table' for manipulating products of formal expressions of the form \eqref{ito_SDE_diff}:
+\\
+\begin{center}
+    \begin{tabularx}{0.4\textwidth}{ 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X | }
+        \hline
+           & $\mathbf{dt}$ & $\mathbf{dB_t}$ \\
+        \hline
+        $\mathbf{dt}$ & $0$  &  $0$ \\ 
+        \hline
+        $\mathbf{dB_t}$ & $0$  & $dt$ \\
+        \hline
+    \end{tabularx}
+\end{center}
+which becomes very useful for formal manipulation. Using this property, one can show using some simple algebra that if a process $X_t$ taking values in $\mathbb{R}$ satisfies the SDE \eqref{ito_SDE_diff}, then the probability density $P(x,t)$ of finding the process in a state $x \in \mathbb{R}$ at time $t$ satisfies the PDE
+\begin{equation}
+\label{ito_FPE}
+\frac{\partial P}{\partial t}(x,t) = -\frac{\partial}{\partial x}\{F(t,x)P(x,t)\} + \frac{1}{2}\frac{\partial^2}{\partial x^2}\{(G(t,x))^2P(x,t)\}
+\end{equation}
+. I present a simple informal derivation in Appendix \ref{App_SDE_FPE}. Equation \eqref{ito_FPE} is called the `Fokker-Planck equation' in the physics and applied mathematics literature \citep{gardiner_stochastic_2009} and is often called the `Kolmogorov forward equation' in the population genetics \citep{ewens_mathematical_2004} and pure mathematics \citep{oksendal_stochastic_1998} literature. If the function $G$ is independent of $x$, then it comes out of the derivatives in equation \eqref{ito_FPE}, and the resultant Fokker-Planck equation is said to be `linear' (and is much easier to solve). This link between SDEs and Fokker-Planck equations goes both ways: One can show that every stochastic process with a probability density described by a Fokker-Planck equation of the form \eqref{ito_FPE} corresponds to the solution of an SDE of the form \eqref{ito_SDE_diff}, though the proof is much more technical and will not be discussed here. This two-way correspondence proves to be extremely useful, as one approach often works for applications in which the other fails. This correspondence makes it greatly desirable to be able to describe our stochastic process of interest as either the solution to an It\^o SDE of the form \eqref{ito_SDE_diff} or as the solution to a Fokker-Planck equation of the form \eqref{ito_FPE}. System-size expansions facilitate such a description for birth-death processes.
+
+\subsection{Density-dependence and the intuition for system-size expansions in ecology}
+The fundamental idea behind the system-size expansion relates to the nature of the jumps between successive states of a birth-death process. In most situations in ecology, at an individual level, births and deaths of individuals are affected by local population density and not directly by the total population size. Despite this, the jumps themselves occur in terms of the addition (birth) or removal (death) of a \emph{single individual} from the population. If there are many individuals, each individual contributes a negligible amount to the density, and thus, the discontinuous jumps due to individual-level births or deaths can look like a small, \emph{continuous} change in population density. This is the essential idea behind the system-size expansion. The name derives from the formalization of this idea as a change of variable from the discrete values $\{0,1,2,\ldots,n-1,n,n+1,\ldots\}$ to the approximately continuous values $\{0,1/K,2/K,\dots,x-1/K,x,x+1/K,\ldots\}$ by the introduction of a `system size parameter' $K$. In ecology, this parameter will be some fundamental limit on resources, such as habitat size or carrying capacity. In physics and chemistry, it is usually the total volume of a container in which physical or chemical reactions take place. When $K$ is large, the fact that transitions occur in units of a small value $1/K$ can be exploited via a Taylor expansion of the transition rates in the Master equation, which then yields a Fokker-Planck equation upon neglecting higher order terms. A similar approximation is well-known (ever since Fisher) in theoretical population genetics \citep{ewens_mathematical_2004}, where it goes by the name of the `diffusion approximation', and has been heavily used by Kimura \citep{crow_introduction_1970} in his stochastic models. However, the population genetics version of the approximation often lacks an explicit system size parameter (in physics parlance \citep{gardiner_stochastic_2009}, it is closer to a Kramers-Moyal expansion than a Van Kampen expansion) and is thus often somewhat ad-hoc.
+
+
+\subsection{The intuition for the weak noise approximation in ecology}
+If the parameter $K$ is sufficiently large, then the Fokker-Planck equation obtained via the system-size expansion can be further simplified to obtain a linear Fokker-Planck equation. This is accomplished by viewing the stochastic dynamics as fluctuating about a deterministic trajectory (obtained by letting $K \to \infty$) and only works if $K$ is large enough to be able to neglect all but the highest-order terms. This is usually an excellent approximation for populations in which the deterministic trajectory has already reached an attractor (stable fixed point, stable limit cycle, etc.). Since many deterministic eco-evolutionary models are expected to relax to such attractors, such an approximation is a useful first step in increasing the generality of existing models (which are usually studied only in the equilibrium regime) to incorporate the dynamics of finite populations. Importantly, this approximation \emph{only} works if we can discard all but highest-order terms of $K$: Including higher-order terms leads to equations that do not form Fokker-Planck equations and do not even describe probability densities. As such, this approximation is best suited to describe populations that are `medium sized' - small enough that they cannot be assumed to be infinitely large, yet large enough that stochasticity is rather weak and the deterministic limit is somewhat predictive - A situation that occurs frequently in ecology and evolution.
+
+\section{One-dimensional processes for population size}\label{sec_1D_processes}
+The simplest birth-death processes are those in which the state at any time can be characterized by a single number. Populations of identical individuals are an obvious example of such a system. The mathematics below are adapted from sections 6.3 and 7.2 of \citep{gardiner_stochastic_2009}.
+
+\subsection{Description of the process and the Master Equation}
+
+Consider a population of identical individuals subject to some ecological rules that affect individuals' birth and death rates. Since all individuals are identical, we can only really track the population size through time. The population as a whole at any time $t$ can thus be characterized by a single number - its population size (Figure \ref{fig_1D_pop_description}). Imagine further that if a population has $n$ identical individuals, then, from the ecological rules, we can determine a \emph{birth rate} $b(n)$, which gives us a measure of the probability that a new individual will be born and the population size becomes $n+1$ `per unit time'. One must be slightly precise about what exactly they mean when they say `per unit time' since there are no discrete `time steps' for individuals to be born. Here, by `birth rate', we mean the probability that there will be a birth (and no death) per an \emph{infinitesimal} amount of time. More formally, letting $N_t$ denote the random variable representing the population size at time $t$ and letting $\mathbb{P}(E)$ denote the probability (in the common-sense usage) of an event $E$, the birth rate $b(n)$ of a population with population size $n$ is the quantity
+\begin{equation}
+\label{1D_birthrate_defn}
+b(n) \coloneqq \lim_{\epsilon \to 0}\frac{1}{\epsilon}\mathbb{P}\left(N_{t+\epsilon}=n+1 | N_{t}=n\right)
+\end{equation}
+\\
+Exactly analogously, we also assume we can define a \emph{death rate} $d(n)$ of a population of $n$ individuals as the quantity
+\begin{equation}
+\label{1D_deathrate_defn}
+d(n) \coloneqq \lim_{\epsilon \to 0}\frac{1}{\epsilon}\mathbb{P}\left(N_{t+\epsilon}=n-1 | N_{t}=n\right)
+\end{equation}
+An alternative, perhaps more intuitive characterization, of these same quantities is the following: If we have a population of size $n$, and we know that \emph{either a birth or a death} has just occurred, then, the probability that the event that occurred is a birth is
+\begin{equation*}
+    \mathbb{P[\textrm{ birth } | \textrm{ something happened }]} = \frac{b(n)}{b(n)+d(n)}
+\end{equation*}
+and the probability that the event was instead a death is given by
+\begin{equation*}
+    \mathbb{P[\textrm{ death } | \textrm{ something happened }]} = \frac{d(n)}{b(n)+d(n)}
+\end{equation*}
+\\
+\begin{example}\label{ex_1D_stoch_logistic}
+Consider the case where the per-capita birth rate is a constant $\lambda > 0$, \emph{i.e}, $b(n) = \lambda n$, and the per-capita death rate has the linear density-dependence $d(n) = \left(\mu + (\lambda-\mu)\frac{n}{K}\right)n$, where $\mu$ and $K$ are positive constants. Taking the difference between the birth and death rates, we obtain $b(n) - d(n) = (\lambda - \mu)n\left(1-\frac{n}{K}\right)$, where, identifying $r=\lambda-\mu$, we obtain the familiar logistic equation on the RHS. Note, however, that the population itself is stochastic, whereas the logistic equation is a deterministic description.
+\end{example}
+Now, let $P(n,t)$ be the probability that the population size is $n$ at time $t$. We wish to have an equation to describe how $P(n,t)$ changes with time - this will provide a probabilistic description of how we expect the population size to change over time.
+\myfig{0.5}{Media/3.1_BD_process_1D.png}{\textbf{Schematic description of a one-dimensional birth-death process}. Consider a population of identical individuals. The state of the system can be described by a single number, in this case, the population size. Births and deaths result in changes in the total population size, and the birth and death rates are dependent on the current population size.}{fig_1D_pop_description}
+
+To do this, we imagine a large ensemble of populations. In a large ensemble of copies evolving independently, a fraction $P(n,t)$ will have population size $n$ at time $t$ by definition of probability. We can now simply measure the `inflow' and `outflow' of copies of the population from each state. If a population has $n$ individuals, it could either have gotten there from a population of $n+1$ individuals, with a death rate of $d(n+1)$, or from a population of $n-1$ individuals, with a birth rate of $b(n-1)$. Thus, the rate of `inflow' to the state $n$ is given by
+\begin{equation}
+    \label{1D_rate_in}
+    R_{\textrm{in}}(n,t) = b(n-1)P(n-1,t) + d(n+1)P(n+1,t)
+\end{equation}
+Similarly, if the population has $n$ individuals, it could obtain a different state in two ways: With rate $b(n)$, the population witnesses a birth, and with rate $d(n)$, it witnesses a death. Thus, the rate of `outflow' is given by
+\begin{equation}
+    \label{1D_rate_out}
+    R_{\textrm{out}}(n,t) = b(n)P(n,t) + d(n)P(n,t)
+\end{equation}
+The rate of change of the probability of the system being in state $n$ is given by the rate of inflow minus the rate of outflow. Thus, we have
+\begin{align}
+    \frac{\partial P}{\partial t}(n,t) &= R_{\textrm{in}}(n,t) - R_{\textrm{out}}(n,t)\nonumber\\
+    &= b(n-1)P(n-1,t) + d(n+1)P(n+1,t) - b(n)P(n,t) - d(n)P(n,t)\label{1D_M_eqn_nostep}
+\end{align}
+For convenience, let us define two `step operators' $\mathcal{E}^{\pm}$, which act on any functions of populations to their right by either adding or removing an individual, \textit{i.e}
+\begin{equation*}
+    \mathcal{E}^{\pm}f(n,t) = f(n \pm 1,t)
+\end{equation*}
+Rearranging the RHS of \eqref{1D_M_eqn_nostep} to write in terms of these step operators, we obtain the compact expression
+\begin{equation}
+\label{1D_M_eqn}
+\frac{\partial P}{\partial t}(n,t) = (\mathcal{E}^{-}-1)b(n)P(n,t) + (\mathcal{E}^{+}-1)d(n)P(n,t)
+\end{equation}
+This is the so-called `master equation', and completely describes our system. However, in general, $b(n)$ and $d(n)$ may be rather complicated, in which case it may not be possible to solve \eqref{1D_M_eqn} directly.
+
+\subsection{The system-size expansion}
+The system-size expansion arises from noting that in many systems, the interactions are governed not by population size, but by population \emph{density}. However, the population jumps themselves are discretized at the scale of the individual, which becomes negligibly small if we have a large population density. Thus, we assume that there exists a system-size parameter $K > 0$ such that the discrete jumps between states happen in units of $1/K$, and we make the substitutions
+\begin{align*}
+    x &= \frac{n}{K}\\
+    b_K(x) &= \frac{1}{K}b(n)\\
+    d_K(x) &= \frac{1}{K}d(n)
+\end{align*}
+As $K$ grows very large, the discontinuous jumps in $n$ thus appear like `continuous' transitions in our new variable $x$, which can be thought of as the `density' of organisms. A system-size parameter $K$ often naturally emerges in ecological systems through resource-limiting factors such as habitat size or carrying capacity. Under these substitutions, equation \eqref{1D_M_eqn} becomes
+\begin{equation}
+\label{1D_M_eqn_density}
+\frac{\partial P}{\partial t}(x,t) = (\Delta^{-}-1)Kb_K(x)P(x,t) + (\Delta^{+}-1)Kd_K(x)P(x,t)
+\end{equation}
+where we now have the new step operators
+\begin{equation}
+\label{1D_step_operators_density}
+\Delta^{\pm}f(x,t) = f\left(x\pm\frac{1}{K},t\right) 
+\end{equation}
+If $K$ is large, then we can now taylor-expand the action of these step operators as:
+\begin{equation*}
+\Delta^{\pm}f(x,t) = f\left(x\pm\frac{1}{K},t\right) = f(x,t) \pm \frac{1}{K}\frac{\partial f}{\partial x}(x,t) + \frac{1}{2K^2}\frac{\partial^2f}{\partial x^2}(x,t) + \mathcal{O}(K^{-3})
+\end{equation*}
+Substituting these expansions into \eqref{1D_M_eqn_density} and neglecting terms of $\mathcal{O}(K^{-3})$ and higher, we obtain
+\begin{equation}
+\label{1D_FPE}
+\setlength{\fboxsep}{2\fboxsep}\boxed{
+\frac{\partial P}{\partial t}(x,t) = -\frac{ \partial}{\partial x}\{A^{-}(x)P(x,t)\} + \frac{1}{2K}\frac{\partial^2}{\partial x^2}\{A^{+}(x)P(x,t)\}
+}
+\end{equation}
+where
+\begin{equation*}
+A^{\pm}(x) = b_K(x) \pm d_K(x)
+\end{equation*}
+Equation \eqref{1D_FPE} has the form of a so-called `Fokker-Planck equation', and corresponds to the SDE:
+\begin{equation}
+\label{1D_SDE}
+dX_t = A^{-}(X_t)dt + \sqrt{\frac{A^{+}(X_t)}{K}}dB_t
+\end{equation}
+interpreted in the It\^{o} sense. Note that the deterministic component of this process depends on the difference between birth and death rates (a mechanistic measure of Malthusian fitness), whereas the stochastic part depends on their sum and scales inversely with $\sqrt{K}$.
+
+\subsection{Stochastic fluctuations and the weak noise approximation}\label{sec_1D_WNA}
+% The mathematics in this section is taken from \cite{gardiner_stochastic_2009} with minor modifications\footnote{Gardiner uses a parameter $\epsilon>0$ such that noise increases with an increase in $\epsilon$. I have used a parameter $K>0$ such that noise decreases with an increase in $K$, which is more biologically relevant. Gardiner's exact results can be recovered by substituting $\epsilon = \frac{1}{\sqrt{K}}$}.
+If we assume the noise is \emph{weak}, then we can go still further with analytic techniques by measuring fluctuations from the deterministic expectations, albeit with some slightly cumbersome calculations to arrive at the final expressions. We will grit our teeth and get through the algebra below, with my promise that the final answer is neat and easy to handle. It is clear that as $K \to \infty$, equation \eqref{1D_SDE} describes a deterministic process, obtained as the solution to
+\begin{equation*}
+    \frac{dx}{dt} = A^{-}(x) = b_{K}(x) - d_{K}(x)
+\end{equation*}
+This is a very intuitive equation, saying that the rate of change of the population is equal to the birth rate minus the death rate. Let the solution of this equation  be given by $\alpha(t)$, so that $\frac{d{\alpha}}{dt}(t) = A^{-}(\alpha(t))$.\\
+We can now measure (scaled) fluctuations from the deterministic solution $\alpha$ through a new variable $y=\sqrt{K}\left(x-\alpha(t)\right)$. For notational clarity, we will also introduce a new time variable $s=t$ which is equal to the original time variable (this is just so the equations look clearer). Let the probability density function of this new variable be given by $\Tilde{P}(y,s)$. In summary, we have introduced the variables:
+\begin{align*}
+    y &= \sqrt{K}\left(x-\alpha(t)\right)\\
+    s &= t\\
+    \Tilde{P}(y,s) &= \frac{1}{\sqrt{K}}P(x,t)
+\end{align*}
+Note that by ordinary rules of variable substitution, we have:
+\begin{align}
+    \frac{\partial \Tilde{P}}{\partial t} &= \frac{\partial \Tilde{P}}{\partial y}\frac{\partial y}{\partial t} + \frac{\partial \Tilde{P}}{\partial s}\frac{\partial s}{\partial t}\nonumber\\
+    &=\frac{\partial \Tilde{P}}{\partial y}\left( -\sqrt{K}\frac{d\alpha}{dt}\right) + \frac{\partial \Tilde{P}}{\partial s}\nonumber\\
+    &= -\sqrt{K}A^{-}(\alpha(s))\frac{\partial \Tilde{P}}{\partial y} + \frac{\partial \Tilde{P}}{\partial s}\label{weak_noise_expansion_first_term}
+\end{align}
+and
+\begin{equation}
+\label{weak_noise_expansion_second_term}
+    \frac{\partial }{\partial y} = \frac{1}{\sqrt{K}}\frac{\partial }{\partial x}
+\end{equation}
+Reformulating \eqref{1D_FPE} in terms of $y,s$ and $\Tilde{P}$ and substituting \eqref{weak_noise_expansion_first_term} and \eqref{weak_noise_expansion_second_term} yields:
+\begin{align}
+-A^-(\alpha)\frac{\partial\Tilde{P}}{\partial x} + \frac{\partial \Tilde{P}}{\partial s} &= -\sqrt{K}\frac{\partial}{\partial y}\left(A^-(\alpha+\frac{y}{\sqrt{K}})\Tilde{P}\right)+\frac{1}{2}\frac{\partial^2}{\partial y^2}\left(A^+(\alpha+\frac{y}{\sqrt{K}})\Tilde{P}\right)\nonumber\\
+\Rightarrow \frac{\partial \Tilde{P}}{\partial s} &= -\frac{\partial}{\partial y}\left[\sqrt{K}\left(A^-(\alpha+\frac{y}{\sqrt{K}})-A^-(\alpha)\right)\Tilde{P}\right]+\frac{1}{2}\frac{\partial^2}{\partial y^2}\left(A^+(\alpha+\frac{y}{\sqrt{K}})\Tilde{P}\right)\label{weak_noise_exact_equation}
+\end{align}
+We are now ready to make a weak noise `expansion'. We do so by assuming that $\Tilde{P}$, $A^-(\alpha + \frac{y}{\sqrt{K}})$, and $A^+(\alpha+\frac{y}{\sqrt{K}})$ can be approximated by series expansions in $\frac{1}{\sqrt{K}}$ of the form:
+\begin{align*}
+    \Tilde{P} &= \sum\limits_{n=0}^{\infty}\Tilde{P}_n\left(\frac{1}{\sqrt{K}}\right)^n\\
+    A^-\left(\alpha(s) + \frac{y}{\sqrt{K}}\right) &= \sum\limits_{n=0}^{\infty}A^-_n(s)\left(\frac{y}{\sqrt{K}}\right)^n\\
+    A^+\left(\alpha(s) + \frac{y}{\sqrt{K}}\right) &= \sum\limits_{n=0}^{\infty}A^+_n(s)\left(\frac{y}{\sqrt{K}}\right)^n
+\end{align*}
+with $A^-_0(s) = A^-(\alpha(s)), A^+_0(s) = A^+(\alpha(s))$. These could be Taylor expansions, for example, but the exact form of the coefficients is irrelevant as long as it is known to us, so any expansion will work. We can now substitute these series expansions into \eqref{weak_noise_exact_equation} to obtain:
+\begin{equation}
+\begin{split}
+\label{weak_noise_full_series_expansion}
+\sum\limits_{n=0}^{\infty}\left(\frac{1}{\sqrt{K}}\right)^n\frac{\partial \Tilde{P}_n}{\partial s} = 
+-\frac{\partial}{\partial y}\left[\sqrt{K}\left( \sum\limits_{n=1}^{\infty}A^-_n(s)\left(\frac{y}{\sqrt{K}}\right)^n\right)\left(\sum\limits_{m=0}^{\infty}\Tilde{P}_m\left(\frac{1}{\sqrt{K}}\right)^m\right)\right] \\ + 
+\frac{1}{2}\frac{\partial^2}{\partial y^2}\left[\left(\sum\limits_{n=0}^{\infty}A^+_n(s)\left(\frac{y}{\sqrt{K}}\right)^n\right)\left(\sum\limits_{m=0}^{\infty}\Tilde{P}_m\left(\frac{1}{\sqrt{K}}\right)^m\right)\right]
+\end{split}
+\end{equation}
+We can now compare the coefficients of $K^{-n/2}$ for each $n$ in order to arrive at approximations in the series expansion, the idea being that you neglect all terms which are of order greater than $\mathcal{O}(K^{-m/2})$ for some $m$ according to the desired precision.\\
+We observe that for any fixed $r$, the coefficient of $K^{-r/2}$ on the LHS is $\frac{\partial \Tilde{P}_r}{\partial s}$. On the RHS, the coefficients of $K^{-r/2}$ in the second term have the form $\Tilde{P}_{m}A^+_{n}y^n$, subject to the constraint that $m+n=r$. Furthermore, all such terms (and only such terms) are coefficients of $K^{-r/2}$. Thus, after grouping, the coefficient of $K^{-r/2}$ from the second terms of the RHS of \eqref{weak_noise_full_series_expansion} is precisely
+\begin{equation*}
+    \frac{1}{2}\frac{\partial^2}{\partial y^2}\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^+_{r-m}y^{r-m}
+\end{equation*}
+Exactly analogous reasoning reveals that the contribution of the first term of the RHS is:
+\begin{equation*}
+    -\frac{\partial}{\partial y}\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^-_{r-m+1}y^{r-m+1}
+\end{equation*}
+Thus, we find that the $r$th term of the expansion satisfies:
+\begin{equation}
+\label{weak_noise_expansion_each_term}
+\frac{\partial \Tilde{P}_r}{\partial s} = -\frac{\partial}{\partial y}\left(\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^-_{r-m+1}y^{r-m+1}\right) + \frac{1}{2}\frac{\partial^2}{\partial y^2}\left(\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^+_{r-m}y^{r-m}\right)
+\end{equation}
+If we assume we can obtain a reasonable approximation by retaining only the first term of the expansion and neglecting all higher-order terms\footnote{For example, if the deterministic trajectory is at a stable fixed point and subject to weak fluctuations}, we are left with the expression:
+\begin{equation}
+\label{1D_WNA}
+\frac{\partial \Tilde{P}_0}{\partial s} = -A^-_1(s)\frac{\partial}{\partial y}(y\Tilde{P}_0) + \frac{A^+_{0}(s)}{2}\frac{\partial^2 \Tilde{P}_{0}}{\partial y^2}
+\end{equation}
+which is simply the Fokker-Planck equation for the It\^{o} process
+\begin{equation*}
+    dY_t = A^-_1(t)Y_tdt + \sqrt{A^+_0(t)}dB_t
+\end{equation*}
+This equation describes a so-called `Ornstein-Uhlenbeck process', and is easily solved by using $\exp(-\int A^-_1(s)ds)$ as an `integrating factor'. In particular, multiplying both sides by $\exp(-\int A^-_1(s)ds)$ yields
+\begin{align*}
+    \exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dY_t - Y_tA^-_1(t)\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dt &= \sqrt{A^+_0(t)}\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dB_t\\
+    \Rightarrow d\left(\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)Y_t\right) &= \sqrt{A^+_0(t)}\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dB_t
+\end{align*}
+Integrating both sides and noting that $A^+_0(s) = A^+(\alpha(s))$, we thus obtain the final expression
+\begin{equation}
+\label{weak_noise_OU_solution}
+    Y_t = Y_0\exp\left({\int\limits_{0}^{t}A^-_1(s)ds}\right)+\int\limits_{0}^{t}\exp\left(-\int\limits_{s}^{t}A^-_{1}(v)dv\right)\sqrt{A^+(\alpha(s))}dB_s
+\end{equation}
+as the zeroth-order weak noise approximation for stochastic fluctuations from the deterministic trajectory due to demographic noise Note that this is an exact equation, and one can get many insights from it. For example, if $Y_0 = 0$ (\emph{i.e} we start at the deterministic steady state, a natural assumption for measuring fluctuations from it), then we can show by taking expectations in \eqref{weak_noise_OU_solution} and using results presented in \ref{intro_SDE} that we must have $\mathbb{E}[Y_t | Y_0] = 0$. In other words, the fluctuations have zero expectation and are expected to occur symmetrically about $\alpha(t)$), with no bias. The variance (spread) of the fluctuations $Y_t$, as well as higher moments, can also be exactly calculated from \eqref{weak_noise_OU_solution} using some tools from stochastic calculus, but we will not demonstrate this here.\\
+\\
+Importantly, higher order terms do not form FPEs, and in general, $\Tilde{P}_r$ for $r>0$ may be negative and therefore does not even describe a probability. As such, formulating the solution as the solution to an SDE only works for $\Tilde{P}_0$. If noise is large enough that it is not well-approximated by $\Tilde{P}_0$, this method is not very useful.
+
+% \subsection{An example: The stochastic logistic equation}
+% Consider the functional forms of example \ref{ex_1D_stoch_logistic}, given by
+% \begin{equation}
+% \label{ex_1D_stoch_logistic_BD_eqns}
+% \begin{aligned}
+%     b(n) &= \lambda n\\
+%     d(n) &= \left(\mu + (\lambda-\mu)\frac{n}{K}\right)n
+% \end{aligned}
+% \end{equation}
+% Here, $K$ is the system-size parameter. Introducing the new variable $x=n/K$, we obtain
+% \begin{align*}
+%     b_K(x) &= \frac{1}{K}b(n) = \frac{1}{K}\lambda Kx\\
+%     d_K(x) &= \frac{1}{K}d(n) = \frac{1}{K}\left(\mu + (\lambda-\mu)\frac{Kx}{K}\right)Kx
+% \end{align*}
+% Thus, we have
+% \begin{equation*}
+%     A^{\pm}(x) = b_K(x)\pm d_K(x) = x\left(\lambda \pm \left(\left(\mu + (\lambda-\mu)x\right)\right) \right)
+% \end{equation*}
+% Defining $r=\lambda-\mu$ and $v=\lambda+\mu$, we see that the deterministic dynamics are
+% \begin{equation}\label{ex_1D_stoch_logistic_det_limit}
+%     \frac{dx}{dt} = A^-(x) = rx(1-x)
+% \end{equation}
+% showing that in the infinite population limit, we obtain the logistic equation. The noise is controlled by
+% \begin{equation*}
+%     \sqrt{\frac{A^+(x)}{K}} = \sqrt{\frac{x(v+rx)}{K}}
+% \end{equation*}
+% and thus, the diffusion approximation (`mesoscopic view') of the system is given by the solution of the SDE
+% \begin{equation}\label{ex_1D_stoch_logistic_full_SDE}
+% dX_t =  rX_t(1-X_t)dt + \sqrt{\frac{X_t(v+rX_t)}{K}}dB_t
+% \end{equation}
+% Letting $\alpha(t)$ be the solution of the logistic equation \eqref{ex_1D_stoch_logistic_det_limit}, We can taylor expand $A^{\pm}(x)$ for the weak noise approximation, and we find:
+% \begin{align*}
+%     A^-_1(x) &= \frac{d}{dx}(rx(1-x))\biggl{|}_{x=\alpha} = r(1 - 2\alpha(t))\\
+%     A^+_0(x) &= \alpha(t)(v+r\alpha(t))
+% \end{align*}
+% Thus, the weak noise approximation of \ref{ex_1D_stoch_logistic_BD_eqns} is given by
+% \begin{equation}\label{ex_1D_stoch_logistic_WNA}
+%     X_t = \alpha(t) + \frac{1}{\sqrt{K}}Y_t
+% \end{equation}
+% where the stochastic process $Y_t$ is an Ornstein-Uhlenbeck process given by the solution to the linear SDE
+% \begin{align}
+%     dY_t &= A^-_1(t)Y_tdt + \sqrt{A^+_0(t)}dB_t\nonumber\\
+%     \Rightarrow dY_t &= r(1 - 2\alpha(t))Y_tdt + \sqrt{\alpha(t)(v+r\alpha(t))}dB_t\label{ex_1D_stoch_logistic_WNA}
+% \end{align}
+% The deterministic trajectory \eqref{ex_1D_stoch_logistic_det_limit} has two fixed points, one at $x=0$ (extinction) and one at $x=1$ (corresponding to a population size of $n=K$). For $r > 0$, $x=0$ is unstable and $x=1$ is a global attractor, meaning in the deterministic limit, when $r > 0$, all populations end up at $x=1$ given enough time. The stochastic dynamics \eqref{ex_1D_stoch_logistic_full_SDE} and \eqref{ex_1D_stoch_logistic_WNA} depend not only on $r$, but also on $v$, the sum of the birth and death rates. It has been proven that $X_t = 0$ is the only recurrent state for the full stochastic dynamics \eqref{ex_1D_stoch_logistic_full_SDE}, meaning that every population is guaranteed to go extinct\footnote{This can be proven using tools from Markov chain theory. For those interested, the proof uses ergodicity to arrive at a contradiction if any state other than $0$ exhibits a non-zero density at steady state.} given enough time \citep{nasell_extinction_2001}, thus illustrating an important difference between finite and infinite populations. $X_t = 0$ is also an `absorbing' state since once a population goes extinct, it has no way of being revived in this model. However, if $K$ is large enough, the eventual extinction of the population may take a very long time. In fact, we can make the expected time to extinction arbitrarily long by making $K$ sufficiently large. Thus, for moderately large values of $K$, it is biologically meaningful only to look at a weaker version of the steady state distribution by imposing the condition that the population does not go extinct and looking at the `transient' dynamics \citep{hastings_transients_2004}. Conditioned on non-extinction, the solution to \eqref{ex_1D_stoch_logistic_full_SDE} has a `quasistationary' distribution about the deterministic attractor $X_t = 1$, with some variance reflecting the effect of noise-induced fluctuations in population size \citep{nasell_extinction_2001} due to the finite size of the population. The weak-noise approximation \eqref{ex_1D_stoch_logistic_WNA} implicitly assumes non-extinction by only measuring small fluctuations from the deterministic solution to \eqref{ex_1D_stoch_logistic_det_limit} and thus, at steady state, naturally describes a quasistationary distribution centered about $X_t = 1$.
+
+\section{Multi-dimensional processes for discrete traits}\label{sec_nD_processes}
+Let us now consider a slightly more complicated scenario. Assume that our population is \emph{not} composed of identical organisms, but instead can contain up to $m$ different kinds of organisms - For example, individuals may come in one of $m$ colors, or a gene may have $m$ different alleles. The formalism we have developed in the previous section carries out essentially unchanged in this case.
+
+\subsection{Description of the process and the Master Equation}
+Given a population that can contain up to $m$ different (fixed) kinds of organisms, it can be entirely characterized by specifying the number of organisms of each type (Figure \ref{fig_nD_pop_description}A). Thus, the state of the population at a given time $t$ is an $m$-dimensional \emph{vector} of the form $\mathbf{v} = [v_1(t),v_2(t),\ldots,v_m(t)]$, where $v_i(t)$ is the number of individuals of type $i$.\\
+Given a state $\mathbf{v}(t)$,  we also need to describe how this vector can change over time due to births and deaths (ecology). In this case, a birth or death could result in an individual belonging to one of $m$ different types. Thus, whereas before we had two functions $b(n)$ and $d(n)$ which take in a number as an input, we now require $2m$ functions that take in a vector as an input (Figure \ref{fig_nD_pop_description}B). In other words, for each type $i \in \{1,2,\ldots,m\}$, we must specify a birth rate $b_i(\mathbf{v})$ and a death rate $d_i(\mathbf{v})$. By `rates', we mean that if we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual of type $i$ is given by
+\begin{equation*}
+    \mathbb{P}[\textrm{ Birth of a type $i$ individual} | \textrm{ something happened }] = \frac{b_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
+\end{equation*}
+and the probability that the event is the death of an individual of type $i$ is
+\begin{equation*}
+    \mathbb{P}[\textrm{ Death of a type $i$ individual} | \textrm{ something happened }] = \frac{d_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
+\end{equation*}
+
+\myfig{0.9}{Media/3.2_BD_process_2D.png}{\textbf{Schematic description of an $m$-dimensional birth-death process. (A)} Consider a population of birds in which individuals are either red or blue. In this case, we have $m=2$, since there are two types of individuals in the population. \textbf{(B)} The state of the system can be described by a vector containing the number of individuals of each discrete type (in this case, the number of red and blue birds in the population). Births and deaths result in changes in the elements of the state vector.}{fig_nD_pop_description}
+
+As before, we can describe the rate of change of $P(\mathbf{v},t)$, the probability of finding the population in a state $\mathbf{v}$ at time $t$, by measuring the inflow and outflow rates. Given a population $\mathbf{v} = [v_1,\ldots,v_{m}]$, the `inflow' is from all populations of the form $[v_1,\ldots,v_{i}-1,\dots,v_{m}]$ through a birth of a type $i$ individual, and from all populations of the form $[v_1,\ldots,v_{i}+1,\dots,v_{m}]$ through the death of a type $i$ individual. Thus, we have the inflow rate
+\begin{equation}
+    \label{nD_rate_in}
+    \begin{split}
+    R_{\textrm{in}}(\mathbf{v},t) &= \sum\limits_{j=1}^{m}b_{j}([v_1,\ldots,v_{j}-1,\ldots,v_m])P([v_1,\ldots,v_{j}-1,\ldots,v_m],t) \\
+    & +\sum\limits_{j=1}^{m}d_{j}([v_1,\ldots,v_{j}+1,\ldots,v_m])P([v_1,\ldots,v_{j}+1,\ldots,v_m],t)
+    \end{split}
+\end{equation}
+Outflow is through births and deaths of individuals in the population $\mathbf{v}$ itself, and thus we have:
+\begin{equation}
+    \label{nD_rate_out}
+    R_{\textrm{out}}(\mathbf{v},t) = \sum\limits_{j=1}^{m}b_{j}(\mathbf{v})P(\mathbf{v},t) + \sum\limits_{j=1}^{m}d_{j}(\mathbf{v})P(\mathbf{v},t)
+\end{equation}
+As before, we now define step operators, both for notational ease and in anticipation of the system size expansion. Note that now, we need $2m$ step operators. For each $i \in \{1,\ldots,m\}$, let us define two step operators $\mathcal{E}_{i}^{\pm}$ by their action on any function $f([v_1,\ldots,v_m],t)$ as:
+\begin{equation}
+\label{nD_step_operators}
+    \mathcal{E}_{i}^{\pm}f([v_1,\ldots,v_m],t) = f([v_1,\ldots,v_i \pm 1, \ldots v_m],t)
+\end{equation}
+In other words, $\mathcal{E}_{i}^{\pm}$ just changes the population through the addition or removal of one type $i$ individual. We can now the rate of change of $P(\mathbf{v},t)$ as
+\begin{equation}
+    \frac{\partial P}{\partial t}(\mathbf{v},t) = R_{\textrm{in}}(\mathbf{v},t) - R_{\textrm{out}}(\mathbf{v},t)
+\end{equation}
+Substituting \eqref{nD_rate_in}, \eqref{nD_rate_out}, and \eqref{nD_step_operators}, we obtain:
+\begin{equation}
+\label{nD_M_eqn}
+\frac{\partial P}{\partial t}(\mathbf{v},t) = \sum\limits_{j=1}^{m}\left[(\mathcal{E}_j^{-}-1)b_j(\mathbf{v})P(\mathbf{v},t) + (\mathcal{E}_j^{+}-1)d_j(\mathbf{v})P(\mathbf{v},t)\right]
+\end{equation}
+This is the master equation of our $m$-dimensional process.
+
+\subsection{The system-size expansion}
+As before, we now assume we can find a system size parameter $K > 0$ such that we can make the substitutions
+\begin{align*}
+    \mathbf{x} &= \frac{\mathbf{v}}{K}\\
+    b^{(K)}_i(\mathbf{x}) &= \frac{1}{K}b_i(\mathbf{v})\\
+    d^{(K)}_i(\mathbf{x}) &= \frac{1}{K}d_i(\mathbf{v})
+\end{align*}
+and define new step operators $\Delta_{i}^{\pm}$ by their action on any real-valued function $f(\mathbf{x},t)$ as
+\begin{equation}
+\label{nD_step_operators_rescaled}
+    \Delta_{i}^{\pm}f([x_1,\ldots,x_m],t) = f([x_1,\ldots,x_i \pm \frac{1}{K}, \ldots x_m],t)
+\end{equation}
+In terms of these new variables, \eqref{nD_M_eqn} becomes
+\begin{equation}
+\label{nd_M_eqn_rescaled}
+\frac{\partial P}{\partial t}(\mathbf{x},t) = K\sum\limits_{j=1}^{m}\left[(\Delta_j^{-}-1)b^{(K)}_j(\mathbf{x})P(\mathbf{x},t) + (\Delta_j^{+}-1)d^{(K)}_j(\mathbf{x})P(\mathbf{x},t)\right]
+\end{equation}
+If $K$ is large, we can once again Taylor expand the action of the step operators as
+\begin{equation*}
+f([x_1,\ldots,x_i \pm \frac{1}{K}, \ldots x_m],t) = f(\mathbf{x},t) \pm \frac{1}{K}\frac{\partial f}{\partial x_i}(\mathbf{x},t) + \frac{1}{2K^2}\frac{\partial^2f}{\partial x_i^2}(\mathbf{x},t) + \mathcal{O}(K^{-3})
+\end{equation*}
+which, after substituting into \eqref{nd_M_eqn_rescaled}, yields the equation
+\begin{equation}
+\label{nD_FPE}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial P}{\partial t}(\mathbf{x},t) = \sum\limits_{j=1}^{m}\left[-\frac{\partial}{\partial x_j}\{A_j^{-}(\mathbf{x})P(\mathbf{x},t)\} + \frac{1}{2K}\frac{\partial^2}{\partial x_j^2}\{A_j^{+}(\mathbf{x})P(\mathbf{x},t)\}\right]}
+\end{equation}
+where
+\begin{equation*}
+A_{i}^{\pm}(\mathbf{x}) = b^{(K)}_i(\mathbf{x})\pm d^{(K)}_i(\mathbf{x})
+\end{equation*}
+Equation \eqref{nD_FPE} is an $m$-dimensional Fokker-Planck equation, and corresponds to the $m$-dimensional It\^o process
+\begin{equation}
+\label{nD_Ito_SDE}
+    d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{B}_t
+\end{equation}
+where $\mathbf{A^-}(\mathbf{X}_t)$ is the $m$ dimensional `drift vector' with $i$\textsuperscript{th} element $ = A^{-}_{i}(\mathbf{X}_t)$. $\mathbf{D}(\mathbf{X}_t)$ is the $m \times m$ `diffusion matrix' and satisfies $\mathbf{D}\mathbf{D}^{\mathrm{T}} = \mathbf{A^+}(\mathbf{X}_t)$, where $\mathbf{A^+}(\mathbf{X}_t))$ is an $m$ dimensional vector with $i$\textsuperscript{th} element $ = A^{+}_{i}(\mathbf{X}_t)$. Finally, $\mathbf{B}_t$ is the $m$-dimensional Brownian motion and can be thought of as a vector of independent one-dimensional Brownian motions (which have been defined in \ref{intro_SDE}). This is the `mesoscopic' description of our process.
+
+\subsection{The deterministic limit}
+Once again, we can take $K \to \infty$ in \eqref{nD_Ito_SDE} to obtain a deterministic expression. Here, the expression reads
+\begin{equation}
+\label{nD_det_limit}
+\frac{d\mathbf{x}}{dt} = \mathbf{A^-}(\mathbf{x}) = \mathbf{b}^{(K)}(\mathbf{x}) - \mathbf{d}^{(K)}(\mathbf{x})
+\end{equation}
+where the $m$-dimensional vector-valued functions $\mathbf{b}^{(K)}(\mathbf{x})$ and $\mathbf{d}^{(K)}(\mathbf{x})$ on the RHS are defined as having $i$\textsuperscript{th} element $b^{(K)}_i(\mathbf{x})$ and $d^{(K)}_i(\mathbf{x})$ respectively. This deterministic limit is sometimes called the `macroscopic' description.
+\subsubsection{Some familiar faces: Replicator-mutator, quasispecies equation, and the Price equation}
+In this multi-dimensional case, the macroscopic description amounts to a description of evolutionary game theory under mild assumptions on the birth and death rate vectors. We show this below, adopting some methods first outlined by \citep{page_unifying_2002}. Let us assume that we can write the birth and death rate vectors as
+\begin{equation}
+\label{nD_functional_forms_for_replicator}
+\begin{aligned}
+    b^{(K)}_i(\mathbf{x}) &= \mu Q_i(\mathbf{x}) + (1-\mu)b^{(\textrm{int})}_{i}(\mathbf{x})x_i\\
+    d^{(K)}_i(\mathbf{x}) &= d^{(\textrm{int})}_i(\mathbf{x})x_i
+\end{aligned}
+\end{equation}
+where $\mu \geq 0$ is a constant describing the mutation rate, $Q_i(\mathbf{x})$ is a real-valued function that describes the birth rate of type $i$ individuals due to mutations in the population $\mathbf{x}$, and $b^{(\textrm{int})}_{i}(\mathbf{x})$ and $d^{(\textrm{int})}_{i}(\mathbf{x})$ are real-valued functions that respectively describe the per-capita birth and death rate of type $i$ individuals due to ecological interactions. Our assumptions of the functional forms \eqref{nD_functional_forms_for_replicator} thus amount to saying that birth and death rates can be separated into mutational and non-mutational components, and furthermore that the density dependence of the birth and death rates due to non-mutational effects is in a form that allows us to write down per-capita birth and death rates. Plugging these definitions into \eqref{nD_det_limit} and writing it down component-wise, we obtain the equation
+\begin{equation}
+\label{nD_det_limit_fitess_defn}
+    \frac{dx_i}{dt} = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
+\end{equation}
+Where for each $i$, we have defined the real-valued function $w_i(\mathbf{x}) \coloneqq (1-\mu)b^{(\textrm{int})}_{i}(\mathbf{x}) - d^{(\textrm{int})}_i(\mathbf{x})$. Setting the mutation rate $\mu \to 0$ in equation \eqref{nD_det_limit_fitess_defn} makes it clear that the quantity $w_i(\mathbf{x})x_i$ describes the growth rate of type $i$ individuals in the population due to all processes other than mutation. The quantity $w_i(\mathbf{x})$ thus describes the per-capita growth rate of type $i$ individuals in a population $\mathbf{x}$, and is sometimes called the `Malthusian fitness' of type $i$. It is notable that the fitness of a type depends on the state of the population as a whole (\textit{i.e.} $\mathbf{x}$) and is thus frequency-dependent.\\
+\\
+Given a state $\mathbf{x}(t)$, we can now compute the total scaled population size, and the frequency of each type in the population as:
+\begin{equation}
+\label{nD_tot_pop_and_prop_inds_defn}
+\begin{aligned}
+    N_{K}(t) &\coloneqq \sum\limits_{i=1}^{m}x_i(t)\\
+    p_i(t) &\coloneqq \frac{x_i(t)}{N_{K}(t)}
+\end{aligned}
+\end{equation}
+We can also define the mean of any type level quantity $f$ in the population as
+\begin{equation}
+\label{nD_mean}
+\overline{f}(t) \coloneqq \sum\limits_{i=1}^{m}f_ip_{i}(\mathbf{x}(t))
+\end{equation}
+, where $f_i$ is the value of the quantity for the $i$th type.\\
+\\
+We can now compute the rate of change of $p_i$, the proportion of type $i$ individuals in the population:
+\begin{align}
+\frac{dp_i}{dt} &= \frac{1}{N_{K}(t)}\frac{dx_i}{dt} - \frac{x_i}{N_{K}^2(t)}\frac{dN_{K}}{dt}\nonumber\\
+&= \frac{1}{N_{K}(t)}\frac{dx_i}{dt} - \frac{x_i}{N_{K}^2(t)}\sum\limits_{j=1}^{m}\frac{dx_j}{dt}\label{nD_replicator_intermediate_1}
+\end{align}
+Substituting \eqref{nD_det_limit_fitess_defn} into \eqref{nD_replicator_intermediate_1}, we now obtain
+\begin{align*}
+  \frac{dp_i}{dt} &=  \frac{1}{N_{K}(t)}\left[w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right] - \frac{x_i}{N_{K}^2(t)}\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})x_j + \mu Q_j(\mathbf{x})\right]\\
+  &= w_i(\mathbf{x})p_i + \frac{\mu}{N_K}Q_i(\mathbf{x}) - p_i\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})p_j + \frac{\mu}{N_K}Q_j(\mathbf{x})\right]
+\end{align*}
+Where we have used the definition of $p_i$ from \eqref{nD_tot_pop_and_prop_inds_defn}. Now using the definition of mean fitness from \eqref{nD_mean} and rearranging terms, we obtain
+\begin{equation}
+\label{nD_replicator_mutator}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dp_i}{dt} = (w_i(\mathbf{x}) - \overline{w})p_i + \mu\left[Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right]}
+\end{equation}
+Where we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. The first term of \eqref{nD_replicator_mutator} describes changes due to faithful (non-mutational) replication, and the second describes changes due to mutation. For this reason, equation \eqref{nD_replicator_mutator} is called the \emph{replicator-mutator equation} in the evolutionary game theory literature, where the individual `types' are interpreted to be pure strategies. If in addition, each $w_i(\mathbf{x})$ is linear in $\mathbf{x}$, meaning we can write $w_i(\mathbf{x}) = \sum_{j}a_{ij}x_j$ for some set of constants $a_{ij}$, then we get the replicator-mutator equation for matrix games, and the constants $a_{ij}$ form the `payoff matrix'. As is well-known, the replicator equation (without mutation) for matrix games with $m$ pure strategies is equivalent to the generalized Lotka-Volterra equations for a community with $m-1$ species \citep{hofbauer_evolutionary_1998}, providing the connection to community ecology.  Equation \eqref{nD_replicator_mutator} is also equivalent to Eigen's \emph{quasispecies equation} from molecular evolution \citep{page_unifying_2002} if each `type' is interpreted as a genetic sequence and each $w_i(\mathbf{x})$ is a constant function\footnote{Mutational effects are often additionally assumed to act through direct `transmission probabilities' of mutating from one type to another. This means that we can write $Q_i(\mathbf{p}) = \sum\limits_{j\neq i}Q_{ij}p_j$. Substituting this into \eqref{nD_replicator_mutator} yields an equation in terms of `$Q$-matrices' or `mutation matrices' that may be more familiar to some biologists.}. We can now calculate how the mean of any `trait level' quantity $f$, defined as $f_i$ for the $i$\textsuperscript{th} trait, changes in the population (For example, setting $f_i = x_i$ gives us the mean trait value in the population). Multiplying both sides of equation \eqref{nD_replicator_mutator} by $f_i$ and summing over all $i$, we obtain
+\begin{align*}
+    \frac{d}{dt}\left(\sum\limits_{i=1}^{m}f_ip_i\right) &= \sum\limits_{i=1}^{m}f_iw_i(\mathbf{x})p_i - \overline{w}\sum\limits_{i=1}^{m}f_ip_i + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\sum\limits_{i=1}^{m}p_if_i\right)\right]\\
+    \Rightarrow \frac{d\overline{f}}{dt} &= \overline{wf}-(\overline{w})(\overline{f}) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right]
+\end{align*}
+Using the definition of statistical covariance of two variables $X$ and $Y$ as $\mathrm{Cov}(X,Y) = \overline{XY} - (\overline{X})(\overline{Y})$, we obtain
+\begin{equation}
+\label{nD_Price}
+\frac{d\overline{f}}{dt} = \mathrm{Cov}(w,f) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right]
+\end{equation}
+The first term of the RHS describes the statistical covariance between the quantity $f$ and the fitness $w$. The second term describes `transmission bias' due to mutational effects - The first summation is the `inflow' of $f$ due to mutations, and the second is the `outflow'. Equation \eqref{nD_Price} is thus a version of the Price equation.
+
+\subsection{Stochastic fluctuations and the weak noise approximation}
+
+Let the deterministic trajectory obtained by solving \eqref{nD_det_limit} be given by $\mathbf{a}(t)$.  We can once again track 
+stochastic fluctuations from the deterministic trajectory by introducing the new variables
+\begin{equation}
+\begin{aligned}
+\mathbf{y} &= \sqrt{K}(\mathbf{x} - \mathbf{a}(t))\\
+s&=t\\
+\tilde{P}(\mathbf{y},s) &= \frac{1}{\sqrt{K}}P(\mathbf{x},t)
+\end{aligned}
+\end{equation}
+Then, after some algebra that follows the exact same steps as in section \ref{sec_1D_WNA} and retaining only the highest order terms in $\sqrt{K}$, we obtain the equation:
+\begin{equation}
+\label{nD_WNA_intermediate}
+\frac{\partial \Tilde{P}_{0}}{\partial s}(\mathbf{y},s) = \sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{(A^{-}_{j})_{1}(s)\Tilde{P}_{0}(\mathbf{y},s)\right\}+\frac{1}{2}{A_j}^{+}(\mathbf{a}(s))\frac{\partial^2}{\partial{y_j}^2}\{\Tilde{P}_{0}(\mathbf{y},s)\}\right)
+\end{equation}
+where $(A^{-}_{j})_{1}(s)$ is the $\mathcal{O}(1/\sqrt{K})$ term of the power series expansion
+\begin{equation*}
+A^-_{j}(\mathbf{a} + \frac{\mathbf{y}}{\sqrt{K}}) = \sum\limits_{n=1}^{\infty}(A^{-}_{j})_{n}(s)\left(\frac{\mathbf{y}}{\sqrt{K}}\right)^n
+\end{equation*}
+In the case where the series expansion is a Taylor expansion, then the first-order term of this expansion is given by
+\begin{equation}
+\label{nD_WNA_taylor_term}
+(A^{-}_{j})_{1}(s) = \sum\limits_{i=1}^{m} y_i\left(\frac{\partial A^{-}_j(\mathbf{x})}{\partial x_i}\bigg{|}_{\mathbf{x}=\mathbf{a}(s)}\right)
+\end{equation}
+In multi-variable calculus, the directional derivative\footnote{Physicists sometimes use the notation $\partial_{\mathbf{v}}f(\mathbf{x})$ or $\mathbf{v}\cdot\nabla f(\mathbf{x})$ for this object.} $D_{\mathbf{v}}(f(\mathbf{x}))$ of a multidimensional function $f: \mathbb{R}^n \to \mathbb{R}$ along a vector $\mathbf{v}$ is the function defined by:
+\begin{equation}
+\label{directional_derivative_defn}
+D_{\mathbf{v}}(f(\mathbf{x})) \coloneqq \sum\limits_{i=1}^{n}\left(\frac{\partial f(\mathbf{x})}{\partial x_i}\right)v_i = \lim_{h \to 0}\frac{f(\mathbf{x}+h\mathbf{v})-f(\mathbf{x})}{h}
+\end{equation}
+Comparing with \eqref{nD_WNA_taylor_term}, we see that the weak-noise approximation of our process is:
+\begin{equation}
+\label{nD_WNA}
+\frac{\partial P}{\partial t}(\mathbf{y},t) = \sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{D_{\mathbf{y}}(A_j^-(\mathbf{a}))(t)P(\mathbf{y},t)\right\}+\frac{1}{2}{A_j}^{+}(\mathbf{a}(t))\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}\right)
+\end{equation}
+where we have dropped the tildes and gone back from $s$ to $t$ for notational clarity. The directional derivative of the population turnover rate $A_j^-$ `in the direction' of the stochastic fluctuation $\mathbf{y}$ at the deterministic point $\mathbf{a}(s)$ here is the multidimensional analogue of the derivative we had in \eqref{1D_WNA}. The meaning of equation \eqref{nD_WNA} is clearer if we compute how the moments of the fluctuation $y_i$ in the density of type $i$ individuals (for some $i$) change over time. Let $n > 0$. We have:
+\begin{align}
+\frac{d}{dt}\mathbb{E}[y_i^n] &= \frac{d}{dt}\int\limits_{\mathbb{R}^m}y_i^nP(\mathbf{y},t)d\mathbf{y}\\
+&= \int\limits_{\mathbb{R}^m}y_i^n\frac{\partial P}{\partial t}(\mathbf{y},t)d\mathbf{y}\label{nD_change_of_moments_defn}
+\end{align}
+where we have assumed that $y_i^n$ and $P(\mathbf{y},t)$ vary sufficiently smoothly to allow us to interchange the order of derivatives and integrals and used the shorthand $\displaystyle \int\limits_{\mathbb{R}^m} \ f(\mathbf{y}) \ d\mathbf{y} = \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}\cdots\int\limits_{\mathbb{R}} \ f(\mathbf{y}) \ dy_1 dy_2 \ldots dy_m$. The one-dimensional integrals are over the entire real line and not just over $[0,\infty)$ because fluctuations can be either positive (greater than $\mathbf{a}(t)$) or negative (lesser than $\mathbf{a}(t)$). For notational brevity, let us use the shorthand $D_j = D_{\mathbf{y}}(A_j^-(\mathbf{a}))(t)$. We can now substitute \eqref{nD_WNA} into \eqref{nD_change_of_moments_defn} to obtain
+\begin{align}
+\frac{d}{dt}\mathbb{E}[y_i^n] &= \int\limits_{\mathbb{R}^m} y_i^n \left(\sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}+\frac{1}{2}{A_j}^{+}(\mathbf{a}(t))\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}\right)\right)d\mathbf{y}\\
+&= \sum\limits_{j=1}^{m}\left[-\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}d\mathbf{y} + \frac{{A_j}^{+}(\mathbf{a}(t))}{2}\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}d\mathbf{y}\right]\label{nD_intermediate_for_moments}
+\end{align}
+We will evaluate the integrals on the RHS of \eqref{nD_intermediate_for_moments} using integration by parts. Recall that the general formula for integration by parts of two functions $u$ and $v$ defined on a domain $\Omega$ is given by:
+\begin{equation}
+\label{int_by_parts_general_formula}
+\int\limits_{\Omega}\frac{\partial u}{\partial x_i}vd\mathbf{x} = -\int\limits_{\Omega}u\frac{\partial v}{\partial x_i}d\mathbf{x} + \int\limits_{\partial\Omega}uv\gamma_{i}dS(\mathbf{x})
+\end{equation}
+where $\partial \Omega$ is the boundary of $\Omega$, $dS$ is the surface element of this boundary, and $\gamma$ is the unit outward normal to the boundary. In our case, we have $\Omega = \mathbb{R}^m$, and thus the boundary conditions are evaluated as $\|y\| \to \infty$. We assume that stochastic fluctuations do not grow too large, and therefore impose the condition $\displaystyle \lim_{\|y\| \to \infty}  P(\mathbf{y},t) = 0$. Further, we assume that this decay is fast enough that $\displaystyle \lim_{\|y\| \to \infty}D_jP(\mathbf{y},t) = 0\ \forall \ j$. Under these conditions, we can evaluate the two integrals in the RHS of \eqref{nD_intermediate_for_moments} by using integration by parts and discarding the boundary term (The second term on the RHS of \eqref{int_by_parts_general_formula}). Note that since the $y_i$s are orthogonal to each other, we have the relation:
+\begin{equation*}
+\frac{\partial y_i ^{n}}{\partial y_j} = \delta_{ij}ny_i^{n-1}
+\end{equation*}
+where $\delta_{ij}$ is the Kronecker delta symbol, defined by
+\begin{equation*}
+\delta_{ij} = 
+\begin{cases}
+1 & i=j\\
+0 & i\neq j
+\end{cases}
+\end{equation*}
+Using this relation and then using integration by parts on the RHS of \eqref{nD_intermediate_for_moments} (once for the first term and twice for the second term), we obtain the considerably simpler expression
+\begin{align}
+\frac{d}{dt}\mathbb{E}[y_i^n] &= n\int\limits_{\mathbb{R}^m} y_i^{n-1}D_{i}P(\mathbf{y},t)d\mathbf{y} + \frac{n(n-1)}{2}A_i^+(\mathbf{a}(t))\int\limits_{\mathbb{R}^m} y_i^{n-2}P(\mathbf{y},t)d\mathbf{y}\\
+\Rightarrow \frac{d}{dt}\mathbb{E}[y_i^n] &= n\mathbb{E}[y_i^{n-1}D_{i}]+\frac{n(n-1)}{2}A_i^+(\mathbf{a}(t))\mathbb{E}[y_i^{n-2}]\label{nD_general_moment_eqns}
+\end{align}
+Of particular interest are the cases $n=1$ (corresponding to the expected value of $y_i$) and $n=2$ (which can be used along with the expected value to compute the variance of $y_i$). For $n=1$, we have:
+\begin{align}
+\frac{d}{dt}\mathbb{E}[y_i] &= \mathbb{E}[D_{i}]\label{nD_moment_eqn_mean}
+% \frac{d}{dt}\mathbb{E}[y_i^2] &= 2\mathbb{E}[y_iD_{i}] +  A_i^+(\mathbf{a}(t))\nonumber\\
+% \Rightarrow \frac{d}{dt}\mathrm{Var}(y_i) &= - \mathbb{E}[D_{i}]^2 + 2\mathbb{E}[y_iD_{i}] +  A_i^+(\mathbf{a}(t))\label{nD_moment_eqn_var}
+\end{align}
+which tells us that whether the fluctuation grows or decays is controlled by $D_i$, a measure of how the growth rate ($b_i - d_i$) changes along the direction of the fluctuation. In the case of the functional forms given by \eqref{nD_functional_forms_for_replicator}, we have:
+\begin{equation}
+A_i^-(\mathbf{x}) = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
+\end{equation}
+and thus, from \eqref{nD_WNA_taylor_term}, we can calculate the directional derivative $D_i$ as
+\begin{align}
+D_i &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial A^{-}_i(\mathbf{x})}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
+&= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial}{\partial x_k}\left( w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right)\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
+&= \sum\limits_{k=1}^{m} y_k\left(a_i\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right) + y_iw_i(\mathbf{a}) + \mu\sum\limits_{k=1}^{m} y_k\left(\frac{\partial Q_i}{\partial x_k}(\mathbf{x})\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
+&= y_iw_i(\mathbf{a}) + a_iD_{\mathbf{y}}(w_i(\mathbf{a})) + \mu D_{\mathbf{y}}(Q_i(\mathbf{a}))
+\end{align}
+Using this in \eqref{nD_moment_eqn_mean}, we see that the expected change of a fluctuation in the density of type $i$ individuals evolves as:
+\begin{equation}
+\frac{d}{dt}\mathbb{E}[y_i] = \underbrace{w_i(\mathbf{a})\mathbb{E}[y_i]}_{\substack{\text{Current fitness of type $i$} \\ \text{at deterministic trajectory $\mathbf{a}$} \\ \text{(scaled by expected density $\mathbb{E}[y_i]$)}}} + \underbrace{a_i\mathbb{E}[D_{\mathbf{y}}(w_i(\mathbf{a}))]}_{\substack{\text{Expected change in fitness} \\ \text{ of type $i$ in going from $\mathbf{a}$ to $\mathbf{y}$} \\ \text{(scaled by deterministic density $a_i$)}}} + \underbrace{\mu\mathbb{E}[D_{\mathbf{y}}(Q_i(\mathbf{a}))]}_{\substack{\text{Expected effect of} \\ \text{mutations}}}
+\end{equation}
+
+\section{Infinite-dimensional processes for quantitative traits}\label{sec_infD_processes}
+Things become more complicated when we deal with `quantitative' traits. Traits like body size, body weight, or beak length, often take on uncountably many values (say, all values in the interval $[0,1]$, for example). In this case, we cannot describe the population using a vector but instead require a function. More precisely, if the set of all possible trait values is $\mathcal{T}$, we will characterize the population using a special kind of function $\phi^{(t)}$ such that the quantity $\int_{A}\phi^{(t)}(x)dx$ gives us the number of individuals that are in any `nice' region $A \subset \mathcal{T}$ of the possible trait space\footnote{The mathematically informed reader may notice that this sounds like I am trying to dance around the word `measure'. Indeed, we are really looking to construct branching processes that take values in some nice space of measures that can be endowed with 
+sufficient mathematical structure for notions like convergence and integration to make sense. All the Dirac deltas that will turn up shortly are `properly' viewed as measures, and integrals with Dirac deltas in the integrand are to be interpreted as integration with respect to the Dirac measure. If one tries to be careful about these things, they will quickly find themselves drowning in a quagmire of mathematical formalism.
+% For example, one can't really justify using informal tools like the functional derivative, which is ill-defined and `properly' interpreted as a Fr\'echet derivative in a suitable normed function space (making the use in conjunction with Dirac measures/distributions somewhat dubious without further elaboration on the space and norm in question). The existence of a probability density function for this process is also \emph{a priori} somewhat questionable and requires detailed arguments using tools like the Radon-Nikodym theorem. Here, we adopt the physicist's solution of ignoring all such potential difficulties and assuming a clever mathematician can make sure everything works out using arcane tools such as ``functional analysis" and  ``distribution theory".
+If you know and care about enough mathematics for this to really bother you, see \citep{champagnat_unifying_2006} for a much more rigorous treatment that avoids using informal tools such as functional derivatives and functional equivalents of Fokker-Planck equations in favor of a probabilistic approach grounded in (measure-theoretic) Markov and martingale theory.}. The state space of the stochastic process thus becomes infinite-dimensional, which complicates matters slightly. The principal objects of interest here are \emph{functionals} $F[x, \phi^{(t)}]$ which take in a scalar $x$ representing the trait value of interest, and a function $\phi^{(t)}$ representing the population at time $t$. Thus, whereas in the previous section we were interested in how a function $f(x(t))$ changes based on the change in an input variable $x(t)$ (the population), we are now interested in how a functional $F[\phi^{(t)}]$ changes with the change in an input function $\phi^{(t)}$. The appropriate tool for this notion is the functional derivative $\delta F/\delta \phi$. The functional derivative is an \emph{ad hoc}, somewhat informal notion, defined indirectly as the unique object that obeys, for any `nice' function $\rho$
+\begin{equation}
+\label{functional_derivative_defn}
+    \int\frac{\delta F}{\delta \phi(x)}\rho(x)dx = \lim_{h \to 0} \frac{F[\phi + h\rho]-F[\phi]}{h}
+\end{equation}
+This definition is formulated in analogy to directional derivatives in multi-variable calculus: Noting that a function can be thought of as an infinite-dimensional vector, informally `taking the limit' $n \to \infty$ in \eqref{directional_derivative_defn} yields \eqref{functional_derivative_defn}.
+
+\subsection{Description of the process and the Master Equation}
+We envision a population of individuals whose phenotypes take trait values in some one-dimensional set $\mathcal{T} \subseteq \mathbb{R}$. Since the trait of any given individual is fixed, and since each individual can only have one exact trait value, an individual with a trait value $x \in \mathcal{T}$ can be characterized as a Dirac delta mass centered at $x$, defined indirectly as the object which satisfies, for any one-dimensional function $f$,
+\begin{equation*}
+    \int\limits_{A}f(y)\delta_{x_i}dy = 
+    \begin{cases}
+        f(x_i) & x_i \in A\\
+        0 & x_i \notin A 
+    \end{cases}
+\end{equation*}
+for every `nice' subset $A \subset \mathcal{T}$. In physics notation, we would write $\delta_{x_i} = \delta(y-x_i)$ as a `function' of the dummy variable $y$ (which will be integrated over). Note that by choosing $f(x) \equiv 1$, we get an `indicator' that is $1$ if the individual is within the set $A$ and $0$ otherwise. Thus, if the population at any time $t$ consists of $N(t)$ individuals with trait values $\{x_1,x_2,\ldots,x_{N(t)}\}$, then it can be completely characterized (Figure \ref{fig_infD_pop_description}) by the `distribution'
+\begin{equation*}
+    \nu^{(t)} = \sum\limits_{i=1}^{N(t)}\delta_{x_i}
+\end{equation*}
+which in physics notation would be a function\footnote{Physicists use the term `field' for functions of the form $f(x,t):\mathbb{R}^{n} \times [0,\infty) \to \mathbb{R}^{m}$, where $\mathbb{R}^{n}$ represents space and $[0,\infty)$ represents time. They then call models which describe such functions `field theories'. In physics jargon, our stochastic process $\{\nu^{(t)}\}_{t \geq 0}$ when viewed as a sequence of functions $\{\nu^{(t)}(y)\}_{t \geq 0}$ thus describes a (scalar) `stochastic field', and the formalism we will develop below is a `stochastic field theory' of evolution, where physical space has been replaced by an abstract trait space. This is closely related to the area of physics called `statistical field theory', the analog of quantum field theory for systems with a large number of classical particles. Stochastic field theories over physical space have been used in neurobiology, see for example \citep{bressloff_stochastic_2010}.} $\nu^{(t)}(y) = \sum_{i}^{N(t)} \delta(y-x_i)$. Thus, the state space of our process is
+\begin{equation*}
+    \mathcal{M} = \left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
+\end{equation*}
+Note that for any set $A \subset \mathcal{T}$, $\int_A\nu^{(t)}dx$ gives the number of individuals that have trait values that lie within the set $A$ and that integrating over $\mathcal{T}$ gives the population size $N(t)$ at time $t$. Given the population $\nu^{(t)} = \sum_{i=1}^{N(t)}\delta_{x_i}$ and a real function $f(x)$, we have $\int_{\mathcal{T}}f(y)\nu^{(t)}dy = \sum_{i=1}^{N(t)}f(x_i)$.
+\myfig{0.5}{Media/3.3_dirac_deltas.png}{\textbf{Schematic description of a function valued birth-death process.} Consider a population of birds in which individuals have varying beak lengths. \textbf{(A)} Each individual in the population can be described as a Dirac delta mass centered at its beak length. This is because each individual has exactly one fixed beak length, and therefore, can be thought of as a distribution centered at that particular beak length and with zero spread. \textbf{(B)} The population as a whole is thus described as a sum of Dirac masses. $N(t)$ here is the size of the population at time $t$. Birth and death of individuals would correspond to the addition and removal of Dirac masses respectively. Note that if we had a large number of individuals, this distribution begins to look like a continuous distribution.}{fig_infD_pop_description}
+% We are interested in observing the behaviour of elements of
+% \begin{equation*}
+%     \mathcal{F} = \left\{f:\mathcal{M} \to \mathbb{R} \ | \ f \ \textrm{bounded and measurable}\right\},
+% \end{equation*}
+% the set of all bounded measurable real functions on $\mathcal{M}$. Given the population $\nu^{(t)} = \sum_{i=1}^{N(t)}\delta_{x_i}$ and a function $f \in \mathcal{F}$, we have $\int_{\mathcal{T}}f(x)\nu^{(t)}(dx) = \sum_{i=1}^{N(t)}f(x_i)$. Elements of $\mathcal{F}$ are interesting because they yield various quantities of biological relevance when integrated over $\mathcal{T}$ with respect to our population measure $\nu$. For example, the function $f(\nu^{(t)}) = 1$ gives the population size at time $t$, and the function $f(\nu^{(t)}) = \chi_{A}/N(t)$, where $\chi$ is the indicator function, gives the fraction of the population that have trait values in $A$.\\
+Now that we have described the population, we must define the rules for how it changes. As before, we assume that there exist functions $b(x|\nu)$ and $d(x|\nu)$ such that $b(x|\nu)$ and $d(x|\nu)$ describe the rate at which individuals with trait value $x$ are born and die respectively in a population $\nu$. Again, we must be careful about what exactly we mean when we speak about `rates'. In this case, we mean that if we know that the population is currently described by the function $\phi$, and we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual whose phenotype is within the set $A \subset \mathcal{T}$ is given by
+\begin{equation*}
+    \mathbb{P}[\textrm{ Birth with offspring in }A | \textrm{ something happened }] = \frac{1}{\mathcal{N}}\int\limits_{A}b(x|\nu)dx
+\end{equation*}
+and the probability that the event is the death of an individual whose phenotype is within the set $A$ is
+\begin{equation*}
+    \mathbb{P}[\textrm{ Death of an individual in }A | \textrm{ something happened }] = \frac{1}{\mathcal{N}}\int\limits_{A}d(x|\nu)dx
+\end{equation*}
+where $\mathcal{N} = \int_{\mathcal{T}}b(x|\nu)+d(x|\nu)dx$ is the normalizing constant in both cases. Note that we assume $\mathcal{N}$ is always finite and non-zero.
+
+\begin{example}
+Consider the birth and death functionals:
+\begin{equation}
+\label{Rogers_logistic_BD}
+\begin{aligned}
+b(x|\nu) &= r\int\limits_{\mathcal{T}}m(x,y)\nu(y)dy; \ m(x,y) = \exp\left(\frac{-(x-y)^2}{\sigma_{m}^{2}}\right)\\
+    d(x|\nu) &= \frac{\nu(x)}{Kn(x)}\int\limits_{\mathcal{T}}\alpha(x,y)\nu(y)dy; \ \alpha(x,y) = \exp\left(\frac{-(x-y)^2}{\sigma_{\alpha}^{2}}\right)
+\end{aligned}
+\end{equation}
+This choice corresponds to an asexual population having a constant (per-capita) birth rate $r$. Birth is sometimes with mutation, and the extent of the mutations is controlled by a Gaussian kernel $m(x,y)$. The death rate is density-dependent, mediated by a Gaussian competition kernel $\alpha(x,y)$, and also contains a phenotype-dependent carrying capacity controlled by $n(x)$, scaled by a constant $K$. The biological interpretation of the death rate is through ecological specialization for limiting resources - Individuals have different intrinsic advantages (controlled by $n(x)$), and experience greater competition from conspecifics that are closer to them in phenotype space (controlled by $\alpha(x,y)$).
+\end{example}
+Let us now define, for each $x \in \mathcal{T}$, two \emph{step operators} $\mathcal{E}_{x}^{\pm}$ that satisfy
+\begin{equation*}
+    \mathcal{E}_{x}^{\pm}[f(y,\nu)] =  f(y,\nu \pm \delta_x)
+\end{equation*}
+In other words, the step operators $\mathcal{E}_{x}^{\pm}$ simply describe the effect of adding or removing a single individual with trait value $x$ from the population.
+It is known (only for one-dimensional traits) that we can find a density function $P(\nu,t)$ such that the probability that the process takes value $\nu^{(t)}$ at time $t$ is given by $\int_{\mathcal{T}}P(\nu,t)dx$.\\
+We can now use the same trick as earlier and obtain a master equation by counting inflow and outflow of states. Any change to a state must be through the addition or subtraction of a single Dirac delta mass. For any state $\nu \in \mathcal{M}$, the transition rate from $\nu - \delta_{x}$ to $\nu$ is simply $\mathcal{E}^{-}_{x}b(x|\nu)$, and similarly, the transition rate from $\nu+\delta_{x}$ to $\nu$ is $\mathcal{E}^{+}_{x}d(x|\nu)$. The transition rate out of $\nu$ to a state $\nu+\delta_x$ is just $b(x|\nu)$, and transition out to a state $\nu - \delta_x$ is just $d(x|\nu)$. Thus, integrating over all possible $x$ to obtain the total inflow and outflow rate for a state $\nu$, we see that $P(\nu,t)$ must satisfy:
+\begin{equation}
+\label{unnormalized_M_equation}
+    \frac{\partial P}{\partial t}(\nu,t) = \int\limits_{\mathcal{T}}\left[(\mathcal{E}^{-}_{x}-1)b(x|\nu)P(\nu,t) + (\mathcal{E}^{+}_{x}-1)d(x|\nu)P(\nu,t)\right]dx
+\end{equation}
+This is the `Master equation' of our process.\\
+\\
+\subsection{The functional system-size expansion}
+
+To proceed, as before, we assume that there exists a system-size parameter $K > 0$ to obtain a new process $\{\phi^{(t)}\}_{t \geq 0}$ such that for any set $A \subset \mathcal{T}$, $\int_A\phi^{(t)}dx$ gives the `density' of individuals that have trait values that lie within the set $A$. Note that we expect this stochastic process to evolve continuously if $K$ is large since the contribution of each individual is negligible. Specifically, we assume that there exists a $K>0$ such that we can make the substitutions:
+\begin{align*}
+    \phi^{(t)} = \frac{1}{K}\nu^{(t)} &= \frac{1}{K}\sum\limits_{i=1}^{N(t)}\delta_{x_i}\\
+    b_K(x|\phi^{(t)}) &= \frac{1}{K}b(x|\nu^{(t)})\\
+    d_K(x|\phi^{(t)}) &= \frac{1}{K}d(x|\nu^{(t)})
+\end{align*}
+$\{\phi^{(t)}\}_{t\geq0}$ takes values in 
+\begin{equation*}
+    \mathcal{M}_K = \left\{\frac{1}{K}\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
+\end{equation*}
+In terms of these new variables, we obtain the master equation:
+\begin{equation}
+\label{M_equation}
+    \frac{\partial P}{\partial t}(\phi,t) = K\int\limits_{\mathcal{T}}\left[(\Delta^{-}_{x}-1)b_K(x|\phi)P(\phi,t) +(\Delta^{+}_{x}-1)d_K(x|\phi)P(\phi,t)\right]dx
+\end{equation}
+where we have introduced new step operators $\Delta_{x}^{\pm}$ that satisfy:
+\begin{equation*}
+    \Delta_{x}^{\pm}[F(y,\phi)] =  F\left(y,\phi \pm \frac{1}{K}\delta_x\right)
+\end{equation*}
+\\
+\\
+We can now conduct a system-size expansion as before by using a functional `Taylor expansion' of the step operators. Recall that the functional version of the Taylor expansion of a functional $F[\rho]$ about a function $\rho_0$ defined on a domain $\Omega \subseteq \mathbb{R}$ is given by:
+\begin{equation*}
+    F[\rho_0 + \rho] = F[\rho_0] + \int\limits_{\Omega}\rho(x)\frac{\delta F}{\delta \rho_0(x)}dx + \frac{1}{2!}\int\limits_{\Omega}\int\limits_{\Omega}\rho(x)\rho(y)\frac{\delta^2 F}{\delta \rho_0(x)\delta \rho_0(y)}dxdy + \cdots
+\end{equation*}
+Since $\Delta^{\pm}_{x}[F[\phi]] = F[\phi \pm \delta_x/K]$, we can Taylor expand the RHS to see that our step operators obey
+\begin{align}
+    \Delta^{\pm}_{x}[F[\phi]] &= F[\phi] \pm \frac{1}{K}\int\limits_{\mathcal{T}}\frac{\delta F}{\delta \phi(y)}\delta_xdy + \frac{1}{2K^2}\int\limits_{\mathcal{T}}\int\limits_{\mathcal{T}}\frac{\delta^2 F}{\delta \phi(y)\delta \phi(z)}\delta_xdy\delta_xdz+\mathcal{O}(K^{-3})\nonumber\\
+    &= F[\phi] \pm \frac{1}{K}\frac{\delta F}{\delta \phi(x)} + \frac{1}{2K^2}\frac{\delta^2 F}{\delta \phi(x)^2}+\mathcal{O}(K^{-3})
+    \label{KM_ansatz}
+\end{align}
+Neglecting terms of $\mathcal{O}(K^{-3})$, we can now substitute \eqref{KM_ansatz} into \eqref{M_equation} to obtain:
+\begin{equation*}
+\begin{split}
+\frac{\partial P}{\partial t}(\phi,t) = K\int\limits_{\mathcal{T}}\left[
+    \left(-\frac{1}{K}\frac{\delta}{\delta\phi(x)} + \frac{1}{2K^2}\frac{\delta^2}{\delta\phi(x)^2}\right)\{b_K(x|\phi)P(\phi,t)\}\right]dx\\
+    +K\int\limits_{\mathcal{T}}\left[\left(\frac{1}{K}\frac{\delta}{\delta\phi(x)} + \frac{1}{2K^2}\frac{\delta^2}{\delta\phi^2(x)}\right)\{d_K(x|\phi)P(\phi,t)\}\right]dx
+\end{split}
+\end{equation*}
+Rearranging these terms, we obtain a `functional Fokker-Planck equation':
+\begin{equation}
+\label{functional_FPE}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial P}{\partial t}(\phi,t) = \int\limits_{\mathcal{T}}\left[-
+    \frac{\delta}{\delta\phi(x)}\{\mathcal{A}^{-}(x|\phi)P(\phi,t)\} + \frac{1}{2K}\frac{\delta^2}{\delta\phi(x)^2}\{\mathcal{A}^{+}(x|\phi)P(\phi,t)\}\right]dx}
+\end{equation}
+where
+\begin{align*}
+   \mathcal{A}^{\pm}(x|\phi) &= b_K(x|\phi)\pm d_K(x|\phi) = \frac{1}{K}\left(b(x|\nu)\pm d(x|\nu)\right)
+\end{align*}
+
+This constitutes the `mesoscopic' description. For large (but finite) $K$, equation \eqref{functional_FPE} can be analyzed using a weak noise approximation as before.
+
+\subsection{The deterministic limit}
+We can once again appeal to the link between Fokker-Planck equations and Langevins \citep{lafuerza_role_2016} to say that \eqref{functional_FPE} corresponds to the Langevin equation:
+\begin{equation}
+\label{functional_langevin}
+    \frac{\partial \phi}{\partial t}(x,t) = \mathcal{A}^{-}(x|\phi) + \frac{1}{\sqrt{K}}\eta(x,t)
+\end{equation}
+where $\eta(x,t)$  is the `Gaussian spacetime white noise' with zero mean and autocovariance function
+\begin{equation*}
+    \mathbb{E}[\eta(x,t)\eta(x',t')] = \sqrt{\mathcal{A}^{+}(x|\phi)\mathcal{A}^{+}(x'|\phi)}\delta(x-x')\delta(t-t')
+\end{equation*}
+Taking $K \to \infty$ in equation \eqref{functional_langevin} then yields a PDE:
+\begin{equation}
+\label{deterministic_traj}
+\frac{\partial \psi}{\partial t}(x,t) = \mathcal{A}^{-}\left(x|\psi\right) = b_K(x|\psi)- d_K(x|\psi)
+\end{equation}
+where we have used a different symbol $\psi$ simply to highlight that $\psi(x,t)$ as the solution to equation \eqref{deterministic_traj} is a deterministic function, whereas $\phi(x,t)$ as defined in equation \eqref{functional_langevin} is really a stochastic process $\{\phi^{(t)}\}_{t\geq0}$. Equation \eqref{deterministic_traj} simply says that in the absence of stochasticity, the change in the density of individuals with trait values $x$ is given by the difference between the birth and death rates of these individuals in the population. Models of this form are precisely the `oligomorphic dynamics' of \citep{sasaki_oligomorphic_2011} if one assumes the population is composed of a small number of `morphs', \emph{i.e.} $\psi(x,t) = \sum\limits_{k=1}^{S} n_{k}\psi_k(x,t)$, where $\psi_k(x,t)$ is the phenotypic distribution of the $k$th morph (often assumed a normal distribution with narrow variance) and $S$ is the number of distinct morphs in the population. Equation \eqref{deterministic_traj} also appears in models of intraspecific trait variation in community ecology, such as the `trait space equations' of \citep{wickman_theoretical_2022} in their framework for eco-evolutionary community dynamics.\\
+If one wishes to be mathematically careful, the connection between \eqref{functional_FPE} and \eqref{functional_langevin} becomes somewhat tenuous. In particular, while the equivalence between Fokker-Planck equations and SDEs (Langevin equations) is well-studied for finite-dimensional stochastic processes, it is much less understood for the infinite-dimensional function-valued processes that we are dealing with, and the interpretation of any formal `Langevin equation' (corresponding now to a stochastic partial differential equation, or SPDE) that we write down is unclear\footnote{The essential difficulty is interpreting what spacetime white noise formally means. See \citep{week_white_2021} for analytical progress for eco-evolutionary models via weak solutions to SPDEs (the rigorous theory needs some knowledge of measure theory and stochastic processes, but Week \emph{et al.} provide some very useful heuristics that only need Riemann integration, probability, and related notions)}. Nevertheless, we will pretend all is well and assume that one can do this, bolstered by the fact that we can recover some well-known deterministic equations from equation \eqref{deterministic_traj}, as we show below.
+
+\subsubsection{Some familiar faces: Kimura-Crow and adaptive dynamics}
+
+The `macroscopic' version of our function-valued process corresponds to quantitative genetics and adaptive dynamics (which is a generalization of evolutionary game theory for quantitative traits). We begin with the deterministic process given by \eqref{deterministic_traj}. We assume that the birth and death functions take the form:
+\begin{equation}
+\label{BD_for_kimura}
+\begin{aligned}
+    b_K(x|\psi) &= \mu b_{\textrm{mut}}(x|\psi) + (1-\mu)b_{\textrm{int}}(x|\psi)\psi(x,t)\\
+    d_K(x|\psi) &= d_{\textrm{int}}(x|\psi)\psi(x,t)
+\end{aligned}
+\end{equation}
+where $\mu \geq 0$ is a mutation rate. Here, $ b_{\textrm{mut}}(x|\psi)$ describes birth due to mutations, $b_{\textrm{int}}(x|\psi)$ describes birth due to ecological interactions with conspecifics, for example, due to mate choice in the sexual case (This function will just take the form of a constant describing intrinsic duplication rate in the asexual case). Similarly, $d_{\textrm{int}}(x|\psi)$ describes death due to interaction with conspecifics, for example due to competition for resources. Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we obtain
+\begin{equation}
+\label{PDE_for_kimura}
+\frac{\partial \psi}{\partial t}(x,t) = w(x|\psi)\psi(x,t) + \mu b_{\textrm{mut}}(x|\psi)
+\end{equation}
+where we have defined $w(x|\psi) \coloneqq (1-\mu)b_{\textrm{int}}(x|\psi) - d_{\textrm{int}}(x|\psi)$, which can be thought of as the (Malthusian) `fitness' of the phenotype $x$. To track population numbers and trait frequencies, we follow the approach of \citep{week_white_2021} and define
+\begin{equation}
+\label{pop_size_and_freq_for_kimura}
+\begin{aligned}
+N_K(t) &\coloneqq \int\limits_{\mathcal{T}}\psi(x,t)dx\\
+p(x,t) &\coloneqq \frac{\psi(x,t)}{N_K(t)}
+\end{aligned}
+\end{equation}
+We can also define the population mean fitness as:
+\begin{equation}
+\label{mean_fitness_for_kimura}
+\overline{w}(t) = \int\limits_{\mathcal{T}}w(x|\psi)p(x,t)dx
+\end{equation}
+Using the chain rule in the definition of $p(x,t)$, we can calculate:
+\begin{align*}
+\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\frac{\partial \psi}{\partial t}(x,t) - \frac{\psi(x,t)}{N^2_K(t)}\frac{d N_K}{dt}\\
+&= \frac{1}{N_K(t)}\frac{\partial \psi}{\partial t}(x,t) - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}\frac{\partial \psi}{\partial t}(y,t)dy
+\end{align*}
+Where we have used the definition of $N_K(t)$ and assumed that integrals and derivatives commute in the second line. Substituting \eqref{PDE_for_kimura}, we now obtain
+\begin{align*}
+\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\left[w(x|\psi)\psi(x,t) + \mu b_{\textrm{mut}}(x|\psi)\right] - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}w(y|\psi)\psi(y,t) + \mu b_{\textrm{mut}}(y|\psi)dy\\
+&= w(x|\psi)p(x,t) + \frac{\mu}{N_{K}(t)} b_{\textrm{mut}}(x|\psi) - p(x,t)\left(\int\limits_{\mathcal{T}}w(y|\psi)p(y,t)dy+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right)
+\end{align*}
+where we have used the definition of $p(x,t)$ in the second line. Using \eqref{mean_fitness_for_kimura} and rearranging the terms gives us:
+\begin{equation}
+\label{cts_replicator_mutator}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]}
+\end{equation}
+This is a continuous version of the replicator-mutator equation when each $x$ is viewed as a strategy. It also yields Kimura's continuum-of-alleles model when each $x$ is viewed as an allele, $b_{\textrm{mut}}(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, and the trait space is the entire real line, \emph{i.e.} $\mathcal{T} = \mathbb{R}$. To see this, let $b_{\textrm{mut}}(y|\psi) = \int\limits_{\mathbb{R}}m(y-z)\psi(z,t)dz$, where $m(x)$ is a mutation kernel, which by definition is normalized such that $\int\limits_{\mathbb{R}}m(x)dx = 1$. Let us further note that we have implicitly been assuming that the total number of individuals (scaled by $K$) remains finite at all times, \emph{i.e.} $N_K(t) = \int\limits_{\mathbb
+R}\psi(x,t)dx < \infty \ \forall \ t$. Thus, $m(x)\psi(y,t) \in  \mathcal{L}^{1}(\mathbb{R}\times\mathbb{R}) \ \forall \ t$ and we can use the Fubini-Tonnelli theorem to interchange the order of integration of iterated integrals of $m(y-z)\psi(y)$. We are now ready to evaluate the rightmost integral of \eqref{cts_replicator_mutator}.\\
+We have: 
+\begin{align}
+\int\limits_{\mathbb{R}} b_{\textrm{mut}}(y|\psi)dy &= \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}} m(y-z)\psi(z,t)dzdy\nonumber\\
+&= \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}} m(y-z)\psi(z,t)dydz\nonumber\\
+&= \int\limits_{\mathbb{R}}\psi(z,t)\left(\int\limits_{\mathbb{R}} m(y-z)dy\right)dz\nonumber\\
+&= \int\limits_{\mathbb{R}}\psi(z,t)\int\limits_{\mathbb{R}} m(u)dudz\nonumber\\
+&= \int\limits_{\mathbb{R}}\psi(z,t)dz\int\limits_{\mathbb{R}} m(u)du\nonumber\\
+&= N_K(t)\int\limits_{\mathbb{R}} m(u)du\label{convolution_integral_intermediate}
+\end{align}
+where we have used the Fubini-Tonnelli theorem to go from the first step to the second, and have made the substitution $u = y-z$ to go from the third to the fourth step. We then note that since $m$ is a kernel, it satisfies $\int\limits_{\mathbb{R}} m(u)du = 1$, and \eqref{convolution_integral_intermediate} therefore becomes $\int\limits_{\mathbb{R}} b_{\textrm{mut}}(y|\psi)dy = N_K(t)$. Substituting this in \eqref{cts_replicator_mutator}, we have
+\begin{equation*}
+\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[\int\limits_{\mathbb{R}}m(x-z)\psi(z,t)dz - p(x,t)N_K(t)\right]
+\end{equation*}
+Substituting our definition $p(z,t) = \psi(z,t)/N_K(t)$ now yields
+\begin{equation}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\mu\left[\int\limits_{\mathbb{R}}m(x-z)p(z,t)dz - p(x,t)\right]}\label{kimura_continuum_model}
+\end{equation}
+which is Kimura's continuum of alleles model.\\
+Note that if we define the mean trait value as
+\begin{equation*}
+    \overline{x}(t) = \int\limits_{\mathcal{T}}xp(x,t)dx
+\end{equation*}
+then, by multiplying both sides of equation \eqref{cts_replicator_mutator} by $x$ and integrating over the trait space, we obtain
+\begin{align}
+\frac{d \overline{x}}{dt} &= \int\limits_{\mathcal{T}}xw(x|\psi)p(x,t)dx - \overline{w}(t)\int\limits_{\mathcal{T}}xp(x,t)dx+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]dx\nonumber\\
+&= \overline{xw} - \overline{w}\cdot\overline{x} + \frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]dx\label{intermediate_for_cts_price}
+\end{align}
+We now observe that
+\begin{equation}
+\label{cts_price_cov^{(t)}erm}
+\mathrm{Cov}(x,w(x|\psi)) = \overline{xw} - \overline{x}\cdot\overline{w}
+\end{equation}
+is the statistical covariance of the trait value with the Malthusian fitness function (Importantly, just like in the Price equation, this is an \emph{analogy} - Everything here is deterministic). The second term, which we will denote by
+\begin{equation}
+\label{cts_price_drift^{(t)}erm}
+M(x|\psi) \coloneqq \frac{\mu}{N_K(t)}\left[\int\limits_{\mathcal{T}}xb_{\textrm{mut}}(x|\psi)dx - \left(\overline{x}\int\limits_{\mathcal{T}}b_{\textrm{mut}}(x|\psi)dx\right)\right] 
+\end{equation}
+reflects the transmission bias of mutations. Thus, we see that equation \eqref{intermediate_for_cts_price} reads
+\begin{equation}
+\label{cts_price}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d \overline{x}}{dt} = \mathrm{Cov}(x,w(x|\psi)) + M(x|\psi)}
+\end{equation}
+from which it is clear that we have obtained a continuous time analog of the Price equation.
+Adaptive dynamics is recovered under the following additional assumptions:
+\begin{itemize}
+    \item Rare mutations, \emph{i.e.} $\mu \to 0$.
+    \item Small mutational effects with `almost faithful' reproduction, meaning $b_{\textrm{mut}}(x|\psi) \to 0$, and the distribution $\psi(x,t)$ tends to stay very `sharp' (i.e strongly peaked about its mean value). 
+    % and $\psi(x,t) \to \sum\limits_{i=1}^{m}n_{i}\delta_{y_i(t)}$, where $m$ is the number of morphs in the population, $y_i(t)$ are deterministic functions taking values in $\mathcal{T}$, and $\sum\limits_{i=1}^{m} n_i(t) = N_K(t)$. Assuming the population is initially monomorphic, we have $\psi(x,t) \to N_K(t)\delta_{y(t)}$ for some deterministic function $y(t)$ taking values in $\mathcal{T}$. 
+    \item Separation of ecological and evolutionary timescales, meaning that the system is always at ecological equilibrium. Thus, the expected rate of change of resident numbers in a resident population is $0$, and we have $w(y|\delta_{y(t)}) = 0$.
+\end{itemize}
+The first two assumptions are sometimes called the `weak mutation' limit, and the last is sometimes called the `strong selection' limit, both for obvious reasons.
+Under these assumptions, if we supply an initial condition $\psi(x,0) = N_{K}(0)\delta_{y_0}$ for some constants $N_K(0) > 0$ and $y_0 \in \mathcal{T}$ (meaning we start with a completely monomorphic population of size $N_K(0)$ in which all individuals have trait value $y_0$), then it is reasonable to assume that the population remains sufficiently clustered for some (possibly small) time $t>0$ that we can continue to approximate the distribution $\psi(x,t)$ as a Dirac Delta mass $N_{K}(t)\delta_{y(t)}$ that is moving across the trait space in a deterministic manner dictated by a function $y(t)$ (to be found). Note that we have $p(x,t) = \delta_{y(t)}$, $\overline{x}(t) = y(t)$, and $\overline{w}(t) = 0$. Thus, from equation \eqref{cts_price}, we have
+\begin{align}
+    \frac{d\overline{x}}{dt} &= \int\limits_{\mathcal{T}}(x-\overline{x}(t))(w(x|\psi)-\overline{w}(t))p(x,t)dx\nonumber\\
+    \Rightarrow \frac{dy}{dt} &= \int\limits_{\mathcal{T}}(x-\overline{x}(t))w\left(x|N_K\delta_{y(t)}\right)\delta_{y(t)}dx\label{intermediate_for_canonical_AD}
+\end{align}
+Our `weak mutation' assumptions imply that the population will be concentrated in an infinitesimal neighborhood around the mean value $y(t)$ (\emph{i.e} that the distribution of traits in the population is sharply peaked). We can thus Taylor expand $w\left(x|N_K\delta_{y(t)}\right)$ about $y(t)$ as:
+\begin{equation*}
+    w(x|N_K\delta_{y(t)}) = \underbrace{w(y|N_K\delta_{y(t)})}_{=0} + (x-y(t))\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y} + \ldots
+\end{equation*}
+Thus, substituting in \eqref{intermediate_for_canonical_AD}, to first order, we obtain
+\begin{equation*}
+    \frac{dy}{dt} = \left(\int\limits_{\mathcal{T}}(x-\overline{x}(t))^2p(x,t)dx\right)\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y}
+\end{equation*}
+where we have used $\overline{x}(t) = y(t)$. We can define the shorthand $B(y) =\int\limits_{\mathcal{T}}(x-y(t))^2p(x,t)dx = \int\limits_{\mathcal{T}}(x-\overline{x}(t))^2p(x,t)dx$ to obtain:
+\begin{equation}
+    \label{AD_canonical_derived}
+    \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dy}{dt} = B(y)\left(\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y}\right)}
+\end{equation}
+Note that by definition, $B(y(t))$ is the variance of the trait in the population at time $t$. The term $w\left(z|N_K\delta_{y(t)}\right)$ is the expected growth rate of an individual with trait value $z$ in a population of size $N_K$ in which (almost) every individual has trait value $y$. This quantity is referred to as the `invasion fitness' of a `mutant' trait $z$ in a population of `resident' $y$ individuals. Comparing with \eqref{AD_canonical_eqn}, we can see that we have thus derived the canonical equation of adaptive dynamics. Note that strictly speaking, if $\psi(x,t) = \delta_{y(t)}$ exactly, then $B(y) \equiv 0$. This just reflects our assumption that mutations are sampled from infinitesimally close to the resident value. More detailed mathematical arguments are required to ensure that this convergence `makes sense' and that $B(y)$ does not actually equal 0. This has been proved using much more sophisticated mathematical tools in \citep{champagnat_unifying_2006}, which is where we refer the interested reader. An alternative heuristic argument is also provided in the classic article by \citep{dieckmann_dynamical_1996}.
+
+\subsection{Stochastic fluctuations and the weak noise approximation}
+
+We can now formally carry out a functional analogue of the weak noise expansion. Assume that $\psi(x,t)$ is the deterministic trajectory obtained as the solution to \eqref{deterministic_traj}. We introduce a new process $\{\zeta^{(s)}\}_{s \geq 0}$ which measures the fluctuations of $\phi^{(t)}$ from the deterministic trajectory $\psi(x,t)$. More precisely, we introduce the new variables:
+\begin{equation}
+\begin{aligned}
+\label{functional_weak_noise_new_vars}
+    \zeta^{(s)}(x) &= \sqrt{K}(\phi^{(t)}(x) - \psi(x,t))\\
+    s &= t\\
+    \Tilde{P}(\zeta,s) &= \frac{1}{\sqrt{K}}P(\phi,t)
+\end{aligned}
+\end{equation}
+Note that the following relations hold:
+\begin{align}
+\frac{\delta F[\zeta]}{\delta \phi(x)} &= \int\limits_{\mathcal{T}}\frac{\delta F[\zeta]}{\delta \zeta(y)}\frac{\delta \zeta(y)}{\delta \phi(x)}dy = \sqrt{K}\frac{\delta F[\zeta]}{\delta \zeta(x)}\ \label{functional_weak_noise_first_subs}\\
+\frac{\partial}{\partial s} &= \frac{\partial}{\partial t}\label{functional_weak_noise_second_subs}
+\end{align}
+Furthermore, for any $\zeta \in \mathcal{M}_K$, we have:
+\begin{align}
+\frac{\partial \Tilde{P}}{\partial t}(\zeta,s) &= \frac{\delta \Tilde{P}}{\delta \zeta}\frac{\partial \zeta}{\partial t} + \frac{\partial \Tilde{P}}{\partial s}\frac{\partial s}{\partial t}\nonumber\\
+    &=\frac{\delta \Tilde{P}}{\delta \zeta}\left(-\sqrt{K}\frac{\partial \psi}{\partial t}\right) + \frac{\partial \Tilde{P}}{\partial s}\nonumber\\
+    &= -\sqrt{K}\frac{\delta}{\delta \zeta}\{\mathcal{A}^{-}(x|\psi)\Tilde{P}(\zeta,s)\} + \frac{\partial \Tilde{P}}{\partial s}\label{functional_weak_noise^{(t)}hird_subs}
+\end{align}
+Reformulating equation \eqref{functional_FPE} in terms of the new variables \eqref{functional_weak_noise_new_vars} and using the relations \eqref{functional_weak_noise_first_subs}, \eqref{functional_weak_noise_second_subs} and \eqref{functional_weak_noise^{(t)}hird_subs}, we obtain:
+\begin{equation*}
+\begin{split}
+-\sqrt{K}\frac{\delta}{\delta \zeta(x)}\{\mathcal{A}^{-}(x|\psi)\Tilde{P}(\zeta,s)\} + \frac{\partial \Tilde{P}}{\partial s} = \int\limits_{\mathcal{T}}\left[-
+    \left(\sqrt{K}\frac{\delta }{\delta \zeta(x)}\right)\{\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\tilde{P}(\zeta,s)\}\right]dx \\
+    + \int\limits_{\mathcal{T}}\left[\frac{1}{2K}\left(K\frac{\delta^2}{\delta\zeta(x)^2}\right)\{\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\Tilde{P}(\zeta,s)\}\right]dx    
+\end{split}
+\end{equation*}
+and rearranging gives us:
+\begin{align}
+\label{functional_weak_noise_mid_expansion}
+\begin{split}
+\frac{\partial \Tilde{P}}{\partial s} &= -\sqrt{K}\int\limits_{\mathcal{T}}\frac{\delta }{\delta \zeta(x)}\left\{\left(\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)-\mathcal{A}^{-}(x|\psi)\right)\Tilde{P}(\zeta,s)\right\}dx\\
+&+\frac{1}{2}\int\limits_{\mathcal{T}}\frac{\delta^2}{\delta\zeta(x)^2}\{\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\Tilde{P}(\zeta,s)\}dx
+\end{split}
+\end{align}
+We will now Taylor expand our functionals about $\psi$ (we assume that this is possible). Thus, we have the expansions:
+\begin{align*}
+    \mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right) &= \mathcal{A}^{-}\left(x|\psi\right) + \frac{1}{\sqrt{K}}\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy + \cdots\\
+    \mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right) &= \mathcal{A}^{+}\left(x|\psi\right) + \frac{1}{\sqrt{K}}\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{+}(y|\psi)\}dy + \cdots
+\end{align*}
+We also assume that $\tilde{P}$ can be expanded as
+\begin{align*}
+     \Tilde{P} &= \sum\limits_{n=0}^{\infty}\Tilde{P}_n\left(\frac{1}{\sqrt{K}}\right)^n
+\end{align*}
+substituting these expansions into equation \eqref{functional_weak_noise_mid_expansion} and equating coefficients of powers of $K$, we see that upto leading order in $K$ (corresponding to the zeroth order terms of $\tilde{P}$ and $\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)$, and the first order term of $\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)$) we have:
+\begin{equation*}
+\frac{\partial \Tilde{P}_{0}}{\partial s}(\zeta,s) = \int\limits_{\mathcal{T}}\left[-\frac{\delta}{\delta \zeta(x)}\left\{\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy\Tilde{P}_{0}(\zeta,s)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{\Tilde{P}_{0}(\zeta,s)\}\right]dx
+\end{equation*}
+We thus arrive at the functional Fokker-Planck equation:
+\begin{equation}
+\label{functional_WNE_zeroth_order}
+    \frac{\partial \Tilde{P}_{0}}{\partial s}(\zeta,s) = \int\limits_{\mathcal{T}}\left(-\frac{\delta}{\delta \zeta(x)}\left\{\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x)\Tilde{P}_{0}(\zeta,s)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{\Tilde{P}_{0}(\zeta,s)\}\right)dx
+\end{equation}
+where 
+\begin{equation*}
+\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x) = \int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy = \frac{d}{d\epsilon}\mathcal{A}^-(x|\psi + \epsilon \zeta) \bigg{|}_{\epsilon = 0}
+\end{equation*}
+can be thought of now as the functional analogue of a directional derivative of $\mathcal{A}^-(x|\psi)$ in the direction of the function $\zeta$.
+
+\subsection{An example: The quantitative stochastic logistic equation}
+As an example, let us carry out the functional Kramers-Moyal expansion for the birth and death functionals given by \eqref{Rogers_logistic_BD}. In terms of the scaled variable $\phi = K\nu$, these functions read:
+\begin{equation}
+\label{Rogers_logistic_BD_scaled}
+\begin{aligned}
+b_K(x|\phi) &= \frac{1}{K}b(x|\nu) = \frac{1}{K}\left( r\int\limits_{\mathcal{T}}m(x,y)K\phi(y)dy\right)\\
+    d_K(x|\phi) &= \frac{1}{K}d(x|\nu) =  \frac{1}{K}\left(\frac{K\phi(x)}{Kn(x)}\int\limits_{\mathcal{T}}\alpha(x,y)K\phi(y)dy\right)
+\end{aligned}
+\end{equation}
+Thus, using equation \eqref{deterministic_traj}, the deterministic trajectory becomes:
+\begin{equation}
+\label{Rogers_logistic_BD_deterministic}
+\frac{\partial \psi}{\partial t}(x,t) = r\int\limits_{\mathcal{T}}m(x,y)\psi(y,t)dy-\frac{1}{n(x)}\psi(x,t)\int\limits_{\mathcal{T}}\alpha(x,y)\psi(y,t)dy
+\end{equation}
+Note that if we employ the change of variables $\Psi = K\psi$ to go back from $\mathcal{M}_{K}$ (\textit{i.e} $\phi^{(t)}$) to $\mathcal{M}$ (\textit{i.e} $\nu^{(t)}$), we recover the familiar continuous logistic equation (Equation \eqref{cts_logistic}) as the deterministic limit:
+\begin{align*}
+\frac{\partial \Psi}{\partial t}(x,t) &= r\int\limits_{\mathcal{T}}m(x,y)\Psi(y,t)dy-\frac{\Psi(x,t)}{Kn(x)}\int\limits_{\mathcal{T}}\alpha(x,y)\Psi(y,t)dy \\
+&\approx r\Psi(x,t) -\frac{\Psi(x,t)}{K(x)}\int\limits_{\mathcal{T}}\alpha(x,y)\Psi(y,t)dy + D_m\nabla^2_{x}\Psi(x,t)
+\end{align*}
+where $K(x) = Kn(x)$ is the carrying capacity experienced by an individual of phenotype $x$, and $D_m = r \sigma_m^2/2$ measures the `diffusion rate' of the population in trait space. It is left as an exercise for the reader to verify by the same steps that if we instead have the birth rate functional $b(x|\phi) = \lambda\int m(x,y)\phi(y)dy$ (with $m(x,y)$ as defined in \eqref{Rogers_logistic_BD}) and the death rate functional $d(x|\phi) = \phi(x)\left(\mu+(\lambda-\mu)\phi(x)/K\right)$ corresponding to \emph{linear} density-dependent death, the macroscopic limit yields the famous Fisher-KPP equation with growth rate $r=\lambda-\mu$ and diffusion constant $D = \lambda \sigma_m^2/2$.
+% In any case, for the system defined by \eqref{Rogers_logistic_BD_scaled}, we can also calculate $\mathcal{D}_{\zeta}[\mathcal{A}^-]$ as
+% \begin{align*}
+% \mathcal{D}_{\zeta}[\mathcal{A}^-] &= \frac{d}{d\epsilon}\left( r\int\limits_{\mathcal{T}} m(x,y)(\psi(y)+\epsilon\zeta(y))dy - \frac{\psi(x)+\epsilon\zeta(x)}{n(x)}\int\limits_{\mathcal{T}}\alpha(x,y)(\psi(y)+\epsilon\zeta(y))dy\right) \biggl{|}_{\epsilon = 0}\\
+% &= r\int\limits_{\mathcal{T}}m(x,y)\zeta(y)dy - \frac{1}{n(x)}\left(\psi(x)\int\limits_{\mathcal{T}}\alpha(x,y)\zeta(y)dy + \zeta(x)\int\limits_{\mathcal{T}}\alpha(x,y)\psi(y)dy\right)
+% \end{align*}
+
+\section{Summary}\label{sec_disc}
+
+In this chapter, we have seen how stochastic birth-death processes can be used to construct and analyze mechanistic individual-based models for the dynamics of finite populations. In doing so, we have also seen that various well-known equations of evolutionary dynamics can be recovered in the infinite population size limit, called the `macroscopic' description. In the finite-dimensional case (corresponding to discrete trait variants), the macroscopic descriptions are the equations of population genetics and evolutionary game theory. In the infinite-dimensional case, they are the equations of quantitative genetics, and, in some further limits, adaptive dynamics. In both cases, the mean value of the trait in the population changes according to an equation resembling the Price equation. My derivation shows the (stochastic) individual-level underpinnings of these population-level equations. It also highlights the natural connections between these various equations - For example, the same procedures that lead to the replicator-mutator equation in the case of discretely varying traits yield Kimura's model in the quantitative case, underscoring the broad similarities between evolutionary game theory and quantitative genetics. The major formulations are summarized in Table \ref{table_summary}. If the population is large (but finite) and the stochasticity is sufficiently weak, stochastic dynamics can be studied analytically using the weak noise approximation. Usually, this approximation is valid if we are studying a stochastic trajectory that is fluctuating about a point that is stable in the deterministic limit \hl{cite van kampen}. Such situations occur often, since many systems of the forms studied here quickly relax to stable equilibria.
+\clearpage
+{\centering\begin{sideways}
+    \begin{minipage}{\textheight}
+        \resizebox{\textheight}{!}{%
+            \setstretch{1.5}
+            \begin{tabular}{ %I manually specified the width of each column by trial and error
+  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 1
+  |p{\dimexpr.27\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 2
+  |p{\dimexpr.33\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 3
+  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 4
+  |p{\dimexpr.4\linewidth-2\tabcolsep-1.3333\arrayrulewidth}|% column 5
+  }
+            \hline
+         \centering \textbf{Number of possible distinct trait variants ($m$)} & \centering \textbf{State Space} &
+\centering \textbf{Model parameters} & \centering \textbf{Mesoscopic description} & \centering\arraybackslash \textbf{Infinite population limit} \\
+        \hline
+        $m = 1$ \newline (Identical individuals)  & $[0,1,2,3,\ldots]$ \newline (Population size) & Two real-valued functions, $b(N)$ and $d(N)$, describing the birth and death rate of individuals when the population size is $N$ & Univariate Fokker-Planck equation \newline (one-dimensional SDE) & Single species population dynamics\\ 
+        \hline
+        $1 < m < \infty$ \newline (Discrete traits) & $[0,1,2,3,\ldots]^{m}$ \newline (Number of individuals of each trait variant) & $2m$ real-valued functions, $b_i(\mathbf{v})$ and $d_i(\mathbf{v})$ (for $1 \leq i \leq m$) describing the birth and death rate of trait variant $i$ when the population is $\mathbf{v}$ & Multivariate Fokker-Planck equation \newline ($m$-dimensional SDE) &  Evolutionary game theory \newline Quasispecies equation \newline Price equation (discrete traits) \\
+        \hline
+        $m = \infty$ \newline (Quantitative traits) & $\left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}\right\}$ \newline \newline (Each Dirac mass $\delta_{x_i}$ is an individual with trait value $x_i$) & Two real-valued functionals $b(x|\nu)$ and $d(x|\nu)$ describing the birth and death rate of trait variant $x$ when the population is $\nu$ & Functional Fokker-Planck equation \newline (SPDE) & Kimura's continuum-of-alleles model \newline \cite{sasaki_oligomorphic_2011}'s Oligomorphic Dynamics \newline \cite{wickman_theoretical_2022}'s Trait Space Equations for intraspecific trait variation \newline Adaptive Dynamics  \newline Price equation (quantitative traits)\\
+        \hline
+            \end{tabular}
+        }
+        %\renewcommand\thetable{1}
+        \captionof{table}{Summary of the various birth-death processes studied in this chapter}
+        \label{table_summary}
+    \end{minipage}
+\end{sideways}\par}
+
+Stochastic systems exhibit many interesting and biologically relevant phenomena which cannot be captured in the deterministic limit. For example, in both the stochastic logistic equation \ref{ex_1D_stoch_logistic_BD_eqns} and in two-strategy games with finite population sizes \citep{tao_stochastic_2007}, demographic noise ensures that all populations are guaranteed to go extinct given enough time, even if the deterministic limit predicts a stable state far from extinction. In the case of quantitative traits, demographic noise can hinder adaptive diversification by increasing the time before evolutionary branching occurs \citep{claessen_delayed_2007, wakano_evolutionary_2013, debarre_evolutionary_2016}, causing stochastic extinction of existing evolutionary branches \citep{rogers_demographic_2012, johansson_will_2006}, or preventing branching altogether if the population is too small \citep{rogers_modes_2015, johnson_two-dimensional_2021}. Stochastic systems also routinely exhibit evolution towards attractors that cannot be attained in the deterministic limit \citep{delong_stochasticity_2023}, sometimes even completely reversing the direction of evolution predicted by deterministic dynamics \citep{constable_demographic_2016,mcleod_social_2019}. Since real-life populations are stochastic and finite, it is thus imperative that modellers work with stochastic first-principles models instead of their deterministic limits, lest they risk missing important phenomena that are unique to stochastic systems \citep{black_stochastic_2012,schreiber_does_2022,hastings_transients_2004,shoemaker_integrating_2020}

@@ -1,0 +1,351 @@
+\epigraph{\justifying Somewhere \ldots between the specific that has no meaning and the general that has no content there must be, for each purpose and at each level of abstraction, an optimum degree of generality}{Kenneth Boulding}
+
+As mentioned in the previous chapters, there is much to be gained by formulating stochastic birth-death models at the individual level from first principles. I have carried this out in the most general possible setting, with the idea being that one can then substitute particular biological forms of the process to try and answer questions for particular models as required.\\
+Consider a quantitative trait that takes values in some abstract trait space $\mathcal{T} \subseteq \mathbb{R}$. In this setting, since the trait of any given individual is fixed, and since each individual can only have one trait value, we can characterize individuals using Dirac delta masses. Thus, an individual with a trait value $x \in \mathcal{T}$ can be characterized as a Dirac delta mass centered at $x$ (this is a measure $\delta_x$ in math notation and a function $f(y) = \delta(y-x)$ in physics notation). Thus, if the population at any time $t$ consists of $N(t)$ individuals with trait values $\{x_1,x_2,\ldots,x_{N(t)}\}$, then it can be completely characterized by the `distribution'
+\begin{equation*}
+    \nu_t(y) = \sum\limits_{i=1}^{N(t)}\delta(y-x_i)
+\end{equation*}
+\myfig{0.6}{Media/3.3_dirac_deltas.png}{Description of the state space of the process. For concreteness, consider a population of birds in which individuals have varying beak lengths. \textbf{(A)} Each individual in the population can be described as a Dirac delta mass centered at its beak length. This is because each individual has exactly one fixed beak length, and therefore, can be thought of as a distribution centered at that particular beak length and with zero spread. \textbf{(B)} The population as a whole is thus described as a sum of Dirac masses. $N(t)$ here is the size of the population at time $t$. Birth and death of individuals would correspond to the addition and removal of Dirac masses respectively. Note that if we had a large number of individuals, this distribution begins to look like a continuous distribution.}{pop_description}\\
+This function can be interpreted as a `distribution' because the properties of Dirac delta functions tell us that given a set $A \subset \mathcal{T}$, integrating $\nu_t(y)$ over this set gives us the number of organisms that have trait values that lie within this set. For example, integrating $\nu_t$ over the entire trait space gives us the total population size at time $t$, \textit{i.e}
+\begin{equation*}
+    \int\limits_{\mathcal{T}}\nu_t(y)dy = N(t)
+\end{equation*}
+For general functions $b(x|\nu)$ and $d(x|\nu)$, previous authors \cite{champagnat_individual_2008} have proven that such a process always exists and is almost surely non-explosive as long as some rather weak regularity properties are satisfied. We can thus safely assume that our process is well-defined for all the kinds of functions we are interested in. Let us now define, for each $x \in \mathcal{T}$, two \emph{step operators} $\mathcal{E}_{x}^{\pm}$ that satisfy, for any bounded measurable function $f:\mathcal{T} \times \mathcal{M} \to \mathbb{R}$,
+\begin{equation*}
+    \mathcal{E}_{x}^{\pm}[f(y,\nu)] =  f(y,\nu \pm \delta_x)
+\end{equation*}
+In other words, the step operators $\mathcal{E}_{x}^{\pm}$ simply describe the effect of adding or removing a single individual with trait value $x$ from the population.
+It is known (only for one-dimensional traits) that we can find a density function $P(\nu,t)$ such that the probability that the process takes values in a set $A \in \mathfrak{B}(\mathcal{T})$ at time $t$ is $ \mathbb{P}(\nu_t \in A)= \int_{A}P(x,t)d\nu(x)$, which we will write in physics notation as $\int_{A}P(\nu_t,t)dx$ for convenience. Note that for any $\nu \in \mathcal{M}$, the transition rate from $\nu - \delta_{x}$ to $\nu$ is simply $\mathcal{E}^{-}_{x}b(x|\nu)$, and similarly, the transition rate from $\nu+\delta_{x}$ to $\nu$ is $\mathcal{E}^{+}_{x}d(x|\nu)$. Thus, using Kolmogorov's backward equation, we see that $P(\nu,t)$ must satisfy:
+\begin{equation}
+\label{unnormalized_M_equation}
+    \frac{\partial P}{\partial t}(\nu,t) = \int\limits_{\mathcal{T}}\left[(\mathcal{E}^{-}_{x}-1)b(x|\nu_t)P(\nu,t) + (\mathcal{E}^{+}_{x}-1)d(x|\nu_t)P(\nu,t)\right]dx
+\end{equation}
+This is the so-called `Master equation' or `M-equation' of our process. To proceed, we assume that the process $\{\nu_t\}_{t \geq 0}$ can be normalized by a `system-size' parameter $K > 0$ to obtain a new measure-valued process $\{\phi_t\}_{t \geq 0}$. Biologically, $K$ is generally interpreted to be the carrying capacity of the environment and $\phi_t(A)$ can be interpreted as the `density' of individuals within the set $A \subset \mathcal{T}$. Specifically, we assume that there exists a $K>0$ such that we can make the substitutions:
+\begin{align*}
+    \phi_t = \frac{1}{K}\nu_t &= \frac{1}{K}\sum\limits_{i=1}^{N(t)}\delta_{x_i}\\
+    b_K(x|\phi_t) &= \frac{1}{K}b(x|\nu_t)\\
+    d_K(x|\phi_t) &= \frac{1}{K}d(x|\nu_t)
+\end{align*}
+$\{\phi_t\}_{t\geq0}$ takes values in 
+\begin{equation*}
+    \mathcal{M}_K = \left\{\frac{1}{K}\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
+\end{equation*}
+In terms of these new variables, we obtain the normalized M-equation:
+\begin{equation}
+\label{M_equation}
+    \frac{\partial P}{\partial t}(\phi,t) = K\int\limits_{\mathcal{T}}\left[(\Delta^{-}_{x}-1)b_K(x|\phi_t)P(\phi,t) +(\Delta^{+}_{x}-1)d_K(x|\phi_t)P(\phi,t)\right]dx
+\end{equation}
+where we have introduced new step operators $\Delta_{x}^{\pm}$ that satisfy, for any bounded measurable functional $F:\mathcal{T} \times \mathcal{M}_K \to \mathbb{R}$:
+\begin{equation*}
+    \Delta_{x}^{\pm}[F(y,\phi)] =  F\left(y,\phi \pm \frac{1}{K}\delta_x\right)
+\end{equation*}
+In general, at least one of $b_K(x|\phi)$ and $d_K(x|\phi)$ will be non-linear, and consequently, the M-equation \eqref{M_equation} will be non-linear and difficult to directly handle. Some approximations are required to make this system more tractable.
+\section{The functional Kramers-Moyal expansion}
+Let us use the physicist's convention of viewing delta distributions as functions (this also turns $\phi(dx)$ into ``$dx$'' and $\delta_y(dx)$ into ``$\delta(y-x)dx$'', with the rules of integration as defined for Dirac delta distributions). In this framework, we can conduct a system-size expansion by interpreting $\phi$ as a function $\phi(x)$ and using a functional `Taylor expansion' of the step operators\cite{rogers_demographic_2012}. Recall that the functional version of the Taylor expansion of a functional $F[\rho]$ of functions $\rho$ defined on a domain $\Omega \subseteq \mathbb{R}$ is given by:
+\begin{equation*}
+    F[\rho_0 + \rho] = F[\rho_0] + \int\limits_{\Omega}\rho(x)\frac{\delta F}{\delta \rho_0(x)}dx + \frac{1}{2!}\int\limits_{\Omega}\int\limits_{\Omega}\rho(x)\rho(y)\frac{\delta^2 F}{\delta \rho_0(x)\delta \rho_0(y)}dxdy + \cdots
+\end{equation*}
+Since $\Delta^{\pm}_{x}[F[\phi(y)]] = F[\phi(y) \pm \delta(y-x)/K]$, we can Taylor expand the RHS to see that our step operators obey
+\begin{align}
+    \Delta^{\pm}_{x}[F[\phi]] &= F[\phi] \pm \frac{1}{K}\int\limits_{\mathcal{T}}\frac{\delta F}{\delta \phi(y)}\delta(y-x)dy + \frac{1}{2K^2}\int\limits_{\mathcal{T}}\int\limits_{\mathcal{T}}\delta(y-x)\delta(z-x)\frac{\delta^2 F}{\delta \phi(y)\delta \phi(z)}dydz+\mathcal{O}(K^{-3})\nonumber\\
+    &= F[\phi] \pm \frac{1}{K}\frac{\delta F}{\delta \phi(x)} + \frac{1}{2K^2}\frac{\delta^2 F}{\delta \phi(x)^2}+\mathcal{O}(K^{-3})
+    \label{KM_ansatz}
+\end{align}
+Neglecting terms of $\mathcal{O}(K^{-3})$, we can now substitute \eqref{KM_ansatz} into \eqref{M_equation} to obtain:
+\begin{equation*}
+\begin{split}
+\frac{\partial P}{\partial t}(\phi,t) = K\int\limits_{\mathcal{T}}\left[
+    \left(-\frac{1}{K}\frac{\delta}{\delta\phi(x)} + \frac{1}{2K^2}\frac{\delta^2}{\delta\phi(x)^2}\right)\{b_K(x|\phi)P(\phi,t)\}\right]dx\\
+    +K\int\limits_{\mathcal{T}}\left[\left(\frac{1}{K}\frac{\delta}{\delta\phi(x)} + \frac{1}{2K^2}\frac{\delta^2}{\delta\phi^2(x)}\right)\{d_K(x|\phi)P(\phi,t)\}\right]dx
+\end{split}
+\end{equation*}
+Rearranging these terms, we obtain a `functional Fokker-Planck equation':
+\begin{equation}
+\label{functional_FPE}
+\frac{\partial P}{\partial t}(\phi,t) = \int\limits_{\mathcal{T}}\left[-
+    \frac{\delta}{\delta\phi(x)}\{\mathcal{A}^{-}(x|\phi)P(\phi,t)\} + \frac{1}{2K}\frac{\delta^2}{\delta\phi(x)^2}\{\mathcal{A}^{+}(x|\phi)P(\phi,t)\}\right]dx
+\end{equation}
+where
+\begin{align*}
+   \mathcal{A}^{\pm}(x|\phi) &= b_K(x|\phi)\pm d_K(x|\phi) = \frac{1}{K}\left(b(x|\nu)\pm d(x|\nu)\right)
+\end{align*}
+
+\section{The Weak Noise Expansion}
+For large (but finite) $K$, equation \eqref{functional_FPE} can be analyzed using a weak noise expansion to arrive at a linear approximation. The essential idea is that the stochastic process can be envisioned as comprising of $\mathcal{O}(K^{-1})$ stochastic fluctuations occurring about a \emph{deterministic} trajectory.  We carry out the expansion explicitly below.
+\subsection{Part 1: The deterministic trajectory}
+Lafuerza and McKane \cite{lafuerza_role_2016} appeal to the link between FPEs and Langevin equations to say that \eqref{functional_FPE} corresponds to the Langevin equation:
+\begin{equation}
+\label{functional_langevin}
+    \frac{\partial \phi}{\partial t}(x,t) = \mathcal{A}^{-}(x|\phi) + \frac{1}{\sqrt{K}}\eta(x,t)
+\end{equation}
+where $\eta(x,t)$  is the `Gaussian white noise' with zero mean and autocovariance function
+\begin{equation*}
+    \mathbb{E}[\eta(x,t)\eta(x',t')] = \sqrt{\mathcal{A}^{+}(x|\phi)\mathcal{A}^{+}(x'|\phi)}\delta(x-x')\delta(t-t')
+\end{equation*}
+Taking $K \to \infty$ in equation \eqref{functional_langevin} then yields a PDE:
+\begin{equation}
+\label{deterministic_traj}
+\frac{\partial \psi}{\partial t}(x,t) = \mathcal{A}^{-}\left(x|\psi\right) = b_K(x|\psi)- d_K(x|\psi)
+\end{equation}
+where we have used a different symbol $\psi$ simply to highlight that $\psi(x,t)$ as the solution to equation \eqref{deterministic_traj} is a deterministic function, whereas $\phi(x,t)$ as defined in equation \eqref{functional_langevin} is really a stochastic process $\{\phi_t\}_{t\geq0}$. Equation \eqref{deterministic_traj} simply says that in the absence of stochasticity, the change in the density of individuals with trait values $x$ is given by the difference between the birth and death rates of these individuals in the population.
+However, if one wishes to be mathematically careful, the connection between \eqref{functional_FPE} and \eqref{functional_langevin} becomes somewhat tenuous, since the process under consideration is measure-valued and the objects in \eqref{functional_FPE} are functional derivatives: As such, I am not at all sure whether such an analogous connection between FPEs and Langevin equations even exists in this setting, especially due to the heuristic nature of the Langevin formulation. I have come up with the following alternative argument, which I \emph{think} is correct:\\
+\\
+Taking the limit $K \to \infty$ in \eqref{functional_FPE} eliminates the second term in the RHS, and the resultant process is known to converge (in law) to a deterministic process \cite{champagnat_individual_2008}. This means that there exists a deterministic function $\psi(x,t):\mathcal{T}\times[0,\infty)\to\mathbb{R}$ such that $\phi_t(A) \to \int_{A}\psi(x,t)dx$ for a.e. $A \in \mathfrak{B}(\mathcal{T})$. Since this is exactly the definition of a probability density on $\mathcal{T}\times[0,\infty)$, we can replace $P(\phi,t)$ with ${\psi(x,t)}$ in equation \eqref{functional_FPE}. Writing $\phi_t(x)$ to underscore that $\{\phi_t\}_t$ is a process, we obtain:
+\begin{align*}
+\frac{\partial\psi}{\partial t}(x,t) &= -\int\limits_{\mathcal{T}}\frac{\delta}{\delta\phi_t(x)}\{\mathcal{A}^{-}(x|\phi_t)\}\psi(x,t)dx\\
+&= \int\limits_{\mathcal{T}}\mathcal{A}^{-}(x|\phi_t)\frac{\delta\psi(x,t)}{\delta\phi_t(x)}dx = \int\limits_{\mathcal{T}}\mathcal{A}^{-}(x|\phi_t)\delta\left(\phi_t(x)-\psi(x,t)\right)dx
+\end{align*}
+Where we have used integration by parts and discarded the surface term, the latter being justified by our assumption that individuals only take trait values in the interior of $\mathcal{T}$, meaning that $P(\nu,t)dx \equiv 0$ on $\partial\mathcal{T}$. The rules for integration of the delta distribution then give us the deterministic PDE \eqref{deterministic_traj}.
+
+\subsubsection{Deriving existing models: Kimura, replicator, and Price}
+
+We begin with the deterministic process given by \eqref{deterministic_traj}. We assume that the birth and death functions take the form:
+\begin{equation}
+\label{BD_for_kimura}
+\begin{aligned}
+    b_K(x|\psi) &= \mu b_{\textrm{mut}}(x|\psi) + (1-\mu)b_{\textrm{int}}(x|\psi)\psi(x,t)\\
+    d_K(x|\psi) &= d_{\textrm{int}}(x|\psi)\psi(x,t)
+\end{aligned}
+\end{equation}
+where $\mu \geq 0$ is a mutation rate. Here, $ b_{\textrm{mut}}(x|\psi)$ describes birth due to mutations, $b_{\textrm{int}}(x|\psi)$ describes birth due to ecological interactions with conspecifics, for example, due to mate choice in the sexual case (This function will just take the form of a constant describing intrinsic duplication rate in the asexual case). Similarly, $d_{\textrm{int}}(x|\psi)$ describes death due to interaction with conspecifics, for example due to competition for resources. Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we obtain
+\begin{equation}
+\label{PDE_for_kimura}
+\frac{\partial \psi}{\partial t}(x,t) = w(x|\psi)\psi(x,t) + \mu b_{\textrm{mut}}(x|\psi)
+\end{equation}
+where we have defined $w(x|\psi) \coloneqq (1-\mu)b_{\textrm{int}}(x|\psi) - d_{\textrm{int}}(x|\psi)$, which can be thought of as the (Malthusian) `fitness' of the phenotype $x$. To track population numbers and trait frequencies, we follow the approach of \cite{week_white_2021} and define
+\begin{equation}
+\label{pop_size_and_freq_for_kimura}
+\begin{aligned}
+N_K(t) &\coloneqq \int\limits_{\mathcal{T}}\psi(x,t)dx\\
+p(x,t) &\coloneqq \frac{\psi(x,t)}{N_K(t)}
+\end{aligned}
+\end{equation}
+We can also define the population mean fitness as:
+\begin{equation}
+\label{mean_fitness_for_kimura}
+\overline{w}(t) = \int\limits_{\mathcal{T}}w(x|\psi)p(x,t)dx
+\end{equation}
+Using the chain rule in the definition of $p(x,t)$, we can calculate:
+\begin{align*}
+\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\frac{\partial \psi}{\partial t}(x,t) - \frac{\psi(x,t)}{N^2_K(t)}\frac{d N_K}{dt}\\
+&= \frac{1}{N_K(t)}\frac{\partial \psi}{\partial t}(x,t) - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}\frac{\partial \psi}{\partial t}(y,t)dy
+\end{align*}
+Where we have used the definition of $N_K(t)$ and assumed that integrals and derivatives commute in the second line. Substituting \eqref{PDE_for_kimura}, we now obtain
+\begin{align*}
+\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\left[w(x|\psi)\psi(x,t) + \mu b_{\textrm{mut}}(x|\psi)\right] - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}w(y|\psi)\psi(y,t) + \mu b_{\textrm{mut}}(y|\psi)dy\\
+&= w(x|\psi)p(x,t) + \frac{\mu}{N_{K}(t)} b_{\textrm{mut}}(x|\psi) - p(x,t)\left(\int\limits_{\mathcal{T}}w(y|\psi)p(y,t)dy+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right)
+\end{align*}
+where we have used the definition of $p(x,t)$ in the second line. Using \eqref{mean_fitness_for_kimura} and rearranging the terms gives us:
+\begin{equation}
+\label{kimura_continuum_model}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]}
+\end{equation}
+This is a continuous version of the replicator-mutator equation when each $x$ is viewed as a strategy. It also yields Kimura's continuum-of-alleles model when each $x$ is viewed as an allele and $b_{\textrm{mut}}(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, because the integral in the rightmost term then evaluates to 1 by definition of a kernel.\\
+Note that if we define the mean trait value as
+\begin{equation*}
+    \overline{x}(t) = \int\limits_{\mathcal{T}}xp(x,t)dx
+\end{equation*}
+then, by multiplying both sides of equation \eqref{kimura_continuum_model} by $x$ and integrating over the trait space, we obtain
+\begin{align}
+\frac{d \overline{x}}{dt} &= \int\limits_{\mathcal{T}}xw(x|\psi)p(x,t)dx - \overline{w}(t)\int\limits_{\mathcal{T}}xp(x,t)dx+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]dx\nonumber\\
+&= \overline{xw} - \overline{w}\cdot\overline{x} + \frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]dx\label{intermediate_for_cts_price}
+\end{align}
+We now observe that
+\begin{equation}
+\label{cts_price_cov_term}
+\mathrm{Cov}(x,w(x|\psi)) = \overline{xw} - \overline{x}\cdot\overline{w}
+\end{equation}
+is the statistical covariance of the trait value with the Malthusian fitness function (Importantly, just like in the Price equation, this is an \emph{analogy} - Everything here is deterministic). The second term, which we will denote by
+\begin{equation}
+\label{cts_price_drift_term}
+M(x|\psi) \coloneqq \frac{\mu}{N_K(t)}\left[\int\limits_{\mathcal{T}}xb_{\textrm{mut}}(x|\psi)dx - \left(\overline{x}\int\limits_{\mathcal{T}}b_{\textrm{mut}}(x|\psi)dx\right)\right] 
+\end{equation}
+reflects the transmission bias of mutations. Thus, we see that equation \eqref{intermediate_for_cts_price} reads
+\begin{equation}
+\label{cts_price}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d \overline{x}}{dt} = \mathrm{Cov}(x,w(x|\psi)) + M(x|\psi)}
+\end{equation}
+from which it is clear that we have obtained a continuous time analog of the Price equation.\\
+\\
+Adaptive dynamics is recovered under the following additional assumptions:
+\begin{itemize}
+    \item Rare mutations, \emph{i.e.} $\mu \to 0$.
+    \item Small mutational effects with `almost faithful' reproduction, meaning $b_{\textrm{mut}}(x|\psi) \to 0$, and the distribution $\psi(x,t)$ tends to stay very `sharp' (i.e `clustered' around its mean value).
+    % and $\psi(x,t) \to \sum\limits_{i=1}^{m}n_{i}\delta_{y_i(t)}$, where $m$ is the number of morphs in the population, $y_i(t)$ are deterministic functions taking values in $\mathcal{T}$, and $\sum\limits_{i=1}^{m} n_i(t) = N_K(t)$. Assuming the population is initially monomorphic, we have $\psi(x,t) \to N_K(t)\delta_{y(t)}$ for some deterministic function $y(t)$ taking values in $\mathcal{T}$. 
+    \item Separation of ecological and evolutionary timescales, meaning that the system is always at ecological equilibrium. Thus, the expected rate of change of resident numbers in a resident population is $0$, and we have $w(y|\delta_{y(t)}) = 0$.
+\end{itemize}
+Under these assumptions, if we supply an initial condition $\psi(x,0) = N_{K}(0)\delta_{y_0}$ for some constants $N_K(0) > 0$ and $y_0 \in \mathcal{T}$ (meaning we start with a completely monomorphic population), then it is reasonable to assume that the population remains sufficiently clustered for $t>0$ that we can continue to approximate the distribution $\psi(x,t)$ as a Dirac Delta mass $N_{K}(t)\delta_{y(t)}$ that is moving across the trait space in a path dictated by a function $y(t)$ (to be found). Note that we have $p(x,t) = \delta_{y(t)}$, $\overline{x}(t) = y(t)$, and $\overline{w}(t) = 0$. Thus, from equation \eqref{cts_price}, we have
+\begin{align}
+    \frac{d\overline{x}}{dt} &= \int\limits_{\mathcal{T}}(x-\overline{x}(t))(w(x|\psi)-\overline{w}(t))p(x,t)dx\nonumber\\
+    \Rightarrow \frac{dy}{dt} &= \int\limits_{\mathcal{T}}(x-\overline{x}(t))w\left(x|N_K\delta_{y(t)}\right)\delta_{y(t)}dx\label{intermediate_for_canonical_AD}
+\end{align}
+Since mutations have small effects, they will only be in an infinitesimal neighborhood around $y(t)$. We can thus Taylor expand $w\left(x|N_K\delta_{y(t)}\right)$ about the resident trait value $y(t)$ as:
+\begin{equation*}
+    w(x|N_K\delta_{y(t)}) = \underbrace{w(y|N_K\delta_{y(t)})}_{=0} + (x-y(t))\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y} + \ldots
+\end{equation*}
+Thus, substituting in \eqref{intermediate_for_canonical_AD}, to first order, we obtain
+\begin{equation*}
+    \frac{dy}{dt} = \left(\int\limits_{\mathcal{T}}(x-\overline{x}(t))^2p(x,t)dx\right)\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y}
+\end{equation*}
+where we have used $\overline{x}(t) = y(t)$. Noting that the integral is just the second moment of the trait distribution when the resident trait value is $y(t)$, we can define the shorthand $B(y) =\int\limits_{\mathcal{T}}(x-y(t))^2p(x,t)dx$ to obtain:
+\begin{equation}
+    \label{AD_canonical_derived}
+    \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dy}{dt} = B(y)\left(\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y}\right)}
+\end{equation}
+Since there are negligible mutational effects, $w\left(z|N_K\delta_{y(t)}\right)$ is the expected growth rate of an individual with trait value $z$ in a population where every individual has trait value $\delta_y$ and is thus (by definition) the invasion fitness $f(z;y)$. Comparing with \eqref{AD_canonical_eqn}, we can see that we have thus derived the canonical equation of adaptive dynamics. Note that strictly speaking, if $\psi(x,t) = \delta_{y(t)}$ exactly, then $B(y) = 0$. This just reflects our assumption that mutations are sampled from infinitesimally close to the resident value. More detailed mathematical arguments are required to ensure that this convergence `makes sense' and that $B(y)$ does not actually equal 0. This has been proved using much more sophisticated mathematical tools in \citep{champagnat_unifying_2006}, which is where we refer the interested reader. An alternative heuristic argument is also provided in the classic article by \citep{dieckmann_dynamical_1996}.
+
+\subsection{Part 2: Stochastic fluctuations}
+
+We can now formally carry out a functional analog of the weak noise expansion. Assume that $\psi(x,t)$ is the deterministic trajectory obtained as the solution to \eqref{deterministic_traj}. We introduce a new process $\{\zeta_s\}_{s \geq 0}$ which measures the fluctuations of $\phi_t$ from the deterministic trajectory $\psi(x,t)$. More precisely, we introduce the new variables:
+\begin{equation}
+\begin{aligned}
+\label{functional_weak_noise_new_vars}
+    \zeta_s(x) &= \sqrt{K}(\phi_t(x) - \psi(x,t))\\
+    s &= t\\
+    \Tilde{P}(\zeta,s) &= \frac{1}{\sqrt{K}}P(\phi,t)
+\end{aligned}
+\end{equation}
+Note that the following relations hold:
+\begin{align}
+\frac{\delta F[\zeta]}{\delta \phi(x)} &= \int\limits_{\mathcal{T}}\frac{\delta F[\zeta]}{\delta \zeta(y)}\frac{\delta \zeta(y)}{\delta \phi(x)}dy = \sqrt{K}\frac{\delta F[\zeta]}{\delta \zeta(x)}\ \label{functional_weak_noise_first_subs}\\
+\frac{\partial}{\partial s} &= \frac{\partial}{\partial t}\label{functional_weak_noise_second_subs}
+\end{align}
+Furthermore, for any measure $\zeta \in \mathcal{M}_K$, we have:
+\begin{align}
+\frac{\partial \Tilde{P}}{\partial t}(\zeta,s) &= \frac{\delta \Tilde{P}}{\delta \zeta}\frac{\partial \zeta}{\partial t} + \frac{\partial \Tilde{P}}{\partial s}\frac{\partial s}{\partial t}\nonumber\\
+    &=\frac{\delta \Tilde{P}}{\delta \zeta}\left(-\sqrt{K}\frac{\partial \psi}{\partial t}\right) + \frac{\partial \Tilde{P}}{\partial s}\nonumber\\
+    &= -\sqrt{K}\frac{\delta}{\delta \zeta}\{\mathcal{A}^{-}(x|\psi)\Tilde{P}(\zeta,s)\} + \frac{\partial \Tilde{P}}{\partial s}\label{functional_weak_noise_third_subs}
+\end{align}
+Reformulating equation \eqref{functional_FPE} in terms of the new variables \eqref{functional_weak_noise_new_vars} and using the relations \eqref{functional_weak_noise_first_subs}, \eqref{functional_weak_noise_second_subs} and \eqref{functional_weak_noise_third_subs}, we obtain:
+\begin{equation*}
+\begin{split}
+-\sqrt{K}\frac{\delta}{\delta \zeta(x)}\{\mathcal{A}^{-}(x|\psi)\Tilde{P}(\zeta,s)\} + \frac{\partial \Tilde{P}}{\partial s} = \int\limits_{\mathcal{T}}\left[-
+    \left(\sqrt{K}\frac{\delta }{\delta \zeta(x)}\right)\{\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\tilde{P}(\zeta,s)\}\right]dx \\
+    + \int\limits_{\mathcal{T}}\left[\frac{1}{2K}\left(K\frac{\delta^2}{\delta\zeta(x)^2}\right)\{\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\Tilde{P}(\zeta,s)\}\right]dx    
+\end{split}
+\end{equation*}
+and rearranging gives us:
+\begin{align}
+\label{functional_weak_noise_mid_expansion}
+\begin{split}
+\frac{\partial \Tilde{P}}{\partial s} &= -\sqrt{K}\int\limits_{\mathcal{T}}\frac{\delta }{\delta \zeta(x)}\left\{\left(\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)-\mathcal{A}^{-}(x|\psi)\right)\Tilde{P}(\zeta,s)\right\}dx\\
+&+\frac{1}{2}\int\limits_{\mathcal{T}}\frac{\delta^2}{\delta\zeta(x)^2}\{\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\Tilde{P}(\zeta,s)\}dx
+\end{split}
+\end{align}
+We will now Taylor expand our functionals about $\psi$ (we assume that this is possible). Thus, we have the expansions:
+\begin{align*}
+    \mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right) &= \mathcal{A}^{-}\left(x|\psi\right) + \frac{1}{\sqrt{K}}\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy + \cdots\\
+    \mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right) &= \mathcal{A}^{+}\left(x|\psi\right) + \frac{1}{\sqrt{K}}\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{+}(y|\psi)\}dy + \cdots
+\end{align*}
+We also assume that $\tilde{P}$ can be expanded as
+\begin{align*}
+     \Tilde{P} &= \sum\limits_{n=0}^{\infty}\Tilde{P}_n\left(\frac{1}{\sqrt{K}}\right)^n
+\end{align*}
+substituting these expansions into equation \eqref{functional_weak_noise_mid_expansion} and equating coefficients of powers of $K$, we see that upto leading order in $K$ (corresponding to the zeroth order terms of $\tilde{P}$ and $\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)$, and the first order term of $\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)$) we have:
+\begin{equation*}
+\frac{\partial \Tilde{P}_{0}}{\partial s}(\zeta,s) = \int\limits_{\mathcal{T}}\left[-\frac{\delta}{\delta \zeta(x)}\left\{\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy\Tilde{P}_{0}(\zeta,s)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{\Tilde{P}_{0}(\zeta,s)\}\right]dx
+\end{equation*}
+We thus arrive at the functional Fokker-Planck equation:
+\begin{equation}
+\label{functional_WNE_zeroth_order}
+    \frac{\partial \Tilde{P}_{0}}{\partial s}(\zeta,s) = \int\limits_{\mathcal{T}}\left(-\frac{\delta}{\delta \zeta(x)}\left\{\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x)\Tilde{P}_{0}(\zeta,s)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{\Tilde{P}_{0}(\zeta,s)\}\right)dx
+\end{equation}
+where 
+\begin{equation*}
+\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x) = \int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy = \frac{d}{d\epsilon}\mathcal{A}^-(x|\psi + \epsilon \zeta) \bigg{|}_{\epsilon = 0}
+\end{equation*}
+can be thought of as the directional derivative of $\mathcal{A}^-(x|\psi)$ in the direction of $\zeta$.
+
+Equation \eqref{functional_WNE_zeroth_order} is a linear equation, and hence more tractable. This will be the approximation we work with.
+
+\section{Detecting phenotypic clusters via Fourier analysis}
+
+Our goal is now to find a method to effectively detect and describe phenotypic clusters (modes in trait space, corresponding to individual morphs) in this process. We will do this by measuring the autocorrelation of the distribution of the population over trait space. A convenient theorem due to Weiner and Khinchin relates the autocorrelation of a probability distribution to its power spectral density via Fourier transformation. This has been extensively used in spatial ecology, and we too will make use of it here. Specifically, we will carry out a basis expansion of our functions in the Fourier basis $\{e^{ikx}\}_{k\in\mathbb{Z}}$. If $\mathcal{D}_{\zeta}[\mathcal{A}^{-}]$ is a translation-invariant linear operator, then $\exp(ikx)$ acts as an eigenfunction, significantly simplifying the calculations.
+
+%\includestandalone[width=.8\textwidth]{backend/fourier_figure}
+\myfig{0.8}{Media/4.1_fourier_fig.png}{Schematic description of Fourier analysis}{Fourier}
+
+We assume that $\mathcal{D}_{\zeta}[\mathcal{A}^{-}]$ takes the form:
+\begin{equation*}
+ \mathcal{D}_{\zeta}[\mathcal{A}^-](x,t) = L[\zeta(x,t)]   
+\end{equation*}
+for a translation-invariant linear operator $L$ that only depends on $x$ and $t$. The presence of phenotypic clustering and polymorphisms can be analyzed by examining the power spectrum of $\Tilde{P}_{0}(\zeta,s)$ over the trait space.\\
+We assume that $\zeta$, and $\mathcal{A}^{+}(x|\psi)$ admit the Fourier basis representations:
+\begin{equation}
+\label{fourier_representations_functions}
+\begin{aligned}
+\zeta(x,t) &= \sum\limits_{k=-\infty}^{\infty}e^{ikx}\zeta_k(t) \ \ ; \ \ \zeta_k(t) = \int\limits_{\mathcal{T}}\zeta(x,t)e^{-ikx}dx\\
+\mathcal{A}^{+}(x|\psi) &= \sum\limits_{k=-\infty}^{\infty}e^{ikx}A_k(t) \ \ ; \ \ A_k(t) = \int\limits_{\mathcal{T}}\mathcal{A}^{+}(x|\psi)e^{-ikx}dx
+\end{aligned}
+\end{equation}
+In this case, the functional derivative operator obeys:
+\begin{equation}
+\label{fourier_representations_derivative}
+    \frac{\delta}{\delta \zeta(x)} = \sum\limits_{k=-\infty}^{\infty}e^{-ikx}\frac{\partial}{\partial \zeta_k}
+\end{equation}
+and since $L$ is linear and translation-invariant, we also have the relation\footnote{This is because $\exp(ikx)$ acts as an eigenfunction for translation invariant linear operators, and therefore, for any function $\varphi = \sum\varphi_k\exp(ikx)$, we have the relation $L[\varphi] = L[\sum\varphi_k\exp(ikx)]=\sum\varphi_kL[\exp(ikx)]=\sum\varphi_kL_k\exp(ikx)$, where $L_k$ is the eigenvalue of $L$ associated with the eigenfunction $\exp(ikx)$. It is helpful to draw the analogy with eigenvectors of matrices and view $L_k\varphi_k$ as the projection of $L[\varphi]$ along the $k$th eigenvector $e_k = \exp(ikx)$.}:
+\begin{equation}
+\label{fourier_representation_linear_operator}
+    L[\zeta] = \sum\limits_{k=-\infty}^{\infty}L_{k}\zeta_ke^{ikx}
+\end{equation}
+where 
+\begin{equation*}
+    L_k = e^{-ikx}L[e^{ikx}]
+\end{equation*}
+Lastly, by definition of Fourier modes, we have, for any differentiable real function $F$ and any fixed time $t > 0$:
+\begin{equation}
+\label{fourier_mode_relation}
+\frac{\partial}{\partial \zeta_j(t)}F(\zeta_i(t)) = \delta_{ij}F'(\zeta_j(t))
+\end{equation}
+where $\delta_{ij}$ is the Kronecker delta symbol.
+Using \eqref{fourier_representations_functions}, \eqref{fourier_representations_derivative}, and \eqref{fourier_representation_linear_operator} in \eqref{functional_WNE_zeroth_order}, we get, for the first term of the RHS:
+\begin{gather}
+-\int\limits_{\mathcal{T}}\frac{\delta}{\delta \zeta(x)}\left\{L[\zeta(x,t)]P(\zeta,t)\right\}dx\nonumber\\
+= -\int\limits_{\mathcal{T}}\sum\limits_{k}e^{-ikx}\frac{\partial}{\partial \zeta_k}\{\sum\limits_{n}e^{inx}L_n\zeta_nP\}dx\nonumber\\
+= -\int\limits_{\mathcal{T}}\sum\limits_{k}\sum\limits_{n}e^{-i(k-n)x}\frac{\partial}{\partial \zeta_k}\{L_n\zeta_nP\}dx\nonumber\\
+= -2\pi\sum\limits_{k}L_{k}\frac{\partial}{\partial \zeta_k}\{\zeta_kP\}\label{fourier_FPE_first_term}
+\end{gather}
+and for the second:
+\begin{gather}
+\int\limits_{\mathcal{T}}\sum\limits_{k}e^{ikx}A_k\left(\sum\limits_{m}\sum\limits_{n}e^{-i(m+n)x}\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_n}P\right)dx\nonumber\\
+= \int\limits_{\mathcal{T}}\sum\limits_{k}\sum\limits_{m}\sum\limits_{n}e^{i(k-m-n)x}A_k\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_n}\{P\}dx\nonumber\\
+= 2\pi\sum\limits_{m}\sum\limits_{n}A_{m+n}\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_{n}}\{P\}\label{fourier_FPE_second_term}
+\end{gather}
+Substituting \eqref{fourier_FPE_first_term} and \eqref{fourier_FPE_second_term} into \eqref{functional_FPE}, we see that the Fokker-Planck equation in Fourier space reads:
+\begin{equation}
+\label{fourier_FPE}
+\frac{\partial P}{\partial t} = -2\pi\sum\limits_{k}L_{k}\frac{\partial}{\partial \zeta_k}\{\zeta_kP\} + \pi\sum\limits_{m}\sum\limits_{n}A_{m+n}\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_{n}}\{P\}
+\end{equation}
+It is important to remember that since $\zeta(x,t)$ is a stochastic process, $\zeta_i$ is really a stochastic process and thus $\zeta_i(t)$ is actually shorthand for the random variable $(\zeta_i)_{t}(\omega)$, where $\omega$ is a sample path in the Fourier dual of our original probability space. Multiplying both sides of \eqref{fourier_FPE} by $\zeta_r$ and integrating over the probability space to obtain expectation values, we see that
+\begin{align}
+\frac{d}{dt}\mathbb{E}[\zeta_r] &= - 2\pi \sum\limits_{k}\int\zeta_rL_k\frac{\partial}{\partial \zeta_k}\{\zeta_k P\}d\omega + \pi\sum\limits_{m}\sum\limits_{n}A_{m+n}\int\zeta_r\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_{n}}(P)d\omega\nonumber\\
+&=  2\pi \sum\limits_{k}L_k\int\zeta_k\frac{\partial \zeta_r}{\partial \zeta_k}Pd\omega + \pi\sum\limits_{m}\sum\limits_{n}A_{m+n}\int\frac{\partial^2 \zeta_r}{\partial \zeta_m\partial \zeta_{n}}Pd\omega\nonumber\\
+&=  2\pi L_{r}\mathbb{E}[\zeta_r]\label{fourier_mode_mean}
+\end{align}
+where we have used integration by parts and neglected the boundary term in the second step (assuming once again that $P$ decays rapidly enough near the boundaries that this is doable), and then used \eqref{fourier_mode_relation} to arrive at the final expression. Similarly, multiplying \eqref{fourier_FPE} by $\zeta_r\zeta_s$, integrating over the probability space and using integration by parts, we get:
+\begin{align}
+\frac{d}{dt}\mathbb{E}[\zeta_r\zeta_s] &= 2\pi \sum\limits_{k}L_{k}\int\zeta_kP\frac{\partial}{\partial \zeta_k}\{\zeta_r\zeta_s\}d\omega + \pi\sum\limits_{m}\sum\limits_{n}A_{m+n}\int\limits_{-\infty}^{\infty}P\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_{n}}\{\zeta_r\zeta_s\}d\omega\nonumber\\
+&= 2\pi (L_{r} + L_{s})\mathbb{E}[\zeta_r\zeta_s] + \pi (A_{2r}+A_{2s})\label{fourier_mode_covariance}
+\end{align}
+At the stationary state, the LHS must be zero by definition, and we must therefore have, for every $r,s \in \mathbb{Z}$,:
+\begin{equation}
+\label{fourier_mode_covariance_stationary}
+\mathbb{E}[\zeta_r\zeta_s] = -   \frac{A_{2r}+A_{2s}}{2(L_{r}+L_{s})}
+\end{equation}
+Recall that the Fourier modes of any real function $\varphi$ must satisfy $\varphi_{-r} = \overline{\varphi}_r$. Since $\zeta$, $A$ and $L$ are all real, we can substitute $s=-r$ in equation \eqref{fourier_mode_covariance_stationary} to obtain the autocovariance relation:
+\begin{equation}
+\label{fourier_mode_autocovariance}
+\mathbb{E}[|\zeta_r|^2] =- \frac{\mathrm{Re}(A_{2r})}{2\mathrm{Re}(L_{r})}
+\end{equation}
+
+The presence of phenotypic clustering can be detected using the `spatial covariance' of our original process $\phi$, defined as \cite{rogers_demographic_2012}:
+\begin{equation}
+\label{spatial_covariance_defn}
+\Xi[x] = m(\mathcal{T})\int\limits_{\mathcal{T}}\mathbb{E}[\phi_{\infty}(x)\phi_{\infty}(y-x)]dy
+\end{equation}
+where $\phi_{\infty}$ is the stationary state distribution of $\{\phi_t\}_{t}$ and $m$ is the Lebesgue measure. We can use a spatial analogue of the Wiener-Khinchin theorem to calculate:
+\begin{equation}
+\label{spatial_covariance_zeta}
+\Xi[x] = m(\mathcal{T})\left[\int\limits_{\mathcal{T}}\psi_{\infty}(x)\psi_{\infty}(y-x)dy + \frac{1}{K}\sum\limits_{r=-\infty}^{\infty}\mathbb{E}[|\zeta_r|^2]e^{irx}\right]
+\end{equation}
+where the expectations in the second term are for the stationary state. A flat $\Xi[x]$ indicates that there are no clusters, and peaks indicate the presence of clusters.
