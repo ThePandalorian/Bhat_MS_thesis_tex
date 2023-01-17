@@ -37,6 +37,7 @@
 %%   version 1999/12/01 or later.
 
 %% Modified for IISER Pune by Anindya Goswami
+%% Aesthetic aspects slightly modified by Ananda Shikhara Bhat in 2022-23.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iiser-thesis}
 \usepackage{ragged2e}
