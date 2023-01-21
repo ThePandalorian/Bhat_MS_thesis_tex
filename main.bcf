@@ -2280,7 +2280,8 @@
     <bcf:citekey order="74">nasell_extinction_2001</bcf:citekey>
     <bcf:citekey order="75">hastings_transients_2004</bcf:citekey>
     <bcf:citekey order="76">nasell_extinction_2001</bcf:citekey>
-    <bcf:citekey order="77">rogers_demographic_2012</bcf:citekey>
+    <bcf:citekey order="77">tao_stochastic_2007</bcf:citekey>
+    <bcf:citekey order="78">rogers_demographic_2012</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

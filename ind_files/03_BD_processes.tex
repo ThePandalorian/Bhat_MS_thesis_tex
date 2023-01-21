@@ -178,9 +178,10 @@ interpreted in the It\^{o} sense. Note that the deterministic component of this 
 \subsection{Stochastic fluctuations and the weak noise approximation}\label{sec_1D_WNA}
 % The mathematics in this section is taken from \cite{gardiner_stochastic_2009} with minor modifications\footnote{Gardiner uses a parameter $\epsilon>0$ such that noise increases with an increase in $\epsilon$. I have used a parameter $K>0$ such that noise decreases with an increase in $K$, which is more biologically relevant. Gardiner's exact results can be recovered by substituting $\epsilon = \frac{1}{\sqrt{K}}$}.
 If we assume the noise is \emph{weak}, then we can go still further with analytic techniques by measuring fluctuations from the deterministic expectations, albeit with some slightly cumbersome calculations to arrive at the final expressions. We will grit our teeth and get through the algebra below, with my promise that the final answer is neat and easy to handle. It is clear that as $K \to \infty$, equation \eqref{1D_SDE} describes a deterministic process, obtained as the solution to
-\begin{equation*}
+\begin{equation}
+\label{1D_det_limit}
     \frac{dx}{dt} = A^{-}(x) = b_{K}(x) - d_{K}(x)
-\end{equation*}
+\end{equation}
 This is a very intuitive equation, saying that the rate of change of the population is equal to the birth rate minus the death rate. Let the solution of this equation  be given by $\alpha(t)$, so that $\frac{d{\alpha}}{dt}(t) = A^{-}(\alpha(t))$.\\
 We can now measure (scaled) fluctuations from the deterministic solution $\alpha$ through a new variable $y=\sqrt{K}\left(x-\alpha(t)\right)$. For notational clarity, we will also introduce a new time variable $s=t$ which is equal to the original time variable (this is just so the equations look clearer). Let the probability density function of this new variable be given by $\Tilde{P}(y,s)$. In summary, we have introduced the variables:
 \begin{align*}
@@ -535,6 +536,7 @@ D_i &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial A^{-}_i(\mathbf{x})}{\parti
 \end{align}
 Using this in \eqref{nD_moment_eqn_mean}, we see that the expected change of a fluctuation in the density of type $i$ individuals evolves as:
 \begin{equation}
+\label{nD_WNA_directional_derivative_for_replicator_eqns}
 \frac{d}{dt}\mathbb{E}[y_i] = \underbrace{w_i(\mathbf{a})\mathbb{E}[y_i]}_{\substack{\text{Current fitness of type $i$} \\ \text{at deterministic trajectory $\mathbf{a}$} \\ \text{(scaled by expected density $\mathbb{E}[y_i]$)}}} + \underbrace{a_i\mathbb{E}[D_{\mathbf{y}}(w_i(\mathbf{a}))]}_{\substack{\text{Expected change in fitness} \\ \text{ of type $i$ in going from $\mathbf{a}$ to $\mathbf{y}$} \\ \text{(scaled by deterministic density $a_i$)}}} + \underbrace{\mu\mathbb{E}[D_{\mathbf{y}}(Q_i(\mathbf{a}))]}_{\substack{\text{Expected effect of} \\ \text{mutations}}}
 \end{equation}
 
@@ -766,7 +768,7 @@ reflects the transmission bias of mutations. Thus, we see that equation \eqref{i
 \label{cts_price}
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d \overline{x}}{dt} = \mathrm{Cov}(x,w(x|\psi)) + M(x|\psi)}
 \end{equation}
-from which it is clear that we have obtained a continuous time analog of the Price equation.
+from which it is clear that we have obtained a version of the Price equation for quantitative traits.
 Adaptive dynamics is recovered under the following additional assumptions:
 \begin{itemize}
     \item Rare mutations, \emph{i.e.} $\mu \to 0$.
@@ -904,7 +906,8 @@ In this chapter, we have seen how stochastic birth-death processes can be used t
         \hline
         $m = 1$ \newline (Identical individuals)  & $[0,1,2,3,\ldots]$ \newline (Population size) & Two real-valued functions, $b(N)$ and $d(N)$, describing the birth and death rate of individuals when the population size is $N$ & Univariate Fokker-Planck equation \newline (one-dimensional SDE) & Single species population dynamics\\ 
         \hline
-        $1 < m < \infty$ \newline (Discrete traits) & $[0,1,2,3,\ldots]^{m}$ \newline (Number of individuals of each trait variant) & $2m$ real-valued functions, $b_i(\mathbf{v})$ and $d_i(\mathbf{v})$ (for $1 \leq i \leq m$) describing the birth and death rate of trait variant $i$ when the population is $\mathbf{v}$ & Multivariate Fokker-Planck equation \newline ($m$-dimensional SDE) &  Evolutionary game theory \newline Quasispecies equation \newline Price equation (discrete traits) \\
+        $1 < m < \infty$ \newline (Discrete traits) & $[0,1,2,3,\ldots]^{m}$ \newline (Number of individuals of each trait variant) & $2m$ real-valued functions, $b_i(\mathbf{v})$ and $d_i(\mathbf{v})$ (for $1 \leq i \leq m$) describing the birth and death rate of trait variant $i$ when the population is $\mathbf{v}$ & Multivariate Fokker-Planck equation \newline ($m$-dimensional SDE) &  Evolutionary game theory \newline
+        Lotka-Volterra competition \newline Quasispecies equation \newline Price equation (discrete traits) \\
         \hline
         $m = \infty$ \newline (Quantitative traits) & $\left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}\right\}$ \newline \newline (Each Dirac mass $\delta_{x_i}$ is an individual with trait value $x_i$) & Two real-valued functionals $b(x|\nu)$ and $d(x|\nu)$ describing the birth and death rate of trait variant $x$ when the population is $\nu$ & Functional Fokker-Planck equation \newline (SPDE) & Kimura's continuum-of-alleles model \newline \cite{sasaki_oligomorphic_2011}'s Oligomorphic Dynamics \newline \cite{wickman_theoretical_2022}'s Trait Space Equations for intraspecific trait variation \newline Adaptive Dynamics  \newline Price equation (quantitative traits)\\
         \hline
