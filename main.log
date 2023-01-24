@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.12)  18 JAN 2023 21:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.12)  24 JAN 2023 14:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1409,14 +1409,7 @@ Package biblatex Warning: Conflicting options.
 (biblatex)                '<namepart>inits' conflicts with 'uniquename=full'.
 (biblatex)                Setting 'uniquename=init' on input line 54.
 
-(./main.aux
-
-LaTeX Warning: Label `Rogers_logistic_BD_scaled' multiply defined.
-
-
-LaTeX Warning: Label `Rogers_logistic_BD_deterministic' multiply defined.
-
-)
+(./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
@@ -1539,7 +1532,7 @@ ABD: EveryShipout initializing macros
 Package pgfplots notification 'compat/show suggested version=true': you might b
 enefit from \pgfplotsset{compat=1.16} (current compat level: 1.8).
 
-<Media/iiser-logo.png, id=199, 100.375pt x 84.315pt>
+<Media/iiser-logo.png, id=195, 100.375pt x 84.315pt>
 File: Media/iiser-logo.png Graphic file (type png)
 <use Media/iiser-logo.png>
 Package pdftex.def Info: Media/iiser-logo.png  used on input line 56.
@@ -1668,7 +1661,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 92--95
 Underfull \vbox (badness 1521) has occurred while \output is active []
 
  [18]
-<Media/2.1_dem_stoch_effects.png, id=565, 1257.85934pt x 647.90054pt>
+<Media/2.1_dem_stoch_effects.png, id=560, 1257.85934pt x 647.90054pt>
 File: Media/2.1_dem_stoch_effects.png Graphic file (type png)
 <use Media/2.1_dem_stoch_effects.png>
 Package pdftex.def Info: Media/2.1_dem_stoch_effects.png  used on input line 96
@@ -1765,7 +1758,7 @@ in-ear density-dependence $\OML/cmm/m/it/12 d\OT1/cmr/m/n/12 (\OML/cmm/m/it/12
 n\OT1/cmr/m/n/12 ) = [] \OML/cmm/m/it/12 n$\OT1/cmr/m/n/12 ,
  []
 
-<Media/3.1_BD_process_1D.png, id=737, 508.41945pt x 180.76534pt>
+<Media/3.1_BD_process_1D.png, id=734, 508.41945pt x 180.76534pt>
 File: Media/3.1_BD_process_1D.png Graphic file (type png)
 <use Media/3.1_BD_process_1D.png>
 Package pdftex.def Info: Media/3.1_BD_process_1D.png  used on input line 111.
@@ -1790,7 +1783,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 255--259
 Underfull \vbox (badness 3281) has occurred while \output is active []
 
  [40]
-<Media/3.2_BD_process_2D.png, id=803, 725.77147pt x 306.60547pt>
+<Media/3.2_BD_process_2D.png, id=800, 725.77147pt x 306.60547pt>
 File: Media/3.2_BD_process_2D.png Graphic file (type png)
 <use Media/3.2_BD_process_2D.png>
 Package pdftex.def Info: Media/3.2_BD_process_2D.png  used on input line 320.
@@ -1840,7 +1833,7 @@ ts|
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [51]
-<Media/3.3_dirac_deltas.png, id=945, 523.50581pt x 536.2434pt>
+<Media/3.3_dirac_deltas.png, id=941, 523.50581pt x 536.2434pt>
 File: Media/3.3_dirac_deltas.png Graphic file (type png)
 <use Media/3.3_dirac_deltas.png>
 Package pdftex.def Info: Media/3.3_dirac_deltas.png  used on input line 572.
@@ -1914,55 +1907,52 @@ it/12 dx
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [64]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [65]
-[66]
-Underfull \hbox (badness 10000) in paragraph at lines 915--915
+[65]
+Underfull \hbox (badness 10000) in paragraph at lines 889--889
 []|\OT1/cmr/m/n/12 Univariate Fokker-Planck
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 915--915
+Underfull \hbox (badness 10000) in paragraph at lines 889--889
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 915--915
+Underfull \hbox (badness 10000) in paragraph at lines 889--889
 \OT1/cmr/m/n/12 (Each Dirac mass $\OML/cmm/m/it/12 ^^N[]$ \OT1/cmr/m/n/12 is
  []
 
 
-Underfull \hbox (badness 1845) in paragraph at lines 915--915
+Underfull \hbox (badness 1845) in paragraph at lines 889--889
 []|\OT1/cmr/m/n/12 Two real-valued func-tion-als $\OML/cmm/m/it/12 b\OT1/cmr/m/
 n/12 (\OML/cmm/m/it/12 x\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 ^^W\OT1/cmr/m/n/12 )
 $
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 915--915
+Underfull \hbox (badness 10000) in paragraph at lines 889--889
 []|\OT1/cmr/m/n/12 Functional Fokker-Planck
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 917.
+(caption)                particular \caption on input line 891.
 See the caption package documentation for explanation.
 
-) [67
+) [66
 
-] [68]
+] [67] [68
+
+]
 Chapter 4.
 (./ind_files/04_polymorphisms.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [69
-
-]
+ [69]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [70]
-<Media/4.1_stoch_logistic_timeseries.png, id=1141, 919.2744pt x 281.853pt>
+<Media/4.1_stoch_logistic_timeseries.png, id=1132, 919.2744pt x 281.853pt>
 File: Media/4.1_stoch_logistic_timeseries.png Graphic file (type png)
 <use Media/4.1_stoch_logistic_timeseries.png>
 Package pdftex.def Info: Media/4.1_stoch_logistic_timeseries.png  used on input
@@ -1970,7 +1960,7 @@ Package pdftex.def Info: Media/4.1_stoch_logistic_timeseries.png  used on input
 (pdftex.def)             Requested size: 469.75502pt x 144.03127pt.
 
 [71 <./Media/4.1_stoch_logistic_timeseries.png>]
-<Media/4.2_stoch_logistic_distributions.png, id=1172, 918.84077pt x 504.4446pt>
+<Media/4.2_stoch_logistic_distributions.png, id=1163, 918.84077pt x 504.4446pt>
 
 File: Media/4.2_stoch_logistic_distributions.png Graphic file (type png)
 <use Media/4.2_stoch_logistic_distributions.png>
@@ -2002,23 +1992,17 @@ Overfull \hbox (46.9748pt too wide) detected at line 138
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [75]
-<Media/4.3_fourier_fig.png, id=1228, 443.19577pt x 230.2703pt>
-File: Media/4.3_fourier_fig.png Graphic file (type png)
-<use Media/4.3_fourier_fig.png>
-Package pdftex.def Info: Media/4.3_fourier_fig.png  used on input line 190.
-(pdftex.def)             Requested size: 375.80544pt x 195.25632pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [76]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<Media/4.3_fourier_fig.png, id=1230, 443.19577pt x 230.2703pt>
+File: Media/4.3_fourier_fig.png Graphic file (type png)
+<use Media/4.3_fourier_fig.png>
+Package pdftex.def Info: Media/4.3_fourier_fig.png  used on input line 191.
+(pdftex.def)             Requested size: 375.80544pt x 195.25632pt.
 
- [77 <./Media/4.3_fourier_fig.png>]
-Underfull \vbox (badness 3449) has occurred while \output is active []
+[77 <./Media/4.3_fourier_fig.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [78]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2027,12 +2011,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [80]
-Underfull \hbox (badness 10000) in paragraph at lines 296--300
+Underfull \hbox (badness 10000) in paragraph at lines 297--301
 
  []
 
 
-Overfull \hbox (2.95914pt too wide) detected at line 303
+Overfull \hbox (2.95914pt too wide) detected at line 304
 []
  []
 
@@ -2069,23 +2053,19 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 76.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 76.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 76.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5ED55ECF142FADEAD4F10FAE4903FE1D;4337.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
+(rerunfilecheck)             Checksum: BFA529C9D3B536AF23E2E9D86C29AB4E;4226.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42468 strings out of 481239
- 937759 string characters out of 5920377
- 1718781 words of memory out of 5000000
- 56575 multiletter control sequences out of 15000+600000
+ 42476 strings out of 481239
+ 938040 string characters out of 5920377
+ 1723904 words of memory out of 5000000
+ 56582 multiletter control sequences out of 15000+600000
  548695 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,21n,100p,5163b,2068s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,21n,100p,5354b,2068s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
@@ -2110,10 +2090,10 @@ cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/t
 exmf/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (112 pages, 4611525 bytes).
+Output written on main.pdf (112 pages, 4613508 bytes).
 PDF statistics:
- 1645 PDF objects out of 1728 (max. 8388607)
- 1467 compressed objects within 15 object streams
- 389 named destinations out of 1000 (max. 500000)
- 437 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1646 PDF objects out of 1728 (max. 8388607)
+ 1468 compressed objects within 15 object streams
+ 390 named destinations out of 1000 (max. 500000)
+ 429 words of extra memory for PDF output out of 10000 (max. 10000000)
 

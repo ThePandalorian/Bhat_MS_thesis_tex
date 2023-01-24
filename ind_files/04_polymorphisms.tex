@@ -120,7 +120,7 @@ Let us define the payoff matrix $\mathbf{B} = - \mathbf{M}$. Then, the dynamics 
 \begin{equation}
 \frac{1}{N_K(t)}\frac{dp_i}{dt} = \left[(\mathbf{Bp})_i - \mathbf{p}\cdot\mathbf{Bp}\right]p_i   
 \end{equation}
-which is the familiar version of the replicator equation seen in most textbooks, with an extra $N_K(t)$ factor to account for the fact that $\sum_i x_i$ is allowed to fluctuate in our model. If instead $N_K$ was a constant for all time, it could simply be absorbed into the definition of the payoff matrix $B$ to obtain exactly the replicator equation as presented in most ecology/evolution textbooks.\\
+which is the familiar version of the replicator equation seen in most textbooks, with an extra $N_K(t)$ factor to account for the fact that $\sum_i x_i$ is allowed to fluctuate in our model. If instead $N_K$ was a constant for all time, it could simply be absorbed into the definition of the payoff matrix $B$ to obtain exactly the replicator equation as presented in most ecology/evolution textbooks. We briefly note here that if $m$ is large, then both the stochastic dynamics \eqref{nD_example_SDE} and the deterministic limit \eqref{nD_example_det_limit} can be simplified from an $m$ dimensional system to an $m-1$ dimensional system by a coordinate transformation. If we go from the variables $x_1,\ldots,x_m$ to the variables $p_1,\ldots,p_{m-1},N_K$, then, we can exploit the fact that $N_K$ varies much less than the $p_i$ terms to project the system onto a `slow manifold' in which $N_K$ is approximately constant, thus reducing to an $m-1$ dimensional system of equations and obtaining the relation between the Lotka-Volterra equations for $m$ species and the replicator equation for $m-1$ tactics. However, we will not explore this further in this manuscript, and refer the reader to \citep{constable_stochastic_2013} for a review of the ideas of dynamics on slow manifolds.\\
 Let the solution to the equations \eqref{nD_example_det_limit} be given by $\mathbf{a}(t) = [a_1(t),\ldots,a_m(t)]$. For the weak noise approximation, we can Taylor expand $A^{\pm}_i$ and use \eqref{nD_WNA_directional_derivative_for_replicator_eqns} to compute the directional derivative as:
 \begin{align}
 D_i &= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_k\left(\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
@@ -141,36 +141,37 @@ Using \eqref{nD_example_directional_derivative} in \eqref{nD_moment_eqn_mean}, w
 \label{nD_example_moment_eqn_mean}
 \frac{d}{dt}\mathbb{E}[y_i] = w_i(\mathbf{a})\mathbb{E}[y_i] + a_i\sum\limits_{k=1}^{m}B_{ik}\mathbb{E}[y_k]
 \end{equation}
-% or, in matrix form:
-% \begin{equation}
-% \resizebox{0.91\textwidth}{!}{$\displaystyle
-% \frac{d}{dt}\begin{bmatrix}
-%     \mathbb{E}[y_1]\\
-%     \mathbb{E}[y_2]\\
-%     \vdots\\
-%     \mathbb{E}[y_i]\\
-%     \vdots\\
-%     \mathbb{E}[y_m]
-%     \end{bmatrix}
-%     =
-% \begin{bmatrix}
-%     (r + \sum\limits_{j=1}^{m}B_{1j}a_j + a_1B_{11}) & a_1B_{12} & a_1B_{13} & \dots & \dots & \dots & a_1B_{1m}\\
-%     a_2B_{21}) & (r + \sum\limits_{j=1}^{m}B_{2j}a_j + a_2B_{22}) & a_2B_{23} & \dots & \dots & \dots & a_2B_{2m}\\
-%     \vdots & \vdots & \vdots &\vdots & \vdots & \vdots & \vdots\\
-%     a_{i}B_{i1} & a_iB_{i2} & a_iB_{i3} & \dots & (r + \sum\limits_{j=1}^{m}B_{ij}a_j + a_iB_{ii}) & \dots & a_iB_{im}\\
-%     \vdots & \vdots & \vdots &\vdots & \vdots & \vdots & \vdots\\
-%     a_mB_{m1} & a_mB_{m2} & a_mB_{m3} & \dots & \dots & \dots & (r + \sum\limits_{j=1}^{m}B_{mj}a_j + a_mB_{mm})
-%     \end{bmatrix}
-% \begin{bmatrix}
-%     \mathbb{E}[y_1]\\
-%     \mathbb{E}[y_2]\\
-%     \vdots\\
-%     \mathbb{E}[y_i]\\
-%     \vdots\\
-%     \mathbb{E}[y_m]
-%     \end{bmatrix}
-% $}
-% \end{equation}
+or, in matrix form:
+\begin{equation}
+\resizebox{0.93\textwidth}{!}{$\displaystyle
+	\frac{d}{dt}\begin{bmatrix}
+	\mathbb{E}[y_1]\\
+	\mathbb{E}[y_2]\\
+	\vdots\\
+	\mathbb{E}[y_i]\\
+	\vdots\\
+	\mathbb{E}[y_m]
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	(r + \sum\limits_{j=1}^{m}B_{1j}a_j + a_1B_{11}) & a_1B_{12} & a_1B_{13} & \dots & \dots & \dots & a_1B_{1m}\\
+	a_2B_{21} & (r + \sum\limits_{j=1}^{m}B_{2j}a_j + a_2B_{22}) & a_2B_{23} & \dots & \dots & \dots & a_2B_{2m}\\
+	\vdots &  & \ddots & &  & & \vdots\\
+	a_{i}B_{i1} & a_iB_{i2} & a_iB_{i3} & \dots & (r + \sum\limits_{j=1}^{m}B_{ij}a_j + a_iB_{ii}) & \dots & a_iB_{im}\\
+	\vdots &  &  & & & \ddots & \vdots\\
+	a_mB_{m1} & a_mB_{m2} & a_mB_{m3} & \dots & \dots & \dots & (r + \sum\limits_{j=1}^{m}B_{mj}a_j + a_mB_{mm})
+	\end{bmatrix}
+	\begin{bmatrix}
+	\mathbb{E}[y_1]\\
+	\mathbb{E}[y_2]\\
+	\vdots\\
+	\mathbb{E}[y_i]\\
+	\vdots\\
+	\mathbb{E}[y_m]
+	\end{bmatrix}
+	$}
+\end{equation}
+The eigenvalues of the first matrix on the RHS will tell us whether the fixed point $\mathbb{E}[y_i] = 0 \ \forall \ i$ (the only fixed point of this system) is stable, or whether fluctuations are expected to grow (up to the point where the fluctuations are so large that the WNA is no longer valid).
 \hl{can compare time series or something here if we think it is helpful. Visualization may be little hard though, because we always have $\geq 3$ dimensions ($m$, + 1 additional for time)}
 
 \section{Example for quantitative traits}
@@ -182,7 +183,7 @@ In section \ref{sec_infD_processes}, we used various approximations to arrive at
 \label{functional_WNE_chap_4}
     \frac{\partial P}{\partial t}(\zeta,t) = \int\limits_{\mathcal{T}}\left(-\frac{\delta}{\delta \zeta(x)}\left\{\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x)P(\zeta,t)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{P(\zeta,t)\}\right)dx
 \end{equation}
-for describing stochastic fluctuations $\zeta$ from the deterministic solution obtained by solving \eqref{deterministic_traj}. Our goal is now to find a method to effectively detect and describe evolutionary branches (modes in trait space, corresponding to individual morphs) for this process. We will do this by measuring the autocorrelation of the distribution of the population over trait space. A convenient theorem due to Weiner and Khinchin relates the autocorrelation of a probability distribution to its power spectral density via Fourier transformation. This has been extensively used in spatial ecology, and we too will make use of it here. Specifically, we will carry out a basis expansion of our functions in the Fourier basis $\{e^{ikx}\}_{k\in\mathbb{Z}}$. If $\mathcal{D}_{\zeta}[\mathcal{A}^{-}]$ is a translation-invariant linear operator, then $\exp(ikx)$ acts as an eigenfunction, significantly simplifying the calculations. We therefore assume this below.
+for describing stochastic fluctuations $\zeta$ from the deterministic solution obtained by solving \eqref{deterministic_traj}. Our goal is now to find a method to effectively detect and describe evolutionary branches (modes in trait space, corresponding to individual morphs) for this process. We will do this by measuring the autocorrelation of the distribution of the population over trait space. A convenient theorem due to Weiner and Khinchin relates the autocorrelation of a probability distribution to its power spectral density via Fourier transformation. This has been extensively used in spatial ecology, and we too will make use of it here. Specifically, we will carry out a basis expansion of our functions in the Fourier basis $\{e^{ikx}\}_{k\in\mathbb{Z}}$. If $\mathcal{D}_{\zeta}[\mathcal{A}^{-}]$ is a translation-invariant\footnote{This is horrible nomenclature by the mathematicians. Though `invariant' is the conventional name for this concept, the intended meaning is not really invariant but `equivariant'. Formally, let $\mathcal{F}$ be a suitable function space of real valued functions. For any $c \in \mathbb{R}$, let $T_c: \mathcal{F} \to \mathcal{F}$ be the translation operator on this space, defined by $T_c[f(x)] = f(x+c)$. An operator $L: \mathcal{F} \to \mathcal{F}$ is said to be translation-invariant if it commutes with $T_c$ for every $c \in \mathbb{R}$, \emph{i.e.} $T_c[L[f]] = L[T_c[f]] \ \forall \ f \in \mathcal{F} \ \forall \ c \in \mathbb{R}$} linear operator, then $\exp(ikx)$ acts as an eigenfunction, significantly simplifying the calculations. We therefore assume this below.
 
 
 
@@ -262,7 +263,7 @@ Recall that the Fourier modes of any real function $\varphi$ must satisfy $\varp
 \mathbb{E}[|\zeta_r|^2] =- \frac{\mathrm{Re}(A_{2r})}{2\mathrm{Re}(L_{r})}
 \end{equation}
 
-The presence of phenotypic clustering can be detected using the `spatial covariance' of our original process $\phi$, defined as \cite{rogers_demographic_2012}:
+The presence of phenotypic clustering can be detected using the `spatial covariance' of our original process $\phi$, defined as \citep{rogers_demographic_2012}:
 \begin{equation}
 \label{spatial_covariance_defn}
 \Xi[x] = m(\mathcal{T})\int\limits_{\mathcal{T}}\mathbb{E}[\phi_{\infty}(x)\phi_{\infty}(y-x)]dy

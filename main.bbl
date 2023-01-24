@@ -66,7 +66,7 @@
       \verb 10.1016/j.tree.2012.01.014
       \endverb
       \verb{file}
-      \verb Black and McKane - 2012 - Stochastic formulation of ecological models and th.pdf:/home/shikhara/Zotero/storage/LXVYW36F/Black and McKane - 2012 - Stochastic formulation of ecological models and th.pdf:application/pdf
+      \verb Black and McKane - 2012 - Stochastic formulation of ecological models and th.pdf:/mnt/data/Work/Zotero_database/storage/LXVYW36F/Black and McKane - 2012 - Stochastic formulation of ecological models and th.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://linkinghub.elsevier.com/retrieve/pii/S016953471200033X
@@ -117,7 +117,7 @@
       \verb 10.1111/ele.13085
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/PY2UHJNB/Boettiger - 2018 - From noise to knowledge how randomness generates .pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/NUJG8BZP/ele.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/PY2UHJNB/Boettiger - 2018 - From noise to knowledge how randomness generates .pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/NUJG8BZP/ele.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13085
@@ -169,7 +169,7 @@
       \verb 10.1137/090756971
       \endverb
       \verb{file}
-      \verb Submitted Version:/home/shikhara/Zotero/storage/4BIJSPCN/Bressloff - 2010 - Stochastic Neural Field Theory and the System-Size.pdf:application/pdf
+      \verb Submitted Version:/mnt/data/Work/Zotero_database/storage/4BIJSPCN/Bressloff - 2010 - Stochastic Neural Field Theory and the System-Size.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://epubs.siam.org/doi/abs/10.1137/090756971
@@ -237,7 +237,7 @@
       \verb 10.1016/j.tpb.2005.10.004
       \endverb
       \verb{file}
-      \verb Submitted Version:/home/shikhara/Zotero/storage/VJJJCMP4/Champagnat et al. - 2006 - Unifying evolutionary dynamics From individual st.pdf:application/pdf;ScienceDirect Snapshot:/home/shikhara/Zotero/storage/2ICT29YI/S0040580905001632.html:text/html
+      \verb Submitted Version:/mnt/data/Work/Zotero_database/storage/VJJJCMP4/Champagnat et al. - 2006 - Unifying evolutionary dynamics From individual st.pdf:application/pdf;ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/2ICT29YI/S0040580905001632.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0040580905001632
@@ -302,7 +302,7 @@
       \verb 10.1080/15326340802437710
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/I8LMIBK5/Champagnat et al. - 2008 - From Individual Stochastic Processes to Macroscopi.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/I8LMIBK5/Champagnat et al. - 2008 - From Individual Stochastic Processes to Macroscopi.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1080/15326340802437710
@@ -374,7 +374,7 @@
       \verb 10.1086/588062
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/M32HE289/Claessen et al. - 2008 - The Effect of Population Size and Recombination on.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/M32HE289/Claessen et al. - 2008 - The Effect of Population Size and Recombination on.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.journals.uchicago.edu/doi/full/10.1086/588062
@@ -439,7 +439,7 @@
       \field{pages}{51\bibrangedash 69}
       \range{pages}{19}
       \verb{file}
-      \verb Snapshot:/home/shikhara/Zotero/storage/HA254W9U/2073.html:text/html;Full Text PDF:/home/shikhara/Zotero/storage/LZ82S27X/Claessen et al. - 2007 - Delayed evolutionary branching in small population.pdf:application/pdf
+      \verb Snapshot:/mnt/data/Work/Zotero_database/storage/HA254W9U/2073.html:text/html;Full Text PDF:/mnt/data/Work/Zotero_database/storage/LZ82S27X/Claessen et al. - 2007 - Delayed evolutionary branching in small population.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.evolutionary-ecology.com/abstracts/v09/2073.html
@@ -497,7 +497,7 @@
       \verb 10.1038/s41559-018-0580-9
       \endverb
       \verb{file}
-      \verb Snapshot:/home/shikhara/Zotero/storage/654PY4XW/s41559-018-0580-9.html:text/html
+      \verb Snapshot:/mnt/data/Work/Zotero_database/storage/654PY4XW/s41559-018-0580-9.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.nature.com/articles/s41559-018-0580-9
@@ -506,6 +506,70 @@
       \verb https://www.nature.com/articles/s41559-018-0580-9
       \endverb
       \keyw{Evolution,Sexual selection,Population dynamics,Population genetics}
+    \endentry
+    \entry{constable_stochastic_2013}{article}{}
+      \name{author}{3}{ul=2}{%
+        {{un=0,uniquepart=base,hash=31268267f6edc305a324a52761558982}{%
+           family={Constable},
+           familyi={C\bibinitperiod},
+           given={George\bibnamedelimb W.\bibnamedelimi A.},
+           giveni={G\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d73b0b09dc8cfbef6e397ed0108a0c07}{%
+           family={{McKane}},
+           familyi={M\bibinitperiod},
+           given={Alan\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ac6e4d73f4a32b3f7e82c4cb9b5f8f83}{%
+           family={Rogers},
+           familyi={R\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{2f2b627d562d60ba0b95f196ea3ff443}
+      \strng{fullhash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
+      \strng{bibnamehash}{2f2b627d562d60ba0b95f196ea3ff443}
+      \strng{authorbibnamehash}{2f2b627d562d60ba0b95f196ea3ff443}
+      \strng{authornamehash}{2f2b627d562d60ba0b95f196ea3ff443}
+      \strng{authorfullhash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The theory of slow manifolds is an important tool in the study of deterministic dynamical systems, giving a practical method by which to reduce the number of relevant degrees of freedom in a model, thereby often resulting in a considerable simplification. In this paper we demonstrate how the same basic methodology may also be applied to stochastic dynamical systems, by examining the behaviour of trajectories conditioned on the event that they do not depart the slow manifold. We apply the method to two models: one from ecology and one from epidemiology, achieving a reduction in model dimension and illustrating the high quality of the analytical approximations.}
+      \field{issn}{1751-8121}
+      \field{journaltitle}{Journal of Physics A: Mathematical and Theoretical}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{note}{Publisher: {IOP} Publishing}
+      \field{number}{29}
+      \field{shortjournal}{J. Phys. A: Math. Theor.}
+      \field{title}{Stochastic dynamics on slow manifolds}
+      \field{urlday}{22}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{volume}{46}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{295002}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/1751-8113/46/29/295002
+      \endverb
+      \verb{file}
+      \verb Accepted Version:/mnt/data/Work/Zotero_database/storage/KTUKSU4A/Constable et al. - 2013 - Stochastic dynamics on slow manifolds.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://dx.doi.org/10.1088/1751-8113/46/29/295002
+      \endverb
+      \verb{url}
+      \verb https://dx.doi.org/10.1088/1751-8113/46/29/295002
+      \endverb
     \endentry
     \entry{constable_demographic_2016}{article}{}
       \name{author}{4}{ul=2}{%
@@ -565,7 +629,7 @@
       \verb 10.1073/pnas.1603693113
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/ADC43F28/Constable et al. - 2016 - Demographic noise can reverse the direction of det.pdf:application/pdf;Constable et al 2016 supp.pdf:/home/shikhara/Work/MS_thesis/literature/demographic_stochasticity/Constable et al 2016 supp.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/ADC43F28/Constable et al. - 2016 - Demographic noise can reverse the direction of det.pdf:application/pdf;Constable et al 2016 supp.pdf:/home/shikhara/Work/MS_thesis/literature/demographic_stochasticity/Constable et al 2016 supp.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.pnas.org/doi/full/10.1073/pnas.1603693113
@@ -630,7 +694,7 @@
       \verb 10.1016/j.tree.2004.05.008
       \endverb
       \verb{file}
-      \verb ScienceDirect Snapshot:/home/shikhara/Zotero/storage/WCWPWKDT/S0169534704001466.html:text/html
+      \verb ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/WCWPWKDT/S0169534704001466.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0169534704001466
@@ -733,7 +797,7 @@
       \verb 10.1086/677137
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/922LA2H2/Débarre et al. - 2014 - Multidimensional (Co)Evolutionary Stability..pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/922LA2H2/Débarre et al. - 2014 - Multidimensional (Co)Evolutionary Stability..pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.journals.uchicago.edu/doi/full/10.1086/677137
@@ -790,7 +854,7 @@
       \verb 10.1016/j.tpb.2015.12.002
       \endverb
       \verb{file}
-      \verb Submitted Version:/home/shikhara/Zotero/storage/K56T2B7Y/Débarre and Otto - 2016 - Evolutionary dynamics of a quantitative trait in a.pdf:application/pdf;ScienceDirect Snapshot:/home/shikhara/Zotero/storage/5EFSZMPL/S0040580915001240.html:text/html
+      \verb Submitted Version:/mnt/data/Work/Zotero_database/storage/K56T2B7Y/Débarre and Otto - 2016 - Evolutionary dynamics of a quantitative trait in a.pdf:application/pdf;ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/5EFSZMPL/S0040580915001240.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0040580915001240
@@ -847,7 +911,7 @@
       \verb 10.1002/ecy.3873
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/CMYQWP8Q/DeLong and Cressler - 2023 - Stochasticity directs adaptive evolution toward no.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/AH9ZSAJ8/ecy.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/CMYQWP8Q/DeLong and Cressler - 2023 - Stochasticity directs adaptive evolution toward no.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/AH9ZSAJ8/ecy.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/ecy.3873
@@ -962,7 +1026,7 @@
       \verb 10.1007/BF02409751
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/NAT4GH96/Dieckmann and Law - 1996 - The dynamical theory of coevolution a derivation .pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/NAT4GH96/Dieckmann and Law - 1996 - The dynamical theory of coevolution a derivation .pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1007/BF02409751
@@ -1053,7 +1117,7 @@
       \verb 10.1086/303417
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/M4IVE3IW/Doebeli and Dieckmann - 2000 - Evolutionary Branching and Sympatric Speciation Ca.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/M4IVE3IW/Doebeli and Dieckmann - 2000 - Evolutionary Branching and Sympatric Speciation Ca.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.journals.uchicago.edu/doi/full/10.1086/303417
@@ -1110,7 +1174,7 @@
       \verb 10.1126/science.1187468
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/9KXY7Y3R/Doebeli and Ispolatov - 2010 - Complexity and Diversity.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/9KXY7Y3R/Doebeli and Ispolatov - 2010 - Complexity and Diversity.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.science.org/doi/full/10.1126/science.1187468
@@ -1167,7 +1231,7 @@
       \verb 10.1086/689891
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/5SPTXJ87/Doebeli and Ispolatov - 2017 - Diversity and Coevolutionary Dynamics in High-Dime.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/5SPTXJ87/Doebeli and Ispolatov - 2017 - Diversity and Coevolutionary Dynamics in High-Dime.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.journals.uchicago.edu/doi/full/10.1086/689891
@@ -1240,7 +1304,7 @@
       \verb 10.7554/eLife.23804
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/WY3225TF/Doebeli et al. - 2017 - Towards a mechanistic foundation of evolutionary t.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/WY3225TF/Doebeli et al. - 2017 - Towards a mechanistic foundation of evolutionary t.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.7554/eLife.23804
@@ -1442,7 +1506,7 @@
       \verb 10.1023/A:1006554906681
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/HLVRDSUA/Geritz et al. - 1998 - Evolutionarily singular strategies and the adaptiv.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/HLVRDSUA/Geritz et al. - 1998 - Evolutionarily singular strategies and the adaptiv.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1023/A:1006554906681
@@ -1501,7 +1565,7 @@
       \verb 10.1007/s00285-011-0496-3
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/MPL4MEJH/Geritz and Kisdi - 2012 - Mathematical ecology why mechanistic models.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/MPL4MEJH/Geritz and Kisdi - 2012 - Mathematical ecology why mechanistic models.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1007/s00285-011-0496-3
@@ -1555,7 +1619,7 @@
       \verb 10.1016/j.tree.2003.09.007
       \endverb
       \verb{file}
-      \verb ScienceDirect Snapshot:/home/shikhara/Zotero/storage/N6XVXEYF/S0169534703002854.html:text/html
+      \verb ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/N6XVXEYF/S0169534703002854.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0169534703002854
@@ -1659,7 +1723,7 @@
       \verb 10.1016/j.jtbi.2015.10.009
       \endverb
       \verb{file}
-      \verb ScienceDirect Snapshot:/home/shikhara/Zotero/storage/42JRP449/S0022519315005020.html:text/html;Submitted Version:/home/shikhara/Zotero/storage/IBY2N2DN/Ispolatov et al. - 2016 - Individual-based models for adaptive diversificati.pdf:application/pdf
+      \verb ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/42JRP449/S0022519315005020.html:text/html;Submitted Version:/mnt/data/Work/Zotero_database/storage/IBY2N2DN/Ispolatov et al. - 2016 - Individual-based models for adaptive diversificati.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0022519315005020
@@ -1717,7 +1781,7 @@
       \verb 10.1016/j.tree.2020.04.007
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/7NXWEENQ/Jamie and Meier - 2020 - The Persistence of Polymorphisms across Species Ra.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/DLTMT8VY/S0169-5347(20)30111-7.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/7NXWEENQ/Jamie and Meier - 2020 - The Persistence of Polymorphisms across Species Ra.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/DLTMT8VY/S0169-5347(20)30111-7.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.cell.com/trends/ecology-evolution/abstract/S0169-5347(20)30111-7
@@ -1774,7 +1838,7 @@
       \verb 10.1086/507996
       \endverb
       \verb{file}
-      \verb Full Text:/home/shikhara/Zotero/storage/W4726TSH/Johansson and Ripa - 2006 - Will Sympatric Speciation Fail due to Stochastic C.pdf:application/pdf
+      \verb Full Text:/mnt/data/Work/Zotero_database/storage/W4726TSH/Johansson and Ripa - 2006 - Will Sympatric Speciation Fail due to Stochastic C.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.journals.uchicago.edu/doi/10.1086/507996
@@ -1838,7 +1902,7 @@
       \verb 10.1098/rsos.210182
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/UUACSZFK/Johnson et al. - Two-dimensional adaptive dynamics of evolutionary .pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/UUACSZFK/Johnson et al. - Two-dimensional adaptive dynamics of evolutionary .pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://royalsocietypublishing.org/doi/full/10.1098/rsos.210182
@@ -1893,7 +1957,7 @@
       \verb{url}
       \verb http://www.gbv.de/dms/bs/toc/016547187.pdf
       \endverb
-      \keyw{42.90 ecology: general,Bevolking,Biologie des populations - Histoire,Biologie des populations - Modèles mathématiques - Histoire,Biologie des populations Histoire,Biologie des populations Modèles mathématiques Histoire,Demökologie,Ecologie,Ecology history,Geschichte,History,Milieu,Models,Statistical,Organisms Population Dynamics Quantitative methods,to 1980,Population biology,Population biology History,Population biology Mathematical models,Population biology Mathematical models History}
+      \keyw{Population biology,42.90 ecology: general,Bevolking,Biologie des populations - Histoire,Biologie des populations - Modèles mathématiques - Histoire,Biologie des populations Histoire,Biologie des populations Modèles mathématiques Histoire,Demökologie,Ecologie,Ecology history,Geschichte,History,Milieu,Models,Statistical,Organisms Population Dynamics Quantitative methods,to 1980,Population biology History,Population biology Mathematical models,Population biology Mathematical models History}
     \endentry
     \entry{lafuerza_role_2016}{article}{}
       \name{author}{2}{}{%
@@ -1943,7 +2007,7 @@
       \verb 10.1103/PhysRevE.93.032121
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/KWDWABNN/Lafuerza and McKane - 2016 - Role of demographic stochasticity in a speciation .pdf:application/pdf;APS Snapshot:/home/shikhara/Zotero/storage/BCN3MUY8/PhysRevE.93.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/KWDWABNN/Lafuerza and McKane - 2016 - Role of demographic stochasticity in a speciation .pdf:application/pdf;APS Snapshot:/mnt/data/Work/Zotero_database/storage/BCN3MUY8/PhysRevE.93.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://link.aps.org/doi/10.1103/PhysRevE.93.032121
@@ -1989,7 +2053,7 @@
       \field{pages}{191\bibrangedash 208}
       \range{pages}{18}
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/FBW4AKHS/Leimar - 2009 - Multidimensional convergence stability.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/2YR3SJDZ/2433.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/FBW4AKHS/Leimar - 2009 - Multidimensional convergence stability.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/2YR3SJDZ/2433.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.evolutionary-ecology.com/abstracts/v11/2433.html
@@ -2048,7 +2112,7 @@
       \verb 10.1371/journal.pcbi.1006739
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/CW62AXDK/McLeod and Day - 2019 - Social evolution under demographic stochasticity.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/SGIJLPC2/article.html:text/html;McLeod and Day 2019 supp.pdf:/home/shikhara/Zotero/storage/BPS7L3X2/McLeod and Day 2019 supp.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/CW62AXDK/McLeod and Day - 2019 - Social evolution under demographic stochasticity.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/SGIJLPC2/article.html:text/html;McLeod and Day 2019 supp.pdf:/mnt/data/Work/Zotero_database/storage/BPS7L3X2/McLeod and Day 2019 supp.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006739
@@ -2101,7 +2165,7 @@
       \verb 10.1006/jtbi.2001.2328
       \endverb
       \verb{file}
-      \verb ScienceDirect Snapshot:/home/shikhara/Zotero/storage/SAA9JGZ9/S0022519301923288.html:text/html
+      \verb ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/SAA9JGZ9/S0022519301923288.html:text/html;Nåsell - 2001 - Extinction and Quasi-stationarity in the Verhulst .pdf:/mnt/data/Work/Zotero_database/storage/L8L945BP/Nåsell - 2001 - Extinction and Quasi-stationarity in the Verhulst .pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0022519301923288
@@ -2208,7 +2272,7 @@
       \verb 10.1017/CBO9780511542602
       \endverb
       \verb{file}
-      \verb Snapshot:/home/shikhara/Zotero/storage/Q8CDM93M/5B22AEA59391284258885065DDC9EA1D.html:text/html
+      \verb Snapshot:/mnt/data/Work/Zotero_database/storage/Q8CDM93M/5B22AEA59391284258885065DDC9EA1D.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.cambridge.org/core/books/alternative-reproductive-tactics/5B22AEA59391284258885065DDC9EA1D
@@ -2312,13 +2376,63 @@
       \verb 10.1006/jtbi.2002.3112
       \endverb
       \verb{file}
-      \verb ScienceDirect Snapshot:/home/shikhara/Zotero/storage/6YNVKYBY/S0022519302931127.html:text/html
+      \verb ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/6YNVKYBY/S0022519302931127.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0022519302931127
       \endverb
       \verb{url}
       \verb https://www.sciencedirect.com/science/article/pii/S0022519302931127
+      \endverb
+    \endentry
+    \entry{pearl_growth_1976}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=8210e8b7f4accb26516a05588221273d}{%
+           family={Pearl},
+           familyi={P\bibinitperiod},
+           given={Raymond},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b4447d5d1df1b6b5563fb4e81d9c8984}{%
+           family={Slobodkin},
+           familyi={S\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6c3c74d11263716476ad49a27f039d75}
+      \strng{fullhash}{6c3c74d11263716476ad49a27f039d75}
+      \strng{bibnamehash}{6c3c74d11263716476ad49a27f039d75}
+      \strng{authorbibnamehash}{6c3c74d11263716476ad49a27f039d75}
+      \strng{authornamehash}{6c3c74d11263716476ad49a27f039d75}
+      \strng{authorfullhash}{6c3c74d11263716476ad49a27f039d75}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0033-5770}
+      \field{journaltitle}{The Quarterly Review of Biology}
+      \field{note}{Publisher: University of Chicago Press}
+      \field{title}{The Growth of Populations}
+      \field{urlday}{22}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{volume}{51}
+      \field{year}{1976}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{6\bibrangedash 24}
+      \range{pages}{19}
+      \verb{file}
+      \verb JSTOR Full Text PDF:/mnt/data/Work/Zotero_database/storage/3KBMFZ3V/Pearl and Slobodkin - 1976 - The Growth of Populations.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.jstor.org/stable/2823040
+      \endverb
+      \verb{url}
+      \verb https://www.jstor.org/stable/2823040
       \endverb
     \endentry
     \entry{phadke_rapid_2009}{article}{}
@@ -2369,7 +2483,7 @@
       \verb 10.1111/j.1095-8312.2009.01250.x
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/WZ9ASQZE/PHADKE and ZUFALL - 2009 - Rapid diversification of mating systems in ciliate.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/NZKRD39R/2235979.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/WZ9ASQZE/PHADKE and ZUFALL - 2009 - Rapid diversification of mating systems in ciliate.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/NZKRD39R/2235979.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1111/j.1095-8312.2009.01250.x
@@ -2458,7 +2572,7 @@
       \verb 10.1111/evo.12412
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/46QQ2LP6/Recknagel et al. - 2014 - Crater Lake Habitat Predicts Morphological Diversi.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/56BMW8CU/evo.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/46QQ2LP6/Recknagel et al. - 2014 - Crater Lake Habitat Predicts Morphological Diversi.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/56BMW8CU/evo.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/evo.12412
@@ -2527,7 +2641,7 @@
       \verb 10.1002/ece3.3013
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/TJMYAPGF/Recknagel et al. - 2017 - Ecosystem size predicts eco-morphological variabil.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/QIJH9L9H/ece3.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/TJMYAPGF/Recknagel et al. - 2017 - Ecosystem size predicts eco-morphological variabil.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/QIJH9L9H/ece3.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/ece3.3013
@@ -2592,7 +2706,7 @@
       \verb 10.1209/0295-5075/97/40008
       \endverb
       \verb{file}
-      \verb IOP Full Text PDF:/home/shikhara/Zotero/storage/NVIBX7T5/Rogers et al. - 2012 - Demographic noise can lead to the spontaneous form.pdf:application/pdf
+      \verb IOP Full Text PDF:/mnt/data/Work/Zotero_database/storage/NVIBX7T5/Rogers et al. - 2012 - Demographic noise can lead to the spontaneous form.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1209/0295-5075/97/40008
@@ -2649,7 +2763,7 @@
       \verb 10.1103/PhysRevE.92.032708
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/ET6LQKNT/Rogers and McKane - 2015 - Modes of competition and the fitness of evolved po.pdf:application/pdf;APS Snapshot:/home/shikhara/Zotero/storage/4EVT2JZT/PhysRevE.92.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/ET6LQKNT/Rogers and McKane - 2015 - Modes of competition and the fitness of evolved po.pdf:application/pdf;APS Snapshot:/mnt/data/Work/Zotero_database/storage/4EVT2JZT/PhysRevE.92.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://link.aps.org/doi/10.1103/PhysRevE.92.032708
@@ -2707,7 +2821,7 @@
       \verb 10.1007/s00285-010-0380-6
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/MUSG38UT/Sasaki and Dieckmann - 2011 - Oligomorphic dynamics for analyzing the quantitati.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/MUSG38UT/Sasaki and Dieckmann - 2011 - Oligomorphic dynamics for analyzing the quantitati.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1007/s00285-010-0380-6
@@ -2780,7 +2894,7 @@
       \verb 10.1002/ecy.3838
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/YNRMR8PD/Schreiber et al. - Does deterministic coexistence theory matter in a .pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/3F82DXYQ/ecy.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/YNRMR8PD/Schreiber et al. - Does deterministic coexistence theory matter in a .pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/3F82DXYQ/ecy.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/ecy.3838
@@ -2951,7 +3065,7 @@
       \verb 10.1002/ecy.2922
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/2XU923MI/Shoemaker et al. - 2020 - Integrating the underlying structure of stochastic.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/ISQF77NM/ecy.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/2XU923MI/Shoemaker et al. - 2020 - Integrating the underlying structure of stochastic.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/ISQF77NM/ecy.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/ecy.2922
@@ -3010,7 +3124,7 @@
       \verb 10.1016/S0169-5347(00)89135-1
       \endverb
       \verb{file}
-      \verb ScienceDirect Full Text PDF:/home/shikhara/Zotero/storage/DVCHS275/Skulason and Smith - 1995 - Resource polymorphisms in vertebrates.pdf:application/pdf;ScienceDirect Snapshot:/home/shikhara/Zotero/storage/934PPZWC/S0169534700891351.html:text/html
+      \verb ScienceDirect Full Text PDF:/mnt/data/Work/Zotero_database/storage/DVCHS275/Skulason and Smith - 1995 - Resource polymorphisms in vertebrates.pdf:application/pdf;ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/934PPZWC/S0169534700891351.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0169534700891351
@@ -3064,7 +3178,7 @@
       \verb 10.1146/annurev.ecolsys.27.1.111
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/9LUBH2NX/Smith and Skúlason - 1996 - Evolutionary Significance of Resource Polymorphism.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/9LUBH2NX/Smith and Skúlason - 1996 - Evolutionary Significance of Resource Polymorphism.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1146/annurev.ecolsys.27.1.111
@@ -3127,7 +3241,7 @@
       \verb 10.1111/evo.12492
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/4699855A/Svardal et al. - 2014 - Organismal Complexity and the Potential for Evolut.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/SJSE6EE8/evo.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/4699855A/Svardal et al. - 2014 - Organismal Complexity and the Potential for Evolut.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/SJSE6EE8/evo.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/evo.12492
@@ -3186,7 +3300,7 @@
       \verb 10.1007/s11538-006-9170-0
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/WBM9Z6VJ/Tao and Cressman - 2007 - Stochastic Fluctuations Through Intrinsic Noise in.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/WBM9Z6VJ/Tao and Cressman - 2007 - Stochastic Fluctuations Through Intrinsic Noise in.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1007/s11538-006-9170-0
@@ -3244,7 +3358,7 @@
       \verb 10.1038/nature02918
       \endverb
       \verb{file}
-      \verb Snapshot:/home/shikhara/Zotero/storage/CULR6QKS/nature02918.html:text/html
+      \verb Snapshot:/mnt/data/Work/Zotero_database/storage/CULR6QKS/nature02918.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.nature.com/articles/nature02918
@@ -3292,7 +3406,7 @@
       \field{dateera}{ce}
       \field{urldateera}{ce}
       \verb{file}
-      \verb Snapshot:/home/shikhara/Zotero/storage/EKE9RXRT/html.html:text/html
+      \verb Snapshot:/mnt/data/Work/Zotero_database/storage/EKE9RXRT/html.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://www.degruyter.com/document/doi/10.1515/9781400883790/html
@@ -3350,7 +3464,7 @@
       \verb 10.1534/genetics.112.144980
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/4ZI7RJ34/Wakano and Iwasa - 2013 - Evolutionary Branching in a Finite Population Det.pdf:application/pdf;Snapshot:/home/shikhara/Zotero/storage/T6NRPYKY/5935234.html:text/html
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/4ZI7RJ34/Wakano and Iwasa - 2013 - Evolutionary Branching in a Finite Population Det.pdf:application/pdf;Snapshot:/mnt/data/Work/Zotero_database/storage/T6NRPYKY/5935234.html:text/html
       \endverb
       \verb{urlraw}
       \verb https://doi.org/10.1534/genetics.112.144980
@@ -3419,7 +3533,7 @@
       \verb 10.1016/j.jtbi.2021.110660
       \endverb
       \verb{file}
-      \verb Submitted Version:/home/shikhara/Zotero/storage/5ZST6HH9/Week et al. - 2021 - A white noise approach to evolutionary ecology.pdf:application/pdf;ScienceDirect Snapshot:/home/shikhara/Zotero/storage/C4SIGMGT/S0022519321000825.html:text/html;Week et al 2021 supp.pdf:/home/shikhara/Zotero/storage/S24JUVBP/Week et al 2021 supp.pdf:application/pdf
+      \verb Submitted Version:/mnt/data/Work/Zotero_database/storage/5ZST6HH9/Week et al. - 2021 - A white noise approach to evolutionary ecology.pdf:application/pdf;ScienceDirect Snapshot:/mnt/data/Work/Zotero_database/storage/C4SIGMGT/S0022519321000825.html:text/html;Week et al 2021 supp.pdf:/mnt/data/Work/Zotero_database/storage/S24JUVBP/Week et al 2021 supp.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0022519321000825
@@ -3468,7 +3582,7 @@
       \verb 10.1073/pnas.83.5.1388
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/KJ96ZHEI/West-Eberhard - 1986 - Alternative adaptations, speciation, and phylogeny.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/KJ96ZHEI/West-Eberhard - 1986 - Alternative adaptations, speciation, and phylogeny.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.pnas.org/doi/abs/10.1073/pnas.83.5.1388
@@ -3527,7 +3641,7 @@
       \verb 10.1086/723406
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/4NQXZ2EC/Wickman et al. - 2022 - A theoretical framework for trait-based eco-evolut.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/4NQXZ2EC/Wickman et al. - 2022 - A theoretical framework for trait-based eco-evolut.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.journals.uchicago.edu/doi/abs/10.1086/723406
@@ -3585,7 +3699,7 @@
       \verb 10.1086/697508
       \endverb
       \verb{file}
-      \verb Full Text PDF:/home/shikhara/Zotero/storage/DMNY27YF/Zuk and Travisano - 2018 - Models on the Runway How Do We Make Replicas of t.pdf:application/pdf
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/DMNY27YF/Zuk and Travisano - 2018 - Models on the Runway How Do We Make Replicas of t.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://www.journals.uchicago.edu/doi/full/10.1086/697508

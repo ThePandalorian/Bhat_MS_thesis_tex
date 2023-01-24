@@ -77,9 +77,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.4.4}Stochastic fluctuations and the weak noise approximation}{63}{subsection.3.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.5}An example: The quantitative stochastic logistic equation}{65}{subsection.3.4.5}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Summary}{66}{section.3.5}%
+\contentsline {section}{\numberline {3.5}Summary}{65}{section.3.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Examples and Applications}{69}{chapter.4}%
 \defcounter {refsection}{0}\relax 
