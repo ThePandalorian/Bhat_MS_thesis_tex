@@ -397,7 +397,7 @@ In this multi-dimensional case, the macroscopic description amounts to a descrip
 \begin{equation}
 \label{nD_functional_forms_for_replicator}
 \begin{aligned}
-    b^{(K)}_i(\mathbf{x}) &= \mu Q_i(\mathbf{x}) + (1-\mu)b^{(\textrm{int})}_{i}(\mathbf{x})x_i\\
+    b^{(K)}_i(\mathbf{x}) &= \mu Q_i(\mathbf{x}) + b^{(\textrm{int})}_{i}(\mathbf{x})x_i\\
     d^{(K)}_i(\mathbf{x}) &= d^{(\textrm{int})}_i(\mathbf{x})x_i
 \end{aligned}
 \end{equation}
@@ -406,7 +406,7 @@ where $\mu \geq 0$ is a constant describing the mutation rate, $Q_i(\mathbf{x})$
 \label{nD_det_limit_fitess_defn}
     \frac{dx_i}{dt} = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
 \end{equation}
-Where for each $i$, we have defined the real-valued function $w_i(\mathbf{x}) \coloneqq (1-\mu)b^{(\textrm{int})}_{i}(\mathbf{x}) - d^{(\textrm{int})}_i(\mathbf{x})$. Setting the mutation rate $\mu \to 0$ in equation \eqref{nD_det_limit_fitess_defn} makes it clear that the quantity $w_i(\mathbf{x})x_i$ describes the growth rate of type $i$ individuals in the population due to all processes other than mutation. The quantity $w_i(\mathbf{x})$ thus describes the per-capita growth rate of type $i$ individuals in a population $\mathbf{x}$, and is sometimes called the `Malthusian fitness' of type $i$. It is notable that the fitness of a type depends on the state of the population as a whole (\textit{i.e.} $\mathbf{x}$) and is thus frequency-dependent.\\
+Where for each $i$, we have defined the real-valued function $w_i(\mathbf{x}) \coloneqq b^{(\textrm{int})}_{i}(\mathbf{x}) - d^{(\textrm{int})}_i(\mathbf{x})$. Setting the mutation rate $\mu \to 0$ in equation \eqref{nD_det_limit_fitess_defn} makes it clear that the quantity $w_i(\mathbf{x})x_i$ describes the growth rate of type $i$ individuals in the population due to all processes other than mutation. The quantity $w_i(\mathbf{x})$ thus describes the per-capita growth rate of type $i$ individuals in a population $\mathbf{x}$, and is sometimes called the `Malthusian fitness' of type $i$. It is notable that the fitness of a type depends on the state of the population as a whole (\textit{i.e.} $\mathbf{x}$) and is thus frequency-dependent.\\
 \\
 Given a state $\mathbf{x}(t)$, we can now compute the total scaled population size, and the frequency of each type in the population as:
 \begin{equation}
@@ -438,7 +438,7 @@ Where we have used the definition of $p_i$ from \eqref{nD_tot_pop_and_prop_inds_
 \label{nD_replicator_mutator}
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dp_i}{dt} = (w_i(\mathbf{x}) - \overline{w})p_i + \mu\left[Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right]}
 \end{equation}
-Where we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. The first term of \eqref{nD_replicator_mutator} describes changes due to faithful (non-mutational) replication, and the second describes changes due to mutation. For this reason, equation \eqref{nD_replicator_mutator} is called the \emph{replicator-mutator equation} in the evolutionary game theory literature, where the individual `types' are interpreted to be pure strategies. If in addition, each $w_i(\mathbf{x})$ is linear in $\mathbf{x}$, meaning we can write $w_i(\mathbf{x}) = \sum_{j}a_{ij}x_j$ for some set of constants $a_{ij}$, then we get the replicator-mutator equation for matrix games, and the constants $a_{ij}$ form the `payoff matrix'. As is well-known, the replicator equation (without mutation) for matrix games with $m$ pure strategies is equivalent to the generalized Lotka-Volterra equations for a community with $m-1$ species \citep{hofbauer_evolutionary_1998}, providing the connection to community ecology.  Equation \eqref{nD_replicator_mutator} is also equivalent to Eigen's \emph{quasispecies equation} from molecular evolution \citep{page_unifying_2002} if each `type' is interpreted as a genetic sequence and each $w_i(\mathbf{x})$ is a constant function\footnote{Mutational effects are often additionally assumed to act through direct `transmission probabilities' of mutating from one type to another. This means that we can write $Q_i(\mathbf{p}) = \sum\limits_{j\neq i}Q_{ij}p_j$. Substituting this into \eqref{nD_replicator_mutator} yields an equation in terms of `$Q$-matrices' or `mutation matrices' that may be more familiar to some biologists.}. We can now calculate how the mean of any `trait level' quantity $f$, defined as $f_i$ for the $i$\textsuperscript{th} trait, changes in the population (For example, setting $f_i = x_i$ gives us the mean trait value in the population). Multiplying both sides of equation \eqref{nD_replicator_mutator} by $f_i$ and summing over all $i$, we obtain
+Where we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. The first term of \eqref{nD_replicator_mutator} describes changes due to faithful (non-mutational) replication, and the second describes changes due to mutation. For this reason, equation \eqref{nD_replicator_mutator} is called the \emph{replicator-mutator equation} in the evolutionary game theory literature, where the individual `types' are interpreted to be pure strategies. If in addition, each $w_i(\mathbf{x})$ is linear in $\mathbf{x}$, meaning we can write $w_i(\mathbf{x}) = \sum_{j}a_{ij}x_j$ for some set of constants $a_{ij}$, then we get the replicator-mutator equation for matrix games, and the constants $a_{ij}$ form the `payoff matrix'. As is well-known, the replicator equation (without mutation) for matrix games with $m$ pure strategies is equivalent to the generalized Lotka-Volterra equations for a community with $m-1$ species \citep{hofbauer_evolutionary_1998}, providing the connection to community ecology.  Equation \eqref{nD_replicator_mutator} is also equivalent to Eigen's \emph{quasispecies equation} from molecular evolution \citep{page_unifying_2002} if each `type' is interpreted as a genetic sequence and each $w_i(\mathbf{x})$ is a constant function\footnote{Mutational effects are often additionally assumed to act through direct `transmission probabilities' of mutating from one type to another. This means that we can write $Q_i(\mathbf{p}) = \sum\limits_{j\neq i}Q_{ij}p_j$, where $Q_{ij} \geq0$ is a constant describing the probability of a $j \to i$ mutation (conditioned on the occurrence of a mutation). Substituting this into \eqref{nD_replicator_mutator} yields an equation in terms of `$Q$-matrices' or `mutation matrices' that may be more familiar to some biologists.}. We can now calculate how the mean of any `trait level' quantity $f$, defined as $f_i$ for the $i$\textsuperscript{th} trait, changes in the population (For example, setting $f_i = x_i$ gives us the mean trait value in the population). Multiplying both sides of equation \eqref{nD_replicator_mutator} by $f_i$ and summing over all $i$, we obtain
 \begin{align*}
     \frac{d}{dt}\left(\sum\limits_{i=1}^{m}f_ip_i\right) &= \sum\limits_{i=1}^{m}f_iw_i(\mathbf{x})p_i - \overline{w}\sum\limits_{i=1}^{m}f_ip_i + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\sum\limits_{i=1}^{m}p_if_i\right)\right]\\
     \Rightarrow \frac{d\overline{f}}{dt} &= \overline{wf}-(\overline{w})(\overline{f}) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right]
@@ -517,13 +517,13 @@ Using this relation and then using integration by parts on the RHS of \eqref{nD_
 \frac{d}{dt}\mathbb{E}[y_i^n] &= n\int\limits_{\mathbb{R}^m} y_i^{n-1}D_{i}P(\mathbf{y},t)d\mathbf{y} + \frac{n(n-1)}{2}A_i^+(\mathbf{a}(t))\int\limits_{\mathbb{R}^m} y_i^{n-2}P(\mathbf{y},t)d\mathbf{y}\\
 \Rightarrow \frac{d}{dt}\mathbb{E}[y_i^n] &= n\mathbb{E}[y_i^{n-1}D_{i}]+\frac{n(n-1)}{2}A_i^+(\mathbf{a}(t))\mathbb{E}[y_i^{n-2}]\label{nD_general_moment_eqns}
 \end{align}
-Of particular interest are the cases $n=1$ (corresponding to the expected value of $y_i$) and $n=2$ (which can be used along with the expected value to compute the variance of $y_i$). For $n=1$, we have:
+Of particular interest are the cases $n=1$ (corresponding to the expected value of $y_i$) and $n=2$ (which can be used along with the expected value to compute the variance of $y_i$). We have:
 \begin{align}
-\frac{d}{dt}\mathbb{E}[y_i] &= \mathbb{E}[D_{i}]\label{nD_moment_eqn_mean}
-% \frac{d}{dt}\mathbb{E}[y_i^2] &= 2\mathbb{E}[y_iD_{i}] +  A_i^+(\mathbf{a}(t))\nonumber\\
+\frac{d}{dt}\mathbb{E}[y_i] &= \mathbb{E}[D_{i}]\label{nD_moment_eqn_mean}\\
+\frac{d}{dt}\mathbb{E}[y_i^2] &= 2\mathbb{E}[y_iD_{i}] +  A_i^+(\mathbf{a}(t)) = 2\mathrm{Cov}(y_i,D_i) + 2\mathbb{E}[y_i]\mathbb{E}[D_i]+A_i^+(\mathbf{a}(t))\label{nD_moment_eqn_2nd_mom}
 % \Rightarrow \frac{d}{dt}\mathrm{Var}(y_i) &= - \mathbb{E}[D_{i}]^2 + 2\mathbb{E}[y_iD_{i}] +  A_i^+(\mathbf{a}(t))\label{nD_moment_eqn_var}
 \end{align}
-which tells us that whether the fluctuation grows or decays is controlled by $D_i$, a measure of how the growth rate ($b_i - d_i$) changes along the direction of the fluctuation. In the case of the functional forms given by \eqref{nD_functional_forms_for_replicator}, we have:
+Thus, whether stochastic fluctuations are expected to grow or decay is controlled by $D_i$, a measure of how the growth rate ($b_i - d_i$) changes along the direction of the fluctuation, whereas the spread of the fluctuations (the variance) has contributions from the net turnover rate ($A_i^+ = b_i + d_i$) and the covariance between the fluctuation and $D_i$. In the case of the functional forms given by \eqref{nD_functional_forms_for_replicator}, we have:
 \begin{equation}
 A_i^-(\mathbf{x}) = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
 \end{equation}
@@ -552,7 +552,7 @@ If you know and care about enough mathematics for this to really bother you, see
 This definition is formulated in analogy to directional derivatives in multi-variable calculus: Noting that a function can be thought of as an infinite-dimensional vector, informally `taking the limit' $n \to \infty$ in \eqref{directional_derivative_defn} yields \eqref{functional_derivative_defn}.
 
 \subsection{Description of the process and the Master Equation}
-We envision a population of individuals whose phenotypes take trait values in some one-dimensional set $\mathcal{T} \subseteq \mathbb{R}$. Since the trait of any given individual is fixed, and since each individual can only have one exact trait value, an individual with a trait value $x \in \mathcal{T}$ can be characterized as a Dirac delta mass centered at $x$, defined indirectly as the object which satisfies, for any one-dimensional function $f$,
+We envision a population of individuals with a `trait' that takes values in some one-dimensional set $\mathcal{T} \subseteq \mathbb{R}$. Since the trait of any given individual is fixed, and since each individual can only have one exact trait value, an individual with a trait value $x \in \mathcal{T}$ can be characterized as a Dirac delta mass centered at $x$, defined indirectly as the object which satisfies, for any one-dimensional function $f$,
 \begin{equation*}
     \int\limits_{A}f(y)\delta_{x_i}dy = 
     \begin{cases}
@@ -564,7 +564,7 @@ for every `nice' subset $A \subset \mathcal{T}$. In physics notation, we would w
 \begin{equation*}
     \nu^{(t)} = \sum\limits_{i=1}^{N(t)}\delta_{x_i}
 \end{equation*}
-which in physics notation would be a function\footnote{Physicists use the term `field' for functions of the form $f(x,t):\mathbb{R}^{n} \times [0,\infty) \to \mathbb{R}^{m}$, where $\mathbb{R}^{n}$ represents space and $[0,\infty)$ represents time. They then call models which describe such functions `field theories'. In physics jargon, our stochastic process $\{\nu^{(t)}\}_{t \geq 0}$ when viewed as a sequence of functions $\{\nu^{(t)}(y)\}_{t \geq 0}$ thus describes a (scalar) `stochastic field', and the formalism we will develop below is a `stochastic field theory' of evolution, where physical space has been replaced by an abstract trait space. This is closely related to the area of physics called `statistical field theory', the analog of quantum field theory for systems with a large number of classical particles. Stochastic field theories over physical space have been used in neurobiology, see for example \citep{bressloff_stochastic_2010}.} $\nu^{(t)}(y) = \sum_{i}^{N(t)} \delta(y-x_i)$. Thus, the state space of our process is
+which in physics notation would be a function\footnote{Physicists use the term `field' for functions of the form $f(x,t):\mathbb{R}^{n} \times [0,\infty) \to \mathbb{R}^{m}$, where $\mathbb{R}^{n}$ represents space and $[0,\infty)$ represents time. They then call models which describe such functions `field theories'. In physics jargon, our stochastic process $\{\nu^{(t)}\}_{t \geq 0}$ when viewed as a sequence of functions $\{\nu^{(t)}(y)\}_{t \geq 0}$ thus describes a (scalar) `stochastic field', and the formalism we will develop below is a `stochastic field theory' of evolution, where physical space has been replaced by an abstract trait space. This is closely related to the area of physics called `statistical field theory', the analog of quantum field theory for systems with a large number of classical particles. Stochastic field theories over physical space have recently been used in biology to model brain function \citep{bressloff_stochastic_2010} and collective motion \citep{o_laighleis_minimal_2018}.} $\nu^{(t)}(y) = \sum_{i}^{N(t)} \delta(y-x_i)$. Thus, the state space of our process is
 \begin{equation*}
     \mathcal{M} = \left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
 \end{equation*}
@@ -575,7 +575,7 @@ Note that for any set $A \subset \mathcal{T}$, $\int_A\nu^{(t)}dx$ gives the num
 %     \mathcal{F} = \left\{f:\mathcal{M} \to \mathbb{R} \ | \ f \ \textrm{bounded and measurable}\right\},
 % \end{equation*}
 % the set of all bounded measurable real functions on $\mathcal{M}$. Given the population $\nu^{(t)} = \sum_{i=1}^{N(t)}\delta_{x_i}$ and a function $f \in \mathcal{F}$, we have $\int_{\mathcal{T}}f(x)\nu^{(t)}(dx) = \sum_{i=1}^{N(t)}f(x_i)$. Elements of $\mathcal{F}$ are interesting because they yield various quantities of biological relevance when integrated over $\mathcal{T}$ with respect to our population measure $\nu$. For example, the function $f(\nu^{(t)}) = 1$ gives the population size at time $t$, and the function $f(\nu^{(t)}) = \chi_{A}/N(t)$, where $\chi$ is the indicator function, gives the fraction of the population that have trait values in $A$.\\
-Now that we have described the population, we must define the rules for how it changes. As before, we assume that there exist functions $b(x|\nu)$ and $d(x|\nu)$ such that $b(x|\nu)$ and $d(x|\nu)$ describe the rate at which individuals with trait value $x$ are born and die respectively in a population $\nu$. Again, we must be careful about what exactly we mean when we speak about `rates'. In this case, we mean that if we know that the population is currently described by the function $\phi$, and we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual whose phenotype is within the set $A \subset \mathcal{T}$ is given by
+Now that we have described the population, we must define the rules for how it changes. We assume that there exist non-negative functionals $b(x|\nu)$ and $d(x|\nu)$ which describe the rate at which individuals with trait value $x$ are born and die respectively in a population $\nu$. Again, we must be careful about what exactly we mean when we speak about `rates'. In this case, we mean that if we know that the population is currently described by the function $\nu$, and we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual whose phenotype is within the set $A \subset \mathcal{T}$ is given by
 \begin{equation*}
     \mathbb{P}[\textrm{ Birth with offspring in }A | \textrm{ something happened }] = \frac{1}{\mathcal{N}}\int\limits_{A}b(x|\nu)dx
 \end{equation*}
@@ -687,7 +687,7 @@ The `macroscopic' version of our function-valued process corresponds to quantita
 \begin{equation}
 \label{BD_for_kimura}
 \begin{aligned}
-    b_K(x|\psi) &= \mu b_{\textrm{mut}}(x|\psi) + (1-\mu)b_{\textrm{int}}(x|\psi)\psi(x,t)\\
+    b_K(x|\psi) &= \mu b_{\textrm{mut}}(x|\psi) + b_{\textrm{int}}(x|\psi)\psi(x,t)\\
     d_K(x|\psi) &= d_{\textrm{int}}(x|\psi)\psi(x,t)
 \end{aligned}
 \end{equation}
@@ -696,7 +696,7 @@ where $\mu \geq 0$ is a mutation rate. Here, $ b_{\textrm{mut}}(x|\psi)$ describ
 \label{PDE_for_kimura}
 \frac{\partial \psi}{\partial t}(x,t) = w(x|\psi)\psi(x,t) + \mu b_{\textrm{mut}}(x|\psi)
 \end{equation}
-where we have defined $w(x|\psi) \coloneqq (1-\mu)b_{\textrm{int}}(x|\psi) - d_{\textrm{int}}(x|\psi)$, which can be thought of as the (Malthusian) `fitness' of the phenotype $x$. To track population numbers and trait frequencies, we follow the approach of \citep{week_white_2021} and define
+where we have defined $w(x|\psi) \coloneqq b_{\textrm{int}}(x|\psi) - d_{\textrm{int}}(x|\psi)$, which can be thought of as the (Malthusian) `fitness' of the phenotype $x$. To track population numbers and trait frequencies, we follow the approach of \citep{week_white_2021} and define
 \begin{equation}
 \label{pop_size_and_freq_for_kimura}
 \begin{aligned}

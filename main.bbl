@@ -507,8 +507,65 @@
       \endverb
       \keyw{Evolution,Sexual selection,Population dynamics,Population genetics}
     \endentry
+    \entry{constable_mapping_2017}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=31268267f6edc305a324a52761558982}{%
+           family={Constable},
+           familyi={C\bibinitperiod},
+           given={George\bibnamedelimb W.\bibnamedelimi A.},
+           giveni={G\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d73b0b09dc8cfbef6e397ed0108a0c07}{%
+           family={{McKane}},
+           familyi={M\bibinitperiod},
+           given={Alan\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{83754224750898d042c9cc995b4079af}
+      \strng{fullhash}{83754224750898d042c9cc995b4079af}
+      \strng{bibnamehash}{83754224750898d042c9cc995b4079af}
+      \strng{authorbibnamehash}{83754224750898d042c9cc995b4079af}
+      \strng{authornamehash}{83754224750898d042c9cc995b4079af}
+      \strng{authorfullhash}{83754224750898d042c9cc995b4079af}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The relationship between the M-species stochastic Lotka-Volterra competition ({SLVC}) model and the M-allele Moran model of population genetics is explored via timescale separation arguments. When selection for species is weak and the population size is large but finite, precise conditions are determined for the stochastic dynamics of the {SLVC} model to be mappable to the neutral Moran model, the Moran model with frequency-independent selection, and the Moran model with frequency-dependent selection (equivalently a game-theoretic formulation of the Moran model). We demonstrate how these mappings can be used to calculate extinction probabilities and the times until a species' extinction in the {SLVC} model.}
+      \field{day}{29}
+      \field{journaltitle}{Physical Review E}
+      \field{month}{8}
+      \field{note}{Publisher: American Physical Society}
+      \field{number}{2}
+      \field{shortjournal}{Phys. Rev. E}
+      \field{title}{Mapping of the stochastic Lotka-Volterra model to models of population genetics and game theory}
+      \field{urlday}{24}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{volume}{96}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{022416}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevE.96.022416
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/TSBMV4I7/Constable and McKane - 2017 - Mapping of the stochastic Lotka-Volterra model to .pdf:application/pdf;APS Snapshot:/mnt/data/Work/Zotero_database/storage/9L8KSETD/PhysRevE.96.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevE.96.022416
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevE.96.022416
+      \endverb
+    \endentry
     \entry{constable_stochastic_2013}{article}{}
-      \name{author}{3}{ul=2}{%
+      \name{author}{3}{ul=3}{%
         {{un=0,uniquepart=base,hash=31268267f6edc305a324a52761558982}{%
            family={Constable},
            familyi={C\bibinitperiod},
@@ -528,11 +585,11 @@
            giveni={T\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{2f2b627d562d60ba0b95f196ea3ff443}
+      \strng{namehash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
       \strng{fullhash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
-      \strng{bibnamehash}{2f2b627d562d60ba0b95f196ea3ff443}
-      \strng{authorbibnamehash}{2f2b627d562d60ba0b95f196ea3ff443}
-      \strng{authornamehash}{2f2b627d562d60ba0b95f196ea3ff443}
+      \strng{bibnamehash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
+      \strng{authorbibnamehash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
+      \strng{authornamehash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
       \strng{authorfullhash}{5cf9cc675fc30141a7f8ffb9e5eac9bb}
       \field{sortinit}{C}
       \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
@@ -2174,6 +2231,69 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0022519301923288
       \endverb
     \endentry
+    \entry{o_laighleis_minimal_2018}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=a834b7376ee69d45ed45acee3bdd659d}{%
+           family={Ó\bibnamedelima Laighléis},
+           familyi={Ó\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1457e299595cb30ff492daee95b9c0c0}{%
+           family={Evans},
+           familyi={E\bibinitperiod},
+           given={M.\bibnamedelimi R.},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9630453f65c464be244167c05f3fd0d3}{%
+           family={Blythe},
+           familyi={B\bibinitperiod},
+           given={R.\bibnamedelimi A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{51409917132a9a637ad3d031a2060476}
+      \strng{fullhash}{0a88c40ba883da1b58831f19b840b81c}
+      \strng{bibnamehash}{51409917132a9a637ad3d031a2060476}
+      \strng{authorbibnamehash}{51409917132a9a637ad3d031a2060476}
+      \strng{authornamehash}{51409917132a9a637ad3d031a2060476}
+      \strng{authorfullhash}{0a88c40ba883da1b58831f19b840b81c}
+      \field{sortinit}{Ó}
+      \field{sortinithash}{ff8d4eeb5101e3cf3809959b3592d942}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We consider the collective behavior of active particles that locally align with their neighbors. Agent-based simulation models have previously shown that in one dimension, these particles can form into a flock that maintains its stability by stochastically alternating its direction. Until now, this behavior has been seen in models based on continuum field equations only by appealing to long-range interactions that are not present in the simulation model. Here, we derive a set of stochastic field equations with local interactions that reproduces both qualitatively and quantitatively the behavior of the agent-based model, including the alternating flock phase. A crucial component is a multiplicative noise term of the voter model type in the dynamics of the local polarization whose magnitude is inversely proportional to the local density. We show that there is an important subtlety in determining the physically appropriate noise, in that it depends on a careful choice of the field variables used to characterize the system. We further use the resulting equations to show that a nonlinear alignment interaction of at least cubic order is needed for flocking to arise.}
+      \field{day}{18}
+      \field{journaltitle}{Physical Review E}
+      \field{month}{12}
+      \field{note}{Publisher: American Physical Society}
+      \field{number}{6}
+      \field{shortjournal}{Phys. Rev. E}
+      \field{title}{Minimal stochastic field equations for one-dimensional flocking}
+      \field{urlday}{15}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{volume}{98}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{062127}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevE.98.062127
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/mnt/data/Work/Zotero_database/storage/8CRM45GM/Ó Laighléis et al. - 2018 - Minimal stochastic field equations for one-dimensi.pdf:application/pdf;APS Snapshot:/mnt/data/Work/Zotero_database/storage/LQ6PQ8DH/PhysRevE.98.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevE.98.062127
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevE.98.062127
+      \endverb
+    \endentry
     \entry{oksendal_stochastic_1998}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=b4cf7abbc177f4b3f12be4226a9bc1fa}{%
@@ -2383,6 +2503,65 @@
       \endverb
       \verb{url}
       \verb https://www.sciencedirect.com/science/article/pii/S0022519302931127
+      \endverb
+    \endentry
+    \entry{parsons_dimension_2017}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=84180ae8359de6195a3208caf17c7668}{%
+           family={Parsons},
+           familyi={P\bibinitperiod},
+           given={Todd\bibnamedelima L.},
+           giveni={T\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ac6e4d73f4a32b3f7e82c4cb9b5f8f83}{%
+           family={Rogers},
+           familyi={R\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{16ee5df0367e9fbb6f52ceda7f07fbf5}
+      \strng{fullhash}{16ee5df0367e9fbb6f52ceda7f07fbf5}
+      \strng{bibnamehash}{16ee5df0367e9fbb6f52ceda7f07fbf5}
+      \strng{authorbibnamehash}{16ee5df0367e9fbb6f52ceda7f07fbf5}
+      \strng{authornamehash}{16ee5df0367e9fbb6f52ceda7f07fbf5}
+      \strng{authorfullhash}{16ee5df0367e9fbb6f52ceda7f07fbf5}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Systems composed of large numbers of interacting agents often admit an effective coarse-grained description in terms of a multidimensional stochastic dynamical system, driven by small-amplitude intrinsic noise. In applications to biological, ecological, chemical and social dynamics it is common for these models to posses quantities that are approximately conserved on short timescales, in which case system trajectories are observed to remain close to some lower-dimensional subspace. Here, we derive explicit and general formulae for a reduced-dimension description of such processes that is exact in the limit of small noise and well-separated slow and fast dynamics. The Michaelis–Menten law of enzyme-catalysed reactions, and the link between the Lotka–Volterra and Wright–Fisher processes are explored as a simple worked examples. Extensions of the method are presented for infinite dimensional systems and processes coupled to non-Gaussian noise sources.}
+      \field{issn}{1751-8121}
+      \field{journaltitle}{Journal of Physics A: Mathematical and Theoretical}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{note}{Publisher: {IOP} Publishing}
+      \field{number}{41}
+      \field{shortjournal}{J. Phys. A: Math. Theor.}
+      \field{shorttitle}{Dimension reduction for stochastic dynamical systems forced onto a manifold by large drift}
+      \field{title}{Dimension reduction for stochastic dynamical systems forced onto a manifold by large drift: a constructive approach with examples from theoretical biology}
+      \field{urlday}{25}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{volume}{50}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{415601}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/1751-8121/aa86c7
+      \endverb
+      \verb{file}
+      \verb Parsons and Rogers - 2017 - Dimension reduction for stochastic dynamical syste.pdf:/mnt/data/Work/Zotero_database/storage/QEJALHAM/Parsons and Rogers - 2017 - Dimension reduction for stochastic dynamical syste.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://dx.doi.org/10.1088/1751-8121/aa86c7
+      \endverb
+      \verb{url}
+      \verb https://dx.doi.org/10.1088/1751-8121/aa86c7
       \endverb
     \endentry
     \entry{pearl_growth_1976}{article}{}

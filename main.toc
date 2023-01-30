@@ -85,11 +85,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}Example for discrete traits: Lotka-Volterra and matrix games in finite populations}{72}{section.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Example for quantitative traits}{76}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Example for quantitative traits}{77}{section.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}Interlude: Detecting clusters through Fourier analysis}{76}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.1}Interlude: Detecting clusters through Fourier analysis}{77}{subsection.4.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.2}An example: The quantitative logistic equation}{80}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}An example: The quantitative logistic equation}{81}{subsection.4.3.2}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Appendices}{83}{section*.14}%
 \defcounter {refsection}{0}\relax 
