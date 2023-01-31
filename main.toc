@@ -59,38 +59,42 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.2}The system-size expansion}{42}{subsection.3.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.3}The deterministic limit}{43}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.3}The deterministic limit}{44}{subsection.3.3.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Some familiar faces: Replicator-mutator, quasispecies equation, and the Price equation}{44}{subsubsection*.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.4}Stochastic fluctuations and the weak noise approximation}{47}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.4}Stochastic trait frequency dynamics for finite populations}{47}{subsection.3.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Infinite-dimensional processes for quantitative traits}{50}{section.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Stochastic fluctuations and the weak noise approximation}{49}{subsection.3.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.1}Description of the process and the Master Equation}{51}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.4}Infinite-dimensional processes for quantitative traits}{52}{section.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.2}The functional system-size expansion}{54}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.1}Description of the process and the Master Equation}{53}{subsection.3.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.3}The deterministic limit}{56}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.2}The functional system-size expansion}{56}{subsection.3.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Some familiar faces: Kimura-Crow and adaptive dynamics}{57}{subsubsection*.10}%
+\contentsline {subsection}{\numberline {3.4.3}The deterministic limit}{58}{subsection.3.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.4}Stochastic fluctuations and the weak noise approximation}{63}{subsection.3.4.4}%
+\contentsline {subsubsection}{Some familiar faces: Kimura-Crow and adaptive dynamics}{59}{subsubsection*.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Summary}{65}{section.3.5}%
+\contentsline {subsection}{\numberline {3.4.4}Stochastic fluctuations and the weak noise approximation}{65}{subsection.3.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Examples and Applications}{69}{chapter.4}%
+\contentsline {section}{\numberline {3.5}Summary}{67}{section.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Example in one dimension: The stochastic logistic equation}{69}{section.4.1}%
+\contentsline {chapter}{\numberline {4}Examples and Applications}{71}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Example for discrete traits: Lotka-Volterra and matrix games in finite populations}{72}{section.4.2}%
+\contentsline {section}{\numberline {4.1}Example in one dimension: The stochastic logistic equation}{71}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Example for quantitative traits}{77}{section.4.3}%
+\contentsline {section}{\numberline {4.2}Example for discrete traits: Lotka-Volterra and matrix games in finite populations}{74}{section.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}Interlude: Detecting clusters through Fourier analysis}{77}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.3}Example for quantitative traits}{79}{section.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.2}An example: The quantitative logistic equation}{81}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.1}Interlude: Detecting clusters through Fourier analysis}{79}{subsection.4.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendices}{83}{section*.14}%
+\contentsline {subsection}{\numberline {4.3.2}An example: The quantitative logistic equation}{83}{subsection.4.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Relation between Ito SDEs and Fokker-Planck equations}{83}{appendix.1.A}%
+\contentsline {chapter}{Appendices}{85}{section*.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}Relation between Ito SDEs and Fokker-Planck equations}{85}{appendix.1.A}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {B}Stochastic equations for trait frequencies in finite populations}{89}{appendix.1.B}%

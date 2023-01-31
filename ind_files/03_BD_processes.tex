@@ -310,36 +310,36 @@ Let us now consider a slightly more complicated scenario. Assume that our popula
 Given a population that can contain up to $m$ different (fixed) kinds of organisms, it can be entirely characterized by specifying the number of organisms of each type (Figure \ref{fig_nD_pop_description}A). Thus, the state of the population at a given time $t$ is an $m$-dimensional \emph{vector} of the form $\mathbf{v} = [v_1(t),v_2(t),\ldots,v_m(t)]$, where $v_i(t)$ is the number of individuals of type $i$.\\
 Given a state $\mathbf{v}(t)$,  we also need to describe how this vector can change over time due to births and deaths (ecology). In this case, a birth or death could result in an individual belonging to one of $m$ different types. Thus, whereas before we had two functions $b(n)$ and $d(n)$ which take in a number as an input, we now require $2m$ functions that take in a vector as an input (Figure \ref{fig_nD_pop_description}B). In other words, for each type $i \in \{1,2,\ldots,m\}$, we must specify a birth rate $b_i(\mathbf{v})$ and a death rate $d_i(\mathbf{v})$. By `rates', we mean that if we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual of type $i$ is given by
 \begin{equation*}
-    \mathbb{P}[\textrm{ Birth of a type $i$ individual} | \textrm{ something happened }] = \frac{b_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
+\mathbb{P}[\textrm{ Birth of a type $i$ individual} | \textrm{ something happened }] = \frac{b_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
 \end{equation*}
 and the probability that the event is the death of an individual of type $i$ is
 \begin{equation*}
-    \mathbb{P}[\textrm{ Death of a type $i$ individual} | \textrm{ something happened }] = \frac{d_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
+\mathbb{P}[\textrm{ Death of a type $i$ individual} | \textrm{ something happened }] = \frac{d_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
 \end{equation*}
 
-\myfig{0.9}{Media/3.2_BD_process_2D.png}{\textbf{Schematic description of an $m$-dimensional birth-death process. (A)} Consider a population of birds in which individuals are either red or blue. In this case, we have $m=2$, since there are two types of individuals in the population. \textbf{(B)} The state of the system can be described by a vector containing the number of individuals of each discrete type (in this case, the number of red and blue birds in the population). Births and deaths result in changes in the elements of the state vector.}{fig_nD_pop_description}
+\myfig{0.9}{Media/3.2_BD_process_2D.png}{\textbf{(A)} Consider a population of birds in which individuals are either red or blue. In this case, we have $m=2$, since there are two types of individuals in the population. \textbf{(B)} The state of the system can be described by a vector containing the number of individuals of each discrete type (in this case, the number of red and blue birds in the population). Births and deaths result in changes in the elements of the state vector.}{fig_nD_pop_description}
 
 As before, we can describe the rate of change of $P(\mathbf{v},t)$, the probability of finding the population in a state $\mathbf{v}$ at time $t$, by measuring the inflow and outflow rates. Given a population $\mathbf{v} = [v_1,\ldots,v_{m}]$, the `inflow' is from all populations of the form $[v_1,\ldots,v_{i}-1,\dots,v_{m}]$ through a birth of a type $i$ individual, and from all populations of the form $[v_1,\ldots,v_{i}+1,\dots,v_{m}]$ through the death of a type $i$ individual. Thus, we have the inflow rate
 \begin{equation}
-    \label{nD_rate_in}
-    \begin{split}
-    R_{\textrm{in}}(\mathbf{v},t) &= \sum\limits_{j=1}^{m}b_{j}([v_1,\ldots,v_{j}-1,\ldots,v_m])P([v_1,\ldots,v_{j}-1,\ldots,v_m],t) \\
-    & +\sum\limits_{j=1}^{m}d_{j}([v_1,\ldots,v_{j}+1,\ldots,v_m])P([v_1,\ldots,v_{j}+1,\ldots,v_m],t)
-    \end{split}
+\label{nD_rate_in}
+\begin{split}
+R_{\textrm{in}}(\mathbf{v},t) &= \sum\limits_{j=1}^{m}b_{j}([v_1,\ldots,v_{j}-1,\ldots,v_m])P([v_1,\ldots,v_{j}-1,\ldots,v_m],t) \\
+& +\sum\limits_{j=1}^{m}d_{j}([v_1,\ldots,v_{j}+1,\ldots,v_m])P([v_1,\ldots,v_{j}+1,\ldots,v_m],t)
+\end{split}
 \end{equation}
 Outflow is through births and deaths of individuals in the population $\mathbf{v}$ itself, and thus we have:
 \begin{equation}
-    \label{nD_rate_out}
-    R_{\textrm{out}}(\mathbf{v},t) = \sum\limits_{j=1}^{m}b_{j}(\mathbf{v})P(\mathbf{v},t) + \sum\limits_{j=1}^{m}d_{j}(\mathbf{v})P(\mathbf{v},t)
+\label{nD_rate_out}
+R_{\textrm{out}}(\mathbf{v},t) = \sum\limits_{j=1}^{m}b_{j}(\mathbf{v})P(\mathbf{v},t) + \sum\limits_{j=1}^{m}d_{j}(\mathbf{v})P(\mathbf{v},t)
 \end{equation}
 As before, we now define step operators, both for notational ease and in anticipation of the system size expansion. Note that now, we need $2m$ step operators. For each $i \in \{1,\ldots,m\}$, let us define two step operators $\mathcal{E}_{i}^{\pm}$ by their action on any function $f([v_1,\ldots,v_m],t)$ as:
 \begin{equation}
 \label{nD_step_operators}
-    \mathcal{E}_{i}^{\pm}f([v_1,\ldots,v_m],t) = f([v_1,\ldots,v_i \pm 1, \ldots v_m],t)
+\mathcal{E}_{i}^{\pm}f([v_1,\ldots,v_m],t) = f([v_1,\ldots,v_i \pm 1, \ldots v_m],t)
 \end{equation}
 In other words, $\mathcal{E}_{i}^{\pm}$ just changes the population through the addition or removal of one type $i$ individual. We can now the rate of change of $P(\mathbf{v},t)$ as
 \begin{equation}
-    \frac{\partial P}{\partial t}(\mathbf{v},t) = R_{\textrm{in}}(\mathbf{v},t) - R_{\textrm{out}}(\mathbf{v},t)
+\frac{\partial P}{\partial t}(\mathbf{v},t) = R_{\textrm{in}}(\mathbf{v},t) - R_{\textrm{out}}(\mathbf{v},t)
 \end{equation}
 Substituting \eqref{nD_rate_in}, \eqref{nD_rate_out}, and \eqref{nD_step_operators}, we obtain:
 \begin{equation}
@@ -351,14 +351,14 @@ This is the master equation of our $m$-dimensional process.
 \subsection{The system-size expansion}
 As before, we now assume we can find a system size parameter $K > 0$ such that we can make the substitutions
 \begin{align*}
-    \mathbf{x} &= \frac{\mathbf{v}}{K}\\
-    b^{(K)}_i(\mathbf{x}) &= \frac{1}{K}b_i(\mathbf{v})\\
-    d^{(K)}_i(\mathbf{x}) &= \frac{1}{K}d_i(\mathbf{v})
+\mathbf{x} &= \frac{\mathbf{v}}{K}\\
+b^{(K)}_i(\mathbf{x}) &= \frac{1}{K}b_i(\mathbf{v})\\
+d^{(K)}_i(\mathbf{x}) &= \frac{1}{K}d_i(\mathbf{v})
 \end{align*}
 and define new step operators $\Delta_{i}^{\pm}$ by their action on any real-valued function $f(\mathbf{x},t)$ as
 \begin{equation}
 \label{nD_step_operators_rescaled}
-    \Delta_{i}^{\pm}f([x_1,\ldots,x_m],t) = f([x_1,\ldots,x_i \pm \frac{1}{K}, \ldots x_m],t)
+\Delta_{i}^{\pm}f([x_1,\ldots,x_m],t) = f([x_1,\ldots,x_i \pm \frac{1}{K}, \ldots x_m],t)
 \end{equation}
 In terms of these new variables, \eqref{nD_M_eqn} becomes
 \begin{equation}
@@ -381,9 +381,17 @@ A_{i}^{\pm}(\mathbf{x}) = b^{(K)}_i(\mathbf{x})\pm d^{(K)}_i(\mathbf{x})
 Equation \eqref{nD_FPE} is an $m$-dimensional Fokker-Planck equation, and corresponds to the $m$-dimensional It\^o process
 \begin{equation}
 \label{nD_Ito_SDE}
-    d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{B}_t
+d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{B}_t
 \end{equation}
-where $\mathbf{A^-}(\mathbf{X}_t)$ is the $m$ dimensional `drift vector' with $i$\textsuperscript{th} element $ = A^{-}_{i}(\mathbf{X}_t)$. $\mathbf{D}(\mathbf{X}_t)$ is the $m \times m$ `diffusion matrix' and satisfies $\mathbf{D}\mathbf{D}^{\mathrm{T}} = \mathbf{A^+}(\mathbf{X}_t)$, where $\mathbf{A^+}(\mathbf{X}_t))$ is an $m$ dimensional vector with $i$\textsuperscript{th} element $ = A^{+}_{i}(\mathbf{X}_t)$. Finally, $\mathbf{B}_t$ is the $m$-dimensional Brownian motion and can be thought of as a vector of independent one-dimensional Brownian motions (which have been defined in \ref{intro_SDE}). This is the `mesoscopic' description of our process.
+where $\mathbf{A^-}(\mathbf{X}_t)$ is the $m$ dimensional `drift vector' with $i$\textsuperscript{th} element $ = A^{-}_{i}(\mathbf{X}_t)$. $\mathbf{D}(\mathbf{X}_t)$ is the $m \times m$ `diffusion matrix' with $ij$th element $\left(\mathbf{D}(\mathbf{X}_t)\right)_{ij} = \delta_{ij}\left(A^{+}_{i}A^{+}_{j}\right)^{\frac{1}{4}}$, where $\delta_{ij}$ is the Kronecker delta symbol, defined by
+\begin{equation*}
+\delta_{ij} = 
+\begin{cases}
+1 & i=j\\
+0 & i\neq j
+\end{cases}
+\end{equation*}
+Finally, $\mathbf{B}_t$ is the $m$-dimensional Brownian motion and can be thought of as a vector of independent one-dimensional Brownian motions (which have been defined in \ref{intro_SDE}). This is the `mesoscopic' description of our process.
 
 \subsection{The deterministic limit}
 Once again, we can take $K \to \infty$ in \eqref{nD_Ito_SDE} to obtain a deterministic expression. Here, the expression reads
@@ -393,18 +401,18 @@ Once again, we can take $K \to \infty$ in \eqref{nD_Ito_SDE} to obtain a determi
 \end{equation}
 where the $m$-dimensional vector-valued functions $\mathbf{b}^{(K)}(\mathbf{x})$ and $\mathbf{d}^{(K)}(\mathbf{x})$ on the RHS are defined as having $i$\textsuperscript{th} element $b^{(K)}_i(\mathbf{x})$ and $d^{(K)}_i(\mathbf{x})$ respectively. This deterministic limit is sometimes called the `macroscopic' description.
 \subsubsection{Some familiar faces: Replicator-mutator, quasispecies equation, and the Price equation}
-In this multi-dimensional case, the macroscopic description amounts to a description of evolutionary game theory under mild assumptions on the birth and death rate vectors. We show this below, adopting some methods first outlined by \citep{page_unifying_2002}. Let us assume that we can write the birth and death rate vectors as
+In this multi-dimensional case, the macroscopic description amounts to a description of evolutionary game theory under mild assumptions on the birth and death rate vectors. We show this below, using methods first outlined by \citep{page_unifying_2002}. Let us assume that we can write the birth and death rate vectors as
 \begin{equation}
 \label{nD_functional_forms_for_replicator}
 \begin{aligned}
-    b^{(K)}_i(\mathbf{x}) &= \mu Q_i(\mathbf{x}) + b^{(\textrm{int})}_{i}(\mathbf{x})x_i\\
-    d^{(K)}_i(\mathbf{x}) &= d^{(\textrm{int})}_i(\mathbf{x})x_i
+b^{(K)}_i(\mathbf{x}) &= \mu Q_i(\mathbf{x}) + b^{(\textrm{int})}_{i}(\mathbf{x})x_i\\
+d^{(K)}_i(\mathbf{x}) &= d^{(\textrm{int})}_i(\mathbf{x})x_i
 \end{aligned}
 \end{equation}
 where $\mu \geq 0$ is a constant describing the mutation rate, $Q_i(\mathbf{x})$ is a real-valued function that describes the birth rate of type $i$ individuals due to mutations in the population $\mathbf{x}$, and $b^{(\textrm{int})}_{i}(\mathbf{x})$ and $d^{(\textrm{int})}_{i}(\mathbf{x})$ are real-valued functions that respectively describe the per-capita birth and death rate of type $i$ individuals due to ecological interactions. Our assumptions of the functional forms \eqref{nD_functional_forms_for_replicator} thus amount to saying that birth and death rates can be separated into mutational and non-mutational components, and furthermore that the density dependence of the birth and death rates due to non-mutational effects is in a form that allows us to write down per-capita birth and death rates. Plugging these definitions into \eqref{nD_det_limit} and writing it down component-wise, we obtain the equation
 \begin{equation}
 \label{nD_det_limit_fitess_defn}
-    \frac{dx_i}{dt} = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
+\frac{dx_i}{dt} = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
 \end{equation}
 Where for each $i$, we have defined the real-valued function $w_i(\mathbf{x}) \coloneqq b^{(\textrm{int})}_{i}(\mathbf{x}) - d^{(\textrm{int})}_i(\mathbf{x})$. Setting the mutation rate $\mu \to 0$ in equation \eqref{nD_det_limit_fitess_defn} makes it clear that the quantity $w_i(\mathbf{x})x_i$ describes the growth rate of type $i$ individuals in the population due to all processes other than mutation. The quantity $w_i(\mathbf{x})$ thus describes the per-capita growth rate of type $i$ individuals in a population $\mathbf{x}$, and is sometimes called the `Malthusian fitness' of type $i$. It is notable that the fitness of a type depends on the state of the population as a whole (\textit{i.e.} $\mathbf{x}$) and is thus frequency-dependent.\\
 \\
@@ -412,8 +420,8 @@ Given a state $\mathbf{x}(t)$, we can now compute the total scaled population si
 \begin{equation}
 \label{nD_tot_pop_and_prop_inds_defn}
 \begin{aligned}
-    N_{K}(t) &\coloneqq \sum\limits_{i=1}^{m}x_i(t)\\
-    p_i(t) &\coloneqq \frac{x_i(t)}{N_{K}(t)}
+N_{K}(t) &\coloneqq \sum\limits_{i=1}^{m}x_i(t)\\
+p_i(t) &\coloneqq \frac{x_i(t)}{N_{K}(t)}
 \end{aligned}
 \end{equation}
 We can also define the mean of any type level quantity $f$ in the population as
@@ -430,18 +438,18 @@ We can now compute the rate of change of $p_i$, the proportion of type $i$ indiv
 \end{align}
 Substituting \eqref{nD_det_limit_fitess_defn} into \eqref{nD_replicator_intermediate_1}, we now obtain
 \begin{align*}
-  \frac{dp_i}{dt} &=  \frac{1}{N_{K}(t)}\left[w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right] - \frac{x_i}{N_{K}^2(t)}\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})x_j + \mu Q_j(\mathbf{x})\right]\\
-  &= w_i(\mathbf{x})p_i + \frac{\mu}{N_K}Q_i(\mathbf{x}) - p_i\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})p_j + \frac{\mu}{N_K}Q_j(\mathbf{x})\right]
+\frac{dp_i}{dt} &=  \frac{1}{N_{K}(t)}\left[w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right] - \frac{x_i}{N_{K}^2(t)}\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})x_j + \mu Q_j(\mathbf{x})\right]\\
+&= w_i(\mathbf{x})p_i + \frac{\mu}{N_K}Q_i(\mathbf{x}) - p_i\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})p_j + \frac{\mu}{N_K}Q_j(\mathbf{x})\right]
 \end{align*}
 Where we have used the definition of $p_i$ from \eqref{nD_tot_pop_and_prop_inds_defn}. Now using the definition of mean fitness from \eqref{nD_mean} and rearranging terms, we obtain
 \begin{equation}
 \label{nD_replicator_mutator}
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dp_i}{dt} = (w_i(\mathbf{x}) - \overline{w})p_i + \mu\left[Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right]}
 \end{equation}
-Where we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. The first term of \eqref{nD_replicator_mutator} describes changes due to faithful (non-mutational) replication, and the second describes changes due to mutation. For this reason, equation \eqref{nD_replicator_mutator} is called the \emph{replicator-mutator equation} in the evolutionary game theory literature, where the individual `types' are interpreted to be pure strategies. If in addition, each $w_i(\mathbf{x})$ is linear in $\mathbf{x}$, meaning we can write $w_i(\mathbf{x}) = \sum_{j}a_{ij}x_j$ for some set of constants $a_{ij}$, then we get the replicator-mutator equation for matrix games, and the constants $a_{ij}$ form the `payoff matrix'. As is well-known, the replicator equation (without mutation) for matrix games with $m$ pure strategies is equivalent to the generalized Lotka-Volterra equations for a community with $m-1$ species \citep{hofbauer_evolutionary_1998}, providing the connection to community ecology.  Equation \eqref{nD_replicator_mutator} is also equivalent to Eigen's \emph{quasispecies equation} from molecular evolution \citep{page_unifying_2002} if each `type' is interpreted as a genetic sequence and each $w_i(\mathbf{x})$ is a constant function\footnote{Mutational effects are often additionally assumed to act through direct `transmission probabilities' of mutating from one type to another. This means that we can write $Q_i(\mathbf{p}) = \sum\limits_{j\neq i}Q_{ij}p_j$, where $Q_{ij} \geq0$ is a constant describing the probability of a $j \to i$ mutation (conditioned on the occurrence of a mutation). Substituting this into \eqref{nD_replicator_mutator} yields an equation in terms of `$Q$-matrices' or `mutation matrices' that may be more familiar to some biologists.}. We can now calculate how the mean of any `trait level' quantity $f$, defined as $f_i$ for the $i$\textsuperscript{th} trait, changes in the population (For example, setting $f_i = x_i$ gives us the mean trait value in the population). Multiplying both sides of equation \eqref{nD_replicator_mutator} by $f_i$ and summing over all $i$, we obtain
+Where we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. The first term of \eqref{nD_replicator_mutator} describes changes due to faithful (non-mutational) replication, and the second describes changes due to mutation. For this reason, equation \eqref{nD_replicator_mutator} is called the \emph{replicator-mutator equation} in the evolutionary game theory literature, where the individual `types' are interpreted to be pure strategies. If in addition, each $w_i(\mathbf{x})$ is linear in $\mathbf{x}$, meaning we can write $w_i(\mathbf{x}) = \sum_{j}a_{ij}x_j$ for some set of constants $a_{ij}$, then we get the replicator-mutator equation for matrix games, and the constants $a_{ij}$ form the `payoff matrix'. As is well-known, the replicator equation (without mutation) for matrix games with $m$ pure strategies is equivalent to the generalized Lotka-Volterra equations for a community with $m-1$ species\citep{hofbauer_evolutionary_1998}, providing the connection to community ecology.  Equation \eqref{nD_replicator_mutator} is also equivalent to Eigen's \emph{quasispecies equation} from molecular evolution if each `type' is interpreted as a genetic sequence and each $w_i(\mathbf{x})$ is a constant function\footnote{Mutational effects are often additionally assumed to act through direct `transmission probabilities' of mutating from one type to another. This means that we can write $Q_i(\mathbf{p}) = \sum\limits_{j\neq i}Q_{ij}p_j$, where $Q_{ij} \geq0$ is a constant describing the probability of a $j \to i$ mutation (conditioned on the occurrence of a mutation). Substituting this into \eqref{nD_replicator_mutator} yields an equation in terms of `$Q$-matrices' or `mutation matrices' that may be more familiar to some biologists.}. We can now calculate how the mean of any `trait level' quantity $f$, defined as $f_i$ for the $i$\textsuperscript{th} trait, changes in the population (For example, setting $f_i = x_i$ gives us the mean trait value in the population). Multiplying both sides of equation \eqref{nD_replicator_mutator} by $f_i$ and summing over all $i$, we obtain
 \begin{align*}
-    \frac{d}{dt}\left(\sum\limits_{i=1}^{m}f_ip_i\right) &= \sum\limits_{i=1}^{m}f_iw_i(\mathbf{x})p_i - \overline{w}\sum\limits_{i=1}^{m}f_ip_i + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\sum\limits_{i=1}^{m}p_if_i\right)\right]\\
-    \Rightarrow \frac{d\overline{f}}{dt} &= \overline{wf}-(\overline{w})(\overline{f}) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right]
+\frac{d}{dt}\left(\sum\limits_{i=1}^{m}f_ip_i\right) &= \sum\limits_{i=1}^{m}f_iw_i(\mathbf{x})p_i - \overline{w}\sum\limits_{i=1}^{m}f_ip_i + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\sum\limits_{i=1}^{m}p_if_i\right)\right]\\
+\Rightarrow \frac{d\overline{f}}{dt} &= \overline{wf}-(\overline{w})(\overline{f}) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right]
 \end{align*}
 Using the definition of statistical covariance of two variables $X$ and $Y$ as $\mathrm{Cov}(X,Y) = \overline{XY} - (\overline{X})(\overline{Y})$, we obtain
 \begin{equation}
@@ -450,9 +458,24 @@ Using the definition of statistical covariance of two variables $X$ and $Y$ as $
 \end{equation}
 The first term of the RHS describes the statistical covariance between the quantity $f$ and the fitness $w$. The second term describes `transmission bias' due to mutational effects - The first summation is the `inflow' of $f$ due to mutations, and the second is the `outflow'. Equation \eqref{nD_Price} is thus a version of the Price equation.
 
+\subsection{Stochastic trait frequency dynamics for finite populations}
+
+Following ideas similar in spirit to \citep{mcleod_social_2019}, we can also use \eqref{nD_Ito_SDE} to write down stochastic equations for $p_i(t)$, the frequency of type $i$ individuals in the population to contrast with the replicator-mutator equation \eqref{nD_replicator_mutator} derived above. In appendix \ref{App_density_to_freq}, we show that we can use It\^{o}'s lemma to write  down a general stochastic equation for the frequencies of each type in the population.  Unlike \cite{mcleod_social_2019}, we make no assumptions about separations of time scales or strength of selection and are able to present an entirely general calculation. Letting $\tau_i(\mathbf{x}) = b^{(\textrm{int})}_{i}(\mathbf{x}) + d^{(\textrm{int})}_i(\mathbf{x})$ be the \emph{per-capita turnover rate} of the $i\textsuperscript{th}$ type and denoting $\overline{\tau} = \sum_i p_i\tau_i$, we show in appendix \ref{App_density_to_freq} that when the birth and death rates are defined by \eqref{nD_functional_forms_for_replicator}, then the frequency of the $i\textsuperscript{th}$ type in the population $\mathbf{X}_t$, changes according to the equation:
+\begin{equation}
+\label{nD_eqn_for_frequencies}
+\begin{aligned}
+dp_i(t) &= \underbrace{\left[(w_i(\mathbf{x}) - \overline{w})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt}_{\substack{\text{Infinite population predictions} \\ \text{(Replicator-mutator, Price, etc.)}}}\\
+&- \frac{1}{K}\underbrace{\frac{1}{N(t)}\left[(\tau_i(\mathbf{x}) - \overline{\tau})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt}_{\substack{\text{Directional finite population effects}\\\text{due to differential turnover rates}}}\\
+&+ \frac{1}{\sqrt{K}}\underbrace{\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]}_{\substack{\text{Non-directional finite population effects}\\\text{due to stochastic fluctuations}}}
+\end{aligned}
+\end{equation}
+where $B^{(1)}_t,B^{(2)}_t, \ldots, B^{(m)}_t$ are $m$ independent one-dimensional standard Brownian motion processes. The first term in this expression is the same as equation \eqref{nD_replicator_mutator} and describes directional changes in the population composition due to `classical' evolutionary forces such as selection and mutation. As we can see, the replicator-mutator equation is generically satisfied for all birth-death processes that are in the (very general) functional forms \eqref{nD_functional_forms_for_replicator}. The second term is an additional directional force on population composition that acts exactly analogously to the replicator equation but in the opposite direction (A higher relative $\tau_i$ leads to a lower frequency), and furthermore, is particular to finite populations. This term describes a biasing effect due to differential turnover rates and can intuitively be understood in the following sense: If a type $i$ has a higher $\tau_i$, it experiences greater turnover due to a generally higher birth and death rate and thus greater demographic stochasticity. Types with a higher $\tau_i$ thus tend to be eliminated by a stochastic analog of selection because they experience more chance events (births and deaths) in a given time period (notice the minus sign before the second term in \eqref{nD_eqn_for_frequencies}). This effect is less visible if the total population size is higher because larger populations generally experience less stochasticity, and this is reflected in the $1/N$ factor in this term. This stochastic analog of selection for reduced turnover rates is the force responsible for the `reversal of the direction of deterministic selection' observed in previous studies \citep{constable_demographic_2016, mcleod_social_2019} and is an effect that is only seen in finite populations. Note that types that tend to increase the \emph{total} population size (such as altruists in evolutionary theory and mutualists in ecological communities) experience a smaller negative effect due to differential turnover rates than types that do not facilitate such an increase (such as cheaters and highly competitive species), which could explain why mutualists and cooperators routinely persist for long periods in finite population models despite extinction being predicted in infinite population models. The fact that the entire term is multiplied by $(KN(t))^{-1}$, however, suggests that the effect of this force is weak for medium to large populations, which explains why the aforementioned persistence of cooperators is often only observed in restrictive sounding conditions such as quasi-neutrality, rapid attraction to a slow manifold, or a weak selection limit. In all three of these cases, the first term on the RHS of \eqref{nD_eqn_for_frequencies} becomes identically 0 and therefore no longer contributes to the total dynamics, thus revealing the effects of differential turnover rate.\\
+Finally, the last term describes non-directional stochastic effects due to fluctuations and has a `spreading effect'. To the highest order in $\sqrt{K}$, the effect of these fluctuations can be described through the weak noise approximation, as we explain below. However, the $1/K$ factor in the second term of \eqref{nD_eqn_for_frequencies} means that the effect of differential turnover rates disappears in this weak noise approximation  (and also in other such approximate treatments, such as the Chemical langevin).
+
+
 \subsection{Stochastic fluctuations and the weak noise approximation}
 
-Let the deterministic trajectory obtained by solving \eqref{nD_det_limit} be given by $\mathbf{a}(t)$.  We can once again track 
+If the noise is \emph{weak}, we can go a little further, as in the one-dimensional case. Let the deterministic trajectory obtained by solving \eqref{nD_det_limit} be given by $\mathbf{a}(t)$.  We can once again track 
 stochastic fluctuations from the deterministic trajectory by introducing the new variables
 \begin{equation}
 \begin{aligned}
@@ -504,14 +527,6 @@ where $\partial \Omega$ is the boundary of $\Omega$, $dS$ is the surface element
 \begin{equation*}
 \frac{\partial y_i ^{n}}{\partial y_j} = \delta_{ij}ny_i^{n-1}
 \end{equation*}
-where $\delta_{ij}$ is the Kronecker delta symbol, defined by
-\begin{equation*}
-\delta_{ij} = 
-\begin{cases}
-1 & i=j\\
-0 & i\neq j
-\end{cases}
-\end{equation*}
 Using this relation and then using integration by parts on the RHS of \eqref{nD_intermediate_for_moments} (once for the first term and twice for the second term), we obtain the considerably simpler expression
 \begin{align}
 \frac{d}{dt}\mathbb{E}[y_i^n] &= n\int\limits_{\mathbb{R}^m} y_i^{n-1}D_{i}P(\mathbf{y},t)d\mathbf{y} + \frac{n(n-1)}{2}A_i^+(\mathbf{a}(t))\int\limits_{\mathbb{R}^m} y_i^{n-2}P(\mathbf{y},t)d\mathbf{y}\\
@@ -532,11 +547,11 @@ and thus, from \eqref{nD_WNA_taylor_term}, we can calculate the directional deri
 D_i &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial A^{-}_i(\mathbf{x})}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
 &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial}{\partial x_k}\left( w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right)\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
 &= \sum\limits_{k=1}^{m} y_k\left(a_i\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right) + y_iw_i(\mathbf{a}) + \mu\sum\limits_{k=1}^{m} y_k\left(\frac{\partial Q_i}{\partial x_k}(\mathbf{x})\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
-&= y_iw_i(\mathbf{a}) + a_iD_{\mathbf{y}}(w_i(\mathbf{a})) + \mu D_{\mathbf{y}}(Q_i(\mathbf{a}))
+&= y_iw_i(\mathbf{a}) + a_iD_{\mathbf{y}}(w_i(\mathbf{a})) + \mu D_{\mathbf{y}}(Q_i(\mathbf{a}))\label{nD_WNA_directional_derivative_for_replicator_eqns}
 \end{align}
 Using this in \eqref{nD_moment_eqn_mean}, we see that the expected change of a fluctuation in the density of type $i$ individuals evolves as:
 \begin{equation}
-\label{nD_WNA_directional_derivative_for_replicator_eqns}
+\label{nD_moment_eqn_mean_replicator}
 \frac{d}{dt}\mathbb{E}[y_i] = \underbrace{w_i(\mathbf{a})\mathbb{E}[y_i]}_{\substack{\text{Current fitness of type $i$} \\ \text{at deterministic trajectory $\mathbf{a}$} \\ \text{(scaled by expected density $\mathbb{E}[y_i]$)}}} + \underbrace{a_i\mathbb{E}[D_{\mathbf{y}}(w_i(\mathbf{a}))]}_{\substack{\text{Expected change in fitness} \\ \text{ of type $i$ in going from $\mathbf{a}$ to $\mathbf{y}$} \\ \text{(scaled by deterministic density $a_i$)}}} + \underbrace{\mu\mathbb{E}[D_{\mathbf{y}}(Q_i(\mathbf{a}))]}_{\substack{\text{Expected effect of} \\ \text{mutations}}}
 \end{equation}
 

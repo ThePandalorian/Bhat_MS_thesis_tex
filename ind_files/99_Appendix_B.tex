@@ -1,0 +1,81 @@
+We first recall the version of the multi-dimensional It\^{o}'s lemma that will be relevant to us. Consider an $m$-dimensional real It\^{o} process $\mathbf{X}_t$ given by the solution to
+\begin{equation*}
+d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t)dt + \boldsymbol{\sigma}(\mathbf{X}_t)d\mathbf{B}_t
+\end{equation*}
+where $\boldsymbol{\mu}: \mathbb{R}^m \to \mathbb{R}^m$ is the `drift vector' and $\boldsymbol{\sigma}: \mathbb{R}^{m} \to \mathbb{R}^{m \times m}$ is the `diffusion matrix'. Let $f: \mathbb{R}^m \to \mathbb{R}$ be an arbitrary $C^2$ function. Then, It\^{o}'s lemma (\cite{oksendal_stochastic_1998}, Section 4.2) states that  the stochastic process $f(\mathbf{X}_t)$ must satisfy:
+\begin{equation}
+\label{nD_Ito_lemma}
+df(\mathbf{X}_t) = \left[\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\mu} + \frac{1}{2}\mathrm{Tr}[\boldsymbol{\sigma}^{\mathrm{T}}(H_{\mathbf{X}}f)\boldsymbol{\sigma}]\right]dt + \left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\sigma}d\mathbf{B}_t
+\end{equation}
+where $\mathrm{Tr}[\cdot]$ denotes the trace of a matrix, $\left(\cdot\right)^{\mathrm{T}}$ denotes the transpose, and we have suppressed the $\mathbf{X}_t$ dependence of $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ to reduce clutter. Here, $\nabla_{\mathbf{X}}f$ is the $m$ dimensional \emph{gradient vector} of $f$ and $H_{\mathbf{X}}f$ is the $m \times m$ \emph{Hessian matrix} of $f$, respectively defined for $f(x_1,\ldots,x_m)$ as:
+\begin{align*}
+\left(\nabla_{\mathbf{x}} f\right)_j &= \frac{\partial f}{\partial x_j}\\
+\left(H_{\mathbf{x}} f\right)_{jk} &= \frac{\partial^2 f}{\partial x_j \partial x_k } 
+\end{align*}
+In our case, we have the It\^{o} process given by \eqref{nD_Ito_SDE}, which defines how the density of each type of individual changes over time. We thus have $\boldsymbol{\mu}(\mathbf{X}_t) = \mathbf{A}^{-}(\mathbf{X}_t)$ and $\boldsymbol{\sigma}(\mathbf{X}_t) = \mathbf{D}(\mathbf{X}_t)/\sqrt{K}$.  For each fixed $i \in \{1,2,\ldots,m\}$, let us define a scalar function $f_i: \mathbb{R}^m \to \mathbb{R}$ as
+\begin{equation*}
+f_i(\mathbf{x}) = \frac{x_i}{\sum\limits_{j=1}^{m}x_j}
+\end{equation*}
+Thus, $f_i(\mathbf{X}_t)$ gives us the frequency of type $i$ individuals when the population is described by the vector $\mathbf{X}_t$. We wish to use It\^{o}'s lemma \eqref{nD_Ito_lemma} to describe the change in this quantity. Let us, therefore, calculate each term in \eqref{nD_Ito_lemma}. We have the gradient:
+\begin{align}
+\left(\nabla_{\mathbf{x}} f_i\right)_j &= \frac{\partial }{\partial x_j}\left(\frac{x_i}{\sum\limits_{k=1}^{m}x_k}\right)\nonumber\\
+&= \left(\frac{1}{N}\frac{\partial x_i}{\partial x_j} 
+- \frac{x_i}{N^2}\sum\limits_{k=1}^{m}\frac{\partial x_k}{\partial x_j}\right)\nonumber\\
+&= \frac{1}{N}\left(\delta_{ij}-p_i\right)\label{nD_jacobian_for_ito}
+\end{align}
+where we have defined $N = \sum_i x_i$ to represent the total population size to reduce clutter and used the fact that $\frac{\partial x_j}{\partial x_k} = \delta_{jk}$.
+Similarly, for the Hessian, we have:
+\begin{align}
+\left(H_{\mathbf{x}} f_i\right)_{jk} &= \frac{\partial^2 }{\partial x_j \partial x_k}\left( \frac{x_i}{\sum\limits_{l=1}^{m}x_l}\right)\nonumber\\
+&= \frac{\partial}{\partial x_j}\left(\frac{\delta_{ik}}{N}-\frac{x_i}{N^2}\right)\nonumber\\
+&= \frac{1}{N^2}\left(2p_i - \delta_{ij}-\delta_{ik}\right)\label{nD_hessian_for_ito}
+\end{align}
+Thus, for the first term of \eqref{nD_Ito_lemma}, we have:
+\begin{align}
+\left(\nabla_{\mathbf{X}}f_i\right)^{\mathrm{T}}\boldsymbol{\mathbf{A}^{-}} &= \sum\limits_{j=1}^{m}\left(\left(\nabla_{\mathbf{x}} f_i\right)_j\right)A^{-}_{j} \nonumber\\
+&= \frac{1}{N}\sum\limits_{j=1}^{m}\left(\delta_{ij}-p_i\right)A^{-}_{j}\nonumber\\
+&= \frac{1}{N}\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)\label{nD_for_Ito_first_term}
+\end{align}
+If the birth and death rates take the form of \eqref{nD_functional_forms_for_replicator}, then it is easy to see using \eqref{nD_det_limit_fitess_defn} that equation \eqref{nD_for_Ito_first_term} is exactly the RHS of \eqref{nD_replicator_intermediate_1}. Thus, when the birth and death rates take the form of \eqref{nD_functional_forms_for_replicator}, then \eqref{nD_for_Ito_first_term} describes the deterministic component of the dynamics as described by the replicator-mutator equation, Price equation, etc. in the infinite population limit. These are the effects of selection and mutation at the infinite population limit. However, the finiteness of the population adds a second term to these dynamics, described by the second term that multiplies $dt$ in \eqref{nD_Ito_lemma}. To calculate it, we first calculate:
+\begin{align}
+\frac{1}{\sqrt{K}}\left(H_{\mathbf{x}} f_i \mathbf{D}\right)_{jk} &= \frac{1}{\sqrt{K}}\sum\limits_{l=1}^{m} \left(H_{\mathbf{x}} f_i \right)_{jl}\left(\mathbf{D}\right)_{lk}\nonumber\\
+&= \frac{1}{\sqrt{K}N^2}\sum\limits_{l=1}^{m}\left(2p_i - \delta_{ij} - \delta_{il}\right)\delta_{lk}\left(A^{+}_{l}A^{+}_{k}\right)^{\frac{1}{4}}\\
+&=  \frac{1}{\sqrt{K}N^2}\left(\left(2p_i -\delta_{ij}\right)(A^{+}_{k})^{\frac{1}{2}} -\delta_{ik}\left(A^{+}_{i}A^{+}_{k}\right)^{\frac{1}{4}}\right)\\
+&= \frac{1}{\sqrt{K}N^2}\left(2p_i -\delta_{ij} -\delta_{ik}\right)(A^{+}_{k})^{\frac{1}{2}}
+\end{align}
+and thus:
+\begin{align}
+\frac{1}{K}\left(\mathbf{D}^{\mathrm{T}} H_{\mathbf{x}} f_i \mathbf{D}\right)_{lk} &=\frac{1}{K}\sum\limits_{j=1}^{m}\left(\mathbf{D}^{\mathrm{T}}\right)_{lj}\left(H_{\mathbf{x}} f_i \mathbf{D}\right)_{jk}\nonumber\\
+&=  \frac{1}{KN^2}\sum\limits_{j=1}^{m}\delta_{lj}\left(A^{+}_{l}A^{+}_{j}\right)^{\frac{1}{4}}(A^{+}_{k})^{\frac{1}{2}}\left(2p_i -\delta_{ij} -\delta_{ik}\right)\\
+&=  \frac{1}{KN^2}(A^{+}_{k})^{\frac{1}{2}}\left(2p_i(A^{+}_{l})^{\frac{1}{2}} - (A^{+}_{i})^{\frac{1}{2}}\delta_{il} - (A^{+}_{l})^{\frac{1}{2}}\delta_{ik}\right)
+\end{align}
+Using this, we see that the trace of this matrix is given by:
+\begin{align}
+\frac{1}{K}\mathrm{Tr}[\mathbf{D}^{\mathrm{T}} H_{\mathbf{x}} f_i \mathbf{D}] &= \frac{1}{K}\sum\limits_{k=1}^{m}\left(\mathbf{D}^{\mathrm{T}} H_{\mathbf{x}} f_i \mathbf{D}\right)_{kk}\nonumber\\
+&= \frac{1}{KN^2}\sum\limits_{k=1}^{m}\left(2p_i(A^{+}_{k}A^{+}_{k})^{\frac{1}{2}} - (A^{+}_{i}A^{+}_{k})^{\frac{1}{2}}\delta_{ik} - (A^{+}_{k}A^{+}_{k})^{\frac{1}{2}}\delta_{ik}\right)\\
+&= \frac{1}{KN^2}\left(2p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right) - 2A^{+}_{i}\right)
+\end{align}
+and thus, the second term multiplying $dt$ in \eqref{nD_Ito_lemma} is given by:
+\begin{equation}
+\frac{1}{2K}\mathrm{Tr}[\mathbf{D}^{\mathrm{T}} H_{\mathbf{x}} f_i \mathbf{D}] =  \frac{-1}{KN^2}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)\label{nD_for_Ito_second_term}
+\end{equation}
+Finally, using \eqref{nD_jacobian_for_ito} and denoting $d\mathbf{B}_t = [dB^{(1)}_t,dB^{(2)}_t, \ldots, dB^{(m)}_t]^{\mathrm{T}}$ where each $dB^{(j)}_t$ is an independent one dimensional Wiener process, we have:
+\begin{align}
+\left(\mathbf{D}d\mathbf{B}_t\right)_j &= \sum\limits_{k=1}^{m}\mathbf{D}_{jk}dB^{(k)}_t\nonumber\\
+&= \sum\limits_{k=1}^{m}\delta_{jk}\left(A^{+}_{j}A^{+}_{k}\right)^{\frac{1}{4}}dB^{(k)}_t\\
+&= \left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t
+\end{align}
+Thus, we see that the last term on the RHS of \eqref{nD_Ito_lemma} is given by
+\begin{align}
+\frac{1}{\sqrt{K}}\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\mathbf{D}d\mathbf{B}_t &= \frac{1}{\sqrt{K}}\sum\limits_{j=1}^{m}\left(\nabla_{\mathbf{x}} f_i\right)_j\left(\mathbf{D}d\mathbf{B}_t\right)_j\nonumber\\
+&=  \frac{1}{N\sqrt{K}}\sum\limits_{j=1}^{m}\left(\delta_{ij}-p_i\right)\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\\
+&= \frac{1}{N\sqrt{K}}\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\label{nD_for_Ito_third_term}
+\end{align}
+Putting equations \eqref{nD_for_Ito_first_term}, \eqref{nD_for_Ito_second_term} and \eqref{nD_for_Ito_third_term} into \eqref{nD_Ito_lemma}, we see that $p_i = f_i(\mathbf{X})_t$, the frequency of the $i\textsuperscript{th}$ type in the population $\mathbf{X}_t$, changes according to the equation:
+\begin{equation}
+\begin{aligned}
+N(t) dp_i &= \underbrace{\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)dt}_{\text{$K \to \infty$ prediction}} - \frac{1}{K}\underbrace{\frac{1}{N(t)}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)dt}_{\substack{\text{Directional finite size effects}\\\text{due to differential turnover rates}}}\\
+&+ \frac{1}{\sqrt{K}}\underbrace{\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]}_{\substack{\text{Non-directional finite size effects}\\\text{due to stochastic fluctuations}}}
+\end{aligned}
+\end{equation}
+Substituting the functional forms given by \eqref{nD_functional_forms_for_replicator} and repeating calculations for the $A^{+}_i$ terms exactly analogous to those done in going from \eqref{nD_replicator_intermediate_1} to \eqref{nD_replicator_mutator} now yields equation \eqref{nD_eqn_for_frequencies} in the main text.

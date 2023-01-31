@@ -1,4 +1,3 @@
-\section*{Appendix A: From It\^{o} to Fokker-Planck}\label{sec_Ito_to_FPE}
 Here, I present a simple (informal) derivation of the Fokker-Planck equation (FPE) for a one-dimensional It\^{o} process. The result for the multi-dimensional case follows from the same logic but is more notationally cumbersome.
 \\
 Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dB_t$ on a filtered probability space $\Omega \subseteq \mathbb{R}$ with probability measure $\mathbb{P}$ such that $\mathbb{P}(\cdot) \equiv 0$ on $\partial \Omega$ and $\mathbb{P} \ll m$, where $m$ is the Lebesgue measure. The latter requirement allows us to use the Radon-Nikodym theorem to write $\int \ \cdot \ d\mathbb{P} = \int \ \cdot \ P(x,t)dx$, where $P(x,t)$ is a `probability density function' defined at every point in $\Omega \times [0,\infty)$. Now, Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s lemma, we have:
