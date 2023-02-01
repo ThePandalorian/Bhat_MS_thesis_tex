@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.12)  31 JAN 2023 19:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.12)  1 FEB 2023 11:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1821,6 +1821,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [48]
+Overfull \vbox (1.69588pt too high) has occurred while \output is active []
+
+
 [49]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1837,7 +1840,7 @@ ts|
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [53]
-<Media/3.3_dirac_deltas.png, id=977, 523.50581pt x 536.2434pt>
+<Media/3.3_dirac_deltas.png, id=978, 523.50581pt x 536.2434pt>
 File: Media/3.3_dirac_deltas.png Graphic file (type png)
 <use Media/3.3_dirac_deltas.png>
 Package pdftex.def Info: Media/3.3_dirac_deltas.png  used on input line 587.
@@ -1956,7 +1959,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [72]
-<Media/4.1_stoch_logistic_timeseries.png, id=1166, 919.2744pt x 281.853pt>
+<Media/4.1_stoch_logistic_timeseries.png, id=1167, 919.2744pt x 281.853pt>
 File: Media/4.1_stoch_logistic_timeseries.png Graphic file (type png)
 <use Media/4.1_stoch_logistic_timeseries.png>
 Package pdftex.def Info: Media/4.1_stoch_logistic_timeseries.png  used on input
@@ -1964,7 +1967,7 @@ Package pdftex.def Info: Media/4.1_stoch_logistic_timeseries.png  used on input
 (pdftex.def)             Requested size: 469.75502pt x 144.03127pt.
 
 [73 <./Media/4.1_stoch_logistic_timeseries.png>]
-<Media/4.2_stoch_logistic_distributions.png, id=1198, 918.84077pt x 504.4446pt>
+<Media/4.2_stoch_logistic_distributions.png, id=1199, 918.84077pt x 504.4446pt>
 
 File: Media/4.2_stoch_logistic_distributions.png Graphic file (type png)
 <use Media/4.2_stoch_logistic_distributions.png>
@@ -1999,7 +2002,7 @@ Overfull \hbox (46.9748pt too wide) detected at line 138
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [78]
-<Media/4.3_fourier_fig.png, id=1269, 443.19577pt x 230.2703pt>
+<Media/4.3_fourier_fig.png, id=1270, 443.19577pt x 230.2703pt>
 File: Media/4.3_fourier_fig.png Graphic file (type png)
 <use Media/4.3_fourier_fig.png>
 Package pdftex.def Info: Media/4.3_fourier_fig.png  used on input line 191.
@@ -2063,10 +2066,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [90]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [91])
+ [91]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [92]
+ [92])
 [93] [94
 
 ]
@@ -2121,7 +2124,7 @@ share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/f
 onts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (121 pages, 4650571 bytes).
+Output written on main.pdf (121 pages, 4651410 bytes).
 PDF statistics:
  1778 PDF objects out of 2073 (max. 8388607)
  1588 compressed objects within 16 object streams
