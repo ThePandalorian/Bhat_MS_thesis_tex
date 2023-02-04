@@ -61,7 +61,9 @@ In this thesis, I show how ideas from statistical physics can be used to analyti
 \pagestyle{plain}
 \thesisfront
 \listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
 \listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
 
 \part{Background}
 
@@ -96,17 +98,22 @@ In this thesis, I show how ideas from statistical physics can be used to analyti
 \input{ind_files/06_unification_discussion}
 \chapter{Towards a stochastic evolutionary theory}\label{chap_stochasticity}
 \input{ind_files/07_stochastic_discussion}
-
 % \chapter{}
 % \input{ind_files/chapter_05}
 % \chapter{} <-- uncomment and add as required
 % \input{ind_files/chapter_06}
-\begin{appendices}
+
+%You need the below commands to elevate the appendix to 'Part' level in the TOC
+%from https://tex.stackexchange.com/a/286452
+\cleardoublepage
+\phantomsection
+\appendix
+\addcontentsline{toc}{part}{Appendices}
+
 \chapter{Deriving the Fokker-Planck equations for It\^{o} SDEs}\label{App_SDE_FPE}
 \input{ind_files/99_Appendix_A}
 \chapter{Deriving stochastic trait frequency dynamics using It\^{o}'s formula}\label{App_density_to_freq}
 \input{ind_files/99_Appendix_B}
-\end{appendices}
 
 \printbibliography[title=References]
 \end{document}

@@ -144,6 +144,7 @@
 and \MessageBreak consult the documentation for the\MessageBreak
 iiser-thesis class.}}%
      {\@nameuse{bd@tf@\bd@option}}}%
+ \addcontentsline{toc}{part}{Front Matter}
   \frontmatter
   \bgroup
   \pagestyle{empty}
@@ -161,10 +162,12 @@ iiser-thesis class.}}%
   \bd@optpage*{Acknowledgments}{\@acknowledgments}%
   \cleardoublepage
   \bd@abstract{\@thesisabstract}%
+  %\addcontentsline{toc}{chapter}{Abstract}
   \cleardoublepage
   \bd@optpage{Preface}{\@preface}%
   \cleardoublepage
   \tableofcontents
+  \addcontentsline{toc}{chapter}{Contents}
   \cleardoublepage
   \if@bd@lot{\listoftables\cleardoublepage}%
   \if@bd@lof{\listoffigures\cleardoublepage}%
@@ -282,7 +285,6 @@ iiser-thesis class.}}%
   \end{center}%
   \clearpage}
 \newenvironment{abstract}{%
-  \addcontentsline{toc}{chapter}{Abstract}
   \begin{singlespace}
     \thispagestyle{plain}
     \begin{center}
@@ -335,6 +337,7 @@ iiser-thesis class.}}%
 
 \newcommand{\declarationpage}{
 \thispagestyle{empty}
+%\addcontentsline{toc}{chapter}{Declaration}
 \begin{center}
 {\Huge{\bf Declaration}}
 \end{center}
