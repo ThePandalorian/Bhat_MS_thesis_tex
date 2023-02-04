@@ -1,17 +1,17 @@
-\section{Background and motivation}
-
 \epigraph{\justifying Somewhere [ ... ] between the specific that has no meaning and the general that has no content there must be, for each purpose and at each level of abstraction, an optimum degree of generality}{Kenneth Boulding}
+
+\section{Background and motivation}
 
 Raymond Pearl, one of the pioneers of mathematical ecology as a discipline, wrote in 1927 that ``What we want to know is how the biological forces of natality and mortality are so integrated and correlated in their action as to lead to a final result in size of population which follows this particular curve rather than some other one'' \citep{pearl_growth_1976}. Pearl realized 95 years ago that population dynamics must be ultimately explained by the mechanistic processes of birth and death. Today, there are mounting calls for more mechanistic models of evolution that are grounded in these fundamental processes of birth and death \citep{geritz_mathematical_2012,doebeli_towards_2017}. Ecologists also increasingly recognize that incorporating stochasticity is vital to developing more realistic ecological models \citep{hastings_transients_2004, coulson_skeletons_2004, boettiger_noise_2018, shoemaker_integrating_2020,schreiber_does_2022} and does more than `add noise' to deterministic expectations. Individual-based models, where ecological rules are specified at the level of the individual, are a powerful mathematical tool for mechanistic descriptions of stochastic population dynamics \citep{black_stochastic_2012}. Birth-death processes are a very general class of stochastic processes that can be used to capture a wide range of eco-evolutionary processes. `System-size expansions' and their subsequent analysis using the `weak noise approximation' are common tools for analyzing stochastic birth-death processes that are well-known in the statistical physics and applied mathematics communities \citep{gardiner_stochastic_2009}. However, these tools remain relatively underappreciated in ecology, despite being relatively easy to understand and extremely well-motivated in scenarios germane to ecology and evolution. Here, I present a formulation of population dynamics constructed from first principles grounded in birth-death processes. To facilitate readership by a broad audience, only passing familiarity with calculus (derivatives, integrals, Taylor expansions) and probability are assumed. Familiarity with stochastic calculus is helpful for some sections but is not required, and I provide a brief introduction below. I begin by introducing birth-death processes, SDEs, and the Fokker-Planck equation in a non-technical manner, and providing the intuition for system-size expansions and weak noise analysis in ecological systems. In section \ref{sec_1D_processes}, I show how fluctuating population size of populations of identical individuals can be tracked through a one-dimensional birth-death process. I introduce a description of the system via a `master equation', and then conduct a `system-size expansion' to obtain a Fokker-Planck equation for the system. Finally, I conduct a weak noise approximation to arrive at a linear Fokker-Planck equation which can be solved exactly using some stochastic calculus to arrive at a closed-form solution given by a time-dependent Ornstein-Uhlenbeck process. As an example, I illustrate the complete process for a stochastic version of the logistic equation. In section \ref{sec_nD_processes}, I present a multivariate process to describe the evolution of discretely varying traits, and, as before, illustrate the system size expansion and the weak noise approximation. Under mild assumptions, we show that the deterministic limit of this process is the well-known replicator-mutator equation (or equivalently, Eigen's quasispecies equation), thus establishing the microscopic basis of well-known equations in evolutionary game theory. I also show that the mean value of the trait in the population changes according to the Price equation in the deterministic limit. Section \ref{sec_infD_processes} introduces a function-valued process to model the evolution of quantitative traits such as body size, which can take on uncountably many values. This function-valued process can then also be analyzed via a system-size approximation to arrive at a `functional' Fokker-Planck equation, in terms of functional derivatives. Under mild assumptions, we show that classic equations such as Kimura's infinite alleles model and the canonical equation of adaptive dynamics can be derived as the deterministic limits of this stochastic process. We also conduct a weak noise approximation to arrive at a linear functional Fokker-Planck equation and illustrate the process using the stochastic quantitative logistic equation introduced by \citep{doebeli_adaptive_2011} and \citep{rogers_demographic_2012} as an example.  Sections \ref{sec_1D_processes} and \ref{sec_nD_processes} provide a unified, pedagogical review and conceptual synthesis of techniques that are well-known in physics, as applied to population biology. Section \ref{sec_infD_processes}, to the best of my knowledge, is entirely original. Section \ref{sec_infD_processes} also presents a simple heuristic derivation of quantitative genetics models and adaptive dynamics from stochastic first principles that is simpler than the rigorous mathematical derivations grounded in measure theory and martingale/markov theory that are currently standard reference in theoretical ecology \citep{champagnat_individual_2008}.
 
 \subsection{Birth-death processes}
 Mathematically, a birth-death process is a so-called `continuous-time Markov chain' in which only transitions between local states are allowed. In other words, a birth-death process is a stochastic process unfolding in continuous time such that
 \begin{itemize}
-    \item The process is `Markov', meaning that the future is statistically independent of the past given the present. In more mathematical terms, if the value of the stochastic process at time $t$ is given by $X_t$, $\mathbb{P}(\cdot | E)$ denotes probability conditioned on $E$, and $u < s \leq t$, then
-    \begin{equation*}
-        \mathbb{P}(X_t | X_s, X_u) = \mathbb{P}(X_t | X_s)
-    \end{equation*}
-    \item Direct transitions must be `local'. Mathematicians usually reserve the phrase `birth-death process' to processes that take values in the non-negative integers $\{0,1,2,3,4,\ldots\}$. In this case, only direct transitions from $n$ to $n \pm 1$ are allowed to occur. Biologically, this is saying that we observe the population on a fine enough timescale that the probability of two or more births/deaths occurring at the exact same time is very low and we can disallow it entirely in our models. The conditions for higher dimensional birth-death processes look similar.
+	\item The process is `Markov', meaning that the future is statistically independent of the past given the present. In more mathematical terms, if the value of the stochastic process at time $t$ is given by $X_t$, $\mathbb{P}(\cdot | E)$ denotes probability conditioned on $E$, and $u < s \leq t$, then
+	\begin{equation*}
+	\mathbb{P}(X_t | X_s, X_u) = \mathbb{P}(X_t | X_s)
+	\end{equation*}
+	\item Direct transitions must be `local'. Mathematicians usually reserve the phrase `birth-death process' to processes that take values in the non-negative integers $\{0,1,2,3,4,\ldots\}$. In this case, only direct transitions from $n$ to $n \pm 1$ are allowed to occur. Biologically, this is saying that we observe the population on a fine enough timescale that the probability of two or more births/deaths occurring at the exact same time is very low and we can disallow it entirely in our models. The conditions for higher dimensional birth-death processes look similar.
 \end{itemize}
 Since these processes unfold in continuous time, they are characterized not by transition probabilities but by transition \emph{rates}, which can be thought of as the probability of transition `per unit time'. The quantity of interest is usually the probability of being in a particular state at a given point in time. The entire birth-death process can be described in terms of such a quantity, through a so-called `Master equation'. The master equation is a partial differential equation (PDE) for the probability of being in a given state at a given time, However, in all but the simplest cases, we can't actually solve this PDE, because it is simply too hard. The primary source of difficulty is non-linearity in the transition rates and the fact that transitions occur in discrete, discontinuous `jumps'. It is much easier to describe and analyze systems by using tools from stochastic calculus and partial differential equations, as we describe below.
 
@@ -19,14 +19,14 @@ Since these processes unfold in continuous time, they are characterized not by t
 Stochastic systems which change continuously (in the state space) can be described in terms of a `stochastic differential equation' (SDE), which here is interchangeable with the phrase `It\^o process'. An SDE for a stochastic process $\{X_t\}_{t \geq 0}$ is an equation of the form
 \begin{equation}
 \label{ito_SDE_integral}
-    X_t = \int\limits_{0}^{t} F(s,X_s)ds + \int\limits_{0}^{t} G(s,X_s)dB_s
+X_t = \int\limits_{0}^{t} F(s,X_s)ds + \int\limits_{0}^{t} G(s,X_s)dB_s
 \end{equation}
 where $F(t,x)$ and $G(t,x)$ are `nice' functions\footnote{For the mathematically oriented reader, there are two requirements: Firstly, we require the functions to have `linear growth', meaning that we can find a constant $C > 0$ such that $\|F(t,x)\| + \|G(t,x)\| \leq C(1+\|x\|)$ for every $x \in \mathbb{R}^{d}$ and $t > 0$. We also require `Lipschitz continuity', which means that we can find a constant $L > 0$ such that $\|F(t,x) - F(t,y)\| + \|G(t,x)-G(t,y)\| \leq L\|x-y\|$ for every pair $x,y \in \mathbb{R}^d$ and $t > 0$. Here, $\|\cdot\|$ denotes the natural norm on the space under consideration and for our cases will usually be the Euclidean norm. For biological systems, both of these conditions will usually be satisfied, and so we assume going further that all our SDEs are always well-defined and admit solutions.} In the physics literature, $F$ and $G$ are often called the `drift' and `diffusion' of the process respectively. However, we will not use this terminology here due to  potential confusion with genetic drift (which actually corresponds to the `diffusion' in the physics terminology). $B_t$ is the so-called `standard Brownian motion'. Named after the botanist Robert Brown (who was looking at the random erratic motion of pollen grains in water under a microscope), $\{B_t\}_{t \geq 0}$ is a stochastic process that is supposed to model `random noise' or `undirected diffusion' of a particle. If one imagines $B_t$ as recording the position of a small pollen grain at time $t$, then $B_t$ can be formally thought of as a process that has the following properties:
 \begin{itemize}
-    \item It starts at the origin, \emph{i.e} $B_0 = 0$. This is a harmless assumption made for convenience and amounts to a choice of coordinate system.
-    \item It moves continuously, without sudden jumps across regions of space, \emph{i.e} the map $t \to B_t$ is continuous. This simply says that our pollen grain moves short distances in short intervals of time.
-    \item The future movement is independent of past history. That is, given times $u < s < t$, the displacement $B_t - B_s$ is independent of the past position $B_u$.
-    \item The movement is directionless and random, and displacement is normally distributed. More precisely, given two times $s < t$, the displacement $B_t - B_s$ follows a normal distribution with a mean of $0$ (this is the `directionless' part) and a variance of $t-s$ (this is the `random' part).
+	\item It starts at the origin, \emph{i.e} $B_0 = 0$. This is a harmless assumption made for convenience and amounts to a choice of coordinate system.
+	\item It moves continuously, without sudden jumps across regions of space, \emph{i.e} the map $t \to B_t$ is continuous. This simply says that our pollen grain moves short distances in short intervals of time.
+	\item The future movement is independent of past history. That is, given times $u < s < t$, the displacement $B_t - B_s$ is independent of the past position $B_u$.
+	\item The movement is directionless and random, and displacement is normally distributed. More precisely, given two times $s < t$, the displacement $B_t - B_s$ follows a normal distribution with a mean of $0$ (this is the `directionless' part) and a variance of $t-s$ (this is the `random' part).
 \end{itemize}
 It can then be shown that since the motion is equally likely to be in any direction, the expected position at any point of time is the same as the initial position, \emph{i.e} $\mathbb{E}[B_t | B_0] = B_0 = 0$.\\
 The second integral in equation \eqref{ito_SDE_integral} is It\^o's `stochastic integral', and is to be interpreted in the following sense: Fix a time $T > 0$. Partition the interval $[0,T]$ into $n$ intervals of the form $[t_i,t_{i+1}]$ such that $0 = t_0 < t_1 < t_2 < \ldots < t_n = T$. Then, the (It\^o) stochastic integral from $0$ to $T$ can be thought of as:
@@ -38,7 +38,7 @@ That is to say, it is obtained by making successively finer partitions of the fo
 Equation \eqref{ito_SDE_integral} is often represented in the compact form:
 \begin{equation}
 \label{ito_SDE_diff}
-    dX_t = F(t,X_t)dt + G(t,X_t)dB_t
+dX_t = F(t,X_t)dt + G(t,X_t)dB_t
 \end{equation}
 . The physics literature also often uses the `Langevin form':
 \begin{equation}
@@ -47,23 +47,23 @@ Equation \eqref{ito_SDE_integral} is often represented in the compact form:
 \end{equation}
 where $\eta(t)$ is supposed to be `Gaussian white noise', defined indirectly such that $\int_0^{t}G(s,x)\eta(s)ds$ behaves the same as $\int_0^{t}G(s,X_s)dB_s$. However, it is important to remember that these are both purely formal expressions - Equation \eqref{ito_SDE_diff} is meaningless on its own and is really just shorthand for equation \eqref{ito_SDE_integral}, which is well-defined as explained above; Equation \eqref{ito_langevin} is even worse, because the Brownian motion is known to be non-differentiable, and as such, $\eta(t)$ cannot really exist - Both equations are thus to be interpreted as shorthand for equation \eqref{ito_SDE_integral}, which formally `makes sense'. SDEs are convenient because they satisfy several `nice' analytical properties. For example, using the fact that the Brownian motion has no expected change in value (\emph{i.e} $\mathbb{E}[B_t | B_0] = B_0 = 0$), it can be shown\footnote{We can actually prove something stronger: We can show under rather mild regularity assumptions on $X_t$ and $G(t,x)$ that the stochastic integral is a continuous square-integrable martingale starting at the origin - This means that the map $t \to \int_0^{t}G(s,X_s)dB_s$ is continuous, starts at the origin, and always has an expectation value of $0$.} that the stochastic integral also has an expectation value of $0$ for all $t$, \emph{i.e}:
 \begin{equation*}
-    \mathbb{E}\left[\int\limits_{0}^{t} G(s,X_s)dB_s \bigg{|} X_0\right] = 0
+\mathbb{E}\left[\int\limits_{0}^{t} G(s,X_s)dB_s \bigg{|} X_0\right] = 0
 \end{equation*}
 Using this, and the fact that the future path of the Brownian motion itself is independent of its history, one can derive the following `notational algebra table' for manipulating products of formal expressions of the form \eqref{ito_SDE_diff}:
 \\
 \begin{center}
-    \begin{tabularx}{0.4\textwidth}{ 
-  | >{\centering\arraybackslash}X 
-  | >{\centering\arraybackslash}X 
-  | >{\centering\arraybackslash}X | }
-        \hline
-           & $\mathbf{dt}$ & $\mathbf{dB_t}$ \\
-        \hline
-        $\mathbf{dt}$ & $0$  &  $0$ \\ 
-        \hline
-        $\mathbf{dB_t}$ & $0$  & $dt$ \\
-        \hline
-    \end{tabularx}
+	\begin{tabularx}{0.4\textwidth}{ 
+			| >{\centering\arraybackslash}X 
+			| >{\centering\arraybackslash}X 
+			| >{\centering\arraybackslash}X | }
+		\hline
+		& $\mathbf{dt}$ & $\mathbf{dB_t}$ \\
+		\hline
+		$\mathbf{dt}$ & $0$  &  $0$ \\ 
+		\hline
+		$\mathbf{dB_t}$ & $0$  & $dt$ \\
+		\hline
+	\end{tabularx}
 \end{center}
 which becomes very useful for formal manipulation. Using this property, one can show using some simple algebra that if a process $X_t$ taking values in $\mathbb{R}$ satisfies the SDE \eqref{ito_SDE_diff}, then the probability density $P(x,t)$ of finding the process in a state $x \in \mathbb{R}$ at time $t$ satisfies the PDE
 \begin{equation}
@@ -872,39 +872,3 @@ where
 \mathcal{D}_{\zeta}[\mathcal{A}^{-}](x) = \int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy = \frac{d}{d\epsilon}\mathcal{A}^-(x|\psi + \epsilon \zeta) \bigg{|}_{\epsilon = 0}
 \end{equation*}
 can be thought of now as the functional analogue of a directional derivative of $\mathcal{A}^-(x|\psi)$ in the direction of the function $\zeta$.
-
-\section{Summary}\label{sec_disc}
-
-In this chapter, we have seen how stochastic birth-death processes can be used to construct and analyze mechanistic individual-based models for the dynamics of finite populations. In doing so, we have also seen that various well-known equations of evolutionary dynamics can be recovered in the infinite population size limit, called the `macroscopic' description. In the finite-dimensional case (corresponding to discrete trait variants), the macroscopic descriptions are the equations of population genetics and evolutionary game theory. In the infinite-dimensional case, they are the equations of quantitative genetics, and, in some further limits, adaptive dynamics. In both cases, the mean value of the trait in the population changes according to an equation resembling the Price equation. My derivation shows the (stochastic) individual-level underpinnings of these population-level equations. It also highlights the natural connections between these various equations - For example, the same procedures that lead to the replicator-mutator equation in the case of discretely varying traits yield Kimura's model in the quantitative case, underscoring the broad similarities between evolutionary game theory and quantitative genetics. The major formulations are summarized in Table \ref{table_summary}. If the population is large (but finite) and the stochasticity is sufficiently weak, stochastic dynamics can be studied analytically using the weak noise approximation. Usually, this approximation is valid if we are studying a stochastic trajectory that is fluctuating about a point that is stable in the deterministic limit \hl{cite van kampen}. Such situations occur often, since many systems of the forms studied here quickly relax to stable equilibria.
-\clearpage
-{\centering\begin{sideways}
-    \begin{minipage}{\textheight}
-        \resizebox{\textheight}{!}{%
-            \setstretch{1.5}
-            \begin{tabular}{ %I manually specified the width of each column by trial and error
-  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 1
-  |p{\dimexpr.27\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 2
-  |p{\dimexpr.33\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 3
-  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 4
-  |p{\dimexpr.4\linewidth-2\tabcolsep-1.3333\arrayrulewidth}|% column 5
-  }
-            \hline
-         \centering \textbf{Number of possible distinct trait variants ($m$)} & \centering \textbf{State Space} &
-\centering \textbf{Model parameters} & \centering \textbf{Mesoscopic description} & \centering\arraybackslash \textbf{Infinite population limit} \\
-        \hline
-        $m = 1$ \newline (Identical individuals)  & $[0,1,2,3,\ldots]$ \newline (Population size) & Two real-valued functions, $b(N)$ and $d(N)$, describing the birth and death rate of individuals when the population size is $N$ & Univariate Fokker-Planck equation \newline (one-dimensional SDE) & Single species population dynamics\\ 
-        \hline
-        $1 < m < \infty$ \newline (Discrete traits) & $[0,1,2,3,\ldots]^{m}$ \newline (Number of individuals of each trait variant) & $2m$ real-valued functions, $b_i(\mathbf{v})$ and $d_i(\mathbf{v})$ (for $1 \leq i \leq m$) describing the birth and death rate of trait variant $i$ when the population is $\mathbf{v}$ & Multivariate Fokker-Planck equation \newline ($m$-dimensional SDE) &  Evolutionary game theory \newline
-        Lotka-Volterra competition \newline Quasispecies equation \newline Price equation (discrete traits) \\
-        \hline
-        $m = \infty$ \newline (Quantitative traits) & $\left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}\right\}$ \newline \newline (Each Dirac mass $\delta_{x_i}$ is an individual with trait value $x_i$) & Two real-valued functionals $b(x|\nu)$ and $d(x|\nu)$ describing the birth and death rate of trait variant $x$ when the population is $\nu$ & Functional Fokker-Planck equation \newline (SPDE) & Kimura's continuum-of-alleles model \newline \cite{sasaki_oligomorphic_2011}'s Oligomorphic Dynamics \newline \cite{wickman_theoretical_2022}'s Trait Space Equations for intraspecific trait variation \newline Adaptive Dynamics  \newline Price equation (quantitative traits)\\
-        \hline
-            \end{tabular}
-        }
-        %\renewcommand\thetable{1}
-        \captionof{table}{Summary of the various birth-death processes studied in this chapter}
-        \label{table_summary}
-    \end{minipage}
-\end{sideways}\par}
-
-Stochastic systems exhibit many interesting and biologically relevant phenomena which cannot be captured in the deterministic limit. For example, in both the stochastic logistic equation \ref{ex_1D_stoch_logistic_BD_eqns} and in two-strategy games with finite population sizes \citep{tao_stochastic_2007}, demographic noise ensures that all populations are guaranteed to go extinct given enough time, even if the deterministic limit predicts a stable state far from extinction. In the case of quantitative traits, demographic noise can hinder adaptive diversification by increasing the time before evolutionary branching occurs \citep{claessen_delayed_2007, wakano_evolutionary_2013, debarre_evolutionary_2016}, causing stochastic extinction of existing evolutionary branches \citep{rogers_demographic_2012, johansson_will_2006}, or preventing branching altogether if the population is too small \citep{rogers_modes_2015, johnson_two-dimensional_2021}. Stochastic systems also routinely exhibit evolution towards attractors that cannot be attained in the deterministic limit \citep{delong_stochasticity_2023}, sometimes even completely reversing the direction of evolution predicted by deterministic dynamics \citep{constable_demographic_2016,mcleod_social_2019}. Since real-life populations are stochastic and finite, it is thus imperative that modellers work with stochastic first-principles models instead of their deterministic limits, lest they risk missing important phenomena that are unique to stochastic systems \citep{black_stochastic_2012,schreiber_does_2022,hastings_transients_2004,shoemaker_integrating_2020}

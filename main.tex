@@ -68,10 +68,6 @@ In this thesis, I show how ideas from statistical physics can be used to analyti
 
 %Implement the fancy headers for everything from here on out
 \pagestyle{fancy}
-%\fancyhead{}
-%\fancyhead[RO]{Chapter \thechapter}
-%\fancyhead[LE]{\mytitle}
-
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
 \fancyhead[RE]{\rule[-2ex]{0pt}{4ex}\footnotesize\itshape\nouppercase{\leftmark}}
@@ -89,7 +85,7 @@ In this thesis, I show how ideas from statistical physics can be used to analyti
 
 \part{Theory \& Applications}
 \chapter{Population dynamics from stochastic first principles}\label{chap_BD}
-\input{ind_files/03_BD_processes.tex}
+\input{ind_files/03_BD_processes}
 \chapter{Examples and Applications}\label{chap_examples}
 \input{ind_files/04_examples}
 % \chapter{}
@@ -97,6 +93,11 @@ In this thesis, I show how ideas from statistical physics can be used to analyti
 % \chapter{} <-- uncomment and add as required
 % \input{ind_files/chapter_06}
 
+\part{Discussion \& Outlook}
+\chapter{A unified view of population dynamics}\label{chap_unification}
+\input{ind_files/05_unification_discussion}
+\chapter{Towards a stochastic evolutionary theory}\label{chap_stochasticity}
+\input{ind_files/06_stochastic_discussion}
 \begin{appendices}
 \chapter{Deriving the Fokker-Planck equations for It\^{o} SDEs}\label{App_SDE_FPE}
 \input{ind_files/99_Appendix_A}
