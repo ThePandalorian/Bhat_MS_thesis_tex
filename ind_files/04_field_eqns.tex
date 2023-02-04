@@ -1,0 +1,320 @@
+\epigraph{\justifying The result has been forty years of bewilderment about what he meant, whereas if he had been willing to make a slight sacrifice of strict mathematical propriety (as I have done) he could have expressed himself in a way that everyone would have understood}{George Price (speaking about Fisher)}
+
+
+So far, we have dealt with populations in which individuals come in countably many different kinds. While developing these models, we have been on mathematically solid ground that has been well understood by statistical physicists and mathematicians. However, things become more complicated when we deal with `quantitative' traits. Traits like body size, body weight, or beak length, often take on uncountably many values (say, all values in the interval $[0,1]$, for example). In this case, we cannot describe the population using a vector as we did before, but instead require a function. More precisely, if the set of all possible trait values is $\mathcal{T}$, we will characterize the population using a special kind of function $\phi^{(t)}$ such that the quantity $\int_{A}\phi^{(t)}(x)dx$ gives us the number of individuals that are in any `nice' region $A \subset \mathcal{T}$ of the possible trait space\footnote{The mathematically informed reader may notice that this sounds like I am trying to dance around the word `measure'. Indeed, we are really looking to construct branching processes that take values in some nice space of measures that can be endowed with 
+sufficient mathematical structure for notions like convergence and integration to make sense. All the Dirac deltas that will turn up shortly are `properly' viewed as measures, and integrals with Dirac deltas in the integrand are to be interpreted as integration with respect to the Dirac measure. If one tries to be careful about these things, they will quickly find themselves drowning in a quagmire of mathematical formalism.
+% For example, one can't really justify using informal tools like the functional derivative, which is ill-defined and `properly' interpreted as a Fr\'echet derivative in a suitable normed function space (making the use in conjunction with Dirac measures/distributions somewhat dubious without further elaboration on the space and norm in question). The existence of a probability density function for this process is also \emph{a priori} somewhat questionable and requires detailed arguments using tools like the Radon-Nikodym theorem. Here, we adopt the physicist's solution of ignoring all such potential difficulties and assuming a clever mathematician can make sure everything works out using arcane tools such as ``functional analysis" and  ``distribution theory".
+If you know and care about enough mathematics for this to really bother you, see \citep{champagnat_unifying_2006} for a much more rigorous treatment that avoids using informal tools such as functional derivatives and functional equivalents of Fokker-Planck equations in favor of a probabilistic approach grounded in (measure-theoretic) Markov and martingale theory.}. The state space of the stochastic process thus becomes infinite-dimensional, which complicates matters slightly. The principal objects of interest here are \emph{functionals} $F[x, \phi^{(t)}]$ which take in a scalar $x$ representing the trait value of interest, and a function $\phi^{(t)}$ representing the population at time $t$. Thus, whereas in the previous section we were interested in how a function $f(x(t))$ changes based on the change in an input variable $x(t)$ (the population), we are now interested in how a functional $F[\phi^{(t)}]$ changes with the change in an input function $\phi^{(t)}$. The mathematics for these sorts of processes is an active area of research (under the name `measure-valued stochastic processes') and is far from well developed. One can nevertheless make some progress if they are willing to do math like a physicist. I will shamelessly adopt this attitude in this chapter, and hope that any questions of rigor, well-posedness, existence, etc. will be sorted out by some clever mathematicians in the future. Physicists use the term `field' for functions of the form $f(x,t):\mathbb{R}^{n} \times [0,\infty) \to \mathbb{R}^{m}$, where $\mathbb{R}^{n}$ represents space and $[0,\infty)$ represents time. They then call models which describe such functions `field theories'. In physics jargon, the stochastic process we will formulate $\{\phi^{(t)}\}_{t \geq 0}$ when viewed as a sequence of functions $\{\phi^{(t)}(y)\}_{t \geq 0}$ thus describes a (scalar) `stochastic field', and the formalism we will develop below is a `stochastic field theory' of evolution, where physical space has been replaced by an abstract trait space. This is closely related to the area of physics called `statistical field theory', the analog of quantum field theory for systems with a large number of classical particles. Stochastic field theories over physical space have recently been used in biology to model brain function \citep{bressloff_stochastic_2010} and collective motion \citep{o_laighleis_minimal_2018}. In the following sections, I will rely heavily on a heuristic object called the functional derivative $\delta F/\delta \phi$. The functional derivative is an \emph{ad hoc}, somewhat informal notion, defined indirectly as the unique object that obeys, for any `nice' function $\rho$
+\begin{equation}
+\label{functional_derivative_defn}
+    \int\frac{\delta F}{\delta \phi(x)}\rho(x)dx = \lim_{h \to 0} \frac{F[\phi + h\rho]-F[\phi]}{h}
+\end{equation}
+This definition is formulated in analogy to directional derivatives in multi-variable calculus: Noting that a function can be thought of as an infinite-dimensional vector, informally `taking the limit' $n \to \infty$ in \eqref{directional_derivative_defn} yields \eqref{functional_derivative_defn}.
+
+\section{Description of the process and the Master Equation}
+We envision a population of individuals with a `trait' that takes values in some one-dimensional set $\mathcal{T} \subseteq \mathbb{R}$. Since the trait of any given individual is fixed, and since each individual can only have one exact trait value, an individual with a trait value $x \in \mathcal{T}$ can be characterized as a Dirac delta mass centered at $x$, defined indirectly as the object which satisfies, for any one-dimensional function $f$,
+\begin{equation*}
+    \int\limits_{A}f(y)\delta_{x_i}dy = 
+    \begin{cases}
+        f(x_i) & x_i \in A\\
+        0 & x_i \notin A 
+    \end{cases}
+\end{equation*}
+for every `nice' subset $A \subset \mathcal{T}$. In physics notation, we would write $\delta_{x_i} = \delta(y-x_i)$ as a `function' of the dummy variable $y$ (which will be integrated over), but I will stick to the notation $\delta_{x_i}$ because it emphasizes that the individual represented by the object is at $x_i$ in trait space (the dummy variable $y$ can be confusing in this regard). Note that by choosing $f(x) \equiv 1$, we get an `indicator' that is $1$ if the individual is within the set $A$ and $0$ otherwise. Thus, if the population at any time $t$ consists of $N(t)$ individuals with trait values $\{x_1,x_2,\ldots,x_{N(t)}\}$, then it can be completely characterized (Figure \ref{fig_infD_pop_description}) by the `distribution'
+\begin{equation*}
+    \nu^{(t)} = \sum\limits_{i=1}^{N(t)}\delta_{x_i}
+\end{equation*}
+which in physics notation would be a function $\nu^{(t)}(y) = \sum_{i}^{N(t)} \delta(y-x_i)$. Thus, the state space of our process is
+\begin{equation*}
+    \mathcal{M} = \left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
+\end{equation*}
+Note that for any set $A \subset \mathcal{T}$, $\int_A\nu^{(t)}dx$ gives the number of individuals that have trait values that lie within the set $A$ and that integrating over $\mathcal{T}$ gives the population size $N(t)$ at time $t$. Given the population $\nu^{(t)} = \sum_{i=1}^{N(t)}\delta_{x_i}$ and a real function $f(x)$, we have $\int_{\mathcal{T}}f(y)\nu^{(t)}dy = \sum_{i=1}^{N(t)}f(x_i)$.
+% We are interested in observing the behaviour of elements of
+% \begin{equation*}
+%     \mathcal{F} = \left\{f:\mathcal{M} \to \mathbb{R} \ | \ f \ \textrm{bounded and measurable}\right\},
+% \end{equation*}
+% the set of all bounded measurable real functions on $\mathcal{M}$. Given the population $\nu^{(t)} = \sum_{i=1}^{N(t)}\delta_{x_i}$ and a function $f \in \mathcal{F}$, we have $\int_{\mathcal{T}}f(x)\nu^{(t)}(dx) = \sum_{i=1}^{N(t)}f(x_i)$. Elements of $\mathcal{F}$ are interesting because they yield various quantities of biological relevance when integrated over $\mathcal{T}$ with respect to our population measure $\nu$. For example, the function $f(\nu^{(t)}) = 1$ gives the population size at time $t$, and the function $f(\nu^{(t)}) = \chi_{A}/N(t)$, where $\chi$ is the indicator function, gives the fraction of the population that have trait values in $A$.\\
+\myfig{0.5}{Media/3.3_dirac_deltas.png}{\textbf{Schematic description of a function valued birth-death process.} Consider a population of birds in which individuals have varying beak lengths. \textbf{(A)} Each individual in the population can be described as a Dirac delta mass centered at its beak length. This is because each individual has exactly one fixed beak length, and therefore, can be thought of as a distribution centered at that particular beak length and with zero spread. \textbf{(B)} The population as a whole is thus described as a sum of Dirac masses. $N(t)$ here is the size of the population at time $t$. Birth and death of individuals would correspond to the addition and removal of Dirac masses respectively. Note that if we had a large number of individuals, this distribution begins to look like a continuous distribution.}{fig_infD_pop_description}
+Now that we have described the population, we must define the rules for how it changes. We assume that there exist non-negative functionals $b(x|\nu)$ and $d(x|\nu)$ which describe the rate at which individuals with trait value $x$ are born and die respectively in a population $\nu$. Again, we must be careful about what exactly we mean when we speak about `rates'. In this case, we mean that if we know that the population is currently described by the function $\nu$, and we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual whose phenotype is within the set $A \subset \mathcal{T}$ is given by
+\begin{equation*}
+    \mathbb{P}[\textrm{ Birth with offspring in }A | \textrm{ something happened }] = \frac{1}{\mathcal{N}}\int\limits_{A}b(x|\nu)dx
+\end{equation*}
+and the probability that the event is the death of an individual whose phenotype is within the set $A$ is
+\begin{equation*}
+    \mathbb{P}[\textrm{ Death of an individual in }A | \textrm{ something happened }] = \frac{1}{\mathcal{N}}\int\limits_{A}d(x|\nu)dx
+\end{equation*}
+where $\mathcal{N} = \int_{\mathcal{T}}b(x|\nu)+d(x|\nu)dx$ is the normalizing constant in both cases. Note that we assume $\mathcal{N}$ is always finite and non-zero.
+
+\begin{example}
+Consider the birth and death functionals:
+\begin{equation}
+\label{Rogers_logistic_BD}
+\begin{aligned}
+b(x|\nu) &= r\int\limits_{\mathcal{T}}m(x,y)\nu(y)dy; \ m(x,y) = \exp\left(\frac{-(x-y)^2}{\sigma_{m}^{2}}\right)\\
+    d(x|\nu) &= \frac{\nu(x)}{Kn(x)}\int\limits_{\mathcal{T}}\alpha(x,y)\nu(y)dy; \ \alpha(x,y) = \exp\left(\frac{-(x-y)^2}{\sigma_{\alpha}^{2}}\right)
+\end{aligned}
+\end{equation}
+This choice corresponds to an asexual population having a constant (per-capita) birth rate $r$. Birth is sometimes with mutation, and the extent of the mutations is controlled by a Gaussian kernel $m(x,y)$. The death rate is density-dependent, mediated by a Gaussian competition kernel $\alpha(x,y)$, and also contains a phenotype-dependent carrying capacity controlled by $n(x)$, scaled by a constant $K$. The biological interpretation of the death rate is through ecological specialization for limiting resources - Individuals have different intrinsic advantages (controlled by $n(x)$), and experience greater competition from conspecifics that are closer to them in phenotype space (controlled by $\alpha(x,y)$).
+\end{example}
+Let us now define, for each $x \in \mathcal{T}$, two \emph{step operators} $\mathcal{E}_{x}^{\pm}$ that satisfy
+\begin{equation*}
+    \mathcal{E}_{x}^{\pm}[f(y,\nu)] =  f(y,\nu \pm \delta_x)
+\end{equation*}
+In other words, the step operators $\mathcal{E}_{x}^{\pm}$ simply describe the effect of adding or removing a single individual with trait value $x$ from the population.
+It is known (only for one-dimensional traits) that we can find a density function $P(\nu,t)$ such that the probability that the process takes value $\nu^{(t)}$ at time $t$ is given by $\int_{\mathcal{T}}P(\nu,t)dx$.\\
+We can now use the same trick as earlier and obtain a master equation by counting inflow and outflow of states. Any change to a state must be through the addition or subtraction of a single Dirac delta mass. For any state $\nu \in \mathcal{M}$, the transition rate from $\nu - \delta_{x}$ to $\nu$ is simply $\mathcal{E}^{-}_{x}b(x|\nu)$, and similarly, the transition rate from $\nu+\delta_{x}$ to $\nu$ is $\mathcal{E}^{+}_{x}d(x|\nu)$. The transition rate out of $\nu$ to a state $\nu+\delta_x$ is just $b(x|\nu)$, and transition out to a state $\nu - \delta_x$ is just $d(x|\nu)$. Thus, integrating over all possible $x$ to obtain the total inflow and outflow rate for a state $\nu$, we see that $P(\nu,t)$ must satisfy:
+\begin{equation}
+\label{unnormalized_M_equation}
+    \frac{\partial P}{\partial t}(\nu,t) = \int\limits_{\mathcal{T}}\left[(\mathcal{E}^{-}_{x}-1)b(x|\nu)P(\nu,t) + (\mathcal{E}^{+}_{x}-1)d(x|\nu)P(\nu,t)\right]dx
+\end{equation}
+This is the `Master equation' of our process.\\
+\\
+\section{The functional system-size expansion}
+
+To proceed, as before, we assume that there exists a system-size parameter $K > 0$ to obtain a new process $\{\phi^{(t)}\}_{t \geq 0}$ such that for any set $A \subset \mathcal{T}$, $\int_A\phi^{(t)}dx$ gives the `density' of individuals that have trait values that lie within the set $A$. Note that we expect this stochastic process to evolve continuously if $K$ is large since the contribution of each individual is negligible. Specifically, we assume that there exists a $K>0$ such that we can make the substitutions:
+\begin{align*}
+    \phi^{(t)} = \frac{1}{K}\nu^{(t)} &= \frac{1}{K}\sum\limits_{i=1}^{N(t)}\delta_{x_i}\\
+    b_K(x|\phi^{(t)}) &= \frac{1}{K}b(x|\nu^{(t)})\\
+    d_K(x|\phi^{(t)}) &= \frac{1}{K}d(x|\nu^{(t)})
+\end{align*}
+$\{\phi^{(t)}\}_{t\geq0}$ takes values in 
+\begin{equation*}
+    \mathcal{M}_K = \left\{\frac{1}{K}\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
+\end{equation*}
+In terms of these new variables, we obtain the master equation:
+\begin{equation}
+\label{M_equation}
+    \frac{\partial P}{\partial t}(\phi,t) = K\int\limits_{\mathcal{T}}\left[(\Delta^{-}_{x}-1)b_K(x|\phi)P(\phi,t) +(\Delta^{+}_{x}-1)d_K(x|\phi)P(\phi,t)\right]dx
+\end{equation}
+where we have introduced new step operators $\Delta_{x}^{\pm}$ that satisfy:
+\begin{equation*}
+    \Delta_{x}^{\pm}[F(y,\phi)] =  F\left(y,\phi \pm \frac{1}{K}\delta_x\right)
+\end{equation*}
+\\
+\\
+We can now conduct a system-size expansion as before by using a functional `Taylor expansion' of the step operators. Recall that the functional version of the Taylor expansion of a functional $F[\rho]$ about a function $\rho_0$ defined on a domain $\Omega \subseteq \mathbb{R}$ is given by:
+\begin{equation*}
+    F[\rho_0 + \rho] = F[\rho_0] + \int\limits_{\Omega}\rho(x)\frac{\delta F}{\delta \rho_0(x)}dx + \frac{1}{2!}\int\limits_{\Omega}\int\limits_{\Omega}\rho(x)\rho(y)\frac{\delta^2 F}{\delta \rho_0(x)\delta \rho_0(y)}dxdy + \cdots
+\end{equation*}
+Since $\Delta^{\pm}_{x}[F[\phi]] = F[\phi \pm \delta_x/K]$, we can Taylor expand the RHS to see that our step operators obey
+\begin{align}
+    \Delta^{\pm}_{x}[F[\phi]] &= F[\phi] \pm \frac{1}{K}\int\limits_{\mathcal{T}}\frac{\delta F}{\delta \phi(y)}\delta_xdy + \frac{1}{2K^2}\int\limits_{\mathcal{T}}\int\limits_{\mathcal{T}}\frac{\delta^2 F}{\delta \phi(y)\delta \phi(z)}\delta_xdy\delta_xdz+\mathcal{O}(K^{-3})\nonumber\\
+    &= F[\phi] \pm \frac{1}{K}\frac{\delta F}{\delta \phi(x)} + \frac{1}{2K^2}\frac{\delta^2 F}{\delta \phi(x)^2}+\mathcal{O}(K^{-3})
+    \label{KM_ansatz}
+\end{align}
+Neglecting terms of $\mathcal{O}(K^{-3})$, we can now substitute \eqref{KM_ansatz} into \eqref{M_equation} to obtain:
+\begin{equation*}
+\begin{split}
+\frac{\partial P}{\partial t}(\phi,t) = K\int\limits_{\mathcal{T}}\left[
+    \left(-\frac{1}{K}\frac{\delta}{\delta\phi(x)} + \frac{1}{2K^2}\frac{\delta^2}{\delta\phi(x)^2}\right)\{b_K(x|\phi)P(\phi,t)\}\right]dx\\
+    +K\int\limits_{\mathcal{T}}\left[\left(\frac{1}{K}\frac{\delta}{\delta\phi(x)} + \frac{1}{2K^2}\frac{\delta^2}{\delta\phi^2(x)}\right)\{d_K(x|\phi)P(\phi,t)\}\right]dx
+\end{split}
+\end{equation*}
+Rearranging these terms, we obtain a `functional Fokker-Planck equation':
+\begin{equation}
+\label{functional_FPE}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial P}{\partial t}(\phi,t) = \int\limits_{\mathcal{T}}\left[-
+    \frac{\delta}{\delta\phi(x)}\{\mathcal{A}^{-}(x|\phi)P(\phi,t)\} + \frac{1}{2K}\frac{\delta^2}{\delta\phi(x)^2}\{\mathcal{A}^{+}(x|\phi)P(\phi,t)\}\right]dx}
+\end{equation}
+where
+\begin{align*}
+   \mathcal{A}^{\pm}(x|\phi) &= b_K(x|\phi)\pm d_K(x|\phi) = \frac{1}{K}\left(b(x|\nu)\pm d(x|\nu)\right)
+\end{align*}
+
+This constitutes the `mesoscopic' description. For large (but finite) $K$, equation \eqref{functional_FPE} can be analyzed using a weak noise approximation as before.
+
+\section{The deterministic limit}
+We can once again appeal to the link between Fokker-Planck equations and Langevins \citep{lafuerza_role_2016} to say that \eqref{functional_FPE} corresponds to the Langevin equation:
+\begin{equation}
+\label{functional_langevin}
+    \frac{\partial \phi}{\partial t}(x,t) = \mathcal{A}^{-}(x|\phi) + \frac{1}{\sqrt{K}}\eta(x,t)
+\end{equation}
+where $\eta(x,t)$  is the `Gaussian spacetime white noise' with zero mean and autocovariance function
+\begin{equation*}
+    \mathbb{E}[\eta(x,t)\eta(x',t')] = \sqrt{\mathcal{A}^{+}(x|\phi)\mathcal{A}^{+}(x'|\phi)}\delta(x-x')\delta(t-t')
+\end{equation*}
+Taking $K \to \infty$ in equation \eqref{functional_langevin} then yields a PDE:
+\begin{equation}
+\label{deterministic_traj}
+\frac{\partial \psi}{\partial t}(x,t) = \mathcal{A}^{-}\left(x|\psi\right) = b_K(x|\psi)- d_K(x|\psi)
+\end{equation}
+where we have used a different symbol $\psi$ simply to highlight that $\psi(x,t)$ as the solution to equation \eqref{deterministic_traj} is a deterministic function, whereas $\phi(x,t)$ as defined in equation \eqref{functional_langevin} is really a stochastic process $\{\phi^{(t)}\}_{t\geq0}$. Equation \eqref{deterministic_traj} simply says that in the absence of stochasticity, the change in the density of individuals with trait values $x$ is given by the difference between the birth and death rates of these individuals in the population. Models of this form are precisely the `oligomorphic dynamics' of \citep{sasaki_oligomorphic_2011} if one assumes the population is composed of a small number of `morphs', \emph{i.e.} $\psi(x,t) = \sum\limits_{k=1}^{S} n_{k}\psi_k(x,t)$, where $\psi_k(x,t)$ is the phenotypic distribution of the $k$th morph (often assumed a normal distribution with narrow variance) and $S$ is the number of distinct morphs in the population. Equation \eqref{deterministic_traj} also appears in models of intraspecific trait variation in community ecology, such as the `trait space equations' of \citep{wickman_theoretical_2022} in their framework for eco-evolutionary community dynamics.\\
+If one wishes to be mathematically careful, the connection between \eqref{functional_FPE} and \eqref{functional_langevin} becomes somewhat tenuous. In particular, while the equivalence between Fokker-Planck equations and SDEs (Langevin equations) is well-studied for finite-dimensional stochastic processes, it is much less understood for the infinite-dimensional function-valued processes that we are dealing with, and the interpretation of any formal `Langevin equation' (corresponding now to a stochastic partial differential equation, or SPDE) that we write down is unclear\footnote{The essential difficulty is interpreting what spacetime white noise formally means. See \citep{week_white_2021} for analytical progress for eco-evolutionary models via weak solutions to SPDEs (the rigorous theory needs some knowledge of measure theory and stochastic processes, but Week \emph{et al.} provide some very useful heuristics that only need Riemann integration, probability, and related notions)}. Nevertheless, we will pretend all is well and assume that one can do this, bolstered by the fact that we can recover some well-known deterministic equations from equation \eqref{deterministic_traj}, as we show below.
+
+\subsection{Some familiar faces: Kimura-Crow and adaptive dynamics}
+
+The `macroscopic' version of our function-valued process corresponds to quantitative genetics and adaptive dynamics (which is a generalization of evolutionary game theory for quantitative traits). We begin with the deterministic process given by \eqref{deterministic_traj}. We assume that the birth and death functions take the form:
+\begin{equation}
+\label{BD_for_kimura}
+\begin{aligned}
+b_K(x|\psi) &= \mu b_{\textrm{mut}}(x|\psi) + b_{\textrm{ind}}(x|\psi)\psi(x,t)\\
+d_K(x|\psi) &= d_{\textrm{ind}}(x|\psi)\psi(x,t)
+\end{aligned}
+\end{equation}
+Here, $ b_{\textrm{mut}}(x|\psi)$ describes birth due to mutations, and $\mu \geq 0$ is a mutation rate. The functions $b_{\textrm{ind}}(x|\psi)$ and $d_{\textrm{ind}}(x|\psi)$ describe the per-capita birth rate and death rate of type $x$ in a population $\psi$. For example,  $b_{\textrm{ind}}(x|\psi)$ may incorporate the effects of mate choice in the sexual case or intrinsic duplication rate in the asexual case, and $d_{\textrm{int}}(x|\psi)$ may model death due to intraspecific competition for resources. Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we obtain
+\begin{equation}
+\label{PDE_for_kimura}
+\frac{\partial \psi}{\partial t}(x,t) = w(x|\psi)\psi(x,t) + \mu b_{\textrm{mut}}(x|\psi)
+\end{equation}
+where we have defined $w(x|\psi) \coloneqq b_{\textrm{int}}(x|\psi) - d_{\textrm{int}}(x|\psi)$, which can be thought of as the (Malthusian) `fitness' of the phenotype $x$. To track population numbers and trait frequencies, we follow the approach of \citep{week_white_2021} and define
+\begin{equation}
+\label{pop_size_and_freq_for_kimura}
+\begin{aligned}
+N_K(t) &\coloneqq \int\limits_{\mathcal{T}}\psi(x,t)dx\\
+p(x,t) &\coloneqq \frac{\psi(x,t)}{N_K(t)}
+\end{aligned}
+\end{equation}
+We can also define the population mean fitness as:
+\begin{equation}
+\label{mean_fitness_for_kimura}
+\overline{w}(t) = \int\limits_{\mathcal{T}}w(x|\psi)p(x,t)dx
+\end{equation}
+Using the chain rule in the definition of $p(x,t)$, we can calculate:
+\begin{align*}
+\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\frac{\partial \psi}{\partial t}(x,t) - \frac{\psi(x,t)}{N^2_K(t)}\frac{d N_K}{dt}\\
+&= \frac{1}{N_K(t)}\frac{\partial \psi}{\partial t}(x,t) - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}\frac{\partial \psi}{\partial t}(y,t)dy
+\end{align*}
+Where we have used the definition of $N_K(t)$ and assumed that integrals and derivatives commute in the second line. Substituting \eqref{PDE_for_kimura}, we now obtain
+\begin{align*}
+\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\left[w(x|\psi)\psi(x,t) + \mu b_{\textrm{mut}}(x|\psi)\right] - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}w(y|\psi)\psi(y,t) + \mu b_{\textrm{mut}}(y|\psi)dy\\
+&= w(x|\psi)p(x,t) + \frac{\mu}{N_{K}(t)} b_{\textrm{mut}}(x|\psi) - p(x,t)\left(\int\limits_{\mathcal{T}}w(y|\psi)p(y,t)dy+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right)
+\end{align*}
+where we have used the definition of $p(x,t)$ in the second line. Using \eqref{mean_fitness_for_kimura} and rearranging the terms gives us:
+\begin{equation}
+\label{cts_replicator_mutator}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]}
+\end{equation}
+This is a continuous version of the replicator-mutator equation when each $x$ is viewed as a strategy. It also yields Kimura's continuum-of-alleles model when each $x$ is viewed as an allele, $b_{\textrm{mut}}(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, and the trait space is the entire real line, \emph{i.e.} $\mathcal{T} = \mathbb{R}$. To see this, let $b_{\textrm{mut}}(y|\psi) = \int\limits_{\mathbb{R}}m(y-z)\psi(z,t)dz$, where $m(x)$ is a mutation kernel, which by definition is normalized such that $\int\limits_{\mathbb{R}}m(x)dx = 1$. Let us further note that we have implicitly been assuming that the total number of individuals (scaled by $K$) remains finite at all times, \emph{i.e.} $N_K(t) = \int\limits_{\mathbb
+R}\psi(x,t)dx < \infty \ \forall \ t$. Thus, $m(x)\psi(y,t) \in  \mathcal{L}^{1}(\mathbb{R}\times\mathbb{R}) \ \forall \ t$ and we can use the Fubini-Tonnelli theorem to interchange the order of integration of iterated integrals of $m(y-z)\psi(y)$. We are now ready to evaluate the rightmost integral of \eqref{cts_replicator_mutator}.\\
+We have: 
+\begin{align}
+\int\limits_{\mathbb{R}} b_{\textrm{mut}}(y|\psi)dy &= \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}} m(y-z)\psi(z,t)dzdy\nonumber\\
+&= \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}} m(y-z)\psi(z,t)dydz\nonumber\\
+&= \int\limits_{\mathbb{R}}\psi(z,t)\left(\int\limits_{\mathbb{R}} m(y-z)dy\right)dz\nonumber\\
+&= \int\limits_{\mathbb{R}}\psi(z,t)\int\limits_{\mathbb{R}} m(u)dudz\nonumber\\
+&= \int\limits_{\mathbb{R}}\psi(z,t)dz\int\limits_{\mathbb{R}} m(u)du\nonumber\\
+&= N_K(t)\int\limits_{\mathbb{R}} m(u)du\label{convolution_integral_intermediate}
+\end{align}
+where we have used the Fubini-Tonnelli theorem to go from the first step to the second, and have made the substitution $u = y-z$ to go from the third to the fourth step. We then note that since $m$ is a kernel, it satisfies $\int\limits_{\mathbb{R}} m(u)du = 1$, and \eqref{convolution_integral_intermediate} therefore becomes $\int\limits_{\mathbb{R}} b_{\textrm{mut}}(y|\psi)dy = N_K(t)$. Substituting this in \eqref{cts_replicator_mutator}, we have
+\begin{equation*}
+\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[\int\limits_{\mathbb{R}}m(x-z)\psi(z,t)dz - p(x,t)N_K(t)\right]
+\end{equation*}
+Substituting our definition $p(z,t) = \psi(z,t)/N_K(t)$ now yields
+\begin{equation}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\mu\left[\int\limits_{\mathbb{R}}m(x-z)p(z,t)dz - p(x,t)\right]}\label{kimura_continuum_model}
+\end{equation}
+which is Kimura's continuum of alleles model.\\
+Note that if we define the mean trait value as
+\begin{equation*}
+    \overline{x}(t) = \int\limits_{\mathcal{T}}xp(x,t)dx
+\end{equation*}
+then, by multiplying both sides of equation \eqref{cts_replicator_mutator} by $x$ and integrating over the trait space, we obtain
+\begin{align}
+\frac{d \overline{x}}{dt} &= \int\limits_{\mathcal{T}}xw(x|\psi)p(x,t)dx - \overline{w}(t)\int\limits_{\mathcal{T}}xp(x,t)dx+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]dx\nonumber\\
+&= \overline{xw} - \overline{w}\cdot\overline{x} + \frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b_{\textrm{mut}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b_{\textrm{mut}}(y|\psi)dy\right]dx\label{intermediate_for_cts_price}
+\end{align}
+We now observe that
+\begin{equation}
+\label{cts_price_cov^{(t)}erm}
+\mathrm{Cov}(x,w(x|\psi)) = \overline{xw} - \overline{x}\cdot\overline{w}
+\end{equation}
+is the statistical covariance of the trait value with the Malthusian fitness function (Importantly, just like in the Price equation, this is an \emph{analogy} - Everything here is deterministic). The second term, which we will denote by
+\begin{equation}
+\label{cts_price_drift^{(t)}erm}
+M(x|\psi) \coloneqq \frac{\mu}{N_K(t)}\left[\int\limits_{\mathcal{T}}xb_{\textrm{mut}}(x|\psi)dx - \left(\overline{x}\int\limits_{\mathcal{T}}b_{\textrm{mut}}(x|\psi)dx\right)\right] 
+\end{equation}
+reflects the transmission bias of mutations. Thus, we see that equation \eqref{intermediate_for_cts_price} reads
+\begin{equation}
+\label{cts_price}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d \overline{x}}{dt} = \mathrm{Cov}(x,w(x|\psi)) + M(x|\psi)}
+\end{equation}
+from which it is clear that we have obtained a version of the Price equation for quantitative traits.
+Adaptive dynamics is recovered under the following additional assumptions:
+\begin{itemize}
+    \item Rare mutations, \emph{i.e.} $\mu \to 0$.
+    \item Small mutational effects with `almost faithful' reproduction, meaning $b_{\textrm{mut}}(x|\psi) \to 0$, and the distribution $\psi(x,t)$ tends to stay very `sharp' (i.e strongly peaked about its mean value). 
+    % and $\psi(x,t) \to \sum\limits_{i=1}^{m}n_{i}\delta_{y_i(t)}$, where $m$ is the number of morphs in the population, $y_i(t)$ are deterministic functions taking values in $\mathcal{T}$, and $\sum\limits_{i=1}^{m} n_i(t) = N_K(t)$. Assuming the population is initially monomorphic, we have $\psi(x,t) \to N_K(t)\delta_{y(t)}$ for some deterministic function $y(t)$ taking values in $\mathcal{T}$. 
+    \item Separation of ecological and evolutionary timescales, meaning that the system is always at ecological equilibrium. Thus, the expected rate of change of resident numbers in a resident population is $0$, and we have $w(y|\delta_{y(t)}) = 0$.
+\end{itemize}
+The first two assumptions are sometimes called the `weak mutation' limit, and the last is sometimes called the `strong selection' limit, both for obvious reasons.
+Under these assumptions, if we supply an initial condition $\psi(x,0) = N_{K}(0)\delta_{y_0}$ for some constants $N_K(0) > 0$ and $y_0 \in \mathcal{T}$ (meaning we start with a completely monomorphic population of size $N_K(0)$ in which all individuals have trait value $y_0$), then it is reasonable to assume that the population remains sufficiently clustered for some (possibly small) time $t>0$ that we can continue to approximate the distribution $\psi(x,t)$ as a Dirac Delta mass $N_{K}(t)\delta_{y(t)}$ that is moving across the trait space in a deterministic manner dictated by a function $y(t)$ (to be found). Note that we have $p(x,t) = \delta_{y(t)}$, $\overline{x}(t) = y(t)$, and $\overline{w}(t) = 0$. Thus, from equation \eqref{cts_price}, we have
+\begin{align}
+    \frac{d\overline{x}}{dt} &= \int\limits_{\mathcal{T}}(x-\overline{x}(t))(w(x|\psi)-\overline{w}(t))p(x,t)dx\nonumber\\
+    \Rightarrow \frac{dy}{dt} &= \int\limits_{\mathcal{T}}(x-\overline{x}(t))w\left(x|N_K\delta_{y(t)}\right)\delta_{y(t)}dx\label{intermediate_for_canonical_AD}
+\end{align}
+Our `weak mutation' assumptions imply that the population will be concentrated in an infinitesimal neighborhood around the mean value $y(t)$ (\emph{i.e} that the distribution of traits in the population is sharply peaked). We can thus Taylor expand $w\left(x|N_K\delta_{y(t)}\right)$ about $y(t)$ as:
+\begin{equation*}
+    w(x|N_K\delta_{y(t)}) = \underbrace{w(y|N_K\delta_{y(t)})}_{=0} + (x-y(t))\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y} + \ldots
+\end{equation*}
+Thus, substituting in \eqref{intermediate_for_canonical_AD}, to first order, we obtain
+\begin{equation*}
+    \frac{dy}{dt} = \left(\int\limits_{\mathcal{T}}(x-\overline{x}(t))^2p(x,t)dx\right)\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y}
+\end{equation*}
+where we have used $\overline{x}(t) = y(t)$. We can define the shorthand $B(y) =\int\limits_{\mathcal{T}}(x-y(t))^2p(x,t)dx = \int\limits_{\mathcal{T}}(x-\overline{x}(t))^2p(x,t)dx$ to obtain:
+\begin{equation}
+    \label{AD_canonical_derived}
+    \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dy}{dt} = B(y)\left(\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y}\right)}
+\end{equation}
+Note that by definition, $B(y(t))$ is the variance of the trait in the population at time $t$. The term $w\left(z|N_K\delta_{y(t)}\right)$ is the expected growth rate of an individual with trait value $z$ in a population of size $N_K$ in which (almost) every individual has trait value $y$. This quantity is referred to as the `invasion fitness' of a `mutant' trait $z$ in a population of `resident' $y$ individuals. Comparing with \eqref{AD_canonical_eqn}, we can see that we have thus derived the canonical equation of adaptive dynamics. Note that strictly speaking, if $\psi(x,t) = \delta_{y(t)}$ exactly, then $B(y) \equiv 0$. This just reflects our assumption that mutations are sampled from infinitesimally close to the resident value. More detailed mathematical arguments are required to ensure that this convergence `makes sense' and that $B(y)$ does not actually equal 0. This has been proved using much more sophisticated mathematical tools in \citep{champagnat_unifying_2006}, which is where we refer the interested reader. An alternative heuristic argument is also provided in the classic article by \citep{dieckmann_dynamical_1996}.
+
+\section{Stochastic fluctuations and the weak noise approximation}
+
+We can now formally carry out a functional analogue of the weak noise expansion. Assume that $\psi(x,t)$ is the deterministic trajectory obtained as the solution to \eqref{deterministic_traj}. We introduce a new process $\{\zeta^{(s)}\}_{s \geq 0}$ which measures the fluctuations of $\phi^{(t)}$ from the deterministic trajectory $\psi(x,t)$. More precisely, we introduce the new variables:
+\begin{equation}
+\begin{aligned}
+\label{functional_weak_noise_new_vars}
+    \zeta^{(s)}(x) &= \sqrt{K}(\phi^{(t)}(x) - \psi(x,t))\\
+    s &= t\\
+    \Tilde{P}(\zeta,s) &= \frac{1}{\sqrt{K}}P(\phi,t)
+\end{aligned}
+\end{equation}
+Note that the following relations hold:
+\begin{align}
+\frac{\delta F[\zeta]}{\delta \phi(x)} &= \int\limits_{\mathcal{T}}\frac{\delta F[\zeta]}{\delta \zeta(y)}\frac{\delta \zeta(y)}{\delta \phi(x)}dy = \sqrt{K}\frac{\delta F[\zeta]}{\delta \zeta(x)}\ \label{functional_weak_noise_first_subs}\\
+\frac{\partial}{\partial s} &= \frac{\partial}{\partial t}\label{functional_weak_noise_second_subs}
+\end{align}
+Furthermore, for any $\zeta \in \mathcal{M}_K$, we have:
+\begin{align}
+\frac{\partial \Tilde{P}}{\partial t}(\zeta,s) &= \frac{\delta \Tilde{P}}{\delta \zeta}\frac{\partial \zeta}{\partial t} + \frac{\partial \Tilde{P}}{\partial s}\frac{\partial s}{\partial t}\nonumber\\
+    &=\frac{\delta \Tilde{P}}{\delta \zeta}\left(-\sqrt{K}\frac{\partial \psi}{\partial t}\right) + \frac{\partial \Tilde{P}}{\partial s}\nonumber\\
+    &= -\sqrt{K}\frac{\delta}{\delta \zeta}\{\mathcal{A}^{-}(x|\psi)\Tilde{P}(\zeta,s)\} + \frac{\partial \Tilde{P}}{\partial s}\label{functional_weak_noise^{(t)}hird_subs}
+\end{align}
+Reformulating equation \eqref{functional_FPE} in terms of the new variables \eqref{functional_weak_noise_new_vars} and using the relations \eqref{functional_weak_noise_first_subs}, \eqref{functional_weak_noise_second_subs} and \eqref{functional_weak_noise^{(t)}hird_subs}, we obtain:
+\begin{equation*}
+\begin{split}
+-\sqrt{K}\frac{\delta}{\delta \zeta(x)}\{\mathcal{A}^{-}(x|\psi)\Tilde{P}(\zeta,s)\} + \frac{\partial \Tilde{P}}{\partial s} = \int\limits_{\mathcal{T}}\left[-
+    \left(\sqrt{K}\frac{\delta }{\delta \zeta(x)}\right)\{\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\tilde{P}(\zeta,s)\}\right]dx \\
+    + \int\limits_{\mathcal{T}}\left[\frac{1}{2K}\left(K\frac{\delta^2}{\delta\zeta(x)^2}\right)\{\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\Tilde{P}(\zeta,s)\}\right]dx    
+\end{split}
+\end{equation*}
+and rearranging gives us:
+\begin{align}
+\label{functional_weak_noise_mid_expansion}
+\begin{split}
+\frac{\partial \Tilde{P}}{\partial s} &= -\sqrt{K}\int\limits_{\mathcal{T}}\frac{\delta }{\delta \zeta(x)}\left\{\left(\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)-\mathcal{A}^{-}(x|\psi)\right)\Tilde{P}(\zeta,s)\right\}dx\\
+&+\frac{1}{2}\int\limits_{\mathcal{T}}\frac{\delta^2}{\delta\zeta(x)^2}\{\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)\Tilde{P}(\zeta,s)\}dx
+\end{split}
+\end{align}
+We will now Taylor expand our functionals about $\psi$ (we assume that this is possible). Thus, we have the expansions:
+\begin{align*}
+    \mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right) &= \mathcal{A}^{-}\left(x|\psi\right) + \frac{1}{\sqrt{K}}\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy + \cdots\\
+    \mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right) &= \mathcal{A}^{+}\left(x|\psi\right) + \frac{1}{\sqrt{K}}\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{+}(y|\psi)\}dy + \cdots
+\end{align*}
+We also assume that $\tilde{P}$ can be expanded as
+\begin{align*}
+     \Tilde{P} &= \sum\limits_{n=0}^{\infty}\Tilde{P}_n\left(\frac{1}{\sqrt{K}}\right)^n
+\end{align*}
+substituting these expansions into equation \eqref{functional_weak_noise_mid_expansion} and equating coefficients of powers of $K$, we see that upto leading order in $K$ (corresponding to the zeroth order terms of $\tilde{P}$ and $\mathcal{A}^{+}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)$, and the first order term of $\mathcal{A}^{-}\left(x\bigg{|}\psi+\frac{\zeta}{\sqrt{K}}\right)$) we have:
+\begin{equation*}
+\frac{\partial \Tilde{P}_{0}}{\partial s}(\zeta,s) = \int\limits_{\mathcal{T}}\left[-\frac{\delta}{\delta \zeta(x)}\left\{\int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy\Tilde{P}_{0}(\zeta,s)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{\Tilde{P}_{0}(\zeta,s)\}\right]dx
+\end{equation*}
+We thus arrive at the functional Fokker-Planck equation:
+\begin{equation}
+\label{functional_WNE_zeroth_order}
+    \frac{\partial \Tilde{P}_{0}}{\partial s}(\zeta,s) = \int\limits_{\mathcal{T}}\left(-\frac{\delta}{\delta \zeta(x)}\left\{\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x)\Tilde{P}_{0}(\zeta,s)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{\Tilde{P}_{0}(\zeta,s)\}\right)dx
+\end{equation}
+where 
+\begin{equation*}
+\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x) = \int\limits_{\mathcal{T}}\zeta(y)\frac{\delta}{\delta \psi(y)}\{\mathcal{A}^{-}(y|\psi)\}dy = \frac{d}{d\epsilon}\mathcal{A}^-(x|\psi + \epsilon \zeta) \bigg{|}_{\epsilon = 0}
+\end{equation*}
+can be thought of now as the functional analogue of a directional derivative of $\mathcal{A}^-(x|\psi)$ in the direction of the function $\zeta$.

@@ -1,0 +1,35 @@
+\epigraph{\justifying The grand aim of all science [is] to cover the greatest number of empirical facts by logical deduction from the smallest number of hypotheses or axioms}{Albert Einstein}
+
+
+In this thesis, we have seen how stochastic birth-death processes can be used to construct and analyze mechanistic individual-based models for the dynamics of finite populations. In doing so, we have also seen that various well-known equations of evolutionary dynamics can be recovered in the infinite population size limit, sometimes also called the `macroscopic' description. In the finite-dimensional case (corresponding to discrete trait variants), the macroscopic descriptions are the equations of population genetics and evolutionary game theory. In the infinite-dimensional case, they are the equations of quantitative genetics, and, in some further limits, adaptive dynamics. In both cases, the mean value of the trait in the population changes according to an equation resembling the Price equation. My derivation shows the (stochastic) individual-level underpinnings of these population-level equations. It also highlights the natural connections between these various equations - For example, the same procedures that lead to the replicator-mutator equation in the case of discretely varying traits yield Kimura's model in the quantitative case, underscoring the broad similarities between evolutionary game theory and quantitative genetics. The major formulations are summarized in Table \ref{table_summary}. If the population is large (but finite) and the stochasticity is sufficiently weak, stochastic dynamics can be studied analytically using the weak noise approximation. Usually, this approximation is valid if we are studying a stochastic trajectory that is fluctuating about a point that is stable in the deterministic limit \hl{cite van kampen}. Such situations occur often, since many systems of the forms studied here quickly relax to stable equilibria.
+\clearpage
+{\centering\begin{sideways}
+    \begin{minipage}{\textheight}
+        \resizebox{\textheight}{!}{%
+            \setstretch{1.5}
+            \begin{tabular}{ %I manually specified the width of each column by trial and error
+  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 1
+  |p{\dimexpr.27\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 2
+  |p{\dimexpr.33\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 3
+  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 4
+  |p{\dimexpr.4\linewidth-2\tabcolsep-1.3333\arrayrulewidth}|% column 5
+  }
+            \hline
+         \centering \textbf{Number of possible distinct trait variants ($m$)} & \centering \textbf{State Space} &
+\centering \textbf{Model parameters} & \centering \textbf{Mesoscopic description} & \centering\arraybackslash \textbf{Infinite population limit} \\
+        \hline
+        $m = 1$ \newline (Identical individuals)  & $[0,1,2,3,\ldots]$ \newline (Population size) & Two real-valued functions, $b(N)$ and $d(N)$, describing the birth and death rate of individuals when the population size is $N$ & Univariate Fokker-Planck equation \newline (one-dimensional SDEs) & Single species population dynamics\\ 
+        \hline
+        $1 < m < \infty$ \newline (Discrete traits) & $[0,1,2,3,\ldots]^{m}$ \newline (Number of individuals of each trait variant) & $2m$ real-valued functions, $b_i(\mathbf{v})$ and $d_i(\mathbf{v})$ (for $1 \leq i \leq m$) describing the birth and death rate of trait variant $i$ when the population is $\mathbf{v}$ & Multivariate Fokker-Planck equation \newline ($m$-dimensional SDEs) &  Evolutionary game theory \newline
+        Lotka-Volterra competition \newline Quasispecies equation \newline Price equation (discrete traits) \\
+        \hline
+        $m = \infty$ \newline (Quantitative traits) & $\left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}\right\}$ \newline \newline (Each Dirac mass $\delta_{x_i}$ is an individual with trait value $x_i$) & Two real-valued functionals $b(x|\nu)$ and $d(x|\nu)$ describing the birth and death rate of trait variant $x$ when the population is $\nu$ & Functional Fokker-Planck equation \newline (SPDEs/Field equations) & Kimura's continuum-of-alleles model \newline \cite{sasaki_oligomorphic_2011}'s Oligomorphic Dynamics \newline \cite{wickman_theoretical_2022}'s Trait Space Equations for intraspecific trait variation \newline Adaptive Dynamics  \newline Price equation (quantitative traits)\\
+        \hline
+            \end{tabular}
+        }
+        %\renewcommand\thetable{1}
+        \captionof{table}{Summary of the various birth-death processes studied in this chapter}
+        \label{table_summary}
+    \end{minipage}
+\end{sideways}\par}
+
