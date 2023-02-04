@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.12)  1 FEB 2023 11:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.12)  4 FEB 2023 11:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1407,29 +1407,29 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 
 Package biblatex Warning: Conflicting options.
 (biblatex)                '<namepart>inits' conflicts with 'uniquename=full'.
-(biblatex)                Setting 'uniquename=init' on input line 53.
+(biblatex)                Setting 'uniquename=init' on input line 54.
 
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
  ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 53.
+LaTeX Info: Redefining \selectfont on input line 54.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1478,10 +1478,10 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 53.
-Package biblatex Info: Reference segment=0 on input line 53.
+Package biblatex Info: Reference section=0 on input line 54.
+Package biblatex Info: Reference segment=0 on input line 54.
 \AtBeginShipoutBox=\box127
-Package hyperref Info: Link coloring ON on input line 53.
+Package hyperref Info: Link coloring ON on input line 54.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
@@ -1493,9 +1493,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count475
 )
-LaTeX Info: Redefining \ref on input line 53.
-LaTeX Info: Redefining \pageref on input line 53.
-LaTeX Info: Redefining \nameref on input line 53.
+LaTeX Info: Redefining \ref on input line 54.
+LaTeX Info: Redefining \pageref on input line 54.
+LaTeX Info: Redefining \nameref on input line 54.
 
 (./main.out) (./main.out)
 \@outlinefile=\write5
@@ -1535,7 +1535,7 @@ enefit from \pgfplotsset{compat=1.16} (current compat level: 1.8).
 <Media/iiser-logo.png, id=203, 100.375pt x 84.315pt>
 File: Media/iiser-logo.png Graphic file (type png)
 <use Media/iiser-logo.png>
-Package pdftex.def Info: Media/iiser-logo.png  used on input line 55.
+Package pdftex.def Info: Media/iiser-logo.png  used on input line 56.
 (pdftex.def)             Requested size: 100.37474pt x 84.31477pt.
 [1
 
@@ -1560,7 +1560,12 @@ Package pdftex.def Info: Media/iiser-logo.png  used on input line 55.
 ] [10
 
 
-] [11] [12
+]
+Underfull \hbox (badness 10000) in paragraph at lines 56--56
+
+ []
+
+[11] [12
 
 
 ] (./main.toc
@@ -1626,7 +1631,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--33
 ]
 Chapter 2.
 
-Overfull \hbox (3.87793pt too wide) in paragraph at lines 59--59
+Overfull \hbox (3.87793pt too wide) in paragraph at lines 60--60
 |\OT1/cmr/bx/n/24.88 Adaptive di-ver-si-fi-ca-tion: a crash course| 
  []
 
@@ -1699,7 +1704,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 Chapter 3.
 
-Overfull \hbox (28.0783pt too wide) in paragraph at lines 61--61
+Overfull \hbox (28.0783pt too wide) in paragraph at lines 62--62
 |\OT1/cmr/bx/n/24.88 Population dy-nam-ics from stochas-tic first
  []
 
@@ -1801,7 +1806,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 416--420
  []
 
 
-Underfull \vbox (badness 2435) has occurred while \output is active []
+Underfull \vbox (badness 7081) has occurred while \output is active []
 
  [44]
 Underfull \hbox (badness 10000) in paragraph at lines 431--435
@@ -1821,29 +1826,31 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [48]
-Overfull \vbox (1.69588pt too high) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-[49]
+ [49]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [50]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [51]
-Overfull \hbox (10.11475pt too wide) in paragraph at lines 558--558
+Overfull \hbox (10.11475pt too wide) in paragraph at lines 557--557
 |[]\OT1/cmr/bx/n/17.28 Infinite-dimensional pro-cesses for quan-ti-ta-tive trai
 ts| 
  []
 
-[52]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [52]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [53]
-<Media/3.3_dirac_deltas.png, id=978, 523.50581pt x 536.2434pt>
+<Media/3.3_dirac_deltas.png, id=980, 523.50581pt x 536.2434pt>
 File: Media/3.3_dirac_deltas.png Graphic file (type png)
 <use Media/3.3_dirac_deltas.png>
-Package pdftex.def Info: Media/3.3_dirac_deltas.png  used on input line 587.
+Package pdftex.def Info: Media/3.3_dirac_deltas.png  used on input line 586.
 (pdftex.def)             Requested size: 234.8775pt x 240.58723pt.
 
 
@@ -1853,21 +1860,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [54]
-[55 <./Media/3.3_dirac_deltas.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 624--627
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 624--627
-
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [56]
-Underfull \hbox (badness 10000) in paragraph at lines 647--651
+ [55 <./Media/3.3_dirac_deltas.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 623--626
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 623--626
+
+ []
+
+[56]
+Underfull \hbox (badness 10000) in paragraph at lines 646--650
 
  []
 
@@ -1875,22 +1881,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 647--651
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [57]
-[58]
-Underfull \vbox (badness 1365) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [59]
-Overfull \hbox (8.36pt too wide) detected at line 736
+ [58]
+[59] [60]
+Overfull \hbox (8.36pt too wide) detected at line 735
 []
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [60]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [61]
-Overfull \hbox (37.47173pt too wide) detected at line 770
+Overfull \hbox (37.47173pt too wide) detected at line 769
 []
  []
 
@@ -1905,7 +1908,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [65]
-Overfull \hbox (25.2945pt too wide) detected at line 865
+Overfull \hbox (25.2945pt too wide) detected at line 864
 []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^P; s\OT1/cmr/m/n/12 ) = [] [] \OML/cmm/m/
 it/12 dx
  []
@@ -1914,52 +1917,55 @@ it/12 dx
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [66]
-[67]
-Underfull \hbox (badness 10000) in paragraph at lines 904--904
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [67]
+[68]
+Underfull \hbox (badness 10000) in paragraph at lines 903--903
 []|\OT1/cmr/m/n/12 Univariate Fokker-Planck
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 904--904
+Underfull \hbox (badness 10000) in paragraph at lines 903--903
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 904--904
+Underfull \hbox (badness 10000) in paragraph at lines 903--903
 \OT1/cmr/m/n/12 (Each Dirac mass $\OML/cmm/m/it/12 ^^N[]$ \OT1/cmr/m/n/12 is
  []
 
 
-Underfull \hbox (badness 1845) in paragraph at lines 904--904
+Underfull \hbox (badness 1845) in paragraph at lines 903--903
 []|\OT1/cmr/m/n/12 Two real-valued func-tion-als $\OML/cmm/m/it/12 b\OT1/cmr/m/
 n/12 (\OML/cmm/m/it/12 x\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 ^^W\OT1/cmr/m/n/12 )
 $
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 904--904
+Underfull \hbox (badness 10000) in paragraph at lines 903--903
 []|\OT1/cmr/m/n/12 Functional Fokker-Planck
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 906.
+(caption)                particular \caption on input line 905.
 See the caption package documentation for explanation.
 
-) [68
+) [69
 
-] [69] [70
-
-]
+] [70]
 Chapter 4.
 (./ind_files/04_polymorphisms.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [71]
+ [71
+
+]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [72]
-<Media/4.1_stoch_logistic_timeseries.png, id=1167, 919.2744pt x 281.853pt>
+<Media/4.1_stoch_logistic_timeseries.png, id=1169, 919.2744pt x 281.853pt>
 File: Media/4.1_stoch_logistic_timeseries.png Graphic file (type png)
 <use Media/4.1_stoch_logistic_timeseries.png>
 Package pdftex.def Info: Media/4.1_stoch_logistic_timeseries.png  used on input
@@ -1967,7 +1973,7 @@ Package pdftex.def Info: Media/4.1_stoch_logistic_timeseries.png  used on input
 (pdftex.def)             Requested size: 469.75502pt x 144.03127pt.
 
 [73 <./Media/4.1_stoch_logistic_timeseries.png>]
-<Media/4.2_stoch_logistic_distributions.png, id=1199, 918.84077pt x 504.4446pt>
+<Media/4.2_stoch_logistic_distributions.png, id=1201, 918.84077pt x 504.4446pt>
 
 File: Media/4.2_stoch_logistic_distributions.png Graphic file (type png)
 <use Media/4.2_stoch_logistic_distributions.png>
@@ -2002,7 +2008,7 @@ Overfull \hbox (46.9748pt too wide) detected at line 138
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [78]
-<Media/4.3_fourier_fig.png, id=1270, 443.19577pt x 230.2703pt>
+<Media/4.3_fourier_fig.png, id=1272, 443.19577pt x 230.2703pt>
 File: Media/4.3_fourier_fig.png Graphic file (type png)
 <use Media/4.3_fourier_fig.png>
 Package pdftex.def Info: Media/4.3_fourier_fig.png  used on input line 191.
@@ -2038,11 +2044,6 @@ Overfull \hbox (2.95914pt too wide) detected at line 304
 
 ) [84]
 Appendix A.
-
-Overfull \hbox (2.29987pt too wide) in paragraph at lines 71--71
-|\OT1/cmr/bx/n/24.88 Relation be-tween Ito SDEs and Fokker-
- []
-
 (./ind_files/99_Appendix_A.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -2061,7 +2062,7 @@ Appendix B.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [89]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1253) has occurred while \output is active []
 
  [90]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2079,23 +2080,23 @@ Package biblatex Warning: Name format 'last-first' deprecated.
 (biblatex)                Using 'family-given' now.
 
 [95] [96] [97] [98] [99] [100] [101] [102] [103] [104] [105]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 78.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 79.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 79.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 78.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 78.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 79.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 79.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 69B701601CBC6FAF8EF6A5E996923CA8;4441.
+(rerunfilecheck)             Checksum: 0A9D5F8CE08BFBC5B15F26E44325EF3F;4443.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42555 strings out of 481239
- 939477 string characters out of 5920377
- 1724365 words of memory out of 5000000
- 56619 multiletter control sequences out of 15000+600000
- 550536 words of font info for 95 fonts, out of 8000000 for 9000
+ 42561 strings out of 481239
+ 939543 string characters out of 5920377
+ 1724391 words of memory out of 5000000
+ 56622 multiletter control sequences out of 15000+600000
+ 551586 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,21n,100p,5354b,2068s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
@@ -2121,13 +2122,14 @@ sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 y7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/f
-onts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (121 pages, 4651410 bytes).
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/ty
+pe1/public/cm-super/sfrm1200.pfb>
+Output written on main.pdf (121 pages, 4660789 bytes).
 PDF statistics:
- 1778 PDF objects out of 2073 (max. 8388607)
- 1588 compressed objects within 16 object streams
- 423 named destinations out of 1000 (max. 500000)
+ 1785 PDF objects out of 2073 (max. 8388607)
+ 1594 compressed objects within 16 object streams
+ 424 named destinations out of 1000 (max. 500000)
  445 words of extra memory for PDF output out of 10000 (max. 10000000)
 

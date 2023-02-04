@@ -309,7 +309,7 @@ iiser-thesis class.}}%
     \begin{flushleft}%
       \vspace*{.15in}%
       \justify
-      This is to certify that this dissertation entitled \@title\ towards the partial fulfilment of the BS-MS dual degree programme at the Indian Institute of Science Education and Research, Pune represents study/work carried out by \@author\ at the Indian Institute of Science Education and Research, Pune,
+      This is to certify that this dissertation entitled {\bf\@title\ }towards the partial fulfilment of the BS-MS dual degree programme at the Indian Institute of Science Education and Research, Pune represents study/work carried out by \@author\ at the Indian Institute of Science Education and Research, Pune,
  under the supervision of \@supervisor \@sdesignation, \@department\ with \@cosupervisor \@csdesignation, \@department\ as a co-supervisor, during the academic year \@academicyear.
    \end{flushleft}
        \vspace*{0.25in}%
@@ -347,7 +347,7 @@ iiser-thesis class.}}%
 \begin{flushleft}%
       \vspace*{.15in}%
       \justify
-      I hereby declare that the matter embodied in the report entitled \@title\ are the results of the work carried out by me at the \@department, under the supervision of \@supervisor\ with \@cosupervisor\ as a co-supervisor, and the same has not been submitted elsewhere for any other degree.
+      I hereby declare that the matter embodied in the report entitled {\bf\@title\ }are the results of the work carried out by me at the \@department, under the supervision of \@supervisor\ with \@cosupervisor\ as a co-supervisor, and the same has not been submitted elsewhere for any other degree.
        \vspace*{2in}%
      \end{flushleft}
       \begin{flushright}%

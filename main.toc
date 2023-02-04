@@ -71,11 +71,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.4.1}Description of the process and the Master Equation}{53}{subsection.3.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.2}The functional system-size expansion}{56}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.2}The functional system-size expansion}{57}{subsection.3.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4.3}The deterministic limit}{58}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.3}The deterministic limit}{59}{subsection.3.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Some familiar faces: Kimura-Crow and adaptive dynamics}{59}{subsubsection*.10}%
+\contentsline {subsubsection}{Some familiar faces: Kimura-Crow and adaptive dynamics}{60}{subsubsection*.10}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.4.4}Stochastic fluctuations and the weak noise approximation}{65}{subsection.3.4.4}%
 \defcounter {refsection}{0}\relax 
@@ -95,6 +95,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Appendices}{85}{section*.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Relation between Ito SDEs and Fokker-Planck equations}{85}{appendix.1.A}%
+\contentsline {chapter}{\numberline {A}Deriving the Fokker-Planck equations for It\^{o} SDEs}{85}{appendix.1.A}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Stochastic equations for trait frequencies in finite populations}{89}{appendix.1.B}%
+\contentsline {chapter}{\numberline {B}Deriving stochastic trait frequency dynamics using It\^{o}'s formula}{89}{appendix.1.B}%

@@ -45,5 +45,5 @@
 \BOOKMARK [2][-]{subsection.4.3.1}{Interlude: Detecting clusters through Fourier analysis}{section.4.3}% 45
 \BOOKMARK [2][-]{subsection.4.3.2}{An example: The quantitative logistic equation}{section.4.3}% 46
 \BOOKMARK [0][-]{section*.14}{Appendices}{}% 47
-\BOOKMARK [0][-]{appendix.1.A}{Relation between Ito SDEs and Fokker-Planck equations}{}% 48
-\BOOKMARK [0][-]{appendix.1.B}{Stochastic equations for trait frequencies in finite populations}{}% 49
+\BOOKMARK [0][-]{appendix.1.A}{Deriving the Fokker-Planck equations for It\364 SDEs}{}% 48
+\BOOKMARK [0][-]{appendix.1.B}{Deriving stochastic trait frequency dynamics using It\364's formula}{}% 49

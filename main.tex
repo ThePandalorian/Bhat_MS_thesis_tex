@@ -30,7 +30,7 @@
 %%%%%%%%%%%%
 %\setcounter{chapter}{-1}
 
-\title{Eco-evolutionary dynamics of finite populations from demographic first principles}
+\title{Eco-evolutionary dynamics of finite populations from first principles}
 
 
 \author{Ananda Shikhara Bhat}
@@ -43,8 +43,9 @@
 \graduationmonth{April}
 
 \thesisabstract{
-Some central questions of ecology and evolution ask how many distinct variants of an entity can emerge and coexist in sympatry. Examples include the study of diversity in standing genetic variation (alleles), polymorphisms (genotypes/phenotypes), and sympatric speciation (species). Historically, these questions have often been studied through phenomenological models formulated for infinitely large populations. Stochastic individual-based models (IbMs), where ecological rules are specified for each individual, are more realistic but are rarely studied analytically.
-In this thesis, I present a review and synthesis of how ideas from statistical physics can be used to analytically formulate and study IbMs from biological first principles. Starting from a stochastic ‘birth-death process’, I show how density dependence of the population dynamics can be used to obtain a continuous approximation of the system. I then show how well-known equations such as the replicator-mutator and Price equations are recovered in the infinite population limit. The dynamics of large, finite populations can be expressed as stochastic deviations from the deterministic result predicted by these well-known models using a ‘weak noise approximation’. As an application, I show how this formalism can be used to describe a version of the logistic equation for finite populations. Finally, I extend this theory to study quantitative traits through a stochastic field equation. In the infinite population limit, I recover well-known models such as Kimura's continuum-of-alleles and the canonical equation of adaptive dynamics. As an application, I show how to study finite-population effects on evolutionary branching, a process considered important for sympatric speciation.
+Some central questions of ecology and evolution ask how many distinct variants of an entity can emerge and coexist in sympatry. Examples include the study of standing genetic variation (alleles), polymorphisms (genotypes/phenotypes), and sympatric speciation (species). Historically, these questions have often been studied through phenomenological models formulated for infinitely large populations. Stochastic individual-based models (IbMs), where mechanistic rules are specified for each individual, are more realistic but are rarely studied analytically.\\
+\\
+In this thesis, I show how ideas from statistical physics can be used to analytically formulate and study IbMs from biological first principles. Starting from a stochastic ‘birth-death process’, I show how density dependence of the population dynamics can be used to obtain a continuous approximation of the system as a stochastic differential equation (SDE). I show that well-known ‘fundamental theorems’ of evolution, such as the Price equation, are recovered in the infinite population limit. My stochastic formulation reveals a new directional evolutionary force in finite populations that lends itself to a simple biological interpretation and has no analogue in infinitely large populations. As an application, I show how this formalism can be used to study cooperation in finite populations. Finally, I extend this theory to study quantitative traits through a stochastic field equation, which can be thought of as an infinite-dimensional SDE. In the infinite population limit, I recover well-known models such as Kimura's continuum-of-alleles and adaptive dynamics. My work thus highlights the connections between various equations in ecology and evolution by revealing their common stochastic underpinnings.
 }
 
 \acknowledgments{Not more than 250 words}
@@ -68,9 +69,9 @@ In this thesis, I present a review and synthesis of how ideas from statistical p
 % \input{ind_files/chapter_06}
 
 \begin{appendices}
-\chapter{Relation between Ito SDEs and Fokker-Planck equations}\label{App_SDE_FPE}
+\chapter{Deriving the Fokker-Planck equations for It\^{o} SDEs}\label{App_SDE_FPE}
 \input{ind_files/99_Appendix_A}
-\chapter{Stochastic equations for trait frequencies in finite populations}\label{App_density_to_freq}
+\chapter{Deriving stochastic trait frequency dynamics using It\^{o}'s formula}\label{App_density_to_freq}
 \input{ind_files/99_Appendix_B}
 \end{appendices}
 
