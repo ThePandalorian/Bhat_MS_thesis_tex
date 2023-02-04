@@ -309,26 +309,20 @@ iiser-thesis class.}}%
     \begin{flushleft}%
       \vspace*{.15in}%
       \justify
-      This is to certify that this dissertation entitled {\bf\@title\ }towards the partial fulfilment of the BS-MS dual degree programme at the Indian Institute of Science Education and Research, Pune represents study/work carried out by \@author\ at the Indian Institute of Science Education and Research, Pune,
- under the supervision of \@supervisor \@sdesignation, \@department\ with \@cosupervisor \@csdesignation, \@department\ as a co-supervisor, during the academic year \@academicyear.
+      This is to certify that this dissertation entitled {\bf\@title\ }towards the partial fulfilment of the BS-MS dual degree programme at the Indian Institute of Science Education and Research, Pune represents study/work carried out by \@author\ at the Indian Institute of Science Education and Research, Pune, under the supervision of \@supervisor \@sdesignation, \@department\ with \@cosupervisor \@csdesignation, \@department\ as a co-supervisor, during the academic year \@academicyear.
    \end{flushleft}
-       \vspace*{0.25in}%
-      \begin{flushright}%
+       \vspace*{0.4in}%
+      \begin{centering}%
               \par
-        \parbox{3.6in}{%
+        \parbox{0.95\linewidth}{%
           \vspace{.8in}%
           \if@bd@sig@lines{\bd@signline{2.9in}}{}%
-         \hfill \@supervisor}%
-      \end{flushright}%
-      %\vspace*{2in}%
-      %\vspace*{0.25in}%
-      \begin{flushright}%
-              \par
-        \parbox{3.6in}{%
-          \vspace{.8in}%
-          \if@bd@sig@lines{\bd@signline{2.9in}}{}%
-         \hfill \@cosupervisor}%
-      \end{flushright}%
+          \hspace*{0.2in}
+          \@supervisor \hfill \hfill
+          \hspace*{0.1in}
+          \@cosupervisor
+      }%
+      \end{centering}%
       \vspace*{0.9in}%
     \begin{flushleft}
       Committee:
@@ -348,31 +342,27 @@ iiser-thesis class.}}%
       \vspace*{.15in}%
       \justify
       I hereby declare that the matter embodied in the report entitled {\bf\@title\ }are the results of the work carried out by me at the \@department, under the supervision of \@supervisor\ with \@cosupervisor\ as a co-supervisor, and the same has not been submitted elsewhere for any other degree.
-       \vspace*{2in}%
+       \vspace*{0.4in}%
      \end{flushleft}
+      \begin{centering}%
+		\par
+		\parbox{0.95\linewidth}{%
+		\vspace{.8in}%
+		\if@bd@sig@lines{\bd@signline{2.9in}}{}%
+		\hspace*{0.2in}
+		\@author \hfill \hfill
+		\hspace*{0.1in}
+		\@supervisor
+		}%
+	\end{centering}%
+  	 \vspace*{0.5in}
       \begin{flushright}%
               \par
         \parbox{3.6in}{%
           \vspace{.8in}%
           \if@bd@sig@lines{\bd@signline{2.9in}}{}%
-         \hfill \@author}%
-      \end{flushright}%
-     \vspace*{0.25in}%
-      \begin{flushright}%
-              \par
-        \parbox{3.6in}{%
-          \vspace{.8in}%
-          \if@bd@sig@lines{\bd@signline{2.9in}}{}%
-         \hfill \@supervisor}%
-      \end{flushright}%
-      %\vspace*{2in}%
-      %\vspace*{0.25in}%
-      \begin{flushright}%
-              \par
-        \parbox{3.6in}{%
-          \vspace{.8in}%
-          \if@bd@sig@lines{\bd@signline{2.9in}}{}%
-         \hfill \@cosupervisor}%
+         \hfill
+         \@cosupervisor \hspace*{0.2in}}%
       \end{flushright}%  
     \clearpage}
     
