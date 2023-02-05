@@ -344,7 +344,7 @@ iiser-thesis class.}}%
 \begin{flushleft}%
       \vspace*{.15in}%
       \justify
-      I hereby declare that the matter embodied in the report entitled {\bf\@title\ }are the results of the work carried out by me at the \@department, under the supervision of \@supervisor\ with \@cosupervisor\ as a co-supervisor, and the same has not been submitted elsewhere for any other degree.
+      I hereby declare that the matter embodied in the report entitled {\bf\@title\ }are the results of the work carried out by me at the \@department, under the supervision of \@supervisor, with \@cosupervisor\ as a co-supervisor, and the same has not been submitted elsewhere for any other degree.
        \vspace*{0.4in}%
      \end{flushleft}
       \begin{centering}%
@@ -353,20 +353,11 @@ iiser-thesis class.}}%
 		\vspace{.8in}%
 		\if@bd@sig@lines{\bd@signline{2.9in}}{}%
 		\hspace*{0.2in}
-		\@author \hfill \hfill
+		\@author \hfill \@supervisor \hfill
 		\hspace*{0.1in}
-		\@supervisor
+		\@cosupervisor
 		}%
-	\end{centering}%
-  	 \vspace*{0.5in}
-      \begin{flushright}%
-              \par
-        \parbox{3.6in}{%
-          \vspace{.8in}%
-          \if@bd@sig@lines{\bd@signline{2.9in}}{}%
-         \hfill
-         \@cosupervisor \hspace*{0.2in}}%
-      \end{flushright}%  
+	\end{centering}% 
     \clearpage}
     
 \newcommand{\bd@sig@page@item}[1]{%
