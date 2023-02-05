@@ -73,8 +73,8 @@ Thus, using \eqref{nD_jacobian_for_ito}, we see that the last term on the RHS of
 Putting equations \eqref{nD_for_Ito_first_term}, \eqref{nD_for_Ito_second_term} and \eqref{nD_for_Ito_third_term} into \eqref{nD_Ito_formula}, we see that $p_i = f_i(\mathbf{X})_t$, the frequency of the $i\textsuperscript{th}$ type in the population $\mathbf{X}_t$, changes according to the equation:
 \begin{equation}
 \begin{aligned}
-N(t) dp_i &= \underbrace{\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)dt}_{\text{$K \to \infty$ prediction}} - \frac{1}{K}\underbrace{\frac{1}{N(t)}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)dt}_{\substack{\text{Directional finite size effects}\\\text{due to differential turnover rates}}}\\
-&+ \frac{1}{\sqrt{K}}\underbrace{\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]}_{\substack{\text{Non-directional finite size effects}\\\text{due to stochastic fluctuations}}}
+N(t) dp_i &= \left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)dt - \frac{1}{K}\frac{1}{N(t)}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)dt\\
+&+ \frac{1}{\sqrt{K}}\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]
 \end{aligned}
 \end{equation}
 Substituting the functional forms given by \eqref{nD_functional_forms_for_replicator} and repeating calculations for the $A^{+}_i$ terms exactly analogous to those done in going from \eqref{nD_replicator_intermediate_1} to \eqref{nD_replicator_mutator} now yields equation \eqref{nD_eqn_for_frequencies} in the main text.
