@@ -59,7 +59,12 @@ We can Taylor expand the invasion fitness function as
 where we have neglected terms that are higher than second order. Since $x^*$ is convergent stable, $\frac{d g}{dx}\bigg{|}_{x=x^*} < 0$ and we therefore see that $g$ is a decreasing function of $x$ in the immediate vicinity of $x^*$. Thus, since $x_2 > x^*$, we must have $g(x_2) < g(x^*) = 0$, and we can conclude that the second term in the RHS must be positive. Lastly, since $x^*$ is evolutionarily unstable, we must have $\frac{\partial^2 f}{\partial x_1^2}(x_1 ; x^*)\bigg{|}_{x_1 = x^*} > 0$ by the stability criterion. Thus, assuming $f$ is smooth, for $x_2$ sufficiently close to $x^*$, it must be the case that $\frac{\partial^2 f}{\partial x_1^2}(x_1 ; x_2)\bigg{|}_{x_1 = x_2} > 0$. Thus, the third term of the RHS is also positive, meaning that $f(x_1 ; x_2) > 0$, and that $x_1$ can thus invade $x_2$. An exactly analogous argument shows that $f(x_2 ; x_1) > 0$, thus completing the proof.
 \end{proof}
 Mutual invasibility of $x_1$ and $x_2$ results in a so-called `protected polymorphism' in which the population harbours some members with trait value $x_1$ and some members with trait value $x_2$. This can be shown in some cases to lead to further divergence where the polymorphisms grow further apart in trait space while both being maintained in the population. Thus, the population appears to have `branched' from a monomorphic state to a dimorphic state in trait space. Due to this reason, points of type \circled{B} are called \emph{branching points}, and the population is said to have undergone \emph{evolutionary branching} once it has gone from a monomorphism to a dimorphism. Note that once a population has branched, equation \eqref{AD_canonical_eqn} no longer describes the population, since it is no longer monomorphic - We instead need a system of \emph{two} equations, one for each morph.\\
-In adaptive dynamics, the name of the game is thus formulating reasonable guesses for $B(x)$ and $f(y;x)$. These are sometimes derived from more mechanistic processes (such as explicitly formulating birth/death functions), but the conceptual idea is the same regardless of how complicated these functions may be, and evolutionary branching easily arises in a very wide range of ecological scenarios as long as the frequency-dependence of the selective force is strong enough \citep{doebeli_evolutionary_2000,doebeli_adaptive_2011}.
+In adaptive dynamics, the name of the game is thus formulating reasonable guesses for $B(x)$ and $f(y;x)$. For example, one common choice for modelling asexual resource competition is $B(x) \equiv 1$ and the invasion fitness function:
+\begin{equation}
+\label{AD_cts_logistic_invasion_fitness}
+f(y:x) = 1 - \frac{\alpha(x,y)K(x)}{K(y)}
+\end{equation}
+where $\alpha(x,y)$ is called the \emph{competition kernel} and $K(x)$ is called the \emph{carrying capacity function} (formulated in analogy with Lotka-Volterra competition or the logistic equation). Invasion fitnesses are sometimes derived from more mechanistic processes (such as explicitly formulating birth/death functions), but the conceptual idea is the same regardless of how complicated these functions may be, and evolutionary branching easily arises in a very wide range of ecological scenarios as long as the frequency-dependence of the selective force is strong enough \citep{doebeli_evolutionary_2000,doebeli_adaptive_2011}.
 
 \subsection{The PDE approach}
 
@@ -86,6 +91,16 @@ PDE models sacrifice interpretability for increased generality. While these mode
 \subsection{Stochastic individual-based models}
 
 The most general approach to modelling adaptive diversification is through individual-based models. In such models, birth rates, death rates, and interaction rules are specified for each individual, and system-level properties are observed by letting the system change according to these rules. These models can be shown to be more general, biologically explicit versions of both PDE models and adaptive dynamics models, as will be discussed in section \ref{dem_stoch}.
+
+\subsection{An example of a prediction of adaptive diversification}
+
+Consider the continuous version of the logistic equation given by the invasion fitness \eqref{AD_cts_logistic_invasion_fitness} in adaptive dynamics and the PDE \eqref{cts_logistic} for PDE models. Assume that we have $\alpha(u,v) = \exp{-(u-v)^2/(2\sigma^{2}_{\alpha})}$ and $K(u) = K_{0}\exp{-(u)^2/(2\sigma^{2}_{K})}$, \emph{i.e.} Gaussian carrying capacity and Gaussian competition kernel. Then, it is known that diversification fails (\emph{i.e.} the population remains monomorphic) if and only if:
+\begin{equation}\label{AD_monomorphic_condn}
+\sigma_K<\sigma_{\alpha}
+\end{equation}.
+One way that \ref{AD_monomorphic_condn} can be satisfied is if $\sigma_K$ is very small. Biologically, this means that the environment is such that only some very particular morphs are viable, and the limit where $\sigma_K = 0$ corresponds to a case where only a single morph is environmentally viable. Ecologists are well-acquainted with this notion, and refer to it as `habitat filtering', the phenomenon in which the habitat itself `selects' for certain phenotypes due to particular limiting abiotic factors.\\
+\\
+A second way to satisfy \ref{AD_monomorphic_condn} is if $\sigma_{\alpha}$ is very large. Biologically, this means that competition occurs across a wide range of phenotypes, and the limit where $\sigma_{\alpha} = \infty$ corresponds to frequency-independent competition. In other words, diversification can fail if competition cannot be alleviated through character displacement, \emph{i.e} selection is not disruptive (or has a very weak disruptive component). This could happen if, for example, the morphs are competing for a resource that has no alternatives and can only be acquired in a single way (Ex: Competition for sunlight in plants).
 
 \section{Demographic stochasticity and stochastic models}\label{dem_stoch}
 
