@@ -82,6 +82,10 @@
 \titlespacing\subsection{0pt}{4pt plus 1pt minus 1pt}{0pt plus 1pt minus 1pt}
 \titlespacing\subsubsection{0pt}{4pt plus 1pt minus 1pt}{0pt plus 1pt minus 1pt}
 
+%Add a custom strut to increase vertical space given to equations when combining with underbrace
+%from https://tex.stackexchange.com/a/13864
+\newcommand*\mystrut[1]{\vrule width0pt height0pt depth#1\relax}
+
 %%%%%%%%%%%%%
 \usepackage{epigraph} %for quotes
 \renewcommand{\textflush}{flushright} %quotes are right aligned
