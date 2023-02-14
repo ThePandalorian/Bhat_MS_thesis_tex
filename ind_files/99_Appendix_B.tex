@@ -23,7 +23,8 @@ Thus, $f_i(\mathbf{X}_t)$ gives us the frequency of type $i$ individuals when th
 - \frac{x_i}{N^2}\sum\limits_{k=1}^{m}\frac{\partial x_k}{\partial x_j}\right)\nonumber\\
 &= \frac{1}{N}\left(\delta_{ij}-p_i\right)\label{nD_jacobian_for_ito}
 \end{align}
-where we have defined the total (scaled) population size\footnote{This is $N_{K}(t)$ in the main text, but we omit the subscript here to reduce notational clutter}  $N = \sum_i x_i$ and the frequency of the $i\textsuperscript{th}$ type $p_i = f_i(x)$ and used the fact that $\frac{\partial x_j}{\partial x_k} = \delta_{jk}$. The $jk\textsuperscript{th}$ element of the Hessian is given by:
+where we have defined the total (scaled) population size\footnote{This is $N_{K}(t)$ in the main text, but we omit the subscript here to reduce notational clutter} $N = \sum_i x_i$ and the frequency of the $i\textsuperscript{th}$ type $p_i = f_i(x)$ and used the fact that $\frac{\partial x_j}{\partial x_k} = \delta_{jk}$.
+The $jk\textsuperscript{th}$ element of the Hessian is given by:
 \begin{align}
 \left(H_{\mathbf{x}} f_i\right)_{jk} &= \frac{\partial^2 }{\partial x_j \partial x_k}\left( \frac{x_i}{\sum\limits_{l=1}^{m}x_l}\right)\nonumber\\
 &= \frac{\partial}{\partial x_j}\left(\frac{\delta_{ik}}{N}-\frac{x_i}{N^2}\right)\nonumber\\
@@ -35,7 +36,7 @@ Thus, for the first term of \eqref{nD_Ito_formula}, we have:
 &= \frac{1}{N}\sum\limits_{j=1}^{m}\left(\delta_{ij}-p_i\right)A^{-}_{j}\nonumber\\
 &= \frac{1}{N}\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)\label{nD_for_Ito_first_term}
 \end{align}
-If the birth and death rates take the form of \eqref{nD_functional_forms_for_replicator}, then it is easy to see using \eqref{nD_det_limit_fitess_defn} that equation \eqref{nD_for_Ito_first_term} is exactly the RHS of \eqref{nD_replicator_intermediate_1}. Thus, when the birth and death rates take the form of \eqref{nD_functional_forms_for_replicator}, then \eqref{nD_for_Ito_first_term} describes the deterministic component of the dynamics as described by the replicator-mutator equation, Price equation, etc. in the infinite population limit. These are the effects of selection and mutation at the infinite population limit. However, the finiteness of the population adds a second term to these dynamics, described by the second term that multiplies $dt$ in \eqref{nD_Ito_formula}. To calculate it, we first calculate:
+This term describes the effects of selection and mutation at the infinite population limit. However, the finiteness of the population adds a second directional term to these dynamics, described by the second term that multiplies $dt$ in \eqref{nD_Ito_formula}. To calculate it, we first calculate:
 \begin{align}
 \frac{1}{\sqrt{K}}\left(H_{\mathbf{x}} f_i \mathbf{D}\right)_{jk} &= \frac{1}{\sqrt{K}}\sum\limits_{l=1}^{m} \left(H_{\mathbf{x}} f_i \right)_{jl}\left(\mathbf{D}\right)_{lk}\nonumber\\
 &= \frac{1}{\sqrt{K}N^2}\sum\limits_{l=1}^{m}\left(2p_i - \delta_{ij} - \delta_{il}\right)\delta_{lk}\left(A^{+}_{l}A^{+}_{k}\right)^{\frac{1}{4}}\\
@@ -64,7 +65,7 @@ Finally, denoting $d\mathbf{B}_t = [dB^{(1)}_t,dB^{(2)}_t, \ldots, dB^{(m)}_t]^{
 &= \sum\limits_{k=1}^{m}\delta_{jk}\left(A^{+}_{j}A^{+}_{k}\right)^{\frac{1}{4}}dB^{(k)}_t\\
 &= \left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t
 \end{align}
-Thus, using \eqref{nD_jacobian_for_ito}, we see that the last term on the RHS of \eqref{nD_Ito_formula} is given by
+Thus, using \eqref{nD_jacobian_for_ito}, we see that the last term on the RHS of \eqref{nD_Ito_formula} is given by:
 \begin{align}
 \frac{1}{\sqrt{K}}\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\mathbf{D}d\mathbf{B}_t &= \frac{1}{\sqrt{K}}\sum\limits_{j=1}^{m}\left(\nabla_{\mathbf{x}} f_i\right)_j\left(\mathbf{D}d\mathbf{B}_t\right)_j\nonumber\\
 &=  \frac{1}{N\sqrt{K}}\sum\limits_{j=1}^{m}\left(\delta_{ij}-p_i\right)\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\\
@@ -72,9 +73,27 @@ Thus, using \eqref{nD_jacobian_for_ito}, we see that the last term on the RHS of
 \end{align}
 Putting equations \eqref{nD_for_Ito_first_term}, \eqref{nD_for_Ito_second_term} and \eqref{nD_for_Ito_third_term} into \eqref{nD_Ito_formula}, we see that $p_i = f_i(\mathbf{X})_t$, the frequency of the $i\textsuperscript{th}$ type in the population $\mathbf{X}_t$, changes according to the equation:
 \begin{equation}
+\label{nD_general_stoch_freq_change}
 \begin{aligned}
-N(t) dp_i &= \left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)dt - \frac{1}{K}\frac{1}{N(t)}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)dt\\
-&+ \frac{1}{\sqrt{K}}\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]
+dp_i &= \underbrace{\frac{1}{N(t)}\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)dt}_{\text{$K \to \infty$ prediction}} - \frac{1}{K}\underbrace{\frac{1}{N^2(t)}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)dt}_{\substack{\text{Directional finite size effects}\\\text{due to differential turnover rates}}}\\
+&+ \frac{1}{\sqrt{K} N(t)}\underbrace{\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]}_{\substack{\text{Non-directional finite size effects}\\\text{due to stochastic fluctuations}}}
 \end{aligned}
 \end{equation}
-Substituting the functional forms given by \eqref{nD_functional_forms_for_replicator} and repeating calculations for the $A^{+}_i$ terms exactly analogous to those done in going from \eqref{nD_replicator_intermediate_1} to \eqref{nD_replicator_mutator} now yields equation \eqref{nD_eqn_for_frequencies} in the main text.
+Plugging the functional forms of \eqref{nD_functional_forms_for_replicator} and the definitions of $w_i$ and $\tau_i$ into the definitions of $A^{-}_i$ and $A^{+}_i$, we obtain the relations
+\begin{equation}
+\label{nD_det_limit_fitness_and_turnover}
+\begin{aligned}
+A^{-}_i &= x_iw_i(\mathbf{x}) + \mu Q_i(\mathbf{x})\\
+A^{+}_i &= x_i\tau_i(\mathbf{x}) + \mu Q_i(\mathbf{x})
+\end{aligned}
+\end{equation}
+Thus, for the first term of \eqref{nD_general_stoch_freq_change}, we have
+\begin{align*}
+\frac{1}{N(t)}\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right) &=  \frac{1}{N(t)}\left[w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right] - \frac{p_i}{N(t)}\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})x_j + \mu Q_j(\mathbf{x})\right]\\
+&= w_i(\mathbf{x})p_i + \frac{\mu}{N(t)}Q_i(\mathbf{x}) - p_i\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})p_j + \frac{\mu}{N(t)}Q_j(\mathbf{x})\right]
+\end{align*}
+Where we have used the definition of $p_i$ from \eqref{nD_tot_pop_and_prop_inds_defn}. Now using the definition of mean fitness from \eqref{nD_mean} and rearranging terms gives us
+\begin{equation}
+\frac{1}{N(t)}\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right) = (w_i(\mathbf{x}) - \overline{w})p_i + \mu\left[Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right]
+\end{equation}
+where we have defined $Q_j(\mathbf{p}) = Q_j(\mathbf{x})/N(t)$. Repeating the exact same calculations for the $A^{+}_i$ terms in the second term of \eqref{nD_general_stoch_freq_change} now yields equation \eqref{nD_eqn_for_frequencies} in the main text.

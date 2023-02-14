@@ -393,15 +393,9 @@ where $\mathbf{A^-}(\mathbf{X}_t)$ is the $m$ dimensional `drift vector' with $i
 \end{equation*}
 Finally, $\mathbf{B}_t$ is the $m$-dimensional Brownian motion and can be thought of as a vector of independent one-dimensional Brownian motions (which have been defined in \ref{intro_SDE}). This is the `mesoscopic' description of our process.
 
-\subsection{The deterministic limit}\label{sec_nD_det_limit}
-Once again, we can take $K \to \infty$ in \eqref{nD_Ito_SDE} to obtain a deterministic expression. Here, the expression reads
-\begin{equation}
-\label{nD_det_limit}
-\frac{d\mathbf{x}}{dt} = \mathbf{A^-}(\mathbf{x}) = \mathbf{b}^{(K)}(\mathbf{x}) - \mathbf{d}^{(K)}(\mathbf{x})
-\end{equation}
-where the $m$-dimensional vector-valued functions $\mathbf{b}^{(K)}(\mathbf{x})$ and $\mathbf{d}^{(K)}(\mathbf{x})$ on the RHS are defined as having $i$\textsuperscript{th} element $b^{(K)}_i(\mathbf{x})$ and $d^{(K)}_i(\mathbf{x})$ respectively. This deterministic limit is sometimes called the `macroscopic' description.
-\subsubsection{Some familiar faces: Replicator-mutator, quasispecies equation, and the Price equation}
-In this multi-dimensional case, the macroscopic description amounts to a description of evolutionary game theory under mild assumptions on the birth and death rate vectors. We show this below, using methods first outlined by \citep{page_unifying_2002}. Let us assume that the birth and death rate functions have the functional form
+\subsection{Stochastic Trait Frequency Dynamics}
+
+We assume that the birth and death rate functions have the functional form
 \begin{equation}
 \label{nD_functional_forms_for_replicator}
 \begin{aligned}
@@ -409,18 +403,12 @@ b^{(K)}_i(\mathbf{x}) &= x_ib^{\textrm{(ind)}}_{i}(\mathbf{x}) + \mu Q_i(\mathbf
 d^{(K)}_i(\mathbf{x}) &= x_id^{\textrm{(ind)}}_i(\mathbf{x})
 \end{aligned}
 \end{equation}
-where $b^{\textrm{(ind)}}_{i}(\mathbf{x})$ and $d^{\textrm{(ind)}}_{i}(\mathbf{x})$ are non-negative functions that respectively describe the per-capita birth and death rate of type $i$ individuals, $\mu \geq 0$ is a constant describing the mutation rate in the population, and $Q_i(\mathbf{x})$ is a non-negative function that describes the additional birth rate of type $i$ individuals due to mutations in the population $\mathbf{x}$ that cannot be captured in the per-capita birth rate\footnote{When $x_i = 0$, \emph{i.e.} there are no type $i$ individuals in the population, individuals of type $i$ may still be born through mutations during births of the other types. This cannot be captured in $b^{\textrm{(ind)}}_{i}(\mathbf{x})$ because the term $x_ib^{\textrm{(ind)}}_{i}(\mathbf{x})$ vanishes when $x_i = 0$. Note that no analogous problem exists for the death rate, since the death rate of type $i$ individuals must be 0 when $x_i$ is 0 to ensure that we never have negative population densities.}. Our assumptions of the functional forms \eqref{nD_functional_forms_for_replicator} thus amount to saying that birth and death rates can be separated into mutational and non-mutational components, and furthermore that the density dependence of the birth and death rates due to non-mutational effects is in a form that allows us to write down per-capita birth and death rates for each type. Plugging these definitions into \eqref{nD_det_limit} and writing it down component-wise, we obtain the equation
-\begin{equation}
-\label{nD_det_limit_fitess_defn}
-\frac{dx_i}{dt} = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
-\end{equation}
-Where for each $i$, we have defined the real-valued function $w_i(\mathbf{x}) \coloneqq b^{\textrm{(ind)}}_{i}(\mathbf{x}) - d^{\textrm{(ind)}}_{i}(\mathbf{x})$. Setting the mutation rate $\mu \to 0$ in equation \eqref{nD_det_limit_fitess_defn} makes it clear that the quantity $w_i(\mathbf{x})x_i$ describes the growth rate of type $i$ individuals in the population due to all processes other than mutation. The quantity $w_i(\mathbf{x})$ thus describes the per-capita growth rate of type $i$ individuals in a population $\mathbf{x}$, and is sometimes called the `Malthusian fitness' of type $i$. Ecologists often denote this quantity by the symbol $r_i$ and simply call it the (exponential) growth rate of type $i$, but we will stick to $w_i$ and `fitness' here. It is notable that the fitness of a type depends on the state of the population as a whole (\textit{i.e.} $\mathbf{x}$) and is thus frequency-dependent.\\
-\\
-Given a state $\mathbf{x}(t)$, we can now compute the total (scaled) population size and the frequency of each type in the population as:
+where $b^{\textrm{(ind)}}_{i}(\mathbf{x})$ and $d^{\textrm{(ind)}}_{i}(\mathbf{x})$ are non-negative functions that respectively describe the per-capita birth and death rate of type $i$ individuals, $\mu \geq 0$ is a constant describing the mutation rate in the population, and $Q_i(\mathbf{x})$ is a non-negative function that describes the additional birth rate of type $i$ individuals due to mutations in the population $\mathbf{x}$ that cannot be captured in the per-capita birth rate\footnote{When $x_i = 0$, \emph{i.e.} there are no type $i$ individuals in the population, individuals of type $i$ may still be born through mutations during births of the other types. This cannot be captured in $b^{\textrm{(ind)}}_{i}(\mathbf{x})$ because the term $x_ib^{\textrm{(ind)}}_{i}(\mathbf{x})$ vanishes when $x_i = 0$. Note that no analogous problem exists for the death rate, since the death rate of type $i$ individuals must be 0 when $x_i$ is 0 to ensure that we never have negative population densities.}. Our assumptions of the functional forms \eqref{nD_functional_forms_for_replicator} thus amount to saying that birth and death rates can be separated into mutational and non-mutational components, and furthermore that the density dependence of the birth and death rates due to non-mutational effects is in a form that allows us to write down per-capita birth and death rates for each type. We define the \emph{Malthusian fitness} of the $i\textsuperscript{th}$ type as $w_i(\mathbf{x}) \coloneqq b^{\textrm{(ind)}}_{i}(\mathbf{x}) - d^{\textrm{(ind)}}_{i}(\mathbf{x})$, and the \emph{per-capita turnover rate} of the $i\textsuperscript{th}$ type as $\tau_i(\mathbf{x}) = b^{\textrm{(ind)}}_{i}(\mathbf{x}) + b^{\textrm{(ind)}}_{i}(\mathbf{x})$.  The quantity $w_i(\mathbf{x})$ describes the per-capita growth rate of type $i$ individuals in a population $\mathbf{x}$ discounting mutation. Ecologists often denote this quantity by the symbol $r_i$ and simply call it the (exponential) growth rate of type $i$, but we will stick to $w_i$ and `fitness' here. It is notable that both $w_i$ and $\tau_i$ depend on the state of the population as a whole (\textit{i.e.} $\mathbf{x}$) and not just on the density of the focal type. Thus, both the fitness and the turnover rate in our model are frequency-dependent.\\
+Following ideas similar in spirit to \citep{mcleod_social_2019}, we can now use \eqref{nD_Ito_SDE} to write down stochastic equations for $p_i(t)$, the frequency of type $i$ individuals in the population. More precisely,  given a state $\mathbf{x}(t)$, we can compute the total (scaled) population size and the frequency of each type in the population as:
 \begin{equation}
 \label{nD_tot_pop_and_prop_inds_defn}
 \begin{aligned}
-N_{K}(t) &\coloneqq \sum\limits_{i=1}^{m}x_i(t)\\
+N_{K}(t) &\coloneqq \sum\limits_{i=1}^{m}x_i(t) = \frac{1}{K}\sum\limits_{i=1}^{m}v_i(t)\\
 p_i(t) &\coloneqq \frac{x_i(t)}{N_{K}(t)}
 \end{aligned}
 \end{equation}
@@ -429,27 +417,32 @@ We can also calculate the statistical mean value of any type level quantity $f$ 
 \label{nD_mean}
 \overline{f}(t) \coloneqq \sum\limits_{i=1}^{m}f_ip_{i}(\mathbf{x}(t))
 \end{equation}
-, where $f_i$ is the value of the quantity for the $i$th type.\\
-\\
-We can now compute the rate of change of $p_i$, the proportion of type $i$ individuals in the population:
-\begin{align}
-\frac{dp_i}{dt} &= \frac{1}{N_{K}(t)}\frac{dx_i}{dt} - \frac{x_i}{N_{K}^2(t)}\frac{dN_{K}}{dt}\nonumber\\
-&= \frac{1}{N_{K}(t)}\frac{dx_i}{dt} - \frac{x_i}{N_{K}^2(t)}\sum\limits_{j=1}^{m}\frac{dx_j}{dt}\label{nD_replicator_intermediate_1}
-\end{align}
-Substituting \eqref{nD_det_limit_fitess_defn} into \eqref{nD_replicator_intermediate_1}, we now obtain
-\begin{align*}
-\frac{dp_i}{dt} &=  \frac{1}{N_{K}(t)}\left[w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right] - \frac{x_i}{N_{K}^2(t)}\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})x_j + \mu Q_j(\mathbf{x})\right]\\
-&= w_i(\mathbf{x})p_i + \frac{\mu}{N_K}Q_i(\mathbf{x}) - p_i\sum\limits_{j=1}^{m}\left[w_j(\mathbf{x})p_j + \frac{\mu}{N_K}Q_j(\mathbf{x})\right]
-\end{align*}
-Where we have used the definition of $p_i$ from \eqref{nD_tot_pop_and_prop_inds_defn}. Now using the definition of mean fitness from \eqref{nD_mean} and rearranging terms, we obtain
+, where $f_i$ is the value of the quantity for the $i$th type. In appendix \ref{App_density_to_freq}, we show that we can use It\^{o}'s formula to write  down a general stochastic equation for the frequencies of each type in the population. Unlike \citep{mcleod_social_2019}, we make no assumptions about the separation of ecological and evolutionary time scales or the strength of selection and are able to present an entirely general calculation.  Letting $\overline{w} = \sum w_ip_i$ and $\overline{\tau} = \sum \tau_i p_i$ be the average population fitness and turnover respectively, we show in appendix \ref{App_density_to_freq} that the frequency of the $i\textsuperscript{th}$ type in the population $\mathbf{x}(t)$ changes according to the equation:
+\begin{equation}
+\label{nD_eqn_for_frequencies}
+\begin{aligned}
+dp_i(t) &= \left[(w_i(\mathbf{x}) - \overline{w})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\
+&- \frac{1}{K}\frac{1}{N_{K}(t)}\left[(\tau_i(\mathbf{x}) - \overline{\tau})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\
+&+ \frac{1}{\sqrt{K}}\frac{1}{N_{K}(t)}\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]
+\end{aligned}
+\end{equation}
+where $B^{(1)}_t,B^{(2)}_t, \ldots, B^{(m)}_t$ are $m$ independent one-dimensional standard Brownian motion processes and we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. We will show below that the first term in this expression describes directional changes in the population composition due to `classical' evolutionary forces such as selection and mutation that occur in deterministic infinite population models. The second term is an additional directional force on population composition that is only seen in finite populations and can be thought of as a biasing `selection' for reduced turnover rate due to an effect similar to gambler's ruin in probability theory. The consequences of this term, as well as connections with previous studies, are discussed in detail in Chapter \ref{chap_unification}. Finally, the last term of equation \eqref{nD_eqn_for_frequencies} describes non-directional stochastic effects due to fluctuations and has a `spreading effect'.
+
+\subsection{The infinite population limit}\label{sec_nD_det_limit}
+Like in \ref{sec_1D_processes}, we can once again take $K \to \infty$ in \eqref{nD_Ito_SDE} to obtain a deterministic expression. Here, the expression reads
+\begin{equation}
+\label{nD_det_limit}
+\frac{d\mathbf{x}}{dt} = \mathbf{A^-}(\mathbf{x}) = \mathbf{b}^{(K)}(\mathbf{x}) - \mathbf{d}^{(K)}(\mathbf{x})
+\end{equation}
+where the $m$-dimensional vector-valued functions $\mathbf{b}^{(K)}(\mathbf{x})$ and $\mathbf{d}^{(K)}(\mathbf{x})$ on the RHS are defined as having $i$\textsuperscript{th} element $b^{(K)}_i(\mathbf{x})$ and $d^{(K)}_i(\mathbf{x})$ respectively. For the trait frequencies, by taking $K \to \infty$ in \eqref{nD_eqn_for_frequencies}, we obtain a deterministic equation that reads:
 \begin{equation}
 \label{nD_replicator_mutator}
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dp_i}{dt} = (w_i(\mathbf{x}) - \overline{w})p_i + \mu\left[Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right]}
 \end{equation}
-Where we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. The first term of \eqref{nD_replicator_mutator} describes changes due to faithful (non-mutational) replication, and the second describes changes due to mutation. For this reason, equation \eqref{nD_replicator_mutator} is called the \emph{replicator-mutator equation} in the evolutionary game theory literature, where the individual `types' are interpreted to be pure strategies. If in addition, each $w_i(\mathbf{x})$ is linear in $\mathbf{x}$, meaning we can write $w_i(\mathbf{x}) = \sum_{j}a_{ij}x_j$ for some set of constants $a_{ij}$, then we get the replicator-mutator equation for matrix games, and the constants $a_{ij}$ form the `payoff matrix'. As is well-known, the replicator equation (without mutation) for matrix games with $m$ pure strategies is equivalent to the generalized Lotka-Volterra equations for a community with $m-1$ species\citep{hofbauer_evolutionary_1998}, providing the connection to community ecology.  Equation \eqref{nD_replicator_mutator} is also equivalent to Eigen's \emph{quasispecies equation} from molecular evolution if each `type' is interpreted as a genetic sequence and each $w_i(\mathbf{x})$ is a constant function\footnote{Mutational effects are often additionally assumed to act through direct `transmission probabilities' of mutating from one type to another. This means that we can write $Q_i(\mathbf{p}) = \sum\limits_{j\neq i}Q_{ij}p_j$, where $Q_{ij} \geq0$ is a constant describing the probability of a $j \to i$ mutation (conditioned on the occurrence of a mutation). Substituting this into \eqref{nD_replicator_mutator} yields an equation in terms of `$Q$-matrices' or `mutation matrices' that may be more familiar to some biologists.}. We can now calculate how the mean of any `type level' quantity $f$, defined as $f_i$ for the $i$\textsuperscript{th} type, changes in the population (For example, if each type is a phenotype for a trait such as height, which can be assigned a numerical value, then setting $f_i = \textit{value of $i\textsuperscript{th}$ phenotype}$ gives us the mean trait value in the population). The product rule of calculus tells us that we have the relation
+In physics parlance, equations \eqref{nD_det_limit} and \eqref{nD_replicator_mutator} constitute the `macroscopic' description of our stochastic process. The first term of \eqref{nD_replicator_mutator} describes changes due to faithful (non-mutational) replication, and the second describes changes due to mutation. For this reason, equation \eqref{nD_replicator_mutator} is called the \emph{replicator-mutator equation} in the evolutionary game theory literature, where the individual `types' are interpreted to be pure strategies. If in addition, each $w_i(\mathbf{x})$ is linear in $\mathbf{x}$, meaning we can write $w_i(\mathbf{x}) = \sum_{j}a_{ij}x_j$ for some set of constants $a_{ij}$, then we get the replicator-mutator equation for matrix games, and the constants $a_{ij}$ form the `payoff matrix'. As is well-known, the replicator equation (without mutation) for matrix games with $m$ pure strategies is equivalent to the generalized Lotka-Volterra equations for a community with $m-1$ species \citep{hofbauer_evolutionary_1998}, providing the connection to community ecology.  Equation \eqref{nD_replicator_mutator} is also equivalent to Eigen's \emph{quasispecies equation} from molecular evolution if each `type' is interpreted as a genetic sequence and each $w_i(\mathbf{x})$ is a constant function\footnote{Mutational effects are often additionally assumed to act through direct `transmission probabilities' of mutating from one type to another. This means that we can write $Q_i(\mathbf{p}) = \sum_j Q_{ij}p_j$, where $Q_{ii} = 0$, and for each $j \neq i$, $Q_{ij} \geq0$ is a constant describing the probability of a $j \to i$ mutation (conditioned on the occurrence of a mutation). Substituting this into \eqref{nD_replicator_mutator} yields an equation in terms of `$Q$-matrices' or `mutation matrices' that may be more familiar to some.}. We can now calculate how the mean of any `type level' quantity $f$, defined as $f_i$ for the $i$\textsuperscript{th} type, changes in the population (For example, if each type is a phenotype for a trait such as height, which can be assigned a numerical value, then setting $f_i = \textit{value of $i\textsuperscript{th}$ phenotype}$ gives us the mean trait value in the population). The product rule of calculus tells us that we have the relation
 \begin{equation}
 \label{product_rule_for_nD_price}
-\frac{d}{dt}\left(\sum\limits_{i=1}^{m}f_ip_i\right) = \sum\limits_{i=1}^{m}\left(f_i\frac{\partial p_i}{\partial t} + p_i\frac{\partial f_i}{\partial t}\right)
+\frac{d}{dt}\left(\sum\limits_{i=1}^{m}f_ip_i\right) = \sum\limits_{i=1}^{m}\left(f_i\frac{\partial p_i}{\partial t} + p_i\frac{\partial f_i}{\partial t}\right) = \sum\limits_{i=1}^{m}f_i\frac{\partial p_i}{\partial t} + \overline{\left(\frac{\partial f}{\partial t}\right)}
 \end{equation}
 Multiplying both sides of equation \eqref{nD_replicator_mutator} by $f_i$ and summing over all $i$, we obtain
 \begin{align*}
@@ -463,7 +456,7 @@ Using the definition of statistical covariance of two variables $X$ and $Y$ as $
 Thus, substituting this into \eqref{product_rule_for_nD_price}, we get
 \begin{equation}
 \label{nD_Price_time_dependent}
-\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d\overline{f}}{dt} = \mathrm{Cov}(w,f) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right] + \sum\limits_{i=1}^{m}p_i\frac{\partial f_i}{\partial t}}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d\overline{f}}{dt} = \mathrm{Cov}(w,f) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right] + \overline{\left(\frac{\partial f}{\partial t}\right)}}
 \end{equation}
 This is a Price equation for quantities $f_i$ which can vary over time. To obtain the more familiar Price equation seen in textbooks, we can consider time-independent $f_i$, \emph{i.e.} situations in which each $f_i$ is constant over time, and thus changes in $\overline{f}$ are purely due to changes in the composition of the population. For such quantities, we have $\frac{\partial f_i}{\partial t} = 0 \ \forall \ i$ and thus obtain 
 \begin{equation}
@@ -473,26 +466,13 @@ This is a Price equation for quantities $f_i$ which can vary over time. To obtai
 \end{equation}
 , the famous Price equation in continuous time. The first term of the RHS describes the statistical covariance between the quantity $f$ and the fitness $w$. The second term describes `transmission bias' due to mutational effects - The first summation is the `inflow' of $f$ due to mutations, and the second is the `outflow'.
 
-\subsection{Stochastic trait frequency dynamics for finite populations}
-
-Following ideas similar in spirit to \citep{mcleod_social_2019}, we can also use \eqref{nD_Ito_SDE} to write down stochastic equations for $p_i(t)$, the frequency of type $i$ individuals in the population to contrast with the replicator-mutator equation \eqref{nD_replicator_mutator} derived above. In appendix \ref{App_density_to_freq}, we show that we can use It\^{o}'s formula to write  down a general stochastic equation for the frequencies of each type in the population. Unlike \citep{mcleod_social_2019}, we make no assumptions about the separation of ecological and evolutionary time scales or the strength of selection and are able to present an entirely general calculation. Letting $\tau_i(\mathbf{x}) = b^{\textrm{(ind)}}_{i}(\mathbf{x}) + b^{\textrm{(ind)}}_{i}(\mathbf{x})$ be the \emph{per-capita turnover rate} of the $i\textsuperscript{th}$ type and denoting $\overline{\tau} = \sum_i p_i\tau_i$, we show in appendix \ref{App_density_to_freq} that when the birth and death rates are defined by \eqref{nD_functional_forms_for_replicator}, then the frequency of the $i\textsuperscript{th}$ type in the population $\mathbf{X}_t$, changes according to the equation:
-\begin{equation}
-\label{nD_eqn_for_frequencies}
-\begin{aligned}
-dp_i(t) &= \left[(w_i(\mathbf{x}) - \overline{w})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\
-&- \frac{1}{K}\frac{1}{N_{K}(t)}\left[(\tau_i(\mathbf{x}) - \overline{\tau})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\
-&+ \frac{1}{\sqrt{K}}\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]
-\end{aligned}
-\end{equation}
-where $B^{(1)}_t,B^{(2)}_t, \ldots, B^{(m)}_t$ are $m$ independent one-dimensional standard Brownian motion processes. The first term in this expression is the same as equation \eqref{nD_replicator_mutator} and describes directional changes in the population composition due to `classical' evolutionary forces such as selection and mutation. We saw in the previous section that the replicator-mutator equation is generically satisfied in the infinite population limit for all birth-death processes that are in the (very general) functional forms \eqref{nD_functional_forms_for_replicator}, a result that is made explicit in \eqref{nD_eqn_for_frequencies} (just take $K \to \infty$ to convince yourself). The second term is an additional directional force on population composition that is only seen in finite populations and can be thought of as a biasing `selection' for reduced turnover rate due to an effect similar to gambler's ruin in probability theory. The consequences of this term, along with the connection to previous studies and standard infinite population models, are discussed in chapter \ref{chap_unification}. Finally, the last term of equation \eqref{nD_eqn_for_frequencies} describes non-directional stochastic effects due to fluctuations and has a `spreading effect'. To the highest order in $\sqrt{K}$, the effect of these fluctuations can be described through the weak noise approximation, as we explain below. However, the $1/K$ factor in the second term of \eqref{nD_eqn_for_frequencies} means that the effect of differential turnover rates disappears in this weak noise regime  (and also in other such approximate treatments, such as the Chemical Langevin equation).
-
 \subsection{Stochastic fluctuations and the weak noise approximation}
 
-If the noise is \emph{weak}, we can go a little further, as in the one-dimensional case. Let the deterministic trajectory obtained by solving \eqref{nD_det_limit} be given by $\mathbf{a}(t)$.  We can once again track 
+As in the one-dimensional case, we can go a little further if the noise is sufficiently weak. Let the deterministic trajectory obtained by solving \eqref{nD_det_limit} be given by $\boldsymbol{\alpha}(t)$.  We can once again track 
 stochastic fluctuations from the deterministic trajectory by introducing the new variables
 \begin{equation}
 \begin{aligned}
-\mathbf{y} &= \sqrt{K}(\mathbf{x} - \mathbf{a}(t))\\
+\mathbf{y} &= \sqrt{K}(\mathbf{x} - \boldsymbol{\alpha}(t))\\
 s&=t\\
 \tilde{P}(\mathbf{y},s) &= \frac{1}{\sqrt{K}}P(\mathbf{x},t)
 \end{aligned}
@@ -500,16 +480,16 @@ s&=t\\
 Then, after some algebra that follows the exact same steps as in section \ref{sec_1D_WNA} and retaining only the highest order terms in $\sqrt{K}$, we obtain the equation:
 \begin{equation}
 \label{nD_WNA_intermediate}
-\frac{\partial \Tilde{P}_{0}}{\partial s}(\mathbf{y},s) = \sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{(A^{-}_{j})_{1}(s)\Tilde{P}_{0}(\mathbf{y},s)\right\}+\frac{1}{2}{A_j}^{+}(\mathbf{a}(s))\frac{\partial^2}{\partial{y_j}^2}\{\Tilde{P}_{0}(\mathbf{y},s)\}\right)
+\frac{\partial \Tilde{P}_{0}}{\partial s}(\mathbf{y},s) = \sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{(A^{-}_{j})_{1}(s)\Tilde{P}_{0}(\mathbf{y},s)\right\}+\frac{1}{2}{A_j}^{+}(\boldsymbol{\alpha}(s))\frac{\partial^2}{\partial{y_j}^2}\{\Tilde{P}_{0}(\mathbf{y},s)\}\right)
 \end{equation}
 where $(A^{-}_{j})_{1}(s)$ is the $\mathcal{O}(1/\sqrt{K})$ term of the power series expansion
 \begin{equation*}
-A^-_{j}(\mathbf{a} + \frac{\mathbf{y}}{\sqrt{K}}) = \sum\limits_{n=1}^{\infty}(A^{-}_{j})_{n}(s)\left(\frac{\mathbf{y}}{\sqrt{K}}\right)^n
+A^-_{j}(\boldsymbol{\alpha} + \frac{\mathbf{y}}{\sqrt{K}}) = \sum\limits_{n=1}^{\infty}(A^{-}_{j})_{n}(s)\left(\frac{\mathbf{y}}{\sqrt{K}}\right)^n
 \end{equation*}
 In the case where the series expansion is a Taylor expansion, then the first-order term of this expansion is given by
 \begin{equation}
 \label{nD_WNA_taylor_term}
-(A^{-}_{j})_{1}(s) = \sum\limits_{i=1}^{m} y_i\left(\frac{\partial A^{-}_j(\mathbf{x})}{\partial x_i}\bigg{|}_{\mathbf{x}=\mathbf{a}(s)}\right)
+(A^{-}_{j})_{1}(s) = \sum\limits_{i=1}^{m} y_i\left(\frac{\partial A^{-}_j(\mathbf{x})}{\partial x_i}\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(s)}\right)
 \end{equation}
 In multi-variable calculus, the directional derivative\footnote{Physicists sometimes use the notation $\partial_{\mathbf{v}}f(\mathbf{x})$ or $\mathbf{v}\cdot\nabla f(\mathbf{x})$ for this object.} $D_{\mathbf{v}}(f(\mathbf{x}))$ of a multidimensional function $f: \mathbb{R}^n \to \mathbb{R}$ along a vector $\mathbf{v}$ is the function defined by:
 \begin{equation}
@@ -519,17 +499,17 @@ D_{\mathbf{v}}(f(\mathbf{x})) \coloneqq \sum\limits_{i=1}^{n}\left(\frac{\partia
 Comparing with \eqref{nD_WNA_taylor_term}, we see that the weak-noise approximation of our process is:
 \begin{equation}
 \label{nD_WNA}
-\frac{\partial P}{\partial t}(\mathbf{y},t) = \sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{D_{\mathbf{y}}(A_j^-(\mathbf{a}))(t)P(\mathbf{y},t)\right\}+\frac{1}{2}{A_j}^{+}(\mathbf{a}(t))\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}\right)
+\frac{\partial P}{\partial t}(\mathbf{y},t) = \sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{D_{\mathbf{y}}(A_j^-(\boldsymbol{\alpha}))(t)P(\mathbf{y},t)\right\}+\frac{1}{2}{A_j}^{+}(\boldsymbol{\alpha}(t))\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}\right)
 \end{equation}
-where we have dropped the tildes and gone back from $s$ to $t$ for notational clarity. The directional derivative of the population turnover rate $A_j^-$ `in the direction' of the stochastic fluctuation $\mathbf{y}$ at the deterministic point $\mathbf{a}(s)$ here is the multidimensional analogue of the derivative we had in \eqref{1D_WNA}. The meaning of equation \eqref{nD_WNA} is clearer if we compute how the moments of the fluctuation $y_i$ in the density of type $i$ individuals (for some $i$) change over time. Let $n > 0$. We have:
+where we have dropped the tildes and gone back from $s$ to $t$ for notational clarity. The directional derivative of the population turnover rate $A_j^-$ `in the direction' of the stochastic fluctuation $\mathbf{y}$ at the deterministic point $\boldsymbol{\alpha}(s)$ here is the multidimensional analogue of the derivative we had in \eqref{1D_WNA}. The meaning of equation \eqref{nD_WNA} is clearer if we compute how the moments of the fluctuation $y_i$ in the density of type $i$ individuals (for some $i$) change over time. Let $n > 0$. We have:
 \begin{align}
 \frac{d}{dt}\mathbb{E}[y_i^n] &= \frac{d}{dt}\int\limits_{\mathbb{R}^m}y_i^nP(\mathbf{y},t)d\mathbf{y}\\
 &= \int\limits_{\mathbb{R}^m}y_i^n\frac{\partial P}{\partial t}(\mathbf{y},t)d\mathbf{y}\label{nD_change_of_moments_defn}
 \end{align}
-where we have assumed that $y_i^n$ and $P(\mathbf{y},t)$ vary sufficiently smoothly to allow us to interchange the order of derivatives and integrals and used the shorthand $\displaystyle \int\limits_{\mathbb{R}^m} \ f(\mathbf{y}) \ d\mathbf{y} = \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}\cdots\int\limits_{\mathbb{R}} \ f(\mathbf{y}) \ dy_1 dy_2 \ldots dy_m$. The one-dimensional integrals are over the entire real line and not just over $[0,\infty)$ because fluctuations can be either positive (greater than $\mathbf{a}(t)$) or negative (lesser than $\mathbf{a}(t)$). For notational brevity, let us use the shorthand $D_j = D_{\mathbf{y}}(A_j^-(\mathbf{a}))(t)$. We can now substitute \eqref{nD_WNA} into \eqref{nD_change_of_moments_defn} to obtain
+where we have assumed that $y_i^n$ and $P(\mathbf{y},t)$ vary sufficiently smoothly to allow us to interchange the order of derivatives and integrals and used the shorthand $\displaystyle \int\limits_{\mathbb{R}^m} \ f(\mathbf{y}) \ d\mathbf{y} = \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}\cdots\int\limits_{\mathbb{R}} \ f(\mathbf{y}) \ dy_1 dy_2 \ldots dy_m$. The one-dimensional integrals are over the entire real line and not just over $[0,\infty)$ because fluctuations can be either positive (greater than $\boldsymbol{\alpha}(t)$) or negative (lesser than $\boldsymbol{\alpha}(t)$). For notational brevity, let us use the shorthand $D_j = D_{\mathbf{y}}(A_j^-(\boldsymbol{\alpha}))(t)$. We can now substitute \eqref{nD_WNA} into \eqref{nD_change_of_moments_defn} to obtain
 \begin{align}
-\frac{d}{dt}\mathbb{E}[y_i^n] &= \int\limits_{\mathbb{R}^m} y_i^n \left(\sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}+\frac{1}{2}{A_j}^{+}(\mathbf{a}(t))\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}\right)\right)d\mathbf{y}\\
-&= \sum\limits_{j=1}^{m}\left[-\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}d\mathbf{y} + \frac{{A_j}^{+}(\mathbf{a}(t))}{2}\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}d\mathbf{y}\right]\label{nD_intermediate_for_moments}
+\frac{d}{dt}\mathbb{E}[y_i^n] &= \int\limits_{\mathbb{R}^m} y_i^n \left(\sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}+\frac{1}{2}{A_j}^{+}(\boldsymbol{\alpha}(t))\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}\right)\right)d\mathbf{y}\\
+&= \sum\limits_{j=1}^{m}\left[-\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}d\mathbf{y} + \frac{{A_j}^{+}(\boldsymbol{\alpha}(t))}{2}\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}d\mathbf{y}\right]\label{nD_intermediate_for_moments}
 \end{align}
 We will evaluate the integrals on the RHS of \eqref{nD_intermediate_for_moments} using integration by parts. Recall that for any two functions $u$ and $v$ defined on a domain $\Omega$, the general formula for integration by parts is given by:
 \begin{equation}
@@ -542,14 +522,14 @@ where $\partial \Omega$ is the boundary of $\Omega$, $dS$ is the surface element
 \end{equation*}
 Using this relation and then using integration by parts on the RHS of \eqref{nD_intermediate_for_moments} (once for the first term and twice for the second term), we obtain the considerably simpler expression
 \begin{align}
-\frac{d}{dt}\mathbb{E}[y_i^n] &= n\int\limits_{\mathbb{R}^m} y_i^{n-1}D_{i}P(\mathbf{y},t)d\mathbf{y} + \frac{n(n-1)}{2}A_i^+(\mathbf{a}(t))\int\limits_{\mathbb{R}^m} y_i^{n-2}P(\mathbf{y},t)d\mathbf{y}\\
-\Rightarrow \frac{d}{dt}\mathbb{E}[y_i^n] &= n\mathbb{E}[y_i^{n-1}D_{i}]+\frac{n(n-1)}{2}A_i^+(\mathbf{a}(t))\mathbb{E}[y_i^{n-2}]\label{nD_general_moment_eqns}
+\frac{d}{dt}\mathbb{E}[y_i^n] &= n\int\limits_{\mathbb{R}^m} y_i^{n-1}D_{i}P(\mathbf{y},t)d\mathbf{y} + \frac{n(n-1)}{2}A_i^+(\boldsymbol{\alpha}(t))\int\limits_{\mathbb{R}^m} y_i^{n-2}P(\mathbf{y},t)d\mathbf{y}\\
+\Rightarrow \frac{d}{dt}\mathbb{E}[y_i^n] &= n\mathbb{E}[y_i^{n-1}D_{i}]+\frac{n(n-1)}{2}A_i^+(\boldsymbol{\alpha}(t))\mathbb{E}[y_i^{n-2}]\label{nD_general_moment_eqns}
 \end{align}
 Of particular interest are the cases $n=1$ (corresponding to the expected value of $y_i$) and $n=2$ (which can be used along with the expected value to compute the variance of $y_i$). We have:
 \begin{align}
 \frac{d}{dt}\mathbb{E}[y_i] &= \mathbb{E}[D_{i}]\label{nD_moment_eqn_mean}\\
-\frac{d}{dt}\mathbb{E}[y_i^2] &= 2\mathbb{E}[y_iD_{i}] +  A_i^+(\mathbf{a}(t)) = 2\mathrm{Cov}(y_i,D_i) + 2\mathbb{E}[y_i]\mathbb{E}[D_i]+A_i^+(\mathbf{a}(t))\label{nD_moment_eqn_2nd_mom}
-% \Rightarrow \frac{d}{dt}\mathrm{Var}(y_i) &= - \mathbb{E}[D_{i}]^2 + 2\mathbb{E}[y_iD_{i}] +  A_i^+(\mathbf{a}(t))\label{nD_moment_eqn_var}
+\frac{d}{dt}\mathbb{E}[y_i^2] &= 2\mathbb{E}[y_iD_{i}] +  A_i^+(\boldsymbol{\alpha}(t)) = 2\mathrm{Cov}(y_i,D_i) + 2\mathbb{E}[y_i]\mathbb{E}[D_i]+A_i^+(\boldsymbol{\alpha}(t))\label{nD_moment_eqn_2nd_mom}
+% \Rightarrow \frac{d}{dt}\mathrm{Var}(y_i) &= - \mathbb{E}[D_{i}]^2 + 2\mathbb{E}[y_iD_{i}] +  A_i^+(\boldsymbol{\alpha}(t))\label{nD_moment_eqn_var}
 \end{align}
 Thus, whether stochastic fluctuations are expected to grow or decay is controlled by $D_i$, a measure of how the growth rate ($b_i - d_i$) changes along the direction of the fluctuation, whereas the spread of the fluctuations (the variance) has contributions from the net turnover rate ($A_i^+ = b_i + d_i$) and the covariance between the fluctuation and $D_i$. Note that unlike in the Price equation \eqref{nD_Price}, this is a true \emph{probability} covariance (as opposed to a statistical covariance between two deterministic quantities). In the case of the functional forms given by \eqref{nD_functional_forms_for_replicator}, we have:
 \begin{equation}
@@ -557,14 +537,14 @@ A_i^-(\mathbf{x}) = w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})
 \end{equation}
 and thus, from \eqref{nD_WNA_taylor_term}, we can calculate the directional derivative $D_i$ as
 \begin{align}
-D_i &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial A^{-}_i(\mathbf{x})}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
-&= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial}{\partial x_k}\left( w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right)\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
-&= \sum\limits_{k=1}^{m} y_k\left(a_i\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right) + y_iw_i(\mathbf{a}) + \mu\sum\limits_{k=1}^{m} y_k\left(\frac{\partial Q_i}{\partial x_k}(\mathbf{x})\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
-&= y_iw_i(\mathbf{a}) + a_iD_{\mathbf{y}}(w_i(\mathbf{a})) + \mu D_{\mathbf{y}}(Q_i(\mathbf{a}))\label{nD_WNA_directional_derivative_for_replicator_eqns}
+D_i &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial A^{-}_i(\mathbf{x})}{\partial x_k}\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right)\\
+&= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial}{\partial x_k}\left( w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right)\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right)\\
+&= \sum\limits_{k=1}^{m} y_k\left(a_i\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right) + y_iw_i(\boldsymbol{\alpha}) + \mu\sum\limits_{k=1}^{m} y_k\left(\frac{\partial Q_i}{\partial x_k}(\mathbf{x})\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right)\\
+&= y_iw_i(\boldsymbol{\alpha}) + a_iD_{\mathbf{y}}(w_i(\boldsymbol{\alpha})) + \mu D_{\mathbf{y}}(Q_i(\boldsymbol{\alpha}))\label{nD_WNA_directional_derivative_for_replicator_eqns}
 \end{align}
 Using this in \eqref{nD_moment_eqn_mean}, we see that the expected change of a fluctuation in the density of type $i$ individuals evolves as:
 \begin{equation}
 \label{nD_moment_eqn_mean_replicator}
-\frac{d}{dt}\mathbb{E}[y_i] = \underbrace{w_i(\mathbf{a})\mathbb{E}[y_i]}_{\substack{\text{Current fitness of type $i$} \\ \text{at deterministic trajectory $\mathbf{a}$} \\ \text{(scaled by expected density $\mathbb{E}[y_i]$)}}} + \underbrace{a_i\mathbb{E}[D_{\mathbf{y}}(w_i(\mathbf{a}))]}_{\substack{\text{Expected change in fitness} \\ \text{ of type $i$ in going from $\mathbf{a}$ to $\mathbf{y}$} \\ \text{(scaled by deterministic density $a_i$)}}} + \underbrace{\mu\mathbb{E}[D_{\mathbf{y}}(Q_i(\mathbf{a}))]}_{\substack{\text{Expected effect of} \\ \text{mutations}}}
+\frac{d}{dt}\mathbb{E}[y_i] = \underbrace{w_i(\boldsymbol{\alpha})\mathbb{E}[y_i]}_{\substack{\text{Current fitness of type $i$} \\ \text{at deterministic trajectory $\boldsymbol{\alpha}$} \\ \text{(scaled by expected density $\mathbb{E}[y_i]$)}}} + \underbrace{a_i\mathbb{E}[D_{\mathbf{y}}(w_i(\boldsymbol{\alpha}))]}_{\substack{\text{Expected change in fitness} \\ \text{ of type $i$ in going from $\boldsymbol{\alpha}$ to $\mathbf{y}$} \\ \text{(scaled by deterministic density $a_i$)}}} + \underbrace{\mu\mathbb{E}[D_{\mathbf{y}}(Q_i(\boldsymbol{\alpha}))]}_{\substack{\text{Expected effect of} \\ \text{mutations}}}
 \end{equation}
 
