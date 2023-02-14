@@ -147,11 +147,11 @@ The `macroscopic' version of our function-valued process corresponds to quantita
 \begin{equation}
 \label{BD_for_kimura}
 \begin{aligned}
-b_K(x|\psi) &= \mu b^{\textrm{(mut)}}(x|\psi) + \psi(x,t)b^{\textrm{(ind)}}(x|\psi)\\
+b_K(x|\psi) &=  \psi(x,t)b^{\textrm{(ind)}}(x|\psi) + \mu b^{\textrm{(mut)}}(x|\psi)\\
 d_K(x|\psi) &= \psi(x,t)d^{\textrm{(ind)}}(x|\psi)
 \end{aligned}
 \end{equation}
-Here, $ b^{\textrm{(mut)}}(x|\psi)$ describes birth due to mutations, and $\mu \geq 0$ is a mutation rate. The functions $b^{\textrm{(ind)}}(x|\psi)$ and $d^{\textrm{(ind)}}(x|\psi)$ describe the per-capita birth rate and death rate of type $x$ in a population $\psi$. These functions could in principle model several ecological factors. For example,  $b^{\textrm{(ind)}}(x|\psi)$ may incorporate the effects of mate choice in the sexual case or intrinsic duplication rates in the asexual case, and $d^{\textrm{(ind)}}(x|\psi)$ may model death due to intraspecific competition for resources. Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we obtain
+As in chapter \ref{chap_BD}, $ b^{\textrm{(mut)}}(x|\psi)$ describes birth due to mutations and $\mu \geq 0$ is a constant mutation rate. The functions $b^{\textrm{(ind)}}(x|\psi)$ and $d^{\textrm{(ind)}}(x|\psi)$ describe the per-capita birth rate and death rate of type $x$ individuals in a population $\psi$. These functions could in principle model several ecological factors. For example,  $b^{\textrm{(ind)}}(x|\psi)$ may incorporate the effects of mate choice in the sexual case or intrinsic duplication rates in the asexual case, and $d^{\textrm{(ind)}}(x|\psi)$ may model death due to intraspecific competition for resources. Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we obtain
 \begin{equation}
 \label{PDE_for_kimura}
 \frac{\partial \psi}{\partial t}(x,t) = w(x|\psi)\psi(x,t) + \mu b^{\textrm{(mut)}}(x|\psi)
