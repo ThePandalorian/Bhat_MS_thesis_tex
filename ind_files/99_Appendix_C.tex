@@ -1,0 +1,69 @@
+Let $\sigma^2_{f}$ denote the statistical variance of a type-level quantity, defined as:
+\begin{equation}
+    \sigma^2_{f} \coloneqq \overline{(f^2)} - (\overline{f})^2
+\end{equation}
+where $\overline{X}$ is the statistical mean value defined by \eqref{nD_mean}. By the product rule, we have
+\begin{equation}
+\label{prod_rule_for_variances}
+\frac{d\sigma^2_{f}}{dt} = 2\overline{f\frac{\partial f}{\partial t}} + \sum\limits_{i=1}^{m}f_i^2\frac{dp_i}{dt} - \frac{d}{dt}(\overline{f}^2)
+\end{equation}
+We will evaluate the RHS term by term. The first term is as simplified as can be. For the second term, we can substitute $dp_i$ from \eqref{nD_stochastic_RM} and use the same steps used in going from \eqref{nD_replicator_mutator} to \eqref{nD_Price} to write
+\begin{equation}
+\label{2nd_term_for_variances}
+\begin{aligned}
+\sum\limits_{i=1}^{m}f_i^2dp_i &= \textrm{Cov}(w,f^2)dt - \frac{1}{KN_K}\textrm{Cov}(\tau,f^2)dt\\
+&+ \mu\left(1-\frac{1}{KN_K(t)}\right)\left(\sum\limits_{i=1}^{m}f^2_iQ_i(\mathbf{p}) - \overline{f^2}\sum\limits_{i=1}^{m}Q_i(\mathbf{p})\right)dt \\
+&+\frac{1}{\sqrt{K}N_{K}(t)}\left(\sum\limits_{i=1}^{m}f^2_i\sqrt{A_i^+}dB_{t}^{(i)} - \overline{f^2}\sum\limits_{i=1}^{m}\sqrt{A_i^+}dB_{t}^{(i)}\right)
+\end{aligned}
+\end{equation}
+For the third term, we need to use It\^{o}'s formula. Here, the relevant version of It\^{o}'s formula is the one-dimensional version of \eqref{nD_Ito_formula}. Given a one-dimensional process $dX_t = S(X_t)dt + \sum D_j(X_t)dB^{(j)}_t$ with $S, D_j$ being suitable real functions and each $B^{(j)}_t$ being an independent Wiener process, It\^{o}'s formula says that given any $C^2(\mathbb{R})$ function $g(x)$, we have the relation:
+\begin{equation}
+\label{1D_Ito_formula}
+dg(X_t) = \left(S(X_t)g'(X_t) + \frac{g''(X_t)}{2}\sum\limits_{j}D_j^2(X_t)\right)dt + \sum\limits_{j}D_j(X_t)g'(X_t)dB^{(j)}_t 
+\end{equation}
+In our case, we have a one-dimensional process for the mean value $d\overline{f}$ of the type level quantity, and the $C^2(\mathbb{R})$ function $g(x) = x^2$. It\^{o}'s formula thus says that the third term of \eqref{prod_rule_for_variances} is given by:
+\begin{equation}
+\label{3rd_term_for_variances}
+d(\overline{f}^2) = \left(2\overline{f}S(X_t) + \sum\limits_{j}D_j^2(X_t)\right)dt + \sum\limits_{j}2\overline{f}D_j(X_t)dB^{(j)}_t
+\end{equation}
+where the relevant functions $S$ and $D_j$ can be read off from \eqref{nD_stochastic_Price}. Since the $dB$ terms are unwieldy and do not contribute to the expected dynamics, we will denote the contribution of all the $dB_t$ terms collectively by $dB_{\sigma^2_{f}}$ and not explicitly calculate these terms. We also note that the covariance operator is a bilinear form, \emph{i.e.} given any three quantities $X$, $Y$ and $Z$ and any constant $a \neq 0$, we have the relations:
+\begin{align*}
+\textrm{Cov}(aX,Y) &= a\textrm{Cov}(X,Y) = \textrm{Cov}(X,aY)\\
+\textrm{Cov}(X,Y+Z) &= \textrm{Cov}(X,Y)+\textrm{Cov}(X,Z)
+\end{align*}
+Substituting equations \eqref{2nd_term_for_variances} and \eqref{3rd_term_for_variances} into equation \eqref{prod_rule_for_variances} and using this property of covariances, we obtain:
+\begin{equation}
+\label{intermediate_1_for_variances}
+\begin{aligned}
+d\sigma^2_{f} &= \textrm{Cov}(w,f^2 - 2\overline{f}f)dt - \frac{1}{KN_K}\left(\textrm{Cov}(\tau,f^2 - 2\overline{f}f)\right)dt + 2\left(\overline{f\frac{\partial f}{\partial t}} - \overline{f}\overline{\left(\frac{\partial f}{\partial t}\right)}\right)dt\\
+&+ \mu\left(1-\frac{1}{KN_K(t)}\right)\left(\sum\limits_{i=1}^{m}(f^2_i - 2\overline{f}f_i)Q_i(\mathbf{p}) - (\overline{f^2}-2\overline{f}^2)\sum\limits_{i=1}^{m}Q_i(\mathbf{p})\right)dt\\
+&+ \frac{1}{KN^2_{K}(t)}\left(\sum\limits_{i=1}^{m}f^2_iA_i^+ - \overline{f}^2\sum\limits_{i=1}^{m}A_i^+\right)dt\\
+&+ dB_{\sigma^2_{f}}
+\end{aligned}
+\end{equation}
+Now, we note that
+\begin{align}
+\frac{1}{N_K}A_i^+ &= \frac{1}{N_K}\left(\tau_ix_i + \mu Q_i(\mathbf{x})\right)\\
+&= \tau_ip_i + \mu Q_i(\mathbf{p})
+\end{align}
+and thus the third line of \eqref{intermediate_1_for_variances} is
+\begin{align}
+\frac{1}{KN^2_{K}(t)}\left(\sum\limits_{i=1}^{m}f^2_iA_i^+ - \overline{f}^2\sum\limits_{i=1}^{m}A_i^+\right)dt &= \frac{1}{KN_{K}}\sum\limits_{i=1}^{m}f_i^2\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right) - \frac{\overline{f}^2}{KN_{K}}\sum\limits_{i=1}^{m}\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right)\\
+&= \frac{1}{KN_K}\sum\limits_{i=1}^{m}\left(f_i^2 - \overline{f}^2\right)\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right)\\
+&= \frac{1}{KN_K}\left(\textrm{Cov}(\tau,f^2)+\mu \sum\limits_{i=1}^{m}\left(f_i^2 - \overline{f}^2\right)Q_i(\mathbf{p})\right)
+\end{align}
+Substituting this into \eqref{intermediate_1_for_variances} and using $M_{\sigma^2_f}(\mathbf{p},N_K)$ to denote the contributions of all the mutational terms (\emph{i.e.} all terms with a $\mu$ factor) for notational brevity, we obtain
+\begin{equation}
+\begin{aligned}
+d\sigma^2_{f} &= \textrm{Cov}(w,f^2 - 2\overline{f}f)dt - \frac{1}{KN_K}\left(\textrm{Cov}(\tau,2f^2 - 2\overline{f}f)\right)dt\\
+&+ 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+\end{aligned}
+\end{equation}
+We can now complete the square inside the covariance terms of the first line of the RHS by writing $f^2 - 2\overline{f}f = (f - \overline{f})^2 - \overline{f}^2$ to obtain
+\begin{equation}
+\begin{aligned}
+d\sigma^2_{f} &= \left[ \ \textrm{Cov}\left(w,(f - \overline{f})^2\right)-\textrm{Cov}\left(w, {\left(\overline{f}\right)}^2\right) \ \right]dt\\[12pt]
+&- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) - \textrm{Cov}\left(\tau,f^2 - {\left(\overline{f}\right)}^2\right) \ \right]dt\\[12pt]
+& + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+\end{aligned}
+\end{equation}
