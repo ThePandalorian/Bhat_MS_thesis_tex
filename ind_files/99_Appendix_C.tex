@@ -80,11 +80,31 @@ and
 &= \overline{\tau f^2} - \overline{\tau}{\left(\overline{f}\right)}^2  - \overline{\tau}\overline{f^2} + \overline{\tau}{\left(\overline{f}\right)}^2\\
 &=\overline{\tau f^2} - \overline{\tau}\overline{f^2} = \textrm{Cov}(\tau,f^2)\label{cov_term_2_for_variances}
 \end{align}
-Substituting \eqref{cov_term_1_for_variances} and \eqref{cov_term_2_for_variances} into \eqref{intermediate_2_for_variances}, we thus see that the rate of change of variance of any type-level quantity in the population is given by:
+Substituting \eqref{cov_term_1_for_variances} and \eqref{cov_term_2_for_variances} into \eqref{intermediate_2_for_variances}, we thus arrive at:
+\begin{equation}
+\label{intermediate_3_for_variances}
+\begin{aligned}
+d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt\\
+&- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \textrm{Cov}(\tau,f^2) \ \right]dt\\
+& + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+\end{aligned}
+\end{equation}
+Covariance with $(f-\overline{f})^2$ is a measure of covariance with the existing `spread' of $f_i$ around the population mean value $\overline{f}$ and is thus readily understood to represent existing variation. However, the $\textrm{Cov}(\tau,f^2)$ term is difficult to interpret since it depends on the square of $f$, which may not have any direct biological interpretation. We will convert this into a form whose interpretation is more clear by repeatedly adding and subtracting a quantity from our expression (these quantities are shown in red below for clarity), noting that this leaves the net value unchanged. We have:
+\begin{align}
+\textrm{Cov}(\tau, f^2) &= \overline{\tau f^2} - \overline{\tau}\overline{f^2}\nonumber\\
+&= \overline{\tau f^2} {\color{red} + \overline{\tau{\left(\overline{f}\right)}^2} - \overline{\tau f \overline{f}}}  - \overline{\tau}\overline{f^2} \nonumber\\
+&= \overline{\tau f^2} + \overline{\tau{\left(\overline{f}\right)}^2} - 2\overline{\tau f \overline{f}}\nonumber\\
+&= \overline{\tau\left(f-\overline{f}\right)^2}\nonumber\\
+&= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red}- \overline{\tau}{\left(\overline{f}\right)}^2 + 2 \overline{\tau}\overline{f\overline{f}} - \overline{\tau}{\left(\overline{f}\right)}^2}\nonumber\\
+&= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red} - \overline{\tau}\overline{f^2}} -\overline{\tau}\overline{{\left(\overline{f}\right)}^2} + 2 \overline{\tau}\overline{f\overline{f}} {\color{red} + \overline{\tau}\overline{f^2}} - \overline{\tau}{\left(\overline{f}\right)}^2\nonumber\\
+&=  \overline{\tau\left(f-\overline{f}\right)^2} - \overline{\tau}\overline{\left(f-\overline{f}\right)^2} + \overline{\tau}\left(\overline{f^2} - {\left(\overline{f}\right)}^2\right)\nonumber\\
+&= \textrm{Cov}(\tau, \left(f-\overline{f}\right)^2) + \overline{\tau}\sigma^2_{f}\label{cov_to_var_sub_for_variances}
+\end{align}
+Finally, substituting \eqref{cov_to_var_sub_for_variances} into \eqref{intermediate_3_for_variances}, we see that the rate of change of the variance of any type-level quantity $f$ in the population satisfies:
 \begin{equation}
 \begin{aligned}
-d\sigma^2_{f} &= \left[ \ \textrm{Cov}\left(w,(f - \overline{f})^2\right) \ \right]dt\\[12pt]
-&- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \textrm{Cov}(\tau,f^2) \ \right]dt\\[12pt]
+d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt\\[12pt]
+&- \frac{1}{KN_K}\left[ \ 2\textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \overline{\tau}\sigma^2_{f}(t) \ \right]dt\\[12pt]
 & + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
 \end{equation}
