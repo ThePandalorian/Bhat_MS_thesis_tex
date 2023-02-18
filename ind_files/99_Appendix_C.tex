@@ -56,7 +56,7 @@ Substituting this into \eqref{intermediate_1_for_variances} and using $M_{\sigma
 \begin{equation}
 \begin{aligned}
 d\sigma^2_{f} &= \textrm{Cov}(w,f^2 - 2\overline{f}f)dt - \frac{1}{KN_K}\left(\textrm{Cov}(\tau,2f^2 - 2\overline{f}f)\right)dt\\
-&+ 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+&+ 2\textrm{Cov}\left(f, \frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
 \end{equation}
 We can now complete the square inside the covariance terms of the first line of the RHS by writing $f^2 - 2\overline{f}f = (f - \overline{f})^2 - \overline{f}^2$ to obtain
@@ -65,7 +65,7 @@ We can now complete the square inside the covariance terms of the first line of 
 \begin{aligned}
 d\sigma^2_{f} &= \left[ \ \textrm{Cov}\left(w,(f - \overline{f})^2\right)-\textrm{Cov}\left(w, {\left(\overline{f}\right)}^2\right) \ \right]dt\\[12pt]
 &- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \textrm{Cov}\left(\tau,f^2 - {\left(\overline{f}\right)}^2\right) \ \right]dt\\[12pt]
-& + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+& + 2\textrm{Cov}\left(f, \frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
 \end{equation}
 To simplify the covariance terms of the first line of the RHS, we observe that
@@ -86,26 +86,40 @@ Substituting \eqref{cov_term_1_for_variances} and \eqref{cov_term_2_for_variance
 \begin{aligned}
 d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt\\
 &- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \textrm{Cov}(\tau,f^2) \ \right]dt\\
-& + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+& + 2\textrm{Cov}\left(f, \frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
 \end{equation}
-Covariance with $(f-\overline{f})^2$ is a measure of covariance with the existing `spread' of $f_i$ around the population mean value $\overline{f}$ and is thus readily understood to represent existing variation. However, the $\textrm{Cov}(\tau,f^2)$ term is difficult to interpret since it depends on the square of $f$, which may not have any direct biological interpretation. We will convert this into a form whose interpretation is more clear by repeatedly adding and subtracting a quantity from our expression (these quantities are shown in red below for clarity), noting that this leaves the net value unchanged. We have:
+Covariance with $(f-\overline{f})^2$ is a measure of covariance with the existing `spread' of $f_i$ around the population mean value $\overline{f}$ and is thus readily understood to represent existing variation. However, the $\textrm{Cov}(\tau,f^2)$ term is difficult to interpret since it depends on the square of $f$, which may not have any direct biological interpretation. We will convert this into a form whose interpretation is more clear
+% by repeatedly adding and subtracting a quantity from our expression (these quantities are shown in red below for clarity), noting that this leaves the net value unchanged. We have:
+% \begin{align}
+% \textrm{Cov}(\tau, f^2) &= \overline{\tau f^2} - \overline{\tau}\overline{f^2}\nonumber\\
+% &= \overline{\tau f^2} {\color{red} + \overline{\tau{\left(\overline{f}\right)}^2} - \overline{\tau f \overline{f}}}  - \overline{\tau}\overline{f^2} \nonumber\\
+% &= \overline{\tau f^2} + \overline{\tau{\left(\overline{f}\right)}^2} - 2\overline{\tau f \overline{f}}\nonumber\\
+% &= \overline{\tau\left(f-\overline{f}\right)^2}\nonumber\\
+% &= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red}- \overline{\tau}{\left(\overline{f}\right)}^2 + 2 \overline{\tau}\overline{f\overline{f}} - \overline{\tau}{\left(\overline{f}\right)}^2}\nonumber\\
+% &= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red} - \overline{\tau}\overline{f^2}} -\overline{\tau}\overline{{\left(\overline{f}\right)}^2} + 2 \overline{\tau}\overline{f\overline{f}} {\color{red} + \overline{\tau}\overline{f^2}} - \overline{\tau}{\left(\overline{f}\right)}^2\nonumber\\
+% &=  \overline{\tau\left(f-\overline{f}\right)^2} - \overline{\tau}\overline{\left(f-\overline{f}\right)^2} + \overline{\tau}\left(\overline{f^2} - {\left(\overline{f}\right)}^2\right)\nonumber\\
+% &= \textrm{Cov}(\tau, \left(f-\overline{f}\right)^2) + \overline{\tau}\sigma^2_{f}\label{cov_to_var_sub_for_variances}
+% \end{align}
+% Finally, substituting \eqref{cov_to_var_sub_for_variances} into \eqref{intermediate_3_for_variances}, we see that the rate of change of the variance of any type-level quantity $f$ in the population satisfies:
+% \begin{equation}
+% \label{stochastic_Price_variance}
+% \begin{aligned}
+% d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt - \frac{1}{KN_K}\left[ \ 2\textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \overline{\tau}\sigma^2_{f}(t) \ \right]dt\\[12pt]
+% & + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+% \end{aligned}
+% \end{equation}
+% In the case of one-dimensional quantitative traits, an infinite-dimensional version of \eqref{stochastic_Price_variance} has been rigorously derived \citep{week_white_2021} in a recent paper for the case where $f$ is the phenotypic value of the quantitative trait - Equation (21b) of \cite{week_white_2021} is precisely the $m \to \infty$ version of my equation \eqref{stochastic_Price_variance} when $f$ is the phenotypic value of the quantitative trait under consideration.
+by using the fact that $f^2 = (f-\overline{f})^2 - \overline{f}^2 + 2f\overline{f}$. we have
 \begin{align}
-\textrm{Cov}(\tau, f^2) &= \overline{\tau f^2} - \overline{\tau}\overline{f^2}\nonumber\\
-&= \overline{\tau f^2} {\color{red} + \overline{\tau{\left(\overline{f}\right)}^2} - \overline{\tau f \overline{f}}}  - \overline{\tau}\overline{f^2} \nonumber\\
-&= \overline{\tau f^2} + \overline{\tau{\left(\overline{f}\right)}^2} - 2\overline{\tau f \overline{f}}\nonumber\\
-&= \overline{\tau\left(f-\overline{f}\right)^2}\nonumber\\
-&= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red}- \overline{\tau}{\left(\overline{f}\right)}^2 + 2 \overline{\tau}\overline{f\overline{f}} - \overline{\tau}{\left(\overline{f}\right)}^2}\nonumber\\
-&= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red} - \overline{\tau}\overline{f^2}} -\overline{\tau}\overline{{\left(\overline{f}\right)}^2} + 2 \overline{\tau}\overline{f\overline{f}} {\color{red} + \overline{\tau}\overline{f^2}} - \overline{\tau}{\left(\overline{f}\right)}^2\nonumber\\
-&=  \overline{\tau\left(f-\overline{f}\right)^2} - \overline{\tau}\overline{\left(f-\overline{f}\right)^2} + \overline{\tau}\left(\overline{f^2} - {\left(\overline{f}\right)}^2\right)\nonumber\\
-&= \textrm{Cov}(\tau, \left(f-\overline{f}\right)^2) + \overline{\tau}\sigma^2_{f}\label{cov_to_var_sub_for_variances}
+\textrm{Cov}(\tau, f^2) &= \textrm{Cov}(\tau, (f-\overline{f})^2) + \textrm{Cov}(\tau, - {\left(\overline{f}\right)}^2) + 2f\overline{f}\nonumber\\
+&=  \textrm{Cov}(\tau, (f-\overline{f})^2) \ \  - \underbrace{\textrm{Cov}(\tau, {\left(\overline{f}\right)}^2)}_{\substack{ =0 \\ {\text{by same argument as in \eqref{cov_term_1_for_variances}}}}} + \ \  2\overline{f}\textrm{Cov}(\tau, f)\label{cov_term_3_for_variances}
 \end{align}
-Finally, substituting \eqref{cov_to_var_sub_for_variances} into \eqref{intermediate_3_for_variances}, we see that the rate of change of the variance of any type-level quantity $f$ in the population satisfies:
+and thus, substituting \eqref{cov_term_3_for_variances} into \eqref{intermediate_3_for_variances},  we see that the rate of change of the variance of any type-level quantity $f$ in the population satisfies:
 \begin{equation}
 \label{stochastic_Price_variance}
 \begin{aligned}
-d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt - \frac{1}{KN_K}\left[ \ 2\textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \overline{\tau}\sigma^2_{f}(t) \ \right]dt\\[12pt]
-& + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt - \frac{2}{KN_K}\left[ \ \overline{f}\textrm{Cov}(\tau, f) +  \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) \ \right]dt\\[12pt]
+& + 2\textrm{Cov}\left(f,\frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
-\end{equation}
-In the case of one-dimensional quantitative traits, an infinite-dimensional version of \eqref{stochastic_Price_variance} has been rigorously derived \citep{week_white_2021} in a recent paper for the case where $f$ is the phenotypic value of the quantitative trait - Equation (21b) of \cite{week_white_2021} is precisely the $m \to \infty$ version of my equation \eqref{stochastic_Price_variance} when $f$ is the phenotypic value of the quantitative trait under consideration.
+\end{equation}.
