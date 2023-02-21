@@ -37,7 +37,7 @@ Substituting equations \eqref{2nd_term_for_variances} and \eqref{3rd_term_for_va
 \begin{aligned}
 d\sigma^2_{f} &= \textrm{Cov}(w,f^2 - 2\overline{f}f)dt - \frac{1}{KN_K}\left(\textrm{Cov}(\tau,f^2 - 2\overline{f}f)\right)dt + 2\left(\overline{f\frac{\partial f}{\partial t}} - \overline{f}\overline{\left(\frac{\partial f}{\partial t}\right)}\right)dt\\
 &+ \mu\left(1-\frac{1}{KN_K(t)}\right)\left(\sum\limits_{i=1}^{m}(f^2_i - 2\overline{f}f_i)Q_i(\mathbf{p}) - (\overline{f^2}-2\overline{f}^2)\sum\limits_{i=1}^{m}Q_i(\mathbf{p})\right)dt\\
-&+ \frac{1}{KN^2_{K}(t)}\left(\sum\limits_{i=1}^{m}f^2_iA_i^+ - \overline{f}^2\sum\limits_{i=1}^{m}A_i^+\right)dt\\
+&- \frac{1}{KN^2_{K}(t)}\left(\sum\limits_{i=1}^{m}(f_i - \overline{f})^2A_i^+\right)dt\\
 &+ dB_{\sigma^2_{f}}
 \end{aligned}
 \end{equation}
@@ -48,14 +48,16 @@ Now, we note that
 \end{align}
 and thus the third line of \eqref{intermediate_1_for_variances} is
 \begin{align}
-\frac{1}{KN^2_{K}(t)}\left(\sum\limits_{i=1}^{m}f^2_iA_i^+ - \overline{f}^2\sum\limits_{i=1}^{m}A_i^+\right)dt &= \frac{1}{KN_{K}}\sum\limits_{i=1}^{m}f_i^2\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right) - \frac{\overline{f}^2}{KN_{K}}\sum\limits_{i=1}^{m}\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right)\\
-&= \frac{1}{KN_K}\sum\limits_{i=1}^{m}\left(f_i^2 - \overline{f}^2\right)\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right)\\
-&= \frac{1}{KN_K}\left(\textrm{Cov}(\tau,f^2)+\mu \sum\limits_{i=1}^{m}\left(f_i^2 - \overline{f}^2\right)Q_i(\mathbf{p})\right)
+\frac{1}{KN^2_{K}(t)}\left(\sum\limits_{i=1}^{m}(f_i-\overline{f})^2A_i^+\right)dt &= \frac{1}{KN_{K}}\sum\limits_{i=1}^{m}(f_i-\overline{f})^2\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right)\\
+&= \frac{1}{KN_K}\sum\limits_{i=1}^{m}\left(f_i - \overline{f}\right)^2\left(\tau_ip_i + \mu Q_i(\mathbf{p})\right)\\
+&= \frac{1}{KN_K}\left(\overline{\left(f - \overline{f}\right)^2\tau}+\mu \sum\limits_{i=1}^{m}\left(f_i - \overline{f}\right)^2Q_i(\mathbf{p})\right)\\
+&= \frac{1}{KN_K}\left(\textrm{Cov}(\tau,\left(f - \overline{f}\right)^2) + \overline{\tau}\overline{\left(f - \overline{f}\right)^2} +\mu \sum\limits_{i=1}^{m}\left(f_i - \overline{f}\right)^2Q_i(\mathbf{p})\right)\\
+&= \frac{1}{KN_K}\left(\textrm{Cov}(\tau,\left(f - \overline{f}\right)^2) + \overline{\tau}\sigma^2_{f} +\mu \sum\limits_{i=1}^{m}\left(f_i - \overline{f}\right)^2Q_i(\mathbf{p})\right)
 \end{align}
-Substituting this into \eqref{intermediate_1_for_variances} and using $M_{\sigma^2_f}(\mathbf{p},N_K)$ to denote the contributions of all the mutational terms (\emph{i.e.} all terms with a $\mu$ factor) for notational brevity, we obtain
+where we have used the definition of statistical covariance in the second to last line and used the definition of statistical variance in the last line. Substituting this into \eqref{intermediate_1_for_variances} and using $M_{\sigma^2_f}(\mathbf{p},N_K)$ to denote the contributions of all the mutational terms (\emph{i.e.} all terms with a $\mu$ factor) for notational brevity, we obtain
 \begin{equation}
 \begin{aligned}
-d\sigma^2_{f} &= \textrm{Cov}(w,f^2 - 2\overline{f}f)dt - \frac{1}{KN_K}\left(\textrm{Cov}(\tau,2f^2 - 2\overline{f}f)\right)dt\\
+d\sigma^2_{f} &= \textrm{Cov}(w,f^2 - 2\overline{f}f)dt - \frac{1}{KN_K}\left(\textrm{Cov}(\tau,f^2 - 2\overline{f}f) + \textrm{Cov}(\tau,\left(f - \overline{f}\right)^2) + \overline{\tau}\sigma^2_{f}\right)dt\\
 &+ 2\textrm{Cov}\left(f, \frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
 \end{equation}
@@ -64,62 +66,39 @@ We can now complete the square inside the covariance terms of the first line of 
 \label{intermediate_2_for_variances}
 \begin{aligned}
 d\sigma^2_{f} &= \left[ \ \textrm{Cov}\left(w,(f - \overline{f})^2\right)-\textrm{Cov}\left(w, {\left(\overline{f}\right)}^2\right) \ \right]dt\\[12pt]
-&- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \textrm{Cov}\left(\tau,f^2 - {\left(\overline{f}\right)}^2\right) \ \right]dt\\[12pt]
-& + 2\textrm{Cov}\left(f, \frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+&- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) - \textrm{Cov}\left(\tau, {\left(\overline{f}\right)}^2\right) + \textrm{Cov}(\tau,\left(f - \overline{f}\right)^2) + \overline{\tau}\sigma^2_{f} \ \right]dt\\[12pt]
+& + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
 \end{equation}
 To simplify the covariance terms of the first line of the RHS, we observe that
-\begin{align}
-\textrm{Cov}\left(w, {\left(\overline{f}\right)}^2\right) &= \overline{\left(w{\left(\overline{f}\right)}^2\right)} - \overline{w}\overline{\left({\left(\overline{f}\right)}^2\right)}\nonumber\\
-&= {\left(\overline{f}\right)}^2\sum\limits_{i=1}^{m}w_ip_i - \overline{w}{\left(\overline{f}\right)}^2\sum\limits_{i=1}^{m}p_i\nonumber\\
-&= {\left(\overline{f}\right)}^2\overline{w} - \overline{w}{\left(\overline{f}\right)}^2 = 0\label{cov_term_1_for_variances}
-\end{align}
-and
-\begin{align}
-\textrm{Cov}\left(\tau,f^2 - {\left(\overline{f}\right)}^2\right) &= \overline{\tau\left(f^2 - {\left(\overline{f}\right)}^2\right)} - \overline{\tau}\left(\overline{f^2 - {\left(\overline{f}\right)}^2}\right)\nonumber\\
-&= \overline{\tau f^2} - \overline{\tau}{\left(\overline{f}\right)}^2  - \overline{\tau}\overline{f^2} + \overline{\tau}{\left(\overline{f}\right)}^2\nonumber\\
-&=\overline{\tau f^2} - \overline{\tau}\overline{f^2} = \textrm{Cov}(\tau,f^2)\label{cov_term_2_for_variances}
-\end{align}
-Substituting \eqref{cov_term_1_for_variances} and \eqref{cov_term_2_for_variances} into \eqref{intermediate_2_for_variances}, we thus arrive at:
-\begin{equation}
-\label{intermediate_3_for_variances}
-\begin{aligned}
-d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt\\
-&- \frac{1}{KN_K}\left[ \ \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \textrm{Cov}(\tau,f^2) \ \right]dt\\
-& + 2\textrm{Cov}\left(f, \frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
-\end{aligned}
-\end{equation}
-Covariance with $(f-\overline{f})^2$ is a measure of covariance with the existing `spread' of $f_i$ around the population mean value $\overline{f}$ and is thus readily understood to represent existing variation. However, the $\textrm{Cov}(\tau,f^2)$ term is difficult to interpret since it depends on the square of $f$, which may not have any direct biological interpretation. We will convert this into a form whose interpretation is more clear
-% by repeatedly adding and subtracting a quantity from our expression (these quantities are shown in red below for clarity), noting that this leaves the net value unchanged. We have:
-% \begin{align}
-% \textrm{Cov}(\tau, f^2) &= \overline{\tau f^2} - \overline{\tau}\overline{f^2}\nonumber\\
-% &= \overline{\tau f^2} {\color{red} + \overline{\tau{\left(\overline{f}\right)}^2} - \overline{\tau f \overline{f}}}  - \overline{\tau}\overline{f^2} \nonumber\\
-% &= \overline{\tau f^2} + \overline{\tau{\left(\overline{f}\right)}^2} - 2\overline{\tau f \overline{f}}\nonumber\\
-% &= \overline{\tau\left(f-\overline{f}\right)^2}\nonumber\\
-% &= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red}- \overline{\tau}{\left(\overline{f}\right)}^2 + 2 \overline{\tau}\overline{f\overline{f}} - \overline{\tau}{\left(\overline{f}\right)}^2}\nonumber\\
-% &= \overline{\tau\left(f-\overline{f}\right)^2} {\color{red} - \overline{\tau}\overline{f^2}} -\overline{\tau}\overline{{\left(\overline{f}\right)}^2} + 2 \overline{\tau}\overline{f\overline{f}} {\color{red} + \overline{\tau}\overline{f^2}} - \overline{\tau}{\left(\overline{f}\right)}^2\nonumber\\
-% &=  \overline{\tau\left(f-\overline{f}\right)^2} - \overline{\tau}\overline{\left(f-\overline{f}\right)^2} + \overline{\tau}\left(\overline{f^2} - {\left(\overline{f}\right)}^2\right)\nonumber\\
-% &= \textrm{Cov}(\tau, \left(f-\overline{f}\right)^2) + \overline{\tau}\sigma^2_{f}\label{cov_to_var_sub_for_variances}
-% \end{align}
-% Finally, substituting \eqref{cov_to_var_sub_for_variances} into \eqref{intermediate_3_for_variances}, we see that the rate of change of the variance of any type-level quantity $f$ in the population satisfies:
-% \begin{equation}
-% \label{stochastic_Price_variance}
-% \begin{aligned}
-% d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt - \frac{1}{KN_K}\left[ \ 2\textrm{Cov}\left(\tau,(f - \overline{f})^2\right) + \overline{\tau}\sigma^2_{f}(t) \ \right]dt\\[12pt]
-% & + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
-% \end{aligned}
-% \end{equation}
-% In the case of one-dimensional quantitative traits, an infinite-dimensional version of \eqref{stochastic_Price_variance} has been rigorously derived \citep{week_white_2021} in a recent paper for the case where $f$ is the phenotypic value of the quantitative trait - Equation (21b) of \cite{week_white_2021} is precisely the $m \to \infty$ version of my equation \eqref{stochastic_Price_variance} when $f$ is the phenotypic value of the quantitative trait under consideration.
-by using the fact that $f^2 = (f-\overline{f})^2 - \overline{f}^2 + 2f\overline{f}$. we have
-\begin{align}
-\textrm{Cov}(\tau, f^2) &= \textrm{Cov}(\tau, (f-\overline{f})^2) + \textrm{Cov}(\tau, - {\left(\overline{f}\right)}^2) + 2f\overline{f}\nonumber\\
-&=  \textrm{Cov}(\tau, (f-\overline{f})^2) \ \  - \underbrace{\textrm{Cov}(\tau, {\left(\overline{f}\right)}^2)}_{\substack{ =0 \\ {\text{by same argument as in \eqref{cov_term_1_for_variances}}}}} + \ \  2\overline{f}\textrm{Cov}(\tau, f)\label{cov_term_3_for_variances}
-\end{align}
-and thus, substituting \eqref{cov_term_3_for_variances} into \eqref{intermediate_3_for_variances},  we see that the rate of change of the variance of any type-level quantity $f$ in the population satisfies:
+\begin{align*}
+\textrm{Cov}\left(w, {\left(\overline{f}\right)}^2\right) &= \overline{\left(w{\left(\overline{f}\right)}^2\right)} - \overline{w}\overline{\left({\left(\overline{f}\right)}^2\right)}\\
+&= {\left(\overline{f}\right)}^2\sum\limits_{i=1}^{m}w_ip_i - \overline{w}{\left(\overline{f}\right)}^2\sum\limits_{i=1}^{m}p_i\\
+&= {\left(\overline{f}\right)}^2\overline{w} - \overline{w}{\left(\overline{f}\right)}^2 = 0
+\end{align*}
+and similarly,
+\begin{equation*}
+\textrm{Cov}\left(\tau, {\left(\overline{f}\right)}^2\right) = 0
+\end{equation*}
+and thus, using this in \eqref{intermediate_2_for_variances},  we see that the rate of change of the variance of any type-level quantity $f$ in the population satisfies:
 \begin{equation}
 \label{stochastic_Price_variance}
 \begin{aligned}
-d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt - \frac{2}{KN_K}\left[ \ \overline{f}\textrm{Cov}(\tau, f) +  \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) \ \right]dt\\[12pt]
-& + 2\textrm{Cov}\left(f,\frac{\partial f}{\partial t}\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
+d\sigma^2_{f} &= \textrm{Cov}\left(w,(f - \overline{f})^2\right)dt - \frac{1}{KN_K}\left[ \ \overline{\tau}\sigma^2_{f} +  2\textrm{Cov}\left(\tau,(f - \overline{f})^2\right) \ \right]dt\\[12pt]
+& + 2\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right)dt + M_{\sigma^2_f}(\mathbf{p},N_K)dt + dB_{\sigma^2_{f}}
 \end{aligned}
-\end{equation}.
+\end{equation}
+In the case of one-dimensional quantitative traits, an infinite-dimensional version of \eqref{stochastic_Price_variance} has been rigorously derived \citep{week_white_2021} in a recent paper for the case where $f$ is the phenotypic value of the quantitative trait - Equation (21b) of \cite{week_white_2021} is precisely the $m \to \infty$ version of my equation \eqref{stochastic_Price_variance} when $f$ is the phenotypic value of the quantitative trait under consideration.\\
+Once again, terms of equation \eqref{stochastic_Price_variance} lend themselves to straightforward biological interpretation. The quantity $(f-\overline{f})^2$ is a measure of the `spread' of the quantity $f$ around the population mean value $\overline{f}$, and thus covariance with $(f-\overline{f})^2$ is a measure of disruptive (\emph{i.e.} diversifying) selection: If values of $f$ that are further away from the mean value are associated with higher fitness, the variance of that quantity in the population increases. The $\overline{\tau}\sigma^2_{f}$ term represents a loss of diversity due to stochastic extinctions (i.e. demographic stochasticity). To see this, let us consider the case in which each $f_i$ is simply a label or mark arbitrarily assigned to individuals in the population at the start of an experiment/observation and subsequently passed on to offspring - For example, a neutral tag in the genome of the organism in an area that does not mutate. Let us set $\mu = 0$ so that the labels cannot change between parents to offspring. This means that we have $M_{\sigma^2_f}(\mathbf{p},N_K) \equiv 0$. Further, since the labels are arbitrary and have no effect whatsoever on the biology of the organisms, we have $\textrm{Cov}\left(w,(f - \overline{f})^2\right) \equiv \textrm{Cov}\left(\tau,(f - \overline{f})^2\right) \equiv 0$. Since the labels do not change over time, we also have $\textrm{Cov}\left(\frac{\partial f}{\partial t},f\right) = 0$. From \eqref{stochastic_Price_variance}, we see that in this case, the variance changes as
+\begin{equation}
+d\sigma^2_f = - \frac{\overline{\tau}\sigma^2_{f}}{KN_K}dt + dB_{\sigma^2_{f}}
+\end{equation}
+In particular, on taking expectations, we see that the expected variance in the population obeys
+\begin{equation}
+\frac{d \mathbb{E}[\sigma^2_f]}{dt} = - \left(\mathbb{E}\left[\frac{\overline{\tau}}{KN_K}\right]\right)\mathbb{E}[\sigma^2_{f}]
+\end{equation}
+We were able to decompose the expectation on the RHS because the label $f$ is completely arbitrary and thus independent of both $\overline{\tau}$ and $N_K(t)$. This is a simple linear ODE and has the solution
+\begin{equation}
+\mathbb{E}[\sigma^2_f(t)] = \sigma^2_f(0)\exp\left(-\mathbb{E}\left[\frac{\overline{\tau}}{KN_K}\right]\right)
+\end{equation}
+In this case, demographic stochasticity is expected to lead to an exponential loss of diversity in the population. Populations with higher mean turnover $\overline{\tau}$  and/or lower population size $KN_K$ lose diversity faster, which again should be intuitive since these populations experience more extreme stochastic events and are therefore more likely to experience loss of labels. Note that \emph{which} label is lost is entirely random (since labelling is arbitrary), but nevertheless, labels tend to be stochastically lost until only a small number of labels remain in the population.
