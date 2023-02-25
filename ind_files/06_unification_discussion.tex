@@ -121,7 +121,7 @@ where we have decomposed the expectation of the product on the RHS into a produc
 \begin{equation}
 \mathbb{E}[\sigma^2_f](t) = \sigma^2_f(0)e^{-\mathbb{E}\left[\frac{\overline{\tau}}{KN_K}\right]t}
 \end{equation}
-which tells us that the expected diversity (variance) of labels in the population decreases exponentially over time. The rate of loss is $\mathbb{E}\left[\overline{\tau}(KN_K)^{-1}\right]$, and thus, populations with higher mean turnover $\overline{\tau}$  and/or lower population size $KN_K$ lose diversity faster. This is because such populations experience more extreme stochastic events and are therefore more likely to experience stochastic loss of labels. Note that \emph{which} labels/individuals are lost is entirely random (since all labels are arbitrary), but nevertheless, labels tend to be stochastically lost until only a small number of labels remain in the population.
+which tells us that the expected diversity (variance) of labels in the population decreases exponentially over time. The rate of loss is $\mathbb{E}\left[\overline{\tau}(KN_K)^{-1}\right]$, and thus, populations with higher mean turnover $\overline{\tau}$  and/or lower population size $KN_K$ lose diversity faster. This is because populations with higher $\overline{\tau}$ experience more stochastic events per unit time (a gambler's ruin type scenario), while extinction is `easier' in smaller populations because a smaller number of deaths is required to eliminate a label from the population completely. Note that \emph{which} labels/individuals are lost is entirely random (since all labels are arbitrary), but nevertheless, labels tend to be stochastically lost until only a small number of labels remain in the population.
 
 
 \section{Weak-Noise approximation}
