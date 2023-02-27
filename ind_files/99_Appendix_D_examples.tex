@@ -1,9 +1,5 @@
-\epigraph{\justifying Our future advances will not be concerned with universal laws, but instead with universal approaches to tackling particular problems}{Peter Kareiva}
-
-In the previous chapter, we used various tools and arguments to illustrate how to obtain approximate equations for very general stochastic birth-death processes. In this chapter, we put this theory into use through examples to study extinction and diversity in finite populations.
-
 \section{An example in one dimension: The stochastic logistic equation}
-Consider the functional forms of example \ref{ex_1D_stoch_logistic}, given by
+Here, we analyze example \ref{ex_1D_stoch_logistic}. To recap, we had a population of individuals that exhibit a constant per-capita birth rate $\lambda > 0$, and a per-capita death rate that had the linear density-dependence $d(n) = \left(\mu + (\lambda-\mu)\frac{n}{K}\right)n$, where $\mu$ and $K$ are positive constants. Thus, we have the equations
 \begin{equation}
 \label{ex_1D_stoch_logistic_BD_eqns}
 \begin{aligned}
@@ -57,89 +53,81 @@ The deterministic trajectory \eqref{ex_1D_stoch_logistic_det_limit} has two fixe
 
 The methods outlined in the above section have recently been used to study the population dynamics of a finite population playing a so-called `matrix game' (An evolutionary game for which you can write down a payoff matrix) with 2 pure strategies \citep{tao_stochastic_2007}. Based on the interpretation of what each type represents, this is mathematically equivalent to studying frequency-dependent selection on a one-locus two-allele gene (with a bijective genotype-phenotype map and no mutations) or studying two-species competitive Lotka-Volterra dynamics, as we will show below. The stochastic Lotka-Volterra competition model shown below has also been proved to be equivalent to an $m$-allele Moran model under certain limits \citep{constable_mapping_2017}.\\
 \\
-Let us imagine a population with $m$ types of individuals that are competing for resources. Let the state of the population be characterized by the vector $\mathbf{v}(t) = [v_1(t),v_2(t),\ldots,v_m(t)]$, where $v_i(t)$ is the number of type $i$ individuals at time $t$. Let the birth and death rates of the $i$th type be given by:
+Let us imagine a population with $m$ types of individuals that are interacting according to some ecological rules. Let the state of the population be characterized by the vector $\mathbf{v}(t) = [v_1(t),v_2(t),\ldots,v_m(t)]$, where $v_i(t)$ is the number of type $i$ individuals at time $t$. Let the birth and death rates of the $i$th type be given by:
 \begin{equation}
 \label{nD_example_numbers_b_d_rates}
 \begin{aligned}
-b_i(\mathbf{v}) &= \lambda v_i\\
-d_i(\mathbf{v}) &= \left(\mu + \frac{1}{K}\left(\sum\limits_{j=1}^{m}M_{ij}v_j\right)\right)v_i
+b_i(\mathbf{v}) &= \left(\lambda + \frac{1}{K}\left(\sum\limits_{j=1}^{m}\beta_{ij}v_j\right)\right)v_i\\
+d_i(\mathbf{v}) &= \left(\mu + \frac{1}{K}\left(\sum\limits_{j=1}^{m}\delta_{ij}v_j\right)\right)v_i
 \end{aligned}
 \end{equation}
-where $K > 0$ is our system size parameter (and represents a global carrying capacity across all types), $\lambda > 0$ and $\mu > 0$ are suitable positive constants representing the baseline natality and mortality common to all types, and $M_{ij} \geq 0$ is a non-negative constant describing the effect of type $j$ individuals on the death rate of type $i$ individuals due to competition. We assume that $M_{ij} \ll K$. The values $M_{ij}$ are often collected in an $m \times m$ matrix $\mathbf{M}$. The negative of this matrix, $-\mathbf{M}$, is called the `payoff matrix' (in evolutionary game theory) or `interaction matrix' (in Lotka-Volterra models), which is why the infinite population analogues of such models are called `matrix games' in the evolutionary game theory literature. Lotka-Volterra models also frequently assume that the diagonal elements $M_{ii}$ are all equal, though we will not make that assumption here.\\
+where $K > 0$ is our system size parameter (and represents a global carrying capacity across all types), $\lambda > 0$ and $\mu > 0$ are suitable positive constants representing the baseline natality and mortality common to all types, and $\beta_{ij}$ and $\delta_{ij}$ are constants describing the effect of type $j$ individuals on the birth and death rate of type $i$ individuals respectively. The sign of $M_{ij} \coloneqq \beta_{ij} - \delta_{ij}$ determines whether type $j$ has a net positive or negative effect on the growth of type $i$. In ecological communities, this is a per-capita ecological interaction effect. In game-theoretic terms, we can interpret $M_{ij}$ as the payoff obtained by a type $j$ individual playing against a type $i$ individual. I assume that $| M_{ij} | \ll K$. The values $M_{ij}$ are often collected in an $m \times m$ matrix $\mathbf{M}$ called the `payoff matrix' (in evolutionary game theory) or `interaction matrix' (in Lotka-Volterra models). Lotka-Volterra models also frequently assume that the diagonal elements $M_{ii}$ are all equal, though I will not make that assumption here.\\
 \\
 Going from population numbers $\mathbf{v}$ to densities $\mathbf{x} = \mathbf{v}/K$, we obtain the birth and death rates:
 \begin{equation}
 \label{nD_example_density_b_d_rates}
 \begin{aligned}
-b^{(K)}_i(\mathbf{x}) &= \lambda x_i\\
-d^{(K)}_i(\mathbf{x}) &= \left(\mu + \sum\limits_{j=1}^{m}M_{ij}x_j\right)x_i
+b^{(K)}_i(\mathbf{x}) &= \left(\lambda + \sum\limits_{j=1}^{m}\beta_{ij}x_j\right)x_i\\
+d^{(K)}_i(\mathbf{x}) &= \left(\mu + \sum\limits_{j=1}^{m}\delta_{ij}x_j\right)x_i
 \end{aligned}
 \end{equation}
 Thus, we have
 \begin{equation*}
-A^{\pm}_{i} = x_i\left(\lambda \pm \left(\mu + \sum\limits_{j=1}^{m}M_{ij}x_j\right)\right)
+A^{\pm}_{i} = x_i\left(\left(\lambda \pm \mu\right) + \sum\limits_{j=1}^{m}\left(\beta_{ij} \pm \delta_{ij}\right)x_j\right)
 \end{equation*}
-Defining $r = \lambda - \mu$ and $v = \lambda + \mu$, we see from equation \eqref{nD_Ito_SDE} that the mesoscopic view is the $m$ dimensional SDE given by
+Defining $r \coloneqq \lambda - \mu$, $\nu \coloneqq \lambda + \mu$, and $T_{ij} \coloneqq \beta_{ij} + \delta_{ij}$, we see from equation \eqref{nD_Ito_SDE} that the mesoscopic view is the $m$ dimensional SDE given by
 \begin{equation}
 \label{nD_example_SDE}
 d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{B}_t
 \end{equation}
 where 
 \begin{equation*}
-\mathbf{A^-}_i = {(\mathbf{X}_{t})}_i(r - \sum\limits_{j=1}^{m}M_{ij}{(\mathbf{X}_{t})}_j) 
+\mathbf{A^-}_i = {(\mathbf{X}_{t})}_i(r + \sum\limits_{j=1}^{m}M_{ij}{(\mathbf{X}_{t})}_j) 
 \end{equation*}
 and
 \begin{equation*}
-(\mathbf{D}\mathbf{D}^{\mathrm{T}})_i = {(\mathbf{X}_{t})}_i(v + \sum\limits_{j=1}^{m}M_{ij}{(\mathbf{X}_{t})}_j) 
+(\mathbf{D}\mathbf{D}^{\mathrm{T}})_i = {(\mathbf{X}_{t})}_i(\nu + \sum\limits_{j=1}^{m}T_{ij}{(\mathbf{X}_{t})}_j) 
 \end{equation*}
 From \eqref{nD_det_limit}, we see that the deterministic limit is a set of $m$ coupled ODEs given by
 \begin{equation}
 \label{nD_example_det_limit}
-\frac{d x_i}{dt} = x_i\left(r - \sum\limits_{j=1}^{m}M_{ij}x_j\right)
+\frac{d x_i}{dt} = x_i\left(r + \sum\limits_{j=1}^{m}M_{ij}x_j\right)
 \end{equation}
-These are precisely the competitive Lotka-Volterra equations for a system of $m$ species. By matching the terms of \eqref{nD_example_density_b_d_rates} with those of \eqref{nD_functional_forms_for_replicator}, we can identify that we have $\mu = 0$ and
+These are precisely the Lotka-Volterra equations for a system of $m$ species. By matching the terms of \eqref{nD_example_density_b_d_rates} with those of \eqref{nD_functional_forms_for_replicator}, we can identify that we have $\mu = 0$ and
 \begin{equation}
 \label{nD_example_fitness}
-\begin{aligned}
-b^{(\textrm{int})}_{i}(\mathbf{x}) &= \lambda\\
-d^{(\textrm{int})}_i(\mathbf{x}) &= \mu + \sum\limits_{j=1}^{m}M_{ij}x_j\\
-w_i(\mathbf{x}) &= r - \sum\limits_{j=1}^{m}M_{ij}x_j
-\end{aligned}
+w_i(\mathbf{x}) = r + \sum\limits_{j=1}^{m}M_{ij}x_j
 \end{equation}
 If $p_i(t)$ is the frequency of type $i$ individuals in the population at time $t$ and $N_K(t) = \sum_i x_i(t)$, then the mean fitness is given by
 \begin{align}
 \overline{w}(t) &= \sum\limits_{i=1}^{m}w_ip_i\\
-&= \sum\limits_{i=1}^{m}\left(r - \sum\limits_{j=1}^{m}M_{ij}x_j\right)p_i\\
-&= r - \sum\limits_{i=1}^{m}p_i\left(\sum\limits_{j=1}^{m}M_{ij}x_j\right)
+&= \sum\limits_{i=1}^{m}\left(r + \sum\limits_{j=1}^{m}M_{ij}x_j\right)p_i\\
+&= r + \sum\limits_{i=1}^{m}p_i\left(\sum\limits_{j=1}^{m}M_{ij}x_j\right)
 \end{align}
 where we have used the fact that $\sum_i p_i = 1$ in the last line. Using \eqref{nD_replicator_mutator} to write down the equations for the frequencies $p_i$, we obtain
 \begin{equation}
-\frac{dp_i}{dt} = \left[\sum\limits_{i=1}^{m}p_i\left(\sum\limits_{j=1}^{m}M_{ij}x_j\right) - \sum\limits_{j=1}^{m}M_{ij}x_j\right]p_i
+\frac{1}{N_K(t)}\frac{dp_i}{dt} = \left[(\mathbf{Mp})_i - \mathbf{p}\cdot\mathbf{Mp}\right]p_i   
 \end{equation}
-Let us define the payoff matrix $\mathbf{B} = - \mathbf{M}$. Then, the dynamics are
-\begin{equation}
-\frac{1}{N_K(t)}\frac{dp_i}{dt} = \left[(\mathbf{Bp})_i - \mathbf{p}\cdot\mathbf{Bp}\right]p_i   
-\end{equation}
-which is the familiar version of the replicator equation seen in most textbooks, with an extra $N_K(t)$ factor to account for the fact that $\sum_i x_i$ is allowed to fluctuate in our model. If instead $N_K$ was a constant for all time, it could simply be absorbed into the definition of the payoff matrix $B$ to obtain exactly the replicator equation as presented in most ecology/evolution textbooks. We briefly note here that if $m$ is large, then both the stochastic dynamics \eqref{nD_example_SDE} and the deterministic limit \eqref{nD_example_det_limit} can be simplified from an $m$ dimensional system to an $m-1$ dimensional system by a coordinate transformation. If we go from the variables $x_1,\ldots,x_m$ to the variables $p_1,\ldots,p_{m-1},N_K$, then, we can exploit the fact that $N_K$ varies much less than the $p_i$ terms to project the system onto a `slow manifold' in which $N_K$ is approximately constant, thus obtaining an $m-1$ dimensional system of equations and recovering the relation between the Lotka-Volterra equations for $m$ species and the replicator equation for $m-1$ tactics \citep{constable_mapping_2017,parsons_dimension_2017}. However, we will not explore this further in this manuscript, and refer the reader to \citep{constable_stochastic_2013} and \citep{parsons_dimension_2017} for a review of the ideas of (stochastic) dynamics on slow manifolds.\\
+which is the familiar version of the replicator equation seen in most textbooks, with an extra $N_K(t)$ factor to account for the fact that $\sum_i x_i$ is allowed to fluctuate in our model. If instead $N_K$ was a constant for all time, it could simply be absorbed into the definition of the payoff matrix $M$ to obtain exactly the replicator equation as presented in most ecology/evolution textbooks. Both the stochastic dynamics \eqref{nD_example_SDE} and the deterministic limit \eqref{nD_example_det_limit} can be simplified from an $m$ dimensional system to an $m-1$ dimensional system by a coordinate transformation that projects the dynamics onto an appropriate curve: If we go from the variables $x_1,\ldots,x_m$ to the variables $p_1,\ldots,p_{m-1},N_K$, we can exploit the fact that $N_K$ varies much less than the $p_i$ terms to project the system onto a `slow manifold' in which $N_K$ is approximately constant, thus obtaining an $m-1$ dimensional system of equations and recovering the relation between the Lotka-Volterra equations for $m$ species and the replicator equation for $m-1$ tactics \citep{constable_mapping_2017,parsons_dimension_2017}. However, I will not explore such dimensional reduction techniques further in this manuscript, and refer the reader to \citep{constable_stochastic_2013} and \citep{parsons_dimension_2017} for a review of the ideas of (stochastic) dynamics on slow manifolds.\\
 Let the solution to the equations \eqref{nD_example_det_limit} be given by $\mathbf{a}(t) = [a_1(t),\ldots,a_m(t)]$. For the weak noise approximation, we can Taylor expand $A^{\pm}_i$ and use \eqref{nD_WNA_directional_derivative_for_replicator_eqns} to compute the directional derivative as:
 \begin{align}
 D_i &= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_k\left(\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
-&= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_k\left(\frac{\partial}{\partial x_k}(r+\sum\limits_{j=1}^{m}B_{ij}x_j)\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
-&= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_kB_{ik}\\
+&= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_k\left(\frac{\partial}{\partial x_k}(r+\sum\limits_{j=1}^{m}M_{ij}x_j)\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
+&= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_kM_{ik}\\
 \Rightarrow D_i &= y_iw_i(\mathbf{a}) + a_iw_i(\mathbf{y}) - ra_i\label{nD_example_directional_derivative}
 \end{align}
-where we have used the fact that $w_i(\mathbf{y}) = r + \sum\limits_{k=1}^{m}y_kB_{ik}$ (from \eqref{nD_example_fitness}) in the last step. Thus, in the weak noise approximation of our process, the dynamics are given by
+where we have used the fact that $w_i(\mathbf{y}) = r + \sum\limits_{k=1}^{m}y_kM_{ik}$ (from \eqref{nD_example_fitness}) in the last step. Thus, in the weak noise approximation of our process, the dynamics are given by
 \begin{equation}
 \mathbf{x}(t) = \mathbf{a}(t) + \frac{1}{\sqrt{K}}\mathbf{y}(t)
 \end{equation}
 where the stochastic fluctuations $\mathbf{y}(t)$ satisfy the linear Fokker-Planck equation
 \begin{equation}
-\resizebox{1.1\textwidth}{!}{$\displaystyle\frac{\partial P}{\partial t}(\mathbf{y},t) = \sum\limits_{i=1}^{m}\left(-\frac{\partial}{\partial y_i}\left\{\left(y_iw_i(\mathbf{a}) + a_iw_i(\mathbf{y}) - ra_i\right)P(\mathbf{y},t)\right\}+\frac{1}{2}\left(a_i\left(v - \sum\limits_{j=1}^{m}B_{ij}a_j\right)\right)\frac{\partial^2}{\partial{y_i}^2}P(\mathbf{y},t)\right)$}
+\resizebox{1.1\textwidth}{!}{$\displaystyle\frac{\partial P}{\partial t}(\mathbf{y},t) = \sum\limits_{i=1}^{m}\left(-\frac{\partial}{\partial y_i}\left\{\left(y_iw_i(\mathbf{a}) + a_iw_i(\mathbf{y}) - ra_i\right)P(\mathbf{y},t)\right\}+\frac{1}{2}\left(a_i\left(\nu + \sum\limits_{j=1}^{m}T_{ij}a_j\right)\right)\frac{\partial^2}{\partial{y_i}^2}P(\mathbf{y},t)\right)$}
 \end{equation}
 Using \eqref{nD_example_directional_derivative} in \eqref{nD_moment_eqn_mean}, we see that the fluctuations are expected to evolve as:
 \begin{equation}
 \label{nD_example_moment_eqn_mean}
-\frac{d}{dt}\mathbb{E}[y_i] = w_i(\mathbf{a})\mathbb{E}[y_i] + a_i\sum\limits_{k=1}^{m}B_{ik}\mathbb{E}[y_k]
+\frac{d}{dt}\mathbb{E}[y_i] = w_i(\mathbf{a})\mathbb{E}[y_i] + a_i\sum\limits_{k=1}^{m}M_{ik}\mathbb{E}[y_k]
 \end{equation}
 or, in matrix form:
 \begin{equation}
@@ -154,12 +142,12 @@ or, in matrix form:
 	\end{bmatrix}
 	=
 	\begin{bmatrix}
-	(r + \sum\limits_{j=1}^{m}B_{1j}a_j + a_1B_{11}) & a_1B_{12} & a_1B_{13} & \dots & \dots & \dots & a_1B_{1m}\\
-	a_2B_{21} & (r + \sum\limits_{j=1}^{m}B_{2j}a_j + a_2B_{22}) & a_2B_{23} & \dots & \dots & \dots & a_2B_{2m}\\
+	(r + \sum\limits_{j=1}^{m}M_{1j}a_j + a_1M_{11}) & a_1M_{12} & a_1M_{13} & \dots & \dots & \dots & a_1M_{1m}\\
+	a_2M_{21} & (r + \sum\limits_{j=1}^{m}M_{2j}a_j + a_2M_{22}) & a_2M_{23} & \dots & \dots & \dots & a_2M_{2m}\\
 	\vdots &  & \ddots & &  & & \vdots\\
-	a_{i}B_{i1} & a_iB_{i2} & a_iB_{i3} & \dots & (r + \sum\limits_{j=1}^{m}B_{ij}a_j + a_iB_{ii}) & \dots & a_iB_{im}\\
+	a_{i}M_{i1} & a_iM_{i2} & a_iM_{i3} & \dots & (r + \sum\limits_{j=1}^{m}M_{ij}a_j + a_iM_{ii}) & \dots & a_iM_{im}\\
 	\vdots &  &  & & & \ddots & \vdots\\
-	a_mB_{m1} & a_mB_{m2} & a_mB_{m3} & \dots & \dots & \dots & (r + \sum\limits_{j=1}^{m}B_{mj}a_j + a_mB_{mm})
+	a_mM_{m1} & a_mM_{m2} & a_mM_{m3} & \dots & \dots & \dots & (r + \sum\limits_{j=1}^{m}M_{mj}a_j + a_mM_{mm})
 	\end{bmatrix}
 	\begin{bmatrix}
 	\mathbb{E}[y_1]\\
@@ -171,7 +159,7 @@ or, in matrix form:
 	\end{bmatrix}
 	$}
 \end{equation}
-The eigenvalues of the first matrix on the RHS will tell us whether the fixed point $\mathbb{E}[y_i] = 0 \ \forall \ i$ (the only fixed point of this system) is stable, or whether fluctuations are expected to grow (up to the point where the fluctuations are so large that the WNA is no longer valid).
+The eigenvalues of the first matrix on the RHS will tell us whether the fixed point $\mathbb{E}[y_i] = 0 \ \forall \ i$ (the only fixed point of this system) is stable, or whether fluctuations are expected to grow (up to the point where the fluctuations are so large that the WNA is no longer valid). In the $m=2$ case, \cite{tao_stochastic_2007} have shown that $\mathbb{E}[y_i] = 0 \ \forall \ i$ is a stable fixed point for this system iff the point $\mathbf{y}$ is an ESS (in the usual game-theoretic sense) for the matrix game defined by the payoff matrix $\mathbf{M}$.
 
 \section{Interlude: Detecting modes in quantitative trait distribution through Fourier analysis}
 
@@ -270,8 +258,14 @@ where $\phi_{\infty}$ is the stationary state distribution of $\{\phi_t\}_{t}$ a
 where the expectations in the second term are for the stationary state. A flat $\Xi[x]$ indicates that there are no clusters, and peaks indicate the presence of clusters.
 
 \section{An example for quantitative traits: The quantitative logistic equation}
-
-Consider the birth and death functionals given by \eqref{Rogers_logistic_BD}. In terms of the scaled variable $\phi = K\nu$, these functions read:
+Recall the birth and death functionals given by \eqref{Rogers_logistic_BD}. That is, the functionals
+\begin{equation}
+\begin{aligned}
+b(x|\nu) &= r\int\limits_{\mathcal{T}}m(x,y)\nu(y)dy; \ m(x,y) = \exp\left(\frac{-(x-y)^2}{\sigma_{m}^{2}}\right)\\
+d(x|\nu) &= \frac{\nu(x)}{Kn(x)}\int\limits_{\mathcal{T}}\alpha(x,y)\nu(y)dy; \ \alpha(x,y) = \exp\left(\frac{-(x-y)^2}{\sigma_{\alpha}^{2}}\right)
+\end{aligned}
+\end{equation}
+corresponding to an asexual population having a constant (per-capita) birth rate $r$ and mutations controlled by a Gaussian kernel $m(x,y)$. The death rate is density-dependent, mediated by a Gaussian competition kernel $\alpha(x,y)$, and also contains a phenotype-dependent carrying capacity controlled by $n(x)$, scaled by a constant $K$. The biological interpretation of the death rate is through ecological specialization for limiting resources - Individuals have different intrinsic advantages (controlled by $n(x)$), and experience greater competition from conspecifics that are closer to them in phenotype space (controlled by $\alpha(x,y)$). In terms of the scaled variable $\phi = K\nu$, these functions read:
 \begin{equation}
 \label{Rogers_logistic_BD_scaled}
 \begin{aligned}
