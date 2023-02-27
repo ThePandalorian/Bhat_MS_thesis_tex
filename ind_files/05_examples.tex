@@ -2,7 +2,7 @@
 
 In the previous chapter, we used various tools and arguments to illustrate how to obtain approximate equations for very general stochastic birth-death processes. In this chapter, we put this theory into use through examples to study extinction and diversity in finite populations.
 
-\section{Example in one dimension: The stochastic logistic equation}
+\section{An example in one dimension: The stochastic logistic equation}
 Consider the functional forms of example \ref{ex_1D_stoch_logistic}, given by
 \begin{equation}
 \label{ex_1D_stoch_logistic_BD_eqns}
@@ -53,7 +53,7 @@ The deterministic trajectory \eqref{ex_1D_stoch_logistic_det_limit} has two fixe
 
 \myfig{0.85}{Media/4.2_stoch_logistic_distributions.png}{Comparison of the steady-state densities given by \eqref{ex_1D_stoch_logistic_BD_eqns}, \eqref{ex_1D_stoch_logistic_full_SDE}, and \eqref{ex_1D_stoch_logistic_WNA} for \textbf{(A)} $K = 500$, \textbf{(B)} $K = 1000$, and \textbf{(C)} $K = 10000$. $\lambda = 2, \mu = 1$ for all thee cases. Each curve was obtained using $1000$ independent realizations.}{fig_1D_stoch_logistic_densities}
 
-\section{Example for discrete traits: Lotka-Volterra and matrix games in finite populations}
+\section{An example for discrete traits: Lotka-Volterra and matrix games in finite populations}
 
 The methods outlined in the above section have recently been used to study the population dynamics of a finite population playing a so-called `matrix game' (An evolutionary game for which you can write down a payoff matrix) with 2 pure strategies \citep{tao_stochastic_2007}. Based on the interpretation of what each type represents, this is mathematically equivalent to studying frequency-dependent selection on a one-locus two-allele gene (with a bijective genotype-phenotype map and no mutations) or studying two-species competitive Lotka-Volterra dynamics, as we will show below. The stochastic Lotka-Volterra competition model shown below has also been proved to be equivalent to an $m$-allele Moran model under certain limits \citep{constable_mapping_2017}.\\
 \\
@@ -172,11 +172,8 @@ or, in matrix form:
 	$}
 \end{equation}
 The eigenvalues of the first matrix on the RHS will tell us whether the fixed point $\mathbb{E}[y_i] = 0 \ \forall \ i$ (the only fixed point of this system) is stable, or whether fluctuations are expected to grow (up to the point where the fluctuations are so large that the WNA is no longer valid).
-\hl{can compare time series or something here if we think it is helpful. Visualization may be little hard though, because we always have $\geq 3$ dimensions ($m$, + 1 additional for time)}
 
-\section{Example for quantitative traits}
-
-\subsection{Interlude: Detecting clusters through Fourier analysis}
+\section{Interlude: Detecting modes in quantitative trait distribution through Fourier analysis}
 
 In Chapter \ref{chap_infD_processes}, we used various approximations to arrive at the linear functional Fokker-Planck equation
 \begin{equation}
@@ -272,7 +269,7 @@ where $\phi_{\infty}$ is the stationary state distribution of $\{\phi_t\}_{t}$ a
 \end{equation}
 where the expectations in the second term are for the stationary state. A flat $\Xi[x]$ indicates that there are no clusters, and peaks indicate the presence of clusters.
 
-\subsection{An example: The quantitative logistic equation}
+\section{An example for quantitative traits: The quantitative logistic equation}
 
 Consider the birth and death functionals given by \eqref{Rogers_logistic_BD}. In terms of the scaled variable $\phi = K\nu$, these functions read:
 \begin{equation}
