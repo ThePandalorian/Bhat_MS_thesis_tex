@@ -278,7 +278,7 @@ Thus, using equation \eqref{deterministic_traj}, the deterministic trajectory be
 \label{Rogers_logistic_BD_deterministic}
 \frac{\partial \psi}{\partial t}(x,t) = r\int\limits_{\mathcal{T}}m(x,y)\psi(y,t)dy-\frac{1}{n(x)}\psi(x,t)\int\limits_{\mathcal{T}}\alpha(x,y)\psi(y,t)dy
 \end{equation}
-Note that if we employ the change of variables $\Psi = K\psi$ to go back from $\mathcal{M}_{K}$ (\textit{i.e} $\phi^{(t)}$) to $\mathcal{M}$ (\textit{i.e} $\nu^{(t)}$), we recover the familiar continuous logistic equation (Equation \eqref{cts_logistic}) as the deterministic limit:
+Note that if we employ the change of variables $\Psi = K\psi$ to go back from $\mathcal{M}_{K}$ (\textit{i.e} $\phi^{(t)}$) to $\mathcal{M}$ (\textit{i.e} $\nu^{(t)}$), we recover the familiar quantitative logistic equation as the deterministic limit:
 \begin{align*}
 \frac{\partial \Psi}{\partial t}(x,t) &= r\int\limits_{\mathcal{T}}m(x,y)\Psi(y,t)dy-\frac{\Psi(x,t)}{Kn(x)}\int\limits_{\mathcal{T}}\alpha(x,y)\Psi(y,t)dy \\
 &\approx r\Psi(x,t) -\frac{\Psi(x,t)}{K(x)}\int\limits_{\mathcal{T}}\alpha(x,y)\Psi(y,t)dy + D_m\nabla^2_{x}\Psi(x,t)
