@@ -5,9 +5,10 @@
 \usepackage[english]{babel}
 \usepackage{csquotes}
 \usepackage[
+			sorting=nyc,
             backend=biber, %backend to use
             style=authoryear, %citation style
-            giveninits=true,
+            uniquelist=false,
             natbib,
             block=ragged,
             maxnames=2]{biblatex}
@@ -15,6 +16,29 @@
 %Make the title of the bibliography say 'References'
 \DefineBibliographyStrings{english}{%
 	bibliography = {References},
+}
+
+%Sort by name-year-cite order (biblatex default is to sort by name-year-title).
+\DeclareSortingTemplate{nyc}{
+	\sort{
+		\field{presort}
+	}
+	\sort[final]{
+		\field{sortkey}
+	}
+	\sort{
+		\field{sortname}
+		\field{author}
+		\field{editor}
+		\field{translator}
+		\field{sorttitle}
+		\field{title}
+	}
+	\sort{
+		\field{sortyear}
+		\field{year}
+	}
+	\sort{\citeorder}
 }
 
 %%%%%%%%%%%%%%
@@ -59,6 +83,7 @@
 \DeclareFieldFormat[article]{journaltitle}{#1\isdot}
 \DeclareFieldFormat[article]{volume}{\textit{#1}}
 \DeclareFieldFormat[article]{pages}{#1}
+
 
 %%%%%%%%%%%%%
 
