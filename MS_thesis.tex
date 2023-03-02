@@ -10,7 +10,7 @@
 
 %Add fancy headers with chapter/section titles
 \usepackage{fancyhdr}
-\setlength{\headsep}{0.9in} %add spacing between header and body text
+\setlength{\headsep}{1.8in} %add spacing between header and body text
 
 %this file contains the bibliography
 \addbibresource{refs.bib}
@@ -73,13 +73,14 @@ Population biology is built on a strong mathematical foundation developed during
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\rule[-2ex]{0pt}{4ex}\footnotesize\itshape\nouppercase{\leftmark}}
-\fancyhead[LO]{\rule[-2ex]{0pt}{4ex}\footnotesize\itshape\nouppercase{\rightmark}}
-\setlength{\headheight}{18pt} % as requested by fancyhdf
+\fancyhead[CE]{\rule[-4ex]{0pt}{4ex}\footnotesize\itshape Eco-evolutionary dynamics of finite populations from first principles}
+\fancyhead[CO]{\rule[-4ex]{0pt}{4ex}\footnotesize\itshape\nouppercase{\leftmark}}
+\setlength{\headheight}{40pt} % as requested by fancyhdf
 \renewcommand{\headrulewidth}{0pt}
 
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername \ \thechapter \ :\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection. \ \ #1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}} %gets rid of chapter number from header
+\renewcommand{\sectionmark}[1]{\markright{#1}} %gets rid of section number from header
+
 
 \chapter{Introduction}
 \input{ind_files/01_Introduction}
@@ -93,12 +94,6 @@ Population biology is built on a strong mathematical foundation developed during
 \part{Summary \& Discussion}\label{part_summary}
 \chapter{A unified view of population dynamics}\label{chap_unification}
 \input{ind_files/04_unification_discussion}
-%\chapter{Towards a stochastic evolutionary theory}\label{chap_stochasticity}
-%\input{ind_files/07_stochastic_discussion}
-% \chapter{}
-% \input{ind_files/chapter_08}
-% \chapter{} <-- uncomment and add as required
-% \input{ind_files/chapter_09}
 
 %You need the below commands to elevate the appendix to 'Part' level in the TOC
 %from https://tex.stackexchange.com/a/286452
