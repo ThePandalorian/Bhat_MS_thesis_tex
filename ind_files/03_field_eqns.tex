@@ -121,10 +121,7 @@ where
    \mathcal{A}^{\pm}(x|\phi) &= b_K(x|\phi)\pm d_K(x|\phi) = \frac{1}{K}\left(b(x|\nu)\pm d(x|\nu)\right)
 \end{align*}
 
-This constitutes the `mesoscopic' description. For large (but finite) $K$, equation \eqref{functional_FPE} can be analyzed using a weak noise approximation as before.
-
-\section{The infinite population limit}
-We can once again appeal to the link between Fokker-Planck equations and Langevins \citep{lafuerza_role_2016} to say that \eqref{functional_FPE} corresponds to the Langevin equation:
+This constitutes the `mesoscopic' description of our process. We can once again appeal to the link between Fokker-Planck equations and Langevins \citep{lafuerza_role_2016} to say that \eqref{functional_FPE} corresponds to the Langevin equation:
 \begin{equation}
 \label{functional_langevin}
     \frac{\partial \phi}{\partial t}(x,t) = \mathcal{A}^{-}(x|\phi) + \frac{1}{\sqrt{K}}\eta(x,t)
@@ -133,17 +130,15 @@ where $\eta(x,t)$  is the `Gaussian spacetime white noise' with zero mean and au
 \begin{equation*}
     \mathbb{E}[\eta(x,t)\eta(x',t')] = \sqrt{\mathcal{A}^{+}(x|\phi)\mathcal{A}^{+}(x'|\phi)}\delta(x-x')\delta(t-t')
 \end{equation*}
+If one wishes to be mathematically careful, the connection between \eqref{functional_FPE} and \eqref{functional_langevin} becomes somewhat tenuous. In particular, while the equivalence between Fokker-Planck equations and SDEs (Langevin equations) for finite-dimensional stochastic processes is part of the standard mathematical canon, the corresponding equivalence is much less well understood for the infinite-dimensional function-valued processes that we are dealing with, and the interpretation of any formal `Langevin equation' (corresponding now to a stochastic partial differential equation, or SPDE) that we write down is unclear for general measure spaces - We may need $\mathcal{M}_K$ to have a considerable amount of structure (Ex: Seperable Hilbert space) for things to work out \citep{da_prato_stochastic_2014,balan_gentle_2018}, and I do not know whether our domain is nice enough. For example, it is not immediately clear what conditions on $\mathcal{A}^{\pm}(x | \phi)$ for \eqref{functional_langevin} to even admit a solution. Nevertheless, we can recover some well-known deterministic equations from equation \eqref{deterministic_traj}, and under certain assumptions, equations like \eqref{nD_eqn_for_frequencies} have been proved to exist.
+
+\section{The infinite population limit}
 Taking $K \to \infty$ in equation \eqref{functional_langevin} then yields a PDE:
 \begin{equation}
 \label{deterministic_traj}
 \frac{\partial \psi}{\partial t}(x,t) = \mathcal{A}^{-}\left(x|\psi\right) = b_K(x|\psi)- d_K(x|\psi)
 \end{equation}
-where we have used a different symbol $\psi$ simply to highlight that $\psi(x,t)$ as the solution to equation \eqref{deterministic_traj} is a deterministic function, whereas $\phi(x,t)$ as defined in equation \eqref{functional_langevin} is really a stochastic process $\{\phi^{(t)}\}_{t\geq0}$. Equation \eqref{deterministic_traj} simply says that in the absence of stochasticity, the change in the density of individuals with trait values $x$ is given by the difference between the birth and death rates of these individuals in the population. Models of this form are precisely the `PDE' models discussed in studies of Adaptive Diversification \citep{doebeli_adaptive_2011}. They are also equivalent to the `oligomorphic dynamics' of \citep{sasaki_oligomorphic_2011, lion_multimorph_2022} if one assumes the population is composed of a small number of `morphs', \emph{i.e.} $\psi(x,t) = \sum\limits_{k=1}^{S} n_{k}\psi_k(x,t)$, where $\psi_k(x,t)$ is the phenotypic distribution of the $k$th morph (often assumed a normal distribution with narrow variance) and $S$ is the number of distinct morphs in the population. Models of the form \eqref{deterministic_traj} are also used to study intraspecific trait variation in community ecology \citep{nordbotten_dynamics_2020}. A prominent recent example is the `trait space equations' of \citep{wickman_theoretical_2022} in their framework for eco-evolutionary community dynamics.\\
-If one wishes to be mathematically careful, the connection between \eqref{functional_FPE} and \eqref{functional_langevin} becomes somewhat tenuous. In particular, while the equivalence between Fokker-Planck equations and SDEs (Langevin equations) for finite-dimensional stochastic processes is part of the standard mathematical canon, the corresponding equivalence is much less well understood for the infinite-dimensional function-valued processes that we are dealing with, and the interpretation of any formal `Langevin equation' (corresponding now to a stochastic partial differential equation, or SPDE) that we write down is unclear. Nevertheless, we will pretend all is well and assume that one can do this, bolstered by the fact that we can recover some well-known deterministic equations from equation \eqref{deterministic_traj}, as we show below.
-
-\subsection{Some familiar faces: Kimura-Crow and adaptive dynamics}
-
-The `macroscopic' version of our function-valued process corresponds to quantitative genetics and adaptive dynamics (which is a generalization of evolutionary game theory for quantitative traits). We begin with the deterministic process given by \eqref{deterministic_traj}. We assume that the birth and death functions take the form:
+where we have used a different symbol $\psi$ simply to highlight that $\psi(x,t)$ as the solution to equation \eqref{deterministic_traj} is a deterministic function, whereas $\phi(x,t)$ as defined in equation \eqref{functional_langevin} is really a stochastic process $\{\phi^{(t)}\}_{t\geq0}$. Equation \eqref{deterministic_traj} simply says that in the absence of stochasticity, the change in the density of individuals with trait values $x$ is given by the difference between the birth and death rates of these individuals in the population. Models of this form are precisely the `PDE models' discussed in studies of Adaptive Diversification \citep{doebeli_adaptive_2011}. Equation \eqref{deterministic_traj} is also the basic equation of `oligomorphic dynamics' \citep{sasaki_oligomorphic_2011, lion_multimorph_2022} if one assumes the population is composed of a small number of `morphs', \emph{i.e.} $\psi(x,t) = \sum\limits_{k=1}^{S} n_{k}\psi_k(x,t)$, where $\psi_k(x,t)$ is the phenotypic distribution of the $k$th morph (often assumed a normal distribution with narrow variance) and $S$ is the number of distinct morphs in the population. Models of the form \eqref{deterministic_traj} are also used to study intraspecific trait variation in community ecology \citep{nordbotten_dynamics_2020}. A prominent recent example is the `trait space equations' of \citep{wickman_theoretical_2022} in their framework for eco-evolutionary community dynamics. As before, I assume that the birth and death functions take the form:
 \begin{equation}
 \label{BD_for_kimura}
 \begin{aligned}
@@ -151,7 +146,11 @@ b_K(x|\psi) &=  \psi(x,t)b^{\textrm{(ind)}}(x|\psi) + \mu b^{\textrm{(mut)}}(x|\
 d_K(x|\psi) &= \psi(x,t)d^{\textrm{(ind)}}(x|\psi)
 \end{aligned}
 \end{equation}
-As in chapter \ref{chap_BD}, $ b^{\textrm{(mut)}}(x|\psi)$ describes birth due to mutations and $\mu \geq 0$ is a constant mutation rate. The functions $b^{\textrm{(ind)}}(x|\psi)$ and $d^{\textrm{(ind)}}(x|\psi)$ describe the per-capita birth rate and death rate of type $x$ individuals in a population $\psi$. These functions could in principle model several ecological factors. For example,  $b^{\textrm{(ind)}}(x|\psi)$ may incorporate the effects of mate choice in the sexual case or intrinsic duplication rates in the asexual case, and $d^{\textrm{(ind)}}(x|\psi)$ may model death due to intraspecific competition for resources. Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we obtain
+As in chapter \ref{chap_BD}, $ b^{\textrm{(mut)}}(x|\psi)$ describes birth due to mutations and $\mu \geq 0$ is a constant mutation rate. The functions $b^{\textrm{(ind)}}(x|\psi)$ and $d^{\textrm{(ind)}}(x|\psi)$ describe the per-capita birth rate and death rate of type $x$ individuals in a population $\psi$. These functions could in principle model several ecological factors. For example,  $b^{\textrm{(ind)}}(x|\psi)$ may incorporate the effects of mate choice in the sexual case or intrinsic duplication rates in the asexual case, and $d^{\textrm{(ind)}}(x|\psi)$ may model death due to intraspecific competition for resources. Note that the definition of the mean value \eqref{nD_mean} of a type level quantity $f(x)$ now becomes
+\begin{equation*}
+\overline{f}(t) = \int\limits_{\mathcal{T}}f(x)p(x,t)dx
+\end{equation*}
+Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we obtain
 \begin{equation}
 \label{PDE_for_kimura}
 \frac{\partial \psi}{\partial t}(x,t) = w(x|\psi)\psi(x,t) + \mu b^{\textrm{(mut)}}(x|\psi)
@@ -164,7 +163,7 @@ N_K(t) &\coloneqq \int\limits_{\mathcal{T}}\psi(x,t)dx\\
 p(x,t) &\coloneqq \frac{\psi(x,t)}{N_K(t)}
 \end{aligned}
 \end{equation}
-We can also define the population mean fitness as:
+The population mean fitness is:
 \begin{equation}
 \label{mean_fitness_for_kimura}
 \overline{w}(t) = \int\limits_{\mathcal{T}}w(x|\psi)p(x,t)dx
@@ -204,32 +203,33 @@ Substituting our definition $p(z,t) = \psi(z,t)/N_K(t)$ now yields
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\mu\left[\int\limits_{\mathbb{R}}m(x-z)p(z,t)dz - p(x,t)\right]}\label{kimura_continuum_model}
 \end{equation}
 which is Kimura's continuum of alleles model.\\
-Note that if we define the mean trait value as
-\begin{equation*}
-    \overline{x}(t) = \int\limits_{\mathcal{T}}xp(x,t)dx
-\end{equation*}
-then, by multiplying both sides of equation \eqref{cts_replicator_mutator} by $x$ and integrating over the trait space, we obtain
+We can now use the same trick we used in deriving \eqref{nD_Price_time_dependent} from \eqref{nD_replicator_mutator}. By multiplying both sides of equation \eqref{cts_replicator_mutator} by a type level quantity\footnote{This is now a function $f(x,t)$ of two variables, the trait value and time. We assume this function is nice enough for all the below operations to make sense} $f(x,t)$ and integrating over the trait space, we obtain
 \begin{align}
-\frac{d \overline{x}}{dt} &= \int\limits_{\mathcal{T}}xw(x|\psi)p(x,t)dx - \overline{w}(t)\int\limits_{\mathcal{T}}xp(x,t)dx+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b^{\textrm{(mut)}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right]dx\nonumber\\
-&= \overline{xw} - \overline{w}\cdot\overline{x} + \frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}x\left[b^{\textrm{(mut)}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right]dx\label{intermediate_for_cts_price}
+\frac{d \overline{f}}{dt} &= \int\limits_{\mathcal{T}}f(x,t)w(x|\psi)p(x,t)dx - \overline{w}(t)\int\limits_{\mathcal{T}}f(x,t)p(x,t)dx\nonumber\\
+&+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}f(x,t)\left[b^{\textrm{(mut)}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right]dx\nonumber\\
+&= \overline{fw} - \overline{w}\cdot\overline{f} + \frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}f(x,t)\left[b^{\textrm{(mut)}}(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right]dx\label{intermediate_for_cts_price}
 \end{align}
 We now observe that
 \begin{equation}
 \label{cts_price_cov^{(t)}erm}
-\mathrm{Cov}(x,w(x|\psi)) = \overline{xw} - \overline{x}\cdot\overline{w}
+\mathrm{Cov}(f,w(x|\psi)) = \overline{fw} - \overline{f}\cdot\overline{w}
 \end{equation}
-is the statistical covariance of the trait value with the Malthusian fitness function (Importantly, just like in the Price equation, this is an \emph{analogy} - Everything here is deterministic). The second term, which we will denote by
+is the statistical covariance of the quantity $f$ with the Malthusian fitness function (Importantly, just like in the Price equation, this is an \emph{analogy} - Everything here is deterministic). The second term, which we will denote by
 \begin{equation}
 \label{cts_price_drift^{(t)}erm}
-M(x|\psi) \coloneqq \frac{\mu}{N_K(t)}\left[\int\limits_{\mathcal{T}}xb^{\textrm{(mut)}}(x|\psi)dx - \left(\overline{x}\int\limits_{\mathcal{T}}b^{\textrm{(mut)}}(x|\psi)dx\right)\right] 
+M_{\overline{f}}(x|\psi) \coloneqq \frac{\mu}{N_K(t)}\left[\int\limits_{\mathcal{T}}f(x,t)b^{\textrm{(mut)}}(x|\psi)dx - \left(\overline{f}\int\limits_{\mathcal{T}}b^{\textrm{(mut)}}(x|\psi)dx\right)\right] 
 \end{equation}
 reflects the transmission bias of mutations. Thus, we see that equation \eqref{intermediate_for_cts_price} reads
 \begin{equation}
-\label{cts_price}
-\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d \overline{x}}{dt} = \mathrm{Cov}(x,w(x|\psi)) + M(x|\psi)}
+\label{cts_price_general}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d \overline{f}}{dt} = \mathrm{Cov}(f,w(x|\psi)) + M_{\overline{f}}(x|\psi) + \overline{\left(\frac{\partial f}{\partial t}\right)}}
 \end{equation}
-from which it is clear that we have obtained a version of the Price equation for quantitative traits.
-Some more familiar dynamics are recovered under the following additional assumptions:
+from which it is clear that we have obtained a version of the Price equation \eqref{nD_Price_time_dependent} for quantitative traits. For the special case $f(x)=x$, we have $\partial f/\partial t = 0$ and thus:
+\begin{equation}
+\label{cts_price}
+\frac{d \overline{x}}{dt} = \mathrm{Cov}(x,w(x|\psi)) + M_{\overline{x}}(x|\psi)
+\end{equation}
+In this case, some more familiar dynamics are recovered under the following additional assumptions:
 \begin{itemize}
     \item Rare mutations, \emph{i.e.} $\mu \to 0$.
     \item Small mutational effects with `almost faithful' reproduction, meaning $b^{\textrm{(mut)}}(x|\psi) \to 0$, and the distribution $\psi(x,t)$ tends to stay very `sharp' (i.e strongly peaked about its mean value). 
@@ -255,11 +255,13 @@ where we have used $\overline{x}(t) = y(t)$. We can define the shorthand $B(y) =
     \label{AD_canonical_derived}
     \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{dy}{dt} = B(y)\left(\frac{d}{dz}w\left(z|N_K\delta_{y(t)}\right)\biggl{|}_{z=y}\right)}
 \end{equation}
-Note that by definition, $B(y(t))$ is the variance of the trait in the population at time $t$. The term $w\left(z|N_K\delta_{y(t)}\right)$ is the expected growth rate of an individual with trait value $z$ in a population of size $N_K$ in which (almost) every individual has trait value $y$. This quantity is referred to as the `invasion fitness' of a `mutant' trait $z$ in a population of `resident' $y$ individuals. Equation \eqref{AD_canonical_derived} represents a broad class of systems called `gradient equations' in quantitative genetics \citep{lande_natural_1976, abrams_relationship_1993, lehtonen_price_2018, lion_theoretical_2018}, and captures the approximate evolutionary dynamics of quantitative traits under certain mutation limits.  It is also deeply related \citep{lehtonen_price_2018, lion_theoretical_2018} to the canonical equation of adaptive dynamics \citep{dieckmann_dynamical_1996, doebeli_adaptive_2011}. The major difference is that in the `proper' canonical equation of adaptive dynamics (as formulated in \cite{dieckmann_dynamical_1996}), the function $B(y)$ explicitly relies on mutations as a continual source of variation, whereas in gradient dynamics and our equation \eqref{AD_canonical_derived}, $B(y)$ captures the standing genetic variation in the population but does not specify the source of this variation. Note that strictly speaking, if $\psi(x,t) = \delta_{y(t)}$ exactly, then $B(y) \equiv 0$. This just reflects our assumption that mutations are vanishingly rare and mutants are sampled from infinitesimally close to the resident value. More detailed mathematical arguments are required to ensure that this convergence `makes sense' and that $B(y)$ does not actually equal 0. This has been proved rigorously using much more sophisticated mathematical tools grounded in martingale theory \citep{champagnat_unifying_2006}. A heuristic derivation of the canonical equation of adaptive dynamics is provided in the classic article by \cite{dieckmann_dynamical_1996}.
+Note that by definition, $B(y(t))$ is the variance of the trait in the population at time $t$. The term $w\left(z|N_K\delta_{y(t)}\right)$ is the expected growth rate of an individual with trait value $z$ in a population of size $N_K$ in which (almost) every individual has trait value $y$. This quantity is referred to as the `invasion fitness' of a `mutant' trait $z$ in a population of `resident' $y$ individuals. Equation \eqref{AD_canonical_derived} is the canonical form of a broad class of systems called `gradient equations' or `gradient dynamics' in quantitative genetics \citep{lande_natural_1976, abrams_relationship_1993, lehtonen_price_2018, lion_theoretical_2018}, and captures the approximate evolutionary dynamics of quantitative traits under certain mutation limits.  It is also deeply related \citep{lehtonen_price_2018, lion_theoretical_2018} to the canonical equation of adaptive dynamics \citep{dieckmann_dynamical_1996, doebeli_adaptive_2011}. The major difference is that in the `proper' canonical equation of adaptive dynamics (as formulated in \cite{dieckmann_dynamical_1996}), the function $B(y)$ explicitly relies on mutations as a continual source of variation, whereas in gradient dynamics and our equation \eqref{AD_canonical_derived}, $B(y)$ captures the standing genetic variation in the population but does not specify the source of this variation. Note that strictly speaking, if $\psi(x,t) = \delta_{y(t)}$ exactly, then $B(y) \equiv 0$. This just reflects our assumption that mutations are vanishingly rare and mutants are sampled from infinitesimally close to the resident value. More detailed mathematical arguments are required to ensure that this convergence `makes sense' and that $B(y)$ does not actually equal 0. This has been proved rigorously using much more sophisticated mathematical tools grounded in martingale theory \citep{champagnat_unifying_2006}. A heuristic derivation of the canonical equation of adaptive dynamics is provided in the classic article by \cite{dieckmann_dynamical_1996}.
+
+\section{Stochastic trait frequency dynamics in the infinite-dimensional case}
+In chapter \ref{chap_BD}, we also derived SDEs for the trait frequency dynamics of the complete stochastic case using It\^o's formula. Doing the same for quantitative traits in our framework is tricky because it requires us to find a version of It\^o's formula that holds for SPDEs of the form \eqref{functional_langevin}. The formulation of It\^o formulas and/or an infinite-dimensional stochastic calculus for general function (measure) valued stochastic processes is an active area of research in pure mathematics \citep{da_prato_stochastic_2014}, and without further information on the nature of the domain $\mathcal{M}_K$, it is not clear (to me at least) whether an It\^o's formula exists for our case in general. If $\mathcal{A}^{\pm}(x | \phi)$ in \eqref{functional_FPE} are Gaussian functions, then it has been proven \citep{week_white_2021} that the SDEs `work as expected' if we take $m \to \infty$ in \eqref{nD_eqn_for_frequencies} (see \ref{sec_fun_theorems_mean} and \ref{sec_fun_theorems_var} in chapter \ref{chap_unification}). However, carrying out a general derivation is beyond the scope of this thesis.
 
 \section{Stochastic fluctuations and the weak noise approximation}
-
-We can now formally carry out a functional analogue of the weak noise expansion. Assume that $\psi(x,t)$ is the deterministic trajectory obtained as the solution to \eqref{deterministic_traj}. We introduce a new process $\{\zeta^{(s)}\}_{s \geq 0}$ which measures the fluctuations of $\phi^{(t)}$ from the deterministic trajectory $\psi(x,t)$. More precisely, we introduce the new variables:
+We can also formally carry out a functional analogue of the weak noise expansion as we did in chapter \ref{chap_BD}. Assume that $\psi(x,t)$ is the deterministic trajectory obtained as the solution to \eqref{deterministic_traj}. We introduce a new process $\{\zeta^{(s)}\}_{s \geq 0}$ which measures the fluctuations of $\phi^{(t)}$ from the deterministic trajectory $\psi(x,t)$. More precisely, we introduce the new variables:
 \begin{equation}
 \begin{aligned}
 \label{functional_weak_noise_new_vars}
