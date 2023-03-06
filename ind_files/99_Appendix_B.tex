@@ -7,7 +7,7 @@ where $\boldsymbol{\mu}: \mathbb{R}^m \to \mathbb{R}^m$ is the `drift vector' an
 \label{nD_Ito_formula}
 df(\mathbf{X}_t) = \left[\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\mu} + \frac{1}{2}\mathrm{Tr}[\boldsymbol{\sigma}^{\mathrm{T}}(H_{\mathbf{X}}f)\boldsymbol{\sigma}]\right]dt + \left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\sigma}d\mathbf{B}_t
 \end{equation}
-where $\mathrm{Tr}[\cdot]$ denotes the trace of a matrix, $\left(\cdot\right)^{\mathrm{T}}$ denotes the transpose, and we have suppressed the $\mathbf{X}_t$ dependence of $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ to reduce clutter. Here, $\nabla_{\mathbf{X}}f$ is the $m$ dimensional \emph{gradient vector} of $f$ and $H_{\mathbf{X}}f$ is the $m \times m$ \emph{Hessian matrix} of $f$, respectively defined for $f(x_1,\ldots,x_m)$ as:
+where $\mathrm{Tr}[\cdot]$ denotes the trace of a matrix, $\left(\cdot\right)^{\mathrm{T}}$ denotes the transpose, and we have suppressed the $\mathbf{X}_t$ dependence of $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ to reduce clutter. Here, $\nabla_{\mathbf{X}}f$ is the $m$-dimensional \emph{gradient vector} of $f$ and $H_{\mathbf{X}}f$ is the $m \times m$ \emph{Hessian matrix} of $f$, respectively defined for $f([x_1,\ldots,x_m]^{\mathrm{T}})$ as:
 \begin{align*}
 \left(\nabla_{\mathbf{x}} f\right)_j &= \frac{\partial f}{\partial x_j}\\
 \left(H_{\mathbf{x}} f\right)_{jk} &= \frac{\partial^2 f}{\partial x_j \partial x_k } 
