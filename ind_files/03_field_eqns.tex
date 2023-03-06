@@ -175,26 +175,26 @@ Using the chain rule in the definition of $p(x,t)$, we can calculate:
 \end{align*}
 Where we have used the definition of $N_K(t)$ and assumed that integrals and derivatives commute in the second line. Substituting \eqref{PDE_for_kimura}, we now obtain
 \begin{align*}
-\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\left[w(x|\psi)\psi(x,t) + \mu Q(x|\psi)\right] - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}w(y|\psi)\psi(y,t) + \mu b^{\textrm{(mut)}}(y|\psi)dy\\
-&= w(x|\psi)p(x,t) + \frac{\mu}{N_{K}(t)} Q(x|\psi) - p(x,t)\left(\int\limits_{\mathcal{T}}w(y|\psi)p(y,t)dy+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right)
+\frac{\partial p}{\partial t} &= \frac{1}{N_K(t)}\left[w(x|\psi)\psi(x,t) + \mu Q(x|\psi)\right] - \frac{\psi(x,t)}{N^2_K(t)}\int\limits_{\mathcal{T}}w(y|\psi)\psi(y,t) + \mu Q(y|\psi)dy\\
+&= w(x|\psi)p(x,t) + \frac{\mu}{N_{K}(t)} Q(x|\psi) - p(x,t)\left(\int\limits_{\mathcal{T}}w(y|\psi)p(y,t)dy+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}} Q(y|\psi)dy\right)
 \end{align*}
 where we have used the definition of $p(x,t)$ in the second line. Using \eqref{mean_fitness_for_kimura} and rearranging the terms gives us:
 \begin{equation}
 \label{cts_replicator_mutator}
-\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[Q(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right]}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[Q(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} Q(y|\psi)dy\right]}
 \end{equation}
-This is a continuous version of the replicator-mutator equation when each $x$ is viewed as a strategy. It also yields Kimura's continuum-of-alleles model when each $x$ is viewed as an allele, $Q(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, and the trait space is the entire real line, \emph{i.e.} $\mathcal{T} = \mathbb{R}$. To see this, let $b^{\textrm{(mut)}}(y|\psi) = \int\limits_{\mathbb{R}}m(y-z)\psi(z,t)dz$, where $m(x)$ is a mutation kernel, which by definition is normalized such that $\int\limits_{\mathbb{R}}m(x)dx = 1$. Let us further note that we have implicitly been assuming that the total number of individuals (scaled by $K$) remains finite at all times, \emph{i.e.} $N_K(t) = \int\limits_{\mathbb
-R}\psi(x,t)dx < \infty \ \forall \ t$. Thus, $m(x)\psi(y,t) \in  \mathcal{L}^{1}(\mathbb{R}\times\mathbb{R}) \ \forall \ t$ and we can use the Fubini-Tonnelli theorem to interchange the order of integration of iterated integrals of $m(y-z)\psi(y)$. We are now ready to evaluate the rightmost integral of \eqref{cts_replicator_mutator}.\\
+This is a continuous version of the replicator-mutator equation when each $x$ is viewed as a strategy. It also yields Kimura's continuum-of-alleles model when each $x$ is viewed as an allele, $Q(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, and the trait space is the entire real line, \emph{i.e.} $\mathcal{T} = \mathbb{R}$. To see this, let $Q(y|\psi) = \int\limits_{\mathbb{R}}m(y-z)\psi(z,t)dz$, where $m:\mathbb{R} \to [0,\infty)$ is a mutation kernel, which by definition is normalized such that $\int\limits_{\mathbb{R}}m(x)dx = 1$. Let us further note that we have implicitly been assuming that the total number of individuals (scaled by $K$) remains finite at all times, \emph{i.e.} $N_K(t) = \int\limits_{\mathbb
+R}\psi(x,t)dx < \infty \ \forall \ t$. Thus, for any fixed $t > 0$, we have $m(y-z)\psi(z,t) \in  \mathcal{L}^{1}(\mathbb{R}\times\mathbb{R})$ and we can use the Fubini-Tonnelli theorem to interchange the order of integration of iterated integrals of $m(y-z)\psi(y)$. We are now ready to evaluate the rightmost integral of \eqref{cts_replicator_mutator}.\\
 We have: 
 \begin{align}
-\int\limits_{\mathbb{R}} b^{\textrm{(mut)}}(y|\psi)dy &= \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}} m(y-z)\psi(z,t)dzdy\nonumber\\
+\int\limits_{\mathbb{R}} Q(y|\psi)dy &= \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}} m(y-z)\psi(z,t)dzdy\nonumber\\
 &= \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}} m(y-z)\psi(z,t)dydz\nonumber\\
 &= \int\limits_{\mathbb{R}}\psi(z,t)\left(\int\limits_{\mathbb{R}} m(y-z)dy\right)dz\nonumber\\
 &= \int\limits_{\mathbb{R}}\psi(z,t)\int\limits_{\mathbb{R}} m(u)dudz\nonumber\\
 &= \int\limits_{\mathbb{R}}\psi(z,t)dz\int\limits_{\mathbb{R}} m(u)du\nonumber\\
 &= N_K(t)\int\limits_{\mathbb{R}} m(u)du\label{convolution_integral_intermediate}
 \end{align}
-where we have used the Fubini-Tonnelli theorem to go from the first step to the second, and have made the substitution $u = y-z$ to go from the third to the fourth step. We then note that since $m$ is a kernel, it satisfies $\int\limits_{\mathbb{R}} m(u)du = 1$, and \eqref{convolution_integral_intermediate} therefore becomes $\int\limits_{\mathbb{R}} b^{\textrm{(mut)}}(y|\psi)dy = N_K(t)$. Substituting this in \eqref{cts_replicator_mutator}, we have
+where we have used the Fubini-Tonnelli theorem to go from the first step to the second, and have made the substitution $u = y-z$ to go from the third to the fourth step. We then note that since $m$ is a kernel, it satisfies $\int\limits_{\mathbb{R}} m(u)du = 1$, and \eqref{convolution_integral_intermediate} therefore becomes $\int\limits_{\mathbb{R}} Q(y|\psi)dy = N_K(t)$. Substituting this in \eqref{cts_replicator_mutator}, we have
 \begin{equation*}
 \frac{\partial p}{\partial t}(x,t) = \left[w(x|\psi) - \overline{w}(t)\right]p(x,t)+\frac{\mu}{N_K(t)}\left[\int\limits_{\mathbb{R}}m(x-z)\psi(z,t)dz - p(x,t)N_K(t)\right]
 \end{equation*}
@@ -206,8 +206,8 @@ which is Kimura's continuum of alleles model.\\
 We can now use the same trick we used in deriving \eqref{nD_Price_time_dependent} from \eqref{nD_replicator_mutator}. By multiplying both sides of equation \eqref{cts_replicator_mutator} by a type level quantity\footnote{This is now a function $f(x,t)$ of two variables, the trait value and time. We assume this function is nice enough for all the below operations to make sense} $f(x,t)$ and integrating over the trait space, we obtain
 \begin{align}
 \frac{d \overline{f}}{dt} &= \int\limits_{\mathcal{T}}f(x,t)w(x|\psi)p(x,t)dx - \overline{w}(t)\int\limits_{\mathcal{T}}f(x,t)p(x,t)dx\nonumber\\
-&+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}f(x,t)\left[Q(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right]dx\nonumber\\
-&= \overline{fw} - \overline{w}\cdot\overline{f} + \frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}f(x,t)\left[Q(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} b^{\textrm{(mut)}}(y|\psi)dy\right]dx\label{intermediate_for_cts_price}
+&+\frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}f(x,t)\left[Q(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} Q(y|\psi)dy\right]dx\nonumber\\
+&= \overline{fw} - \overline{w}\cdot\overline{f} + \frac{\mu}{N_K(t)}\int\limits_{\mathcal{T}}f(x,t)\left[Q(x|\psi) - p(x,t)\int\limits_{\mathcal{T}} Q(y|\psi)dy\right]dx\label{intermediate_for_cts_price}
 \end{align}
 We now observe that
 \begin{equation}
@@ -224,12 +224,12 @@ reflects the transmission bias of mutations. Thus, we see that equation \eqref{i
 \label{cts_price_general}
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d \overline{f}}{dt} = \mathrm{Cov}(f,w(x|\psi)) + M_{\overline{f}}(x|\psi) + \overline{\left(\frac{\partial f}{\partial t}\right)}}
 \end{equation}
-from which it is clear that we have obtained a version of the Price equation \eqref{nD_Price_time_dependent} for quantitative traits. For the special case $f(x)=x$, we have $\partial f/\partial t = 0$ and thus:
+from which it is clear that we have obtained a version of the Price equation \eqref{nD_Price_time_dependent} for quantitative traits (Note that \eqref{cts_price_general} is precisely the equation obtained by informally taking $m \to \infty$ in \eqref{nD_Price_time_dependent}). For the special case $f(x)=x$, we have $\partial f/\partial t = 0$ and thus:
 \begin{equation}
 \label{cts_price}
 \frac{d \overline{x}}{dt} = \mathrm{Cov}(x,w(x|\psi)) + M_{\overline{x}}(x|\psi)
 \end{equation}
-In this case, some more familiar dynamics are recovered under the following additional assumptions:
+We can also recover some more familiar dynamics under the following additional assumptions:
 \begin{itemize}
     \item Rare mutations, \emph{i.e.} $\mu \to 0$.
     \item Small mutational effects with `almost faithful' reproduction, meaning $Q(x|\psi) \to 0$, and the distribution $\psi(x,t)$ tends to stay very `sharp' (i.e strongly peaked about its mean value). 
