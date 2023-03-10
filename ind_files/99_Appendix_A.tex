@@ -41,9 +41,18 @@ Since this is true for an arbitrary choice of $f(x)$ (as long as $f$ is $C^2$), 
 \label{FPE}
 \frac{\partial P}{\partial t}(x,t) =-\frac{\partial}{\partial x}\left(\mu(x,t) P(x,t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left((\sigma(x,t))^2P(x,t)\right)
 \end{equation}
-Equation \eqref{FPE} is the Fokker-Planck equation in one dimension. Using the exact same strategy, the multidimensional Fokker-Planck equation for the $n$ dimensional It\^{o} Process $d\mathbf{X}_t = \mu(\mathbf{X}_t,t)dt + \sigma(\mathbf{X}_t,t)dB_t$ is found to be:
+Equation \eqref{FPE} is the Fokker-Planck equation in one dimension. Using the exact same strategy, the multidimensional Fokker-Planck equation for the $m$-dimensional It\^{o} Process $d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t,t)dt + \boldsymbol{\sigma}(\mathbf{X}_t,t)dB_t$ can be easily found to be:
 \begin{equation}
-\label{FPE_ndim}
-\frac{\partial P}{\partial t}(\mathbf{x},t) =-\sum\limits_{i=1}^{n}\frac{\partial}{\partial x_i}\left(\mu_i(\mathbf{x},t) P(\mathbf{x},t)\right) + \frac{1}{2}\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\frac{\partial^2}{\partial x_ix_j}\left(D_{ij}P(\mathbf{x},t)\right)
+\label{app_FPE_ndim}
+\frac{\partial P}{\partial t}(\mathbf{x},t) =-\sum\limits_{i=1}^{m}\frac{\partial}{\partial x_i}\left(\mu_i(\mathbf{x},t) P(\mathbf{x},t)\right) + \frac{1}{2}\sum\limits_{i=1}^{m}\sum\limits_{j=1}^{m}\frac{\partial^2}{\partial x_i \partial x_j}\left(D_{ij}P(\mathbf{x},t)\right)
 \end{equation}
-where $\mathbf{D} = \mathbf{\sigma}\mathbf{\sigma}^T$.
+where $\mathbf{D} = \mathbf{\sigma}\mathbf{\sigma}^T$. As an aside, I briefly note that some authors like to define the `probability current' $\mathbf{J}(\mathbf{x},t)$, an $m$-dimensional function with $i\textsuperscript{th}$ element
+\begin{equation*}
+J_i(\mathbf{x},t) \coloneqq \mu_i(\mathbf{x},t)P(\mathbf{x},t) - \frac{1}{2}\sum\limits_{j=1}^{m}\frac{\partial}{\partial x_j}\left(D_{ij}P(\mathbf{x},t)\right)
+\end{equation*}
+In this notation, equation \eqref{app_FPE_ndim} can be written in the more compact form:
+\begin{equation}
+\label{app_FPE_ndim_continuity_eqn}
+\frac{\partial P}{\partial t}  + \div{\mathbf{J}} = 0
+\end{equation}
+where $\div$ is the divergence operator (also denoted $\mathrm{div}$ in some texts). Those familiar with physics should immediately recognize that equation \eqref{app_FPE_ndim_continuity_eqn} is in the form of a so-called `continuity equation' for a conserved quantity. Continuity equations occur in various areas of applied mathematics, most famously in electromagnetism and fluid dynamics. This explains the name `probability current', in analogy with other currents such as electrical current or fluid current. The continuity equation representation also  makes it clear that the Fokker-Planck equation describes the `flow of probability' in the system. In particular, equation \eqref{app_FPE_ndim_continuity_eqn} says that the total probability in the system is `conserved', and is thus simply a mathematical formalization of the common-sense idea that whenever the probability of the system of being in a given state decreases, the probability of it being in some other state must increase (and vice versa).
