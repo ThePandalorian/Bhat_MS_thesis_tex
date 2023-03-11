@@ -30,9 +30,9 @@ where $F(t,x)$ and $G(t,x)$ are `nice' functions\footnote{For the mathematically
 \end{itemize}
 It can then be shown that since the motion is equally likely to be in any direction, the expected position at any point of time is the same as the initial position, \emph{i.e} $\mathbb{E}[B_t | B_0] = B_0 = 0$.
 
-The second integral in equation \eqref{ito_SDE_integral} is It\^o's `stochastic integral', and is to be interpreted in the following sense: Fix a time $T > 0$. Partition the interval $[0,T]$ into $n$ intervals of the form $[t_i,t_{i+1}]$ such that $0 = t_0 < t_1 < t_2 < \ldots < t_n = T$. Then, the (It\^o) stochastic integral from $0$ to $T$ can be thought of as:
+The second integral in equation \eqref{ito_SDE_integral} is It\^o's `stochastic integral', and is to be interpreted in the following sense: Fix a time $T > 0$. For any $n\geq2$, let $\Pi_n = \{t_1,t_2,\ldots,t_n\}$ be a partition of the interval $[0,T]$. In other words, $\Pi_n$ divides $[0,T]$ into $n$ slices of the form $[t_i,t_{i+1}]$ such that $0 = t_0 < t_1 < t_2 < \ldots < t_n = T$. Then, the (It\^o) stochastic integral from $0$ to $T$ can be thought of as:
 \begin{equation*}
-\int\limits_{0}^{T} G(s,X_s)dB_s \coloneqq \lim_{n \to \infty} \sum\limits_{i=1}^{n}G(t_i,X_{t_i})(B_{t_{i+1}}-B_{t_i})  
+\int\limits_{0}^{T} G(s,X_s)dB_s \coloneqq \lim_{n \to \infty} \sum\limits_{\Pi_n}G(t_i,X_{t_i})(B_{t_{i+1}}-B_{t_i})  
 \end{equation*}
 That is to say, it is obtained by making successively finer partitions of the form $[t_i,t_{i+1}]$, and then computing the `area of the rectangle' formed with $B_{t_{i+1}}-B_{t_i}$ and $G(t_i,X_{t_i})$ as sides. This should look similar to the classic Riemann integral, with the uniform width $t_{i+1}-t_i$ of the Riemann integral replaced by a random width corresponding to the random displacement of a Brownian particle during the uniform time interval $[t_i,t_{i+1}]$.
 
