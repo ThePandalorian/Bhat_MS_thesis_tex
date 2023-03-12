@@ -36,17 +36,17 @@ Substituting \eqref{eq_Ito_to_FPE_I_term} and \eqref{eq_Ito_to_FPE_J_term} into 
 \begin{equation*}
     \int\limits_{\Omega}f(X_t)\frac{\partial P}{\partial t}(x,t)dx = \int\limits_{\Omega}f(X_t)\left[-\frac{\partial}{\partial x}(\mu P(x,t)) + \frac{1}{2}\frac{\partial^2}{\partial x^2}(\sigma^2P(x,t))\right]dx
 \end{equation*}
-Since this is true for an arbitrary choice of $f(x)$ (as long as $f$ is $C^2$), we are thus led to conclude that the density function $P(x,t)$ must satisfy:
+Since this is true for an arbitrary choice of $f(x)$, we are thus led to conclude that the density function $P(x,t)$ must satisfy:
 \begin{equation}
 \label{FPE}
 \frac{\partial P}{\partial t}(x,t) =-\frac{\partial}{\partial x}\left(\mu(x,t) P(x,t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left((\sigma(x,t))^2P(x,t)\right)
 \end{equation}
-Equation \eqref{FPE} is the Fokker-Planck equation in one dimension. Using the exact same strategy, the multidimensional Fokker-Planck equation for the $m$-dimensional It\^{o} Process $d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t,t)dt + \boldsymbol{\sigma}(\mathbf{X}_t,t)dB_t$ can be easily found to be:
+Equation \eqref{FPE} is the Fokker-Planck equation in one dimension. Using the exact same strategy, the multidimensional Fokker-Planck equation for the $m$-dimensional It\^{o} Process $d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t,t)dt + \boldsymbol{\sigma}(\mathbf{X}_t,t)d\mathbf{B}_t$ can be easily found to be:
 \begin{equation}
 \label{app_FPE_ndim}
 \frac{\partial P}{\partial t}(\mathbf{x},t) =-\sum\limits_{i=1}^{m}\frac{\partial}{\partial x_i}\left(\mu_i(\mathbf{x},t) P(\mathbf{x},t)\right) + \frac{1}{2}\sum\limits_{i=1}^{m}\sum\limits_{j=1}^{m}\frac{\partial^2}{\partial x_i \partial x_j}\left(D_{ij}P(\mathbf{x},t)\right)
 \end{equation}
-where $\mathbf{D} = \mathbf{\sigma}\mathbf{\sigma}^T$. As an aside, I briefly note that some authors like to define the `probability current' $\mathbf{J}(\mathbf{x},t)$, an $m$-dimensional function with $i\textsuperscript{th}$ element
+where $\mathbf{D} = \mathbf{\sigma}\mathbf{\sigma}^T$. Some authors like to define the `probability current' $\mathbf{J}(\mathbf{x},t)$, an $m$-dimensional function with $i\textsuperscript{th}$ element
 \begin{equation*}
 J_i(\mathbf{x},t) \coloneqq \mu_i(\mathbf{x},t)P(\mathbf{x},t) - \frac{1}{2}\sum\limits_{j=1}^{m}\frac{\partial}{\partial x_j}\left(D_{ij}P(\mathbf{x},t)\right)
 \end{equation*}
