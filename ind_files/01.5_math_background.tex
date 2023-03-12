@@ -1,0 +1,278 @@
+\epigraph{\justifying Like most mathematicians, he takes the hopeful biologist to the edge of a pond, points out that a good swim will help his work, and then pushes him in and leaves him to drown.}{Charles Elton (speaking about Lotka)}
+
+Theorists are often accused of presenting somewhat intuitive ideas in a highly inaccessible formalism that discourages those unfamiliar with the required mathematics. Indeed, many models that use the kind of stochastic processes I use in this thesis assume familiarity with stochastic calculus or Markov theory, or at the very least a willingness to `fill in the blanks' between major results of the calculations. In an attempt to make the ideas I use more accessible to a broader audience, I will use this expository chapter to present a pedagogical summary of the basic mathematical tools required, and present a toy model tracking the population size of a population of identical individuals as an example of the major ideas used.
+
+\section{Mathematical Background}\label{sec_math_background}
+
+Here, I provide a brief, informal introduction to basic notions in stochastic processes that will be helpful for some technical portions of this thesis. Interested readers looking for a more comprehensive source can refer to standard mathematics texts such as~\cite{oksendal_stochastic_1998} or~\cite{karatzas_brownian_1998} for a more rigorous treatment of the mathematical foundations, or physics-style texts such as~\cite{gardiner_stochastic_2009} or~\cite{van_kampen_stochastic_1981} for useful tools and techniques to study real systems.
+
+\subsection{Birth-death processes}
+Mathematically, a birth-death process is a so-called `continuous-time Markov chain' in which only transitions between local states are allowed. In other words, a birth-death process is a stochastic process unfolding in continuous time such that
+\begin{itemize}
+	\item The process is `Markov', meaning that the future is statistically independent of the past given the present. In more mathematical terms, if the value of the stochastic process at time $t$ is given by $X_t$, $\mathbb{P}(\cdot | E)$ denotes probability conditioned on $E$, and $u < s \leq t$, then
+	\begin{equation*}
+	\mathbb{P}(X_t | X_s, X_u) = \mathbb{P}(X_t | X_s)
+	\end{equation*}
+	\item Direct transitions must be `local'. Mathematicians usually reserve the phrase `birth-death process' to processes that take values in the non-negative integers $\{0,1,2,3,4,\ldots\}$. In this case, only direct transitions from $n$ to $n \pm 1$ are allowed to occur. Biologically, this is saying that we observe the population on a fine enough timescale that the probability of two or more births/deaths occurring at the exact same time is very low and we can disallow it entirely in our models. The conditions for higher dimensional birth-death processes look similar.
+\end{itemize}
+Since these processes unfold in continuous time, they are characterized not by transition probabilities but by transition \emph{rates}, which can be thought of as the probability of transition `per unit time'. The quantity of interest is usually the probability of being in a particular state at a given point in time. The entire birth-death process can be described in terms of such a quantity, through a so-called `Master equation'. The master equation is a partial differential equation (PDE) for the probability of being in a given state at a given time, However, in all but the simplest cases, we can't actually solve this PDE, because it is simply too hard. The primary source of difficulty is non-linearity in the transition rates and the fact that transitions occur in discrete, discontinuous `jumps'. It is much easier to describe and analyze systems by using tools from stochastic calculus and partial differential equations, as we describe below.
+
+\subsection{SDEs and the Fokker-Planck equation}\label{intro_SDE}
+Stochastic systems which change continuously (in the state space) can be described in terms of a `stochastic differential equation' (SDE), which here is interchangeable with the phrase `It\^o process'. An SDE for a stochastic process $\{X_t\}_{t \geq 0}$ is an equation of the form
+\begin{equation}
+\label{ito_SDE_integral}
+X_t = \int\limits_{0}^{t} F(s,X_s)ds + \int\limits_{0}^{t} G(s,X_s)dB_s
+\end{equation}
+where $F(t,x)$ and $G(t,x)$ are `nice' functions\footnote{For the mathematically oriented reader, there are two requirements: Firstly, we require the functions to have `linear growth', meaning that we can find a constant $C > 0$ such that $\|F(t,x)\| + \|G(t,x)\| \leq C(1+\|x\|)$ for every $x \in \mathbb{R}^{d}$ and $t > 0$. We also require `Lipschitz continuity', which means that we can find a constant $L > 0$ such that $\|F(t,x) - F(t,y)\| + \|G(t,x)-G(t,y)\| \leq L\|x-y\|$ for every pair $x,y \in \mathbb{R}^d$ and $t > 0$. Here, $\|\cdot\|$ denotes the natural norm on the space under consideration and for our cases will usually be the Euclidean norm. For biological systems, both of these conditions will usually be satisfied, and so we assume going further that all our SDEs are always well-defined and admit solutions.} In the physics literature, $F$ and $G$ are often called the `drift' and `diffusion' of the process respectively. However, we will not use this terminology here due to  potential confusion with genetic drift (which actually corresponds to the `diffusion' in the physics terminology). $B_t$ is the so-called `standard Brownian motion'. Named after the botanist Robert Brown (who was looking at the random erratic motion of pollen grains in water under a microscope), $\{B_t\}_{t \geq 0}$ is a stochastic process that is supposed to model `random noise' or `undirected diffusion' of a particle. If one imagines $B_t$ as recording the position of a small pollen grain at time $t$, then $B_t$ can be formally thought of as a process that has the following properties:
+\begin{itemize}
+	\item It starts at the origin, \emph{i.e} $B_0 = 0$. This is a harmless assumption made for convenience and amounts to a choice of coordinate system.
+	\item It moves continuously, without sudden jumps across regions of space, \emph{i.e} the map $t \to B_t$ is continuous. This simply says that our pollen grain moves short distances in short intervals of time.
+	\item The future movement is independent of past history. That is, given times $u < s < t$, the displacement $B_t - B_s$ is independent of the past position $B_u$.
+	\item The movement is directionless and random, and displacement is normally distributed. More precisely, given two times $s < t$, the displacement $B_t - B_s$ follows a normal distribution with a mean of $0$ (this is the `directionless' part) and a variance of $t-s$ (this is the `random' part).
+\end{itemize}
+It can then be shown that since the motion is equally likely to be in any direction, the expected position at any point of time is the same as the initial position, \emph{i.e} $\mathbb{E}[B_t | B_0] = B_0 = 0$.
+
+The second integral in equation \eqref{ito_SDE_integral} is It\^o's `stochastic integral', and is to be interpreted in the following sense: Fix a time $T > 0$. For any $n\geq2$, let $\Pi_n = \{t_1,t_2,\ldots,t_n\}$ be a partition of the interval $[0,T]$. In other words, $\Pi_n$ divides $[0,T]$ into $n$ slices of the form $[t_i,t_{i+1}]$ such that $0 = t_0 < t_1 < t_2 < \ldots < t_n = T$. Then, the (It\^o) stochastic integral from $0$ to $T$ can be thought of as:
+\begin{equation*}
+\int\limits_{0}^{T} G(s,X_s)dB_s \coloneqq \lim_{n \to \infty} \sum\limits_{t_i \in \Pi_n}G(t_i,X_{t_i})(B_{t_{i+1}}-B_{t_i})  
+\end{equation*}
+That is to say, it is obtained by making successively finer partitions of the form $[t_i,t_{i+1}]$, and then computing the `area of the rectangle' formed with $B_{t_{i+1}}-B_{t_i}$ and $G(t_i,X_{t_i})$ as sides. This should look similar to the classic Riemann integral, with the uniform width $t_{i+1}-t_i$ of the Riemann integral replaced by a random width corresponding to the random displacement of a Brownian particle during the uniform time interval $[t_i,t_{i+1}]$.
+
+Equation \eqref{ito_SDE_integral} is often represented in the compact form:
+\begin{equation}
+\label{ito_SDE_diff}
+dX_t = F(t,X_t)dt + G(t,X_t)dB_t
+\end{equation}
+. The physics literature also often uses the `Langevin form':
+\begin{equation}
+\label{ito_langevin}
+\frac{dx}{dt} = F(t,x) + G(t,x)\eta(t)
+\end{equation}
+where $\eta(t)$ is supposed to be `Gaussian white noise', defined indirectly such that $\int_0^{t}G(s,x)\eta(s)ds$ behaves identically to $\int_0^{t}G(s,X_s)dB_s$. However, it is important to remember that these are both purely formal expressions - Equation \eqref{ito_SDE_diff} is meaningless on its own and is really just shorthand for equation \eqref{ito_SDE_integral}, which is well-defined as explained above; Equation \eqref{ito_langevin} is even worse, because the Brownian motion is known to be non-differentiable, and as such, $\eta(t)$ cannot really exist - Both equations are thus to be interpreted as shorthand for equation \eqref{ito_SDE_integral}, which formally `makes sense'. SDEs are convenient because they satisfy several `nice' analytical properties. For example, using the fact that the Brownian motion has no expected change in value (\emph{i.e} $\mathbb{E}[B_t | B_0] = B_0 = 0$), it can be shown\footnote{We can actually prove something stronger: We can show under rather mild regularity assumptions on $X_t$ and $G(t,x)$ that the stochastic integral is a continuous square-integrable martingale starting at the origin - This means that the map $t \to \int_0^{t}G(s,X_s)dB_s$ is continuous, starts at the origin, and always has an expectation value of $0$.} that the stochastic integral also has an expectation value of $0$ for all $t$, \emph{i.e}:
+\begin{equation*}
+\mathbb{E}\left[\int\limits_{0}^{t} G(s,X_s)dB_s \bigg{|} X_0\right] = 0
+\end{equation*}
+Using this, and the fact that the future path of the Brownian motion itself is independent of its history, one can derive the following `notational algebra table' for manipulating products of formal expressions of the form \eqref{ito_SDE_diff}:
+\\
+\begin{center}
+	\begin{tabularx}{0.4\textwidth}{ 
+			| >{\centering\arraybackslash}X 
+			| >{\centering\arraybackslash}X 
+			| >{\centering\arraybackslash}X | }
+		\hline
+		& $\mathbf{dt}$ & $\mathbf{dB_t}$ \\
+		\hline
+		$\mathbf{dt}$ & $0$  &  $0$ \\ 
+		\hline
+		$\mathbf{dB_t}$ & $0$  & $dt$ \\
+		\hline
+	\end{tabularx}
+\end{center}
+which becomes very useful for formal manipulation. One important consequence is that we can no longer rely on the normal rules of calculus when dealing with stochastic integrals. In regular calculus, if we had a quantity $x(t)$ satisfying $\dot{x} = f(x,t) + g(x,t)$ for two `nice'\footnote{We just need the solution $x(t)$ to be a continuous function} real functions $f$ and $g$, then, given any function $h(x)$, we have the chain rule of differentiation, which says that
+\begin{equation*}
+\frac{dh}{dt} = \frac{dh}{dx}\frac{dx}{dt} = h'(x)f(x) + h'(x)g(x)
+\end{equation*}
+\emph{i.e.}
+\begin{equation*}
+dh =  h'(x)f(x)dt + h'(x)g(x)dt
+\end{equation*}
+Naively, we may expect the same logic to still hold true for one-dimensional It\^o processes of the form \eqref{ito_SDE_diff} with $gdt$ simply being replaced by $GdB_t$ on the RHS. However, this does not work. The correct relation is instead given by 
+\emph{It\^o's formula}\footnote{It\^o's formula also additionally requires $h \in C^2(\mathbb{R})$, meaning that $h$ is continuous and the first and second derivatives of $h$ exist and are also continuous}:
+\begin{equation*}
+dh(X_t) = h'(X_t)F(X_t)dt + h'(X_t)G(X_t)dB_t  + \frac{h''(X_t)}{2}G^2(X_t)dt 
+\end{equation*}
+Note that there is now an extra $h''(X_t)G^2(X_t)/2$ term that does not exist in the deterministic setting. In some sense, this term is present because the random fluctuations of Brownian motion are `too erratic' and do not follow our deterministic intuitions. Using It\^o's formula and some simple algebra, one can then show that given any process $X_t$ taking values in $\mathbb{R}$ satisfying the SDE \eqref{ito_SDE_diff}, the associated probability density $P(x,t)$ of finding the process in a state $x \in \mathbb{R}$ satisfies the PDE
+\begin{equation}
+\label{ito_FPE}
+\frac{\partial P}{\partial t}(x,t) = -\frac{\partial}{\partial x}\{F(t,x)P(x,t)\} + \frac{1}{2}\frac{\partial^2}{\partial x^2}\{(G(t,x))^2P(x,t)\}
+\end{equation}
+I present a simple informal derivation in Appendix \ref{App_SDE_FPE} for the sake of completeness. Equation \eqref{ito_FPE} is called the `Fokker-Planck equation' in the physics and applied mathematics literature~\citep{gardiner_stochastic_2009} and is often called the `Kolmogorov forward equation' in the population genetics~\citep{ewens_mathematical_2004} and pure mathematics~\citep{oksendal_stochastic_1998} literature. As I explain in Appendix \ref{App_SDE_FPE}, the Fokker-Planck equation can be viewed as a `conservation law' for probability that mathematically expresses the common-sense observation that the sum (or integral) of probabilities over the entire state space cannot change over time (since it must always equal 1). If the function $G$ is independent of $x$, it comes out of the derivatives in equation \eqref{ito_FPE}, and the resultant Fokker-Planck equation is said to be `linear' (and is much easier to solve). This link between SDEs and Fokker-Planck equations goes both ways: One can show that every stochastic process with a probability density described by a Fokker-Planck equation of the form \eqref{ito_FPE} corresponds to the solution of an SDE of the form \eqref{ito_SDE_diff}, though the proof is much more technical and will not be discussed here. This two-way correspondence proves to be extremely useful, as one approach often works for applications in which the other fails. This correspondence makes it greatly desirable to be able to describe our stochastic process of interest as either the solution to an It\^o SDE of the form \eqref{ito_SDE_diff} or as the solution to a Fokker-Planck equation of the form \eqref{ito_FPE}. System-size expansions facilitate such a description for birth-death processes.
+
+\subsection{Density-dependence and the intuition for system-size expansions in ecology}
+The fundamental idea behind the system-size expansion relates to the nature of the jumps between successive states of a birth-death process. In most situations in ecology, at an individual level, births and deaths of individuals are affected by local population density and not directly by the total population size. Despite this, the jumps themselves occur in terms of the addition (birth) or removal (death) of a \emph{single individual} from the population. If there are many individuals, each individual contributes a negligible amount to the density, and thus, the discontinuous jumps due to individual-level births or deaths can look like a small, \emph{continuous} change in population density. This is the essential idea behind the system-size expansion. The name derives from the formalization of this idea as a change of variable from the discrete values $\{0,1,2,\ldots,n-1,n,n+1,\ldots\}$ to the approximately continuous values $\{0,1/K,2/K,\dots,x-1/K,x,x+1/K,\ldots\}$ by the introduction of a `system size parameter' $K$. In ecology, this parameter will be some fundamental limit on resources, such as habitat size or carrying capacity. In physics and chemistry, it is usually the total volume of a container in which physical or chemical reactions take place. When $K$ is large, the fact that transitions occur in units of a small value $1/K$ can be exploited via a Taylor expansion of the transition rates in the Master equation, which then yields a Fokker-Planck equation upon neglecting higher order terms. A similar approximation is well-known (ever since Fisher) in theoretical population genetics, where it goes by the name of the `diffusion approximation'\citep{ewens_mathematical_2004} or `continuum limit'~\citep{czuppon_understanding_2021}, and has been heavily used by Kimura~\citep{crow_introduction_1970} in his stochastic models. However, the population genetics version of the approximation usually either relies on total population size being fixed~\citep{crow_introduction_1970, lande_natural_1976,ewens_mathematical_2004} or is conducted in an ad-hoc manner without specifying an explicit system size parameter (\emph{i.e.} is closer to a Kramers-Moyal expansion than a Van Kampen expansion).
+
+
+\subsection{The intuition for the weak noise approximation in ecology}
+If the parameter $K$ is sufficiently large, then the Fokker-Planck equation obtained via the system-size expansion can be further simplified to obtain a linear Fokker-Planck equation. This is accomplished by viewing the stochastic dynamics as fluctuating about a deterministic trajectory (obtained by letting $K \to \infty$) and only works if $K$ is large enough to be able to neglect all but the highest-order terms. This is usually an excellent approximation for populations in which the deterministic trajectory has already reached an attractor (stable fixed point, stable limit cycle, etc.). Since many deterministic eco-evolutionary models are expected to relax to such attractors, such an approximation is a useful first step in increasing the generality of existing models (which are usually studied only in the equilibrium regime) to incorporate the dynamics of finite populations. Importantly, this approximation \emph{only} works if we can discard all but highest-order terms of $K$: Including higher-order terms leads to equations that do not form Fokker-Planck equations and do not even describe probability densities. As such, this approximation is best suited to describe populations that are `medium sized' - small enough that they cannot be assumed to be infinitely large, yet large enough that stochasticity is rather weak and the deterministic limit is somewhat predictive - A situation that occurs frequently in ecology and evolution.
+
+\section{Warm up: One-dimensional processes for population size}\label{sec_1D_processes}
+The simplest birth-death processes are those in which the state at any time can be characterized by a single number. Populations of identical individuals are an obvious example of such a system. I will use this toy system as an illustration of the techniques that will be used for the actual problems we intend to tackle in the next sections. The mathematics below are adapted from sections 6.3 and 7.2 of~\cite{gardiner_stochastic_2009}.
+
+\subsection{Description of the process and the Master Equation}
+
+Consider a population of identical individuals subject to some ecological rules that affect individuals' birth and death rates. Since all individuals are identical, we can only really track the population size through time. The population as a whole at any time $t$ can thus be characterized by a single number - its population size (Figure \ref{fig_1D_pop_description}). Imagine further that if a population has $n$ identical individuals, then, from the ecological rules, we can determine a \emph{birth rate} $b(n)$, which gives us a measure of the probability that a new individual will be born and the population size becomes $n+1$ `per unit time'. One must be slightly precise about what exactly they mean when they say `per unit time' since there are no discrete `time steps' for individuals to be born. Here, by `birth rate', we mean the probability that there will be a birth (and no death) per an \emph{infinitesimal} amount of time. More formally, letting $N_t$ denote the random variable representing the population size at time $t$ and letting $\mathbb{P}(E)$ denote the probability (in the common-sense usage) of an event $E$, the birth rate $b(n)$ of a population with population size $n$ is the quantity
+\begin{equation}
+\label{1D_birthrate_defn}
+b(n) \coloneqq \lim_{\epsilon \to 0}\frac{1}{\epsilon}\mathbb{P}\left(N_{t+\epsilon}=n+1 | N_{t}=n\right)
+\end{equation}
+\\
+
+Exactly analogously, we also assume we can define a \emph{death rate} $d(n)$ of a population of $n$ individuals as the quantity
+\begin{equation}
+\label{1D_deathrate_defn}
+d(n) \coloneqq \lim_{\epsilon \to 0}\frac{1}{\epsilon}\mathbb{P}\left(N_{t+\epsilon}=n-1 | N_{t}=n\right)
+\end{equation}
+An alternative, perhaps more intuitive characterization, of these same quantities is the following: If we have a population of size $n$, and we know that \emph{either a birth or a death} has just occurred, then, the probability that the event that occurred is a birth is
+\begin{equation*}
+\mathbb{P[\textrm{ birth } | \textrm{ something happened }]} = \frac{b(n)}{b(n)+d(n)}
+\end{equation*}
+and the probability that the event was instead a death is given by
+\begin{equation*}
+\mathbb{P[\textrm{ death } | \textrm{ something happened }]} = \frac{d(n)}{b(n)+d(n)}
+\end{equation*}
+\\
+
+\begin{example}\label{ex_1D_stoch_logistic}
+	Consider the case where the per-capita birth rate is a constant $\lambda > 0$, \emph{i.e}, $b(n) = \lambda n$, and the per-capita death rate has the linear density-dependence $d(n) = \left(\mu + (\lambda-\mu)\frac{n}{K}\right)n$, where $\mu$ and $K$ are positive constants. Taking the difference between the birth and death rates, we obtain $b(n) - d(n) = (\lambda - \mu)n\left(1-\frac{n}{K}\right)$, where, identifying $r=\lambda-\mu$, we obtain the familiar logistic equation on the RHS. Note, however, that the population itself is stochastic, whereas the logistic equation is a deterministic description.
+\end{example}
+Now, let $P(n,t)$ be the probability that the population size is $n$ at time $t$. We wish to have an equation to describe how $P(n,t)$ changes with time - this will provide a probabilistic description of how we expect the population size to change over time.
+\myfig{0.5}{Media/3.1_BD_process_1D.png}{\textbf{Schematic description of a one-dimensional birth-death process}. Consider a population of identical individuals. The state of the system can be described by a single number, in this case, the population size. Births and deaths result in changes in the total population size, and the birth and death rates are dependent on the current population size.}{fig_1D_pop_description}
+
+To do this, we imagine a large ensemble of populations. In a large ensemble of copies evolving independently, a fraction $P(n,t)$ will have population size $n$ at time $t$ by definition of probability. We can now simply measure the `inflow' and `outflow' of copies of the population from each state. If a population has $n$ individuals, it could either have gotten there from a population of $n+1$ individuals, with a death rate of $d(n+1)$, or from a population of $n-1$ individuals, with a birth rate of $b(n-1)$. Thus, the rate of `inflow' to the state $n$ is given by
+\begin{equation}
+\label{1D_rate_in}
+R_{\textrm{in}}(n,t) = b(n-1)P(n-1,t) + d(n+1)P(n+1,t)
+\end{equation}
+Similarly, if the population has $n$ individuals, it could obtain a different state in two ways: With rate $b(n)$, the population witnesses a birth, and with rate $d(n)$, it witnesses a death. Thus, the rate of `outflow' is given by
+\begin{equation}
+\label{1D_rate_out}
+R_{\textrm{out}}(n,t) = b(n)P(n,t) + d(n)P(n,t)
+\end{equation}
+The rate of change of the probability of the system being in state $n$ is given by the rate of inflow minus the rate of outflow. Thus, we have
+\begin{align}
+\frac{\partial P}{\partial t}(n,t) &= R_{\textrm{in}}(n,t) - R_{\textrm{out}}(n,t)\nonumber\\
+&= b(n-1)P(n-1,t) + d(n+1)P(n+1,t) - b(n)P(n,t) - d(n)P(n,t)\label{1D_M_eqn_nostep}
+\end{align}
+For convenience, let us define two `step operators' $\mathcal{E}^{\pm}$, which act on any functions of populations to their right by either adding or removing an individual, \textit{i.e}
+\begin{equation*}
+\mathcal{E}^{\pm}f(n,t) = f(n \pm 1,t)
+\end{equation*}
+Rearranging the RHS of \eqref{1D_M_eqn_nostep} to write in terms of these step operators, we obtain the compact expression
+\begin{equation}
+\label{1D_M_eqn}
+\frac{\partial P}{\partial t}(n,t) = (\mathcal{E}^{-}-1)b(n)P(n,t) + (\mathcal{E}^{+}-1)d(n)P(n,t)
+\end{equation}
+This is the so-called `master equation', and completely describes our system. However, in general, $b(n)$ and $d(n)$ may be rather complicated, in which case it may not be possible to solve \eqref{1D_M_eqn} directly.
+
+\subsection{The system-size expansion}
+The system-size expansion arises from noting that in many systems, the interactions are governed not by population size, but by population \emph{density}. However, the population jumps themselves are discretized at the scale of the individual, which becomes negligibly small if we have a large population density. Thus, we assume that there exists a system-size parameter $K > 0$ such that the discrete jumps between states happen in units of $1/K$, and we make the substitutions
+\begin{align*}
+x &= \frac{n}{K}\\
+b_K(x) &= \frac{1}{K}b(n)\\
+d_K(x) &= \frac{1}{K}d(n)
+\end{align*}
+As $K$ grows very large, the discontinuous jumps in $n$ thus appear like `continuous' transitions in our new variable $x$, which can be thought of as the `density' of organisms. A system-size parameter $K$ often naturally emerges in ecological systems through resource-limiting factors such as habitat size or carrying capacity. Under these substitutions, equation \eqref{1D_M_eqn} becomes
+\begin{equation}
+\label{1D_M_eqn_density}
+\frac{\partial P}{\partial t}(x,t) = (\Delta^{-}-1)Kb_K(x)P(x,t) + (\Delta^{+}-1)Kd_K(x)P(x,t)
+\end{equation}
+where we now have the new step operators
+\begin{equation}
+\label{1D_step_operators_density}
+\Delta^{\pm}f(x,t) = f\left(x\pm\frac{1}{K},t\right) 
+\end{equation}
+If $K$ is large, then we can now taylor-expand the action of these step operators as:
+\begin{equation*}
+\Delta^{\pm}f(x,t) = f\left(x\pm\frac{1}{K},t\right) = f(x,t) \pm \frac{1}{K}\frac{\partial f}{\partial x}(x,t) + \frac{1}{2K^2}\frac{\partial^2f}{\partial x^2}(x,t) + \mathcal{O}(K^{-3})
+\end{equation*}
+Substituting these expansions into \eqref{1D_M_eqn_density} and neglecting terms of $\mathcal{O}(K^{-3})$ and higher, we obtain
+\begin{equation}
+\label{1D_FPE}
+\setlength{\fboxsep}{2\fboxsep}\boxed{
+	\frac{\partial P}{\partial t}(x,t) = -\frac{ \partial}{\partial x}\{A^{-}(x)P(x,t)\} + \frac{1}{2K}\frac{\partial^2}{\partial x^2}\{A^{+}(x)P(x,t)\}
+}
+\end{equation}
+where
+\begin{equation*}
+A^{\pm}(x) = b_K(x) \pm d_K(x)
+\end{equation*}
+Equation \eqref{1D_FPE} has the form of a so-called `Fokker-Planck equation', and corresponds to the SDE:
+\begin{equation}
+\label{1D_SDE}
+dX_t = A^{-}(X_t)dt + \sqrt{\frac{A^{+}(X_t)}{K}}dB_t
+\end{equation}
+interpreted in the It\^{o} sense. Note that the deterministic component of this process depends on the difference between birth and death rates (a mechanistic measure of Malthusian fitness), whereas the stochastic part depends on their sum and scales inversely with $\sqrt{K}$.
+
+\subsection{Stochastic fluctuations and the weak noise approximation}\label{sec_1D_WNA}
+% The mathematics in this section is taken from~\cite{gardiner_stochastic_2009} with minor modifications\footnote{Gardiner uses a parameter $\epsilon>0$ such that noise increases with an increase in $\epsilon$. I have used a parameter $K>0$ such that noise decreases with an increase in $K$, which is more biologically relevant. Gardiner's exact results can be recovered by substituting $\epsilon = \frac{1}{\sqrt{K}}$}.
+If we assume the noise is \emph{weak}, then we can go still further with analytic techniques by measuring fluctuations from the deterministic expectations, albeit with some slightly cumbersome calculations to arrive at the final expressions. We will grit our teeth and get through the algebra below, with my promise that the final answer is neat and easy to handle. It is clear that as $K \to \infty$, equation \eqref{1D_SDE} describes a deterministic process, obtained as the solution to
+\begin{equation}
+\label{1D_det_limit}
+\frac{dx}{dt} = A^{-}(x) = b_{K}(x) - d_{K}(x)
+\end{equation}
+This is a very intuitive equation, saying that the rate of change of the population is equal to the birth rate minus the death rate. Let the solution of this equation  be given by $\alpha(t)$, so that $\frac{d{\alpha}}{dt}(t) = A^{-}(\alpha(t))$.
+
+We can now measure (scaled) fluctuations from the deterministic solution $\alpha$ through a new variable $y=\sqrt{K}\left(x-\alpha(t)\right)$. For notational clarity, we will also introduce a new time variable $s=t$ which is equal to the original time variable (this is just so the equations look clearer). Let the probability density function of this new variable be given by $\Tilde{P}(y,s)$. In summary, we have introduced the variables:
+\begin{align*}
+y &= \sqrt{K}\left(x-\alpha(t)\right)\\
+s &= t\\
+\Tilde{P}(y,s) &= \frac{1}{\sqrt{K}}P(x,t)
+\end{align*}
+Note that by ordinary rules of variable substitution, we have:
+\begin{align}
+\frac{\partial \Tilde{P}}{\partial t} &= \frac{\partial \Tilde{P}}{\partial y}\frac{\partial y}{\partial t} + \frac{\partial \Tilde{P}}{\partial s}\frac{\partial s}{\partial t}\nonumber\\
+&=\frac{\partial \Tilde{P}}{\partial y}\left( -\sqrt{K}\frac{d\alpha}{dt}\right) + \frac{\partial \Tilde{P}}{\partial s}\nonumber\\
+&= -\sqrt{K}A^{-}(\alpha(s))\frac{\partial \Tilde{P}}{\partial y} + \frac{\partial \Tilde{P}}{\partial s}\label{weak_noise_expansion_first_term}
+\end{align}
+and
+\begin{equation}
+\label{weak_noise_expansion_second_term}
+\frac{\partial }{\partial y} = \frac{1}{\sqrt{K}}\frac{\partial }{\partial x}
+\end{equation}
+Reformulating \eqref{1D_FPE} in terms of $y,s$ and $\Tilde{P}$ and substituting \eqref{weak_noise_expansion_first_term} and \eqref{weak_noise_expansion_second_term} yields:
+\begin{align}
+-A^-(\alpha)\frac{\partial\Tilde{P}}{\partial x} + \frac{\partial \Tilde{P}}{\partial s} &= -\sqrt{K}\frac{\partial}{\partial y}\left(A^-(\alpha+\frac{y}{\sqrt{K}})\Tilde{P}\right)+\frac{1}{2}\frac{\partial^2}{\partial y^2}\left(A^+(\alpha+\frac{y}{\sqrt{K}})\Tilde{P}\right)\nonumber\\
+\Rightarrow \frac{\partial \Tilde{P}}{\partial s} &= -\frac{\partial}{\partial y}\left[\sqrt{K}\left(A^-(\alpha+\frac{y}{\sqrt{K}})-A^-(\alpha)\right)\Tilde{P}\right]+\frac{1}{2}\frac{\partial^2}{\partial y^2}\left(A^+(\alpha+\frac{y}{\sqrt{K}})\Tilde{P}\right)\label{weak_noise_exact_equation}
+\end{align}
+We are now ready to make a weak noise `expansion'. We do so by assuming that $\Tilde{P}$, $A^-(\alpha + \frac{y}{\sqrt{K}})$, and $A^+(\alpha+\frac{y}{\sqrt{K}})$ can be approximated by series expansions in $\frac{1}{\sqrt{K}}$ of the form:
+\begin{align*}
+\Tilde{P} &= \sum\limits_{n=0}^{\infty}\Tilde{P}_n\left(\frac{1}{\sqrt{K}}\right)^n\\
+A^-\left(\alpha(s) + \frac{y}{\sqrt{K}}\right) &= \sum\limits_{n=0}^{\infty}A^-_n(s)\left(\frac{y}{\sqrt{K}}\right)^n\\
+A^+\left(\alpha(s) + \frac{y}{\sqrt{K}}\right) &= \sum\limits_{n=0}^{\infty}A^+_n(s)\left(\frac{y}{\sqrt{K}}\right)^n
+\end{align*}
+with $A^-_0(s) = A^-(\alpha(s)), A^+_0(s) = A^+(\alpha(s))$. These could be Taylor expansions, for example, but the exact form of the coefficients is irrelevant as long as it is known to us, so any expansion will work. We can now substitute these series expansions into \eqref{weak_noise_exact_equation} to obtain:
+\begin{equation}
+\begin{split}
+\label{weak_noise_full_series_expansion}
+\sum\limits_{n=0}^{\infty}\left(\frac{1}{\sqrt{K}}\right)^n\frac{\partial \Tilde{P}_n}{\partial s} = 
+-\frac{\partial}{\partial y}\left[\sqrt{K}\left( \sum\limits_{n=1}^{\infty}A^-_n(s)\left(\frac{y}{\sqrt{K}}\right)^n\right)\left(\sum\limits_{m=0}^{\infty}\Tilde{P}_m\left(\frac{1}{\sqrt{K}}\right)^m\right)\right] \\ + 
+\frac{1}{2}\frac{\partial^2}{\partial y^2}\left[\left(\sum\limits_{n=0}^{\infty}A^+_n(s)\left(\frac{y}{\sqrt{K}}\right)^n\right)\left(\sum\limits_{m=0}^{\infty}\Tilde{P}_m\left(\frac{1}{\sqrt{K}}\right)^m\right)\right]
+\end{split}
+\end{equation}
+We can now compare the coefficients of $K^{-n/2}$ for each $n$ in order to arrive at approximations in the series expansion, the idea being that you neglect all terms which are of order greater than $\mathcal{O}(K^{-m/2})$ for some $m$ according to the desired precision.
+
+We observe that for any fixed $r$, the coefficient of $K^{-r/2}$ on the LHS is $\frac{\partial \Tilde{P}_r}{\partial s}$. On the RHS, the coefficients of $K^{-r/2}$ in the second term have the form $\Tilde{P}_{m}A^+_{n}y^n$, subject to the constraint that $m+n=r$. Furthermore, all such terms (and only such terms) are coefficients of $K^{-r/2}$. Thus, after grouping, the coefficient of $K^{-r/2}$ from the second terms of the RHS of \eqref{weak_noise_full_series_expansion} is precisely
+\begin{equation*}
+\frac{1}{2}\frac{\partial^2}{\partial y^2}\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^+_{r-m}y^{r-m}
+\end{equation*}
+Exactly analogous reasoning reveals that the contribution of the first term of the RHS is:
+\begin{equation*}
+-\frac{\partial}{\partial y}\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^-_{r-m+1}y^{r-m+1}
+\end{equation*}
+Thus, we find that the $r$th term of the expansion satisfies:
+\begin{equation}
+\label{weak_noise_expansion_each_term}
+\frac{\partial \Tilde{P}_r}{\partial s} = -\frac{\partial}{\partial y}\left(\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^-_{r-m+1}y^{r-m+1}\right) + \frac{1}{2}\frac{\partial^2}{\partial y^2}\left(\sum\limits_{m=0}^{r}\Tilde{P}_{m}A^+_{r-m}y^{r-m}\right)
+\end{equation}
+If we assume we can obtain a reasonable approximation by retaining only the first term of the expansion and neglecting all higher-order terms\footnote{For example, if the deterministic trajectory is at a stable fixed point and subject to weak fluctuations}, we are left with the expression:
+\begin{equation}
+\label{1D_WNA}
+\frac{\partial \Tilde{P}_0}{\partial s} = -A^-_1(s)\frac{\partial}{\partial y}(y\Tilde{P}_0) + \frac{A^+_{0}(s)}{2}\frac{\partial^2 \Tilde{P}_{0}}{\partial y^2}
+\end{equation}
+which is simply the Fokker-Planck equation for the It\^{o} process
+\begin{equation*}
+dY_t = A^-_1(t)Y_tdt + \sqrt{A^+_0(t)}dB_t
+\end{equation*}
+This equation describes a so-called `Ornstein-Uhlenbeck process', and is easily solved by using $\exp(-\int A^-_1(s)ds)$ as an `integrating factor'. In particular, multiplying both sides by $\exp(-\int A^-_1(s)ds)$ yields
+\begin{align*}
+\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dY_t - Y_tA^-_1(t)\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dt &= \sqrt{A^+_0(t)}\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dB_t\\
+\Rightarrow d\left(\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)Y_t\right) &= \sqrt{A^+_0(t)}\exp\left(-{\int\limits_{0}^{t}A^-_1(s)ds}\right)dB_t
+\end{align*}
+Integrating both sides and noting that $A^+_0(s) = A^+(\alpha(s))$, we thus obtain the final expression
+\begin{equation}
+\label{weak_noise_OU_solution}
+Y_t = Y_0\exp\left({\int\limits_{0}^{t}A^-_1(s)ds}\right)+\int\limits_{0}^{t}\exp\left(-\int\limits_{s}^{t}A^-_{1}(v)dv\right)\sqrt{A^+(\alpha(s))}dB_s
+\end{equation}
+as the zeroth-order weak noise approximation for stochastic fluctuations from the deterministic trajectory due to demographic noise Note that this is an exact equation, and one can get many insights from it. For example, if $Y_0 = 0$ (\emph{i.e} we start at the deterministic steady state, a natural assumption for measuring fluctuations from it), then we can show by taking expectations in \eqref{weak_noise_OU_solution} and using results presented in \ref{intro_SDE} that we must have $\mathbb{E}[Y_t | Y_0] = 0$. In other words, the fluctuations have zero expectation and are expected to occur symmetrically about $\alpha(t)$), with no bias. The variance (spread) of the fluctuations $Y_t$, as well as higher moments, can also be exactly calculated from \eqref{weak_noise_OU_solution} using some tools from stochastic calculus, but we will not demonstrate this here.
+
+Importantly, higher order terms do not form FPEs, and in general, $\Tilde{P}_r$ for $r>0$ may be negative and therefore does not even describe a probability. As such, formulating the solution as the solution to an SDE only works for $\Tilde{P}_0$. If noise is large enough that it is not well-approximated by $\Tilde{P}_0$, this method is not very useful.

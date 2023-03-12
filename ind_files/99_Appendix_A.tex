@@ -9,27 +9,27 @@ Writing this in integral form and taking expectations on both sides yields:
 \label{eq_expectation_Ito}
     \mathbb{E}[f(X_t)] = \mathbb{E}\left[\int\limits_{0}^{t}\left(\mu f' + \frac{\sigma^2}{2}f''\right)ds\right] + \mathbb{E}\left[\int\limits_{0}^{t}\sigma f' dB_s\right]
 \end{align}
-Since the Brownian motion is a martingale, as long as $X_t$ and $\sigma(X_t,t)$ are reasonably `nice', the stochastic integral in the second term of the RHS of \eqref{eq_expectation_Ito} will be a continuous $L^2(\mathbb{P})$ martingale starting at the origin, and its expectation will therefore be 0. Using the definition of the expectation value, we are thus left with:
+As long as $X_t$ and $\sigma(X_t,t)$ are reasonably `nice', the stochastic integral in the second term of the RHS of \eqref{eq_expectation_Ito} will vanish upon taking an expectation (see \ref{sec_math_background}). Using the definition of the expectation value, we are thus left with:
 \begin{equation*}
     \int\limits_{\Omega}f(X_t)P(x,t)dx = \int\limits_{\Omega}\left(\int\limits_{0}^{t}\mu f' + \frac{\sigma^2}{2}f''ds\right)P(x,t)dx
 \end{equation*}
 Assuming derivatives and expectations commute, we can now differentiate with respect to time on both sides and use the fundamental theorem of calculus to write
 \begin{equation}
 \label{eq_Ito_to_FPE_for_parts}
-\int\limits_{\Omega}f(X_t)\frac{\partial P}{\partial t}(x,t)dx = \underbrace{\int\limits_{\Omega}\mu f'P(x,t)dx}_{I(x,t)} + \underbrace{\int\limits_{\Omega}\frac{\sigma^2}{2}f''P(x,t)dx}_{J(x,t)}
+\int\limits_{\Omega}f(X_t)\frac{\partial P}{\partial t}(x,t)dx = \underbrace{\int\limits_{\Omega}\mu f'P(x,t)dx}_{M(x,t)} + \underbrace{\int\limits_{\Omega}\frac{\sigma^2}{2}f''P(x,t)dx}_{N(x,t)}
 \end{equation}
-We will now use integration by parts to further evaluate $I(x,t)$ and $J(x,t)$. Recall that the general formula for integration by parts is given by:
+We will now use integration by parts to further evaluate the two parts $M(x,t)$ and $N(x,t)$. Recall that the general formula for integration by parts is given by:
 \begin{equation*}
     \int\limits_{\Omega}u_{x_i}vdx = -\int\limits_{\Omega}uv_{x_i}dx + \int\limits_{\partial\Omega}uv\gamma_{i}dS(x)
 \end{equation*}
-where subscript indicates differentiation and $\gamma$ is the unit outward normal. In our case, assuming that $P(x,t) \equiv 0$ on $\partial \Omega$, the boundary term (second term of the RHS) vanishes and we can use integration by parts once on $I(x,t)$ to obtain
+where subscript indicates differentiation and $\gamma$ is the unit outward normal. In our case, assuming that $P(x,t) \equiv 0$ on $\partial \Omega$, the boundary term (second term of the RHS) vanishes and we can use integration by parts once on $M(x,t)$ to obtain
 \begin{equation}
 \label{eq_Ito_to_FPE_I_term}
-    I(x,t) = - \int\limits_{\Omega}f(X_t)\left(\frac{\partial}{\partial x}\mu P(x,t)\right)dx
+    M(x,t) = - \int\limits_{\Omega}f(X_t)\left(\frac{\partial}{\partial x}\mu P(x,t)\right)dx
 \end{equation}
-and twice on $J(x,t)$ to obtain
+and twice on $N(x,t)$ to obtain
 \begin{align}
-    J(x,t) &= - \frac{1}{2}\int\limits_{\Omega}f'(X_t)\left(\frac{\partial}{\partial x}\sigma^2 P(x,t)\right)dx\nonumber\\
+    N(x,t) &= - \frac{1}{2}\int\limits_{\Omega}f'(X_t)\left(\frac{\partial}{\partial x}\sigma^2 P(x,t)\right)dx\nonumber\\
     &= \frac{1}{2}\int\limits_{\Omega}f(X_t)\left(\frac{\partial^2}{\partial x^2}\sigma^2 P(x,t)\right)dx\label{eq_Ito_to_FPE_J_term}
 \end{align}
 Substituting \eqref{eq_Ito_to_FPE_I_term} and \eqref{eq_Ito_to_FPE_J_term} into \eqref{eq_Ito_to_FPE_for_parts} and collecting terms yields
