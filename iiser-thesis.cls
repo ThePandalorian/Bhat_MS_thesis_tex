@@ -248,18 +248,18 @@ iiser-thesis class.}}%
     {\Huge \bf\baselineskip=.8\baselineskip \@title\\}
     \vskip 2em
          {\bf A Thesis}
-          \vskip 2em
+          \vskip 1em
    \large{submitted to\\
     Indian Institute of Science Education and Research Pune\\
     in partial fulfillment  of the requirements for the \\
     BS-MS Dual Degree Programme\\}
       \vskip 1em
           {by \par}
-         \vskip 1.5em
+         \vskip 1em
          \begin{tabular}[t]{c}
             {\large {\bf \@author}}
          \end{tabular}
-    \vskip 2em
+    \vskip 1em
     \includegraphics{Media/iiser-logo.png}
     \end{center}
     \begin{center}
@@ -269,7 +269,7 @@ iiser-thesis class.}}%
            \vskip 1em
      {\@graduationmonth, \@graduationyear}
   \end{center}%
-  \vfil
+  %\vfil
 \begin{center}
 {Supervisor: \@supervisor }\\
 {Co-supervisor: \@cosupervisor }\\
@@ -345,20 +345,16 @@ iiser-thesis class.}}%
       \vspace*{.15in}%
       \justify
       I hereby declare that the matter embodied in the report entitled {\bf\@title\ }are the results of the work carried out by me at the \@department, under the supervision of \@supervisor, with \@cosupervisor\ as a co-supervisor, and the same has not been submitted elsewhere for any other degree.
-       \vspace*{0.4in}%
-     \end{flushleft}
-      \begin{centering}%
-		\par
-		\parbox{0.95\linewidth}{%
+       \vspace*{2in}%
+	\begin{flushright}%
+	\par
+	\parbox{3.6in}{%
 		\vspace{.8in}%
 		\if@bd@sig@lines{\bd@signline{2.9in}}{}%
-		\hspace*{0.2in}
-		\@author \hfill \@supervisor \hfill
-		\hspace*{0.1in}
-		\@cosupervisor
-		}%
-	\end{centering}% 
-    \clearpage}
+		\hfill \@author}%
+	\end{flushright}%
+\end{flushleft}
+\clearpage}
     
 \newcommand{\bd@sig@page@item}[1]{%
   \if@bd@sig@lines{%
