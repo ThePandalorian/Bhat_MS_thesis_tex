@@ -246,7 +246,7 @@ iiser-thesis class.}}%
   \begin{center}
     \vspace*{-1in}%
     {\Huge \bf\baselineskip=.8\baselineskip \@title\\}
-    \vskip 2em
+    \vskip 1.5em
          {\bf A Thesis}
           \vskip 1em
    \large{submitted to\\
@@ -259,7 +259,7 @@ iiser-thesis class.}}%
          \begin{tabular}[t]{c}
             {\large {\bf \@author}}
          \end{tabular}
-    \vskip 1em
+    \vskip 0.5em
     \includegraphics{Media/iiser-logo.png}
     \end{center}
     \begin{center}
