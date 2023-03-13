@@ -1,11 +1,11 @@
 We first recall the version of the multi-dimensional It\^{o}'s formula that will be relevant to us. Consider an $m$-dimensional real It\^{o} process $\mathbf{X}_t$ given by the solution to
 \begin{equation*}
-d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t)dt + \boldsymbol{\sigma}(\mathbf{X}_t)d\mathbf{B}_t
+d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t)dt + \boldsymbol{\sigma}(\mathbf{X}_t)d\mathbf{W}_t
 \end{equation*}
 where $\boldsymbol{\mu}: \mathbb{R}^m \to \mathbb{R}^m$ is the `drift vector' and $\boldsymbol{\sigma}: \mathbb{R}^{m} \to \mathbb{R}^{m \times m}$ is the `diffusion matrix'. Let $f: \mathbb{R}^m \to \mathbb{R}$ be an arbitrary $C^2(\mathbb{R}^m)$ function. Then, It\^{o}'s formula (\cite{oksendal_stochastic_1998}, Section 4.2) states that  the stochastic process $f(\mathbf{X}_t)$ must satisfy:
 \begin{equation}
 \label{nD_Ito_formula}
-df(\mathbf{X}_t) = \left[\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\mu} + \frac{1}{2}\mathrm{Tr}[\boldsymbol{\sigma}^{\mathrm{T}}(H_{\mathbf{X}}f)\boldsymbol{\sigma}]\right]dt + \left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\sigma}d\mathbf{B}_t
+df(\mathbf{X}_t) = \left[\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\mu} + \frac{1}{2}\mathrm{Tr}[\boldsymbol{\sigma}^{\mathrm{T}}(H_{\mathbf{X}}f)\boldsymbol{\sigma}]\right]dt + \left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\boldsymbol{\sigma}d\mathbf{W}_t
 \end{equation}
 where $\mathrm{Tr}[\cdot]$ denotes the trace of a matrix, $\left(\cdot\right)^{\mathrm{T}}$ denotes the transpose, and we have suppressed the $\mathbf{X}_t$ dependence of $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ to reduce clutter. Here, $\nabla_{\mathbf{X}}f$ is the $m$-dimensional \emph{gradient vector} of $f$ and $H_{\mathbf{X}}f$ is the $m \times m$ \emph{Hessian matrix} of $f$, respectively defined for $f([x_1,\ldots,x_m]^{\mathrm{T}})$ as:
 \begin{align*}
@@ -59,24 +59,24 @@ and thus, the second term multiplying $dt$ in \eqref{nD_Ito_formula} is given by
 \begin{equation}
 \frac{1}{2K}\mathrm{Tr}[\mathbf{D}^{\mathrm{T}} H_{\mathbf{x}} f_i \mathbf{D}] =  \frac{-1}{KN^2}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)\label{nD_for_Ito_second_term}
 \end{equation}
-Finally, denoting $d\mathbf{B}_t = [dB^{(1)}_t,dB^{(2)}_t, \ldots, dB^{(m)}_t]^{\mathrm{T}}$ where each $dB^{(j)}_t$ is an independent one dimensional Wiener process, we have:
+Finally, denoting $d\mathbf{W}_t = [dW^{(1)}_t,dW^{(2)}_t, \ldots, dW^{(m)}_t]^{\mathrm{T}}$ where each $dW^{(j)}_t$ is an independent one dimensional Wiener process, we have:
 \begin{align}
-\left(\mathbf{D}d\mathbf{B}_t\right)_j &= \sum\limits_{k=1}^{m}\mathbf{D}_{jk}dB^{(k)}_t\nonumber\\
-&= \sum\limits_{k=1}^{m}\delta_{jk}\left(A^{+}_{j}A^{+}_{k}\right)^{\frac{1}{4}}dB^{(k)}_t\\
-&= \left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t
+\left(\mathbf{D}d\mathbf{W}_t\right)_j &= \sum\limits_{k=1}^{m}\mathbf{D}_{jk}dW^{(k)}_t\nonumber\\
+&= \sum\limits_{k=1}^{m}\delta_{jk}\left(A^{+}_{j}A^{+}_{k}\right)^{\frac{1}{4}}dW^{(k)}_t\\
+&= \left(A^{+}_{j}\right)^{1/2}dW^{(j)}_t
 \end{align}
 Thus, using \eqref{nD_jacobian_for_ito}, we see that the last term on the RHS of \eqref{nD_Ito_formula} is given by:
 \begin{align}
-\frac{1}{\sqrt{K}}\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\mathbf{D}d\mathbf{B}_t &= \frac{1}{\sqrt{K}}\sum\limits_{j=1}^{m}\left(\nabla_{\mathbf{x}} f_i\right)_j\left(\mathbf{D}d\mathbf{B}_t\right)_j\nonumber\\
-&=  \frac{1}{N\sqrt{K}}\sum\limits_{j=1}^{m}\left(\delta_{ij}-p_i\right)\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\\
-&= \frac{1}{N\sqrt{K}}\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\label{nD_for_Ito_third_term}
+\frac{1}{\sqrt{K}}\left(\nabla_{\mathbf{X}}f\right)^{\mathrm{T}}\mathbf{D}d\mathbf{W}_t &= \frac{1}{\sqrt{K}}\sum\limits_{j=1}^{m}\left(\nabla_{\mathbf{x}} f_i\right)_j\left(\mathbf{D}d\mathbf{W}_t\right)_j\nonumber\\
+&=  \frac{1}{N\sqrt{K}}\sum\limits_{j=1}^{m}\left(\delta_{ij}-p_i\right)\left(A^{+}_{j}\right)^{1/2}dW^{(j)}_t\\
+&= \frac{1}{N\sqrt{K}}\left(A^{+}_{i}\right)^{1/2}dW^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dW^{(j)}_t\label{nD_for_Ito_third_term}
 \end{align}
 Putting equations \eqref{nD_for_Ito_first_term}, \eqref{nD_for_Ito_second_term} and \eqref{nD_for_Ito_third_term} into \eqref{nD_Ito_formula}, we see that $p_i = f_i(\mathbf{X})_t$, the frequency of the $i\textsuperscript{th}$ type in the population $\mathbf{X}_t$, changes according to the equation:
 \begin{equation}
 \label{nD_general_stoch_freq_change}
 \begin{aligned}
 dp_i &= \underbrace{\frac{1}{N(t)}\left(A^{-}_{i} - p_i\sum\limits_{j=1}^{m}A^{-}_{j}\right)dt}_{\text{$K \to \infty$ prediction}} - \frac{1}{K}\underbrace{\frac{1}{N^2(t)}\left(A^{+}_{i}-p_i\left(\sum\limits_{k=1}^{m} A^{+}_k\right)\right)dt}_{\substack{\text{Directional finite size effects}\\\text{due to differential turnover rates}}}\\
-&+ \frac{1}{\sqrt{K} N(t)}\underbrace{\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]}_{\substack{\text{Non-directional finite size effects}\\\text{due to stochastic fluctuations}}}
+&+ \frac{1}{\sqrt{K} N(t)}\underbrace{\left[\left(A^{+}_{i}\right)^{1/2}dW^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dW^{(j)}_t\right]}_{\substack{\text{Non-directional finite size effects}\\\text{due to stochastic fluctuations}}}
 \end{aligned}
 \end{equation}
 Plugging the functional forms of \eqref{nD_functional_forms_for_replicator} and the definitions of $w_i$ and $\tau_i$ into the definitions of $A^{-}_i$ and $A^{+}_i$, we obtain the relations

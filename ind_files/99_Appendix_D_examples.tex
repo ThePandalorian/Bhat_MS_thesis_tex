@@ -19,7 +19,7 @@ Thus, we have
 Defining $r=\lambda-\mu$ and $v=\lambda+\mu$ and using equation \eqref{1D_SDE}, we 
 see that the `mesoscopic view' of the system is given by the solution of the SDE
 \begin{equation}\label{ex_1D_stoch_logistic_full_SDE}
-dX_t =  rX_t(1-X_t)dt + \sqrt{\frac{X_t(v+rX_t)}{K}}dB_t
+dX_t =  rX_t(1-X_t)dt + \sqrt{\frac{X_t(v+rX_t)}{K}}dW_t
 \end{equation}
 From equation \eqref{1D_det_limit}, we see that the deterministic dynamics are
 \begin{equation}\label{ex_1D_stoch_logistic_det_limit}
@@ -40,8 +40,8 @@ Thus, the weak noise approximation of \ref{ex_1D_stoch_logistic_BD_eqns} is give
 \end{equation}
 where the stochastic process $Y_t$ is an Ornstein-Uhlenbeck process given by the solution to the linear SDE
 \begin{align}
-    dY_t &= A^-_1(t)Y_tdt + \sqrt{A^+_0(t)}dB_t\nonumber\\
-    \Rightarrow dY_t &= r(1 - 2\alpha(t))Y_tdt + \sqrt{\alpha(t)(v+r\alpha(t))}dB_t\label{ex_1D_stoch_logistic_WNA}
+    dY_t &= A^-_1(t)Y_tdt + \sqrt{A^+_0(t)}dW_t\nonumber\\
+    \Rightarrow dY_t &= r(1 - 2\alpha(t))Y_tdt + \sqrt{\alpha(t)(v+r\alpha(t))}dW_t\label{ex_1D_stoch_logistic_WNA}
 \end{align}
 The time series predicted by these three processes look qualitatively similar and all seem to fluctuate about the deterministic steady state (Figure \ref{fig_1D_stoch_logistic_timeseries}).
 \myfig{1}{Media/4.1_stoch_logistic_timeseries.png}{Comparison of a single realization of the exact birth-death process \eqref{ex_1D_stoch_logistic_BD_eqns}, the deterministic trajectory \eqref{ex_1D_stoch_logistic_det_limit}, the non-linear Fokker-Planck equation \eqref{ex_1D_stoch_logistic_full_SDE}, and the weak noise approximation \eqref{ex_1D_stoch_logistic_WNA} for \textbf{(A)} $K = 500$, \textbf{(B)} $K = 1000$, and \textbf{(C)} $K = 10000$. $\lambda = 2, \mu = 1$ for all thee cases.}{fig_1D_stoch_logistic_timeseries}
@@ -53,17 +53,17 @@ Conditioned on non-extinction, the solution to \eqref{ex_1D_stoch_logistic_full_
 
 The methods outlined in the above section have recently been used to study the population dynamics of a finite population playing a so-called `matrix game' (An evolutionary game for which you can write down a payoff matrix) with 2 pure strategies~\citep{tao_stochastic_2007}. Based on the interpretation of what each type represents, this is mathematically equivalent to studying frequency-dependent selection on a one-locus two-allele gene (with a bijective genotype-phenotype map and no mutations) or studying two-species competitive Lotka-Volterra dynamics, as we will show below. The stochastic Lotka-Volterra competition model shown below has also been proved to be equivalent to an $m$-allele Moran model under certain limits~\citep{constable_mapping_2017}.
 
-Let us imagine a population with $m$ types of individuals that are interacting according to some ecological rules. Let the state of the population be characterized by the vector $\mathbf{v}(t) = [v_1(t),v_2(t),\ldots,v_m(t)]$, where $v_i(t)$ is the number of type $i$ individuals at time $t$. Let the birth and death rates of the $i$th type be given by:
+Let us imagine a population with $m$ types of individuals that are interacting according to some ecological rules. Let the state of the population be characterized by the vector $\mathbf{n}(t) = [n_1(t),n_2(t),\ldots,n_m(t)]$, where $n_i(t)$ is the number of type $i$ individuals at time $t$. Let the birth and death rates of the $i$th type be given by:
 \begin{equation}
 \label{nD_example_numbers_b_d_rates}
 \begin{aligned}
-b_i(\mathbf{v}) &= \left(\lambda + \frac{1}{K}\left(\sum\limits_{j=1}^{m}\beta_{ij}v_j\right)\right)v_i\\
-d_i(\mathbf{v}) &= \left(\mu + \frac{1}{K}\left(\sum\limits_{j=1}^{m}\delta_{ij}v_j\right)\right)v_i
+b_i(\mathbf{n}) &= \left(\lambda + \frac{1}{K}\left(\sum\limits_{j=1}^{m}\beta_{ij}n_j\right)\right)n_i\\
+d_i(\mathbf{n}) &= \left(\mu + \frac{1}{K}\left(\sum\limits_{j=1}^{m}\delta_{ij}n_j\right)\right)n_i
 \end{aligned}
 \end{equation}
 where $K > 0$ is our system size parameter (and represents a global carrying capacity across all types), $\lambda > 0$ and $\mu > 0$ are suitable positive constants representing the baseline natality and mortality common to all types, and $\beta_{ij}$ and $\delta_{ij}$ are constants describing the effect of type $j$ individuals on the birth and death rate of type $i$ individuals respectively. The sign of $M_{ij} \coloneqq \beta_{ij} - \delta_{ij}$ determines whether type $j$ has a net positive or negative effect on the growth of type $i$. In ecological communities, this is a per-capita ecological interaction effect. In game-theoretic terms, we can interpret $M_{ij}$ as the payoff obtained by a type $j$ individual playing against a type $i$ individual. I assume that $| M_{ij} | \ll K$. The values $M_{ij}$ are often collected in an $m \times m$ matrix $\mathbf{M}$ called the `payoff matrix' (in evolutionary game theory) or `interaction matrix' (in Lotka-Volterra models). Lotka-Volterra models also frequently assume that the diagonal elements $M_{ii}$ are all equal, though I will not make that assumption here.
 
-Going from population numbers $\mathbf{v}$ to densities $\mathbf{x} = \mathbf{v}/K$, we obtain the birth and death rates:
+Going from population numbers $\mathbf{n}$ to densities $\mathbf{x} = \mathbf{n}/K$, we obtain the birth and death rates:
 \begin{equation}
 \label{nD_example_density_b_d_rates}
 \begin{aligned}
@@ -78,7 +78,7 @@ A^{\pm}_{i} = x_i\left(\left(\lambda \pm \mu\right) + \sum\limits_{j=1}^{m}\left
 Defining $r \coloneqq \lambda - \mu$, $\nu \coloneqq \lambda + \mu$, and $T_{ij} \coloneqq \beta_{ij} + \delta_{ij}$, we see from equation \eqref{nD_Ito_SDE} that the mesoscopic view is the $m$ dimensional SDE given by
 \begin{equation}
 \label{nD_example_SDE}
-d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{B}_t
+d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{W}_t
 \end{equation}
 where 
 \begin{equation*}

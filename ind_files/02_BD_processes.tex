@@ -1,56 +1,56 @@
-\epigraph{\justifying Somewhere [ ... ] between the specific that has no meaning and the general that has no content there must be, for each purpose and at each level of abstraction, an optimum degree of generality}{Kenneth Boulding}
+\epigraph{\justifying Somewhere [...] between the specific that has no meaning and the general that has no content there must be, for each purpose and at each level of abstraction, an optimum degree of generality}{Kenneth Boulding}
 
 Let us now consider a slightly more complicated scenario. Assume that our population is \emph{not} composed of identical organisms, but instead can contain up to $m$ different kinds of organisms - For example, individuals may come in one of $m$ colors, or a gene may have $m$ different alleles. The specific interpretation of the different variants is irrelevant to our formalism, and I, therefore, refer to each distinct variant of an organism simply as a `type'. Unlike many classic stochastic formulations in evolutionary theory~\citep{fisher_genetical_1930,wright_evolution_1931,moran_random_1958,crow_introduction_1970, lande_natural_1976}, I do not assume a fixed (effective) population size and instead allow the total population size to fluctuate naturally over time. 
 
 \section{Description of the process and the Master Equation}
-Given a population that can contain up to $m$ different (fixed) kinds of organisms, it can be entirely characterized by specifying the number of organisms of each type (Figure \ref{fig_nD_pop_description}A). Thus, the state of the population at a given time $t$ is an $m$-dimensional \emph{vector} of the form $\mathbf{v} = [v_1(t),v_2(t),\ldots,v_m(t)]$, where $v_i(t)$ is the number of individuals of type $i$.
+Given a population that can contain up to $m$ different (fixed) kinds of organisms, it can be entirely characterized by specifying the number of organisms of each type (Figure \ref{fig_nD_pop_description}A). Thus, the state of the population at a given time $t$ is an $m$-dimensional \emph{vector} of the form $\mathbf{n}(t) = [n_1(t),n_2(t),\ldots,n_m(t)]$, where $n_i(t)$ is the number of individuals of type $i$ in the population at time $t$.
 
-Given a state $\mathbf{v}(t)$,  we also need to describe how this vector can change over time due to births and deaths (ecology). In this case, a birth or death could result in an individual belonging to one of $m$ different types. Thus, whereas before we had two functions $b(n)$ and $d(n)$ which take in a number as an input, we now require $2m$ functions that take in a vector as an input (Figure \ref{fig_nD_pop_description}B). In other words, for each type $i \in \{1,2,\ldots,m\}$, we must specify a birth rate $b_i(\mathbf{v})$ and a death rate $d_i(\mathbf{v})$. By `rates', we mean that if we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual of type $i$ is given by
+Given a state $\mathbf{n}(t)$,  we also need to describe how this vector can change over time due to births and deaths (ecology). In this case, a birth or death could result in an individual belonging to one of $m$ different types. Thus, whereas before we had two functions $b(n)$ and $d(n)$ which take in a number as an input, we now require $2m$ functions that take in a vector as an input (Figure \ref{fig_nD_pop_description}B). In other words, for each type $i \in \{1,2,\ldots,m\}$, we must specify a birth rate $b_i(\mathbf{n})$ and a death rate $d_i(\mathbf{n})$. By `rates', we mean that if we know that \emph{either a birth or a death} occurs, then the probability that this event is the birth of an individual of type $i$ is given by
 \begin{equation*}
-\mathbb{P}[\textrm{ Birth of a type $i$ individual} | \textrm{ something happened }] = \frac{b_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
+\mathbb{P}\big[\textrm{ Birth of a type $i$ individual } \big{|} \textrm{ something happened }\big] = \frac{b_i(\mathbf{n})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{n})+d_j(\mathbf{n}))}
 \end{equation*}
 and the probability that the event is the death of an individual of type $i$ is
 \begin{equation*}
-\mathbb{P}[\textrm{ Death of a type $i$ individual} | \textrm{ something happened }] = \frac{d_i(\mathbf{v})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{v})+d_j(\mathbf{v}))}
+\mathbb{P}\big[\textrm{ Death of a type $i$ individual } \big{|} \textrm{ something happened }\big] = \frac{d_i(\mathbf{n})}{\sum\limits_{j=1}^{m}(b_j(\mathbf{n})+d_j(\mathbf{n}))}
 \end{equation*}
 
 \myfig{0.9}{Media/3.2_BD_process_2D.png}{\textbf{Schematic description of a multi-dimensional birth-death process}. \textbf{(A)} Consider a population of birds in which individuals are either {\color{red}red} or {\color{blue}blue}. In this case, we have $m=2$, since there are two types of individuals in the population. \textbf{(B)} The state of the system can be described by a vector containing the number of individuals of each discrete type (in this case, the number of red and blue birds in the population). Births and deaths result in changes in the elements of the state vector.}{fig_nD_pop_description}
 
-As before, we can describe the rate of change of $P(\mathbf{v},t)$, the probability of finding the population in a state $\mathbf{v}$ at time $t$, by measuring the inflow and outflow rates. Given a population $\mathbf{v} = [v_1,\ldots,v_{m}]$, the `inflow' is from all populations of the form $[v_1,\ldots,v_{i}-1,\dots,v_{m}]$ through a birth of a type $i$ individual, and from all populations of the form $[v_1,\ldots,v_{i}+1,\dots,v_{m}]$ through the death of a type $i$ individual. Thus, we have the inflow rate
+As before, we can describe the rate of change of $P(\mathbf{n},t)$, the probability of finding the population in a state $\mathbf{n}$ at time $t$, by measuring the inflow and outflow rates. Since the population changes in units of exactly one individual (by definition of a birth-death process; see section \ref{sec_math_background}), we know that these inflow and outflow rates must only involve populations that are a single individual away from our focal population. In other words, for a population $\mathbf{n} = [n_1,\ldots,n_{m}]$, the `inflow' is from all populations of the form $[n_1,\ldots,n_{i}-1,\dots,n_{m}]$ through a birth of a type $i$ individual, and from all populations of the form $[n_1,\ldots,n_{i}+1,\dots,n_{m}]$ through the death of a type $i$ individual. Thus, we have the inflow rate
 \begin{equation}
 \label{nD_rate_in}
 \begin{split}
-R_{\textrm{in}}(\mathbf{v},t) &= \sum\limits_{j=1}^{m}b_{j}([v_1,\ldots,v_{j}-1,\ldots,v_m])P([v_1,\ldots,v_{j}-1,\ldots,v_m],t) \\
-& +\sum\limits_{j=1}^{m}d_{j}([v_1,\ldots,v_{j}+1,\ldots,v_m])P([v_1,\ldots,v_{j}+1,\ldots,v_m],t)
+R_{\textrm{in}}(\mathbf{n},t) &= \sum\limits_{j=1}^{m}b_{j}([n_1,\ldots,n_{j}-1,\ldots,n_m])P([n_1,\ldots,n_{j}-1,\ldots,n_m],t) \\
+& +\sum\limits_{j=1}^{m}d_{j}([n_1,\ldots,n_{j}+1,\ldots,n_m])P([n_1,\ldots,n_{j}+1,\ldots,n_m],t)
 \end{split}
 \end{equation}
-Outflow is through births and deaths of individuals in the population $\mathbf{v}$ itself, and thus we have:
+Outflow is through births and deaths of individuals in the population $\mathbf{n}$ itself, and thus we have:
 \begin{equation}
 \label{nD_rate_out}
-R_{\textrm{out}}(\mathbf{v},t) = \sum\limits_{j=1}^{m}b_{j}(\mathbf{v})P(\mathbf{v},t) + \sum\limits_{j=1}^{m}d_{j}(\mathbf{v})P(\mathbf{v},t)
+R_{\textrm{out}}(\mathbf{n},t) = \sum\limits_{j=1}^{m}b_{j}(\mathbf{n})P(\mathbf{n},t) + \sum\limits_{j=1}^{m}d_{j}(\mathbf{n})P(\mathbf{n},t)
 \end{equation}
-As before, we now define step operators, both for notational ease and in anticipation of the system size expansion. Note that now, we need $2m$ step operators. For each $i \in \{1,\ldots,m\}$, let us define two step operators $\mathcal{E}_{i}^{\pm}$ by their action on any function $f([v_1,\ldots,v_m],t)$ as:
+As before, we now define step operators, both for notational ease and in anticipation of the system size expansion. Note that now, we need $2m$ step operators. For each $i \in \{1,\ldots,m\}$, let us define two step operators $\mathcal{E}_{i}^{\pm}$ by their action on any function $f([n_1,\ldots,n_m],t)$ as:
 \begin{equation}
 \label{nD_step_operators}
-\mathcal{E}_{i}^{\pm}f([v_1,\ldots,v_m],t) = f([v_1,\ldots,v_i \pm 1, \ldots v_m],t)
+\mathcal{E}_{i}^{\pm}f([n_1,\ldots,n_m],t) = f([n_1,\ldots,n_i \pm 1, \ldots n_m],t)
 \end{equation}
-In other words, $\mathcal{E}_{i}^{\pm}$ just changes the population through the addition or removal of one type $i$ individual. We can now the rate of change of $P(\mathbf{v},t)$ as
+In other words, $\mathcal{E}_{i}^{\pm}$ just changes the population through the addition or removal of one type $i$ individual. We can now the rate of change of $P(\mathbf{n},t)$ as
 \begin{equation}
-\frac{\partial P}{\partial t}(\mathbf{v},t) = R_{\textrm{in}}(\mathbf{v},t) - R_{\textrm{out}}(\mathbf{v},t)
+\frac{\partial P}{\partial t}(\mathbf{n},t) = R_{\textrm{in}}(\mathbf{n},t) - R_{\textrm{out}}(\mathbf{n},t)
 \end{equation}
 Substituting \eqref{nD_rate_in}, \eqref{nD_rate_out}, and \eqref{nD_step_operators}, we obtain:
 \begin{equation}
 \label{nD_M_eqn}
-\frac{\partial P}{\partial t}(\mathbf{v},t) = \sum\limits_{j=1}^{m}\left[(\mathcal{E}_j^{-}-1)b_j(\mathbf{v})P(\mathbf{v},t) + (\mathcal{E}_j^{+}-1)d_j(\mathbf{v})P(\mathbf{v},t)\right]
+\frac{\partial P}{\partial t}(\mathbf{n},t) = \sum\limits_{j=1}^{m}\left[(\mathcal{E}_j^{-}-1)b_j(\mathbf{n})P(\mathbf{n},t) + (\mathcal{E}_j^{+}-1)d_j(\mathbf{n})P(\mathbf{n},t)\right]
 \end{equation}
 This is the master equation of our $m$-dimensional process.
 
 \section{The system-size expansion}
 As before, we now assume we can find a system size parameter $K > 0$ such that we can make the substitutions
 \begin{align*}
-\mathbf{x} &= \frac{\mathbf{v}}{K}\\
-b^{(K)}_i(\mathbf{x}) &= \frac{1}{K}b_i(\mathbf{v})\\
-d^{(K)}_i(\mathbf{x}) &= \frac{1}{K}d_i(\mathbf{v})
+\mathbf{x} &= \frac{\mathbf{n}}{K}\\
+b^{(K)}_i(\mathbf{x}) &= \frac{1}{K}b_i(\mathbf{n})\\
+d^{(K)}_i(\mathbf{x}) &= \frac{1}{K}d_i(\mathbf{n})
 \end{align*}
 and define new step operators $\Delta_{i}^{\pm}$ by their action on any real-valued function $f(\mathbf{x},t)$ as
 \begin{equation}
@@ -78,7 +78,7 @@ A_{i}^{\pm}(\mathbf{x}) = b^{(K)}_i(\mathbf{x})\pm d^{(K)}_i(\mathbf{x})
 Equation \eqref{nD_FPE} is an $m$-dimensional Fokker-Planck equation, and corresponds to the $m$-dimensional It\^o process
 \begin{equation}
 \label{nD_Ito_SDE}
-d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{B}_t
+d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{W}_t
 \end{equation}
 where $\mathbf{A^-}(\mathbf{X}_t)$ is the $m$ dimensional `drift vector' with $i$\textsuperscript{th} element $ = A^{-}_{i}(\mathbf{X}_t)$. $\mathbf{D}(\mathbf{X}_t)$ is the $m \times m$ `diffusion matrix' with $ij$th element $\left(\mathbf{D}(\mathbf{X}_t)\right)_{ij} = \delta_{ij}\left(A^{+}_{i}A^{+}_{j}\right)^{\frac{1}{4}}$, where $\delta_{ij}$ is the Kronecker delta symbol, defined by
 \begin{equation*}
@@ -88,7 +88,7 @@ where $\mathbf{A^-}(\mathbf{X}_t)$ is the $m$ dimensional `drift vector' with $i
 0 & i\neq j
 \end{cases}
 \end{equation*}
-Finally, $\mathbf{B}_t$ is the $m$-dimensional Brownian motion and can be thought of as a vector of independent one-dimensional Brownian motions (which have been defined in \ref{intro_SDE}). This is the `mesoscopic' description of our process.
+Finally, $\mathbf{W}_t$ is the $m$-dimensional Wiener process and can be thought of as a vector of independent one-dimensional Wiener processes (which have been defined in \ref{intro_SDE}). This is the `mesoscopic' description of our process.
 
 \section{Functional forms of the birth and death rates}
 
@@ -131,7 +131,7 @@ In appendix \ref{App_density_to_freq}, we show that we can use It\^{o}'s formula
 \begin{aligned}
 dp_i(t) &= \left[(w_i(\mathbf{x}) - \overline{w})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\
 &- \frac{1}{K}\frac{1}{N_{K}(t)}\left[(\tau_i(\mathbf{x}) - \overline{\tau})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\
-&+ \frac{1}{\sqrt{K}}\frac{1}{N_{K}(t)}\left[\left(A^{+}_{i}\right)^{1/2}dB^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dB^{(j)}_t\right]
+&+ \frac{1}{\sqrt{K}}\frac{1}{N_{K}(t)}\left[\left(A^{+}_{i}\right)^{1/2}dW^{(i)}_t - p_i\sum\limits_{j=1}^{m}\left(A^{+}_{j}\right)^{1/2}dW^{(j)}_t\right]
 \end{aligned}
 \end{equation}
 where $B^{(1)}_t,B^{(2)}_t, \ldots, B^{(m)}_t$ are $m$ independent one-dimensional standard Brownian motion processes and we have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. We will show below that the first term in this expression describes directional changes in the population composition due to `classical' evolutionary forces such as selection and mutation that occur in deterministic infinite population models. The second term is an additional directional force on population composition that is only seen in finite populations and can be thought of as a biasing `selection' for reduced turnover rate due to an effect similar to gambler's ruin in probability theory. The consequences of this term, as well as connections with previous studies, are discussed in detail in Chapter \ref{chap_unification}. Finally, the last term of equation \eqref{nD_eqn_for_frequencies} describes non-directional stochastic effects due to fluctuations and has a `spreading effect'.
@@ -166,13 +166,13 @@ Thus, substituting this into \eqref{product_rule_for_nD_price}, we get
 \label{nD_Price_time_dependent}
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{d\overline{f}}{dt} = \mathrm{Cov}(w,f) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right] + \overline{\left(\frac{\partial f}{\partial t}\right)}}
 \end{equation}
-This is a Price equation for quantities $f_i$ which can vary over time. To obtain the more familiar Price equation seen in textbooks, we can consider time-independent $f_i$, \emph{i.e.} situations in which each $f_i$ is constant over time, and thus changes in $\overline{f}$ are purely due to changes in the composition of the population. For such quantities, we have $\frac{\partial f_i}{\partial t} = 0 \ \forall \ i$ and thus obtain 
+This is a Price equation for quantities $f_i$ which can vary over time~\citep{lion_theoretical_2018}. To obtain the more familiar Price equation seen in textbooks, we can consider time-independent $f_i$, \emph{i.e.} situations in which each $f_i$ is constant over time, and thus changes in $\overline{f}$ are purely due to changes in the composition of the population. For such quantities, we have $\frac{\partial f_i}{\partial t} = 0 \ \forall \ i$ and thus obtain the dynamic version of the famous Price equation~\citep{page_unifying_2002,lion_theoretical_2018}:
 \begin{equation}
 \label{nD_Price}
 \setlength{\fboxsep}{2\fboxsep}\boxed{
 	\frac{d\overline{f}}{dt} = \mathrm{Cov}(w,f) + \mu\left[\sum\limits_{i=1}^{m}Q_i(\mathbf{p})f_i - \left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\overline{f}\right]}
 \end{equation}
-, the famous Price equation in continuous time. The first term of the RHS describes the statistical covariance between the quantity $f$ and the fitness $w$. The second term describes `transmission bias' due to mutational effects - The first summation is the `inflow' of $f$ due to mutations, and the second is the `outflow'.
+The first term of the RHS describes the statistical covariance between the quantity $f$ and the fitness $w$. The second term describes `transmission bias' due to mutational effects - The first summation is the `inflow' of $f$ due to mutations, and the second is the `outflow'.
 
 \section{Stochastic fluctuations and the weak noise approximation}
 
@@ -199,10 +199,10 @@ In the case where the series expansion is a Taylor expansion, then the first-ord
 \label{nD_WNA_taylor_term}
 (A^{-}_{j})_{1}(s) = \sum\limits_{i=1}^{m} y_i\left(\frac{\partial A^{-}_j(\mathbf{x})}{\partial x_i}\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(s)}\right)
 \end{equation}
-In multi-variable calculus, the directional derivative\footnote{Physicists sometimes use the notation $\partial_{\mathbf{v}}f(\mathbf{x})$ or $\mathbf{v}\cdot\nabla f(\mathbf{x})$ for this object.} $D_{\mathbf{v}}(f(\mathbf{x}))$ of a multidimensional function $f: \mathbb{R}^n \to \mathbb{R}$ along a vector $\mathbf{v}$ is the function defined by:
+In multi-variable calculus, the directional derivative\footnote{Some authors use the notation $\partial_{\mathbf{v}}f(\mathbf{x})$ or $\mathbf{v}\cdot\nabla f(\mathbf{x})$ for this object.} $D_{\mathbf{v}}(f(\mathbf{x}))$ of a multidimensional function $f: \mathbb{R}^m \to \mathbb{R}$ along a vector $\mathbf{v}$ is the function defined by:
 \begin{equation}
 \label{directional_derivative_defn}
-D_{\mathbf{v}}(f(\mathbf{x})) \coloneqq \sum\limits_{i=1}^{n}\left(\frac{\partial f(\mathbf{x})}{\partial x_i}\right)v_i = \lim_{h \to 0}\frac{f(\mathbf{x}+h\mathbf{v})-f(\mathbf{x})}{h}
+D_{\mathbf{v}}(f(\mathbf{x})) \coloneqq \sum\limits_{i=1}^{m}\left(\frac{\partial f(\mathbf{x})}{\partial x_i}\right)v_i = \lim_{h \to 0}\frac{f(\mathbf{x}+h\mathbf{v})-f(\mathbf{x})}{h}
 \end{equation}
 Comparing with \eqref{nD_WNA_taylor_term}, we see that the weak-noise approximation of our process is:
 \begin{equation}

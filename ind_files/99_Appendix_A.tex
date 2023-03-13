@@ -1,13 +1,13 @@
 Here, I present a simple (informal) derivation of the Fokker-Planck equation (FPE) for a one-dimensional It\^{o} process. The result for the multi-dimensional case follows from the same logic but is more notationally cumbersome.
 
-Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dB_t$ on a filtered probability space $\Omega \subseteq \mathbb{R}$ that admits a probability density function $P(x,t)$ on $\Omega \times [0,\infty)$. Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s formula, we have:
+Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dW_t$ on a filtered probability space $\Omega \subseteq \mathbb{R}$ that admits a probability density function $P(x,t)$ on $\Omega \times [0,\infty)$. Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s formula, we have:
 \begin{align*}
-    df(X_t) = \left(\mu f' + \frac{\sigma^2}{2}f''\right)dt + \sigma f' dB_t
+    df(X_t) = \left(\mu f' + \frac{\sigma^2}{2}f''\right)dt + \sigma f' dW_t
 \end{align*}
 Writing this in integral form and taking expectations on both sides yields:
 \begin{align}
 \label{eq_expectation_Ito}
-    \mathbb{E}[f(X_t)] = \mathbb{E}\left[\int\limits_{0}^{t}\left(\mu f' + \frac{\sigma^2}{2}f''\right)ds\right] + \mathbb{E}\left[\int\limits_{0}^{t}\sigma f' dB_s\right]
+    \mathbb{E}[f(X_t)] = \mathbb{E}\left[\int\limits_{0}^{t}\left(\mu f' + \frac{\sigma^2}{2}f''\right)ds\right] + \mathbb{E}\left[\int\limits_{0}^{t}\sigma f' dW_s\right]
 \end{align}
 As long as $X_t$ and $\sigma(X_t,t)$ are reasonably `nice', the stochastic integral in the second term of the RHS of \eqref{eq_expectation_Ito} will vanish upon taking an expectation (see \ref{sec_math_background}). Using the definition of the expectation value, we are thus left with:
 \begin{equation*}
@@ -41,7 +41,7 @@ Since this is true for an arbitrary choice of $f(x)$, we are thus led to conclud
 \label{FPE}
 \frac{\partial P}{\partial t}(x,t) =-\frac{\partial}{\partial x}\left(\mu(x,t) P(x,t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left((\sigma(x,t))^2P(x,t)\right)
 \end{equation}
-Equation \eqref{FPE} is the Fokker-Planck equation in one dimension. Using the exact same strategy, the multidimensional Fokker-Planck equation for the $m$-dimensional It\^{o} Process $d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t,t)dt + \boldsymbol{\sigma}(\mathbf{X}_t,t)d\mathbf{B}_t$ can be easily found to be:
+Equation \eqref{FPE} is the Fokker-Planck equation in one dimension. Using the exact same strategy, the multidimensional Fokker-Planck equation for the $m$-dimensional It\^{o} Process $d\mathbf{X}_t = \boldsymbol{\mu}(\mathbf{X}_t,t)dt + \boldsymbol{\sigma}(\mathbf{X}_t,t)d\mathbf{W}_t$ can be easily found to be:
 \begin{equation}
 \label{app_FPE_ndim}
 \frac{\partial P}{\partial t}(\mathbf{x},t) =-\sum\limits_{i=1}^{m}\frac{\partial}{\partial x_i}\left(\mu_i(\mathbf{x},t) P(\mathbf{x},t)\right) + \frac{1}{2}\sum\limits_{i=1}^{m}\sum\limits_{j=1}^{m}\frac{\partial^2}{\partial x_i \partial x_j}\left(D_{ij}P(\mathbf{x},t)\right)
