@@ -148,29 +148,40 @@ iiser-thesis class.}}%
  \addcontentsline{toc}{part}{Front Matter}
   \frontmatter
   \bgroup
+  %Title page
   \pagestyle{empty}
   \thesistitlepage\cleardoublepage
   \if@bd@onlinesubmission{\signaturepage}{\signaturepage*}%
   \cleardoublepage
-  \ifx\@dedication\@empty\else
-     \dedicationpage{\@dedication}%
-     \cleardoublepage
-  \fi
-  \cleardoublepage
+  %Declaration page
   \declarationpage
   \cleardoublepage
+  %Dedication page
+    \ifx\@dedication\@empty\else
+  \dedicationpage{\@dedication}%
+  \cleardoublepage
+  \fi
+  \cleardoublepage
   \egroup
+  %Acknowledgements page
   \bd@optpage*{Acknowledgments}{\@acknowledgments}%
   \cleardoublepage
-  \bd@abstract{\@thesisabstract}%
-  %\addcontentsline{toc}{chapter}{Abstract}
+  %CRediT contributions page
+  \contributionspage
   \cleardoublepage
+  %Thesis abstract page
+  \bd@abstract{\@thesisabstract}%
+  \cleardoublepage
+  %Preface if present
   \bd@optpage{Preface}{\@preface}%
   \cleardoublepage
+  %Table of contents
   \tableofcontents
   \addcontentsline{toc}{chapter}{Contents}
   \cleardoublepage
+  %List of tables
   \if@bd@lot{\listoftables\cleardoublepage}%
+  %List of figures
   \if@bd@lof{\listoffigures\cleardoublepage}%
   \mainmatter}
 \let\if@bd@onlinesubmission\@firstoftwo
@@ -318,7 +329,14 @@ iiser-thesis class.}}%
 	%import the (signed) certificate page
 	\includepdf[pages={1}]{backend/declaration.pdf}
 	\clearpage}
-    
+
+%CRediT contributions page
+\newcommand{\contributionspage}{
+	\thispagestyle{empty}%
+	%import the TeX containing the contributions page content
+	\input{backend/contributions}
+	\clearpage}
+
 \newcommand{\bd@sig@page@item}[1]{%
   \if@bd@sig@lines{%
      \penalty10000\vskip.6in minus 1in%
