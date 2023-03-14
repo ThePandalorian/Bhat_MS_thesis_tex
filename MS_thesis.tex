@@ -1,20 +1,22 @@
-\documentclass[twoside, 12pt]{iiser-thesis-modified}
+\documentclass[twoside, 12pt]{iiser-thesis-modified} %Use the custom .cls file we have
 
 %Bio dept guidelines say the font should be in Arial (ew).
 %Uncommenting out the below lines will do it, but I intend to keep them commented unless explicitly told to change font to Arial. Change compiler to XeLaTeX or LuaLaTeX for this to work
 %\usepackage{fontspec}
 %\setmainfont{Arial}
 
-%my own list of packages
+%%%%%%%%%%%%%%%%%%%
+
+%My own list of packages and commands, for convenience
 \input{head}
 
-%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
 
 %Add fancy headers with chapter/section titles
 \usepackage{fancyhdr}
 \setlength{\headsep}{1.8in} %add spacing between header and body text
 
-%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
 
 %this file contains the bibliography
 \addbibresource{refs.bib}
@@ -25,17 +27,20 @@
 \usepackage{fullpage}
 \setlength{\parskip}{1em}
 
+%1.5 line spacing (as requested by IISER)
 \usepackage{setspace}
 \onehalfspacing
 
+%Decide upto what depth the table of contents should list: subsection, subsubsection, etc
 \setcounter{tocdepth}{3}
 
 \catcode`\@=11
 \catcode`\@=12
 
-%%%%%%%%%%%%
-% Document %
-%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+%  Abstract and   %
+%  other details  %
+%%%%%%%%%%%%%%%%%%%
 
 \title{Eco-evolutionary dynamics of finite populations from first principles}
 \author{Ananda Shikhara Bhat}
@@ -58,13 +63,19 @@
 Population biology is built on a strong mathematical foundation developed during the Modern Synthesis through fields such as theoretical population genetics, evolutionary game theory, and quantitative genetics. Historically, these formalisms have often worked with infinite populations, ignoring the effects of demographic stochasticity. Finite population models in population genetics usually assume a fixed population size and are of limited applicability in the real world, where population sizes routinely fluctuate. In this thesis, I use ideas from statistical physics to analytically describe evolving populations from biological first principles. Starting from a density-dependent `birth-death process’ describing an arbitrary closed population of individuals with discrete traits, I derive a set of stochastic differential equations (SDEs) for how trait frequencies change over time. Along with recovering the effects of the standard evolutionary forces of selection, mutation, and drift, these SDEs also reveal a new directional evolutionary force, `noise-induced selection’, that is particular to finite populations and has been largely overlooked in standard formulations of evolution. Noise-induced selection can reverse the direction of evolution predicted by infinite-population frameworks, with implications for simulation studies and real world populations. Well-known results such as the replicator-mutator equation and Fisher’s fundamental theorem are recovered in the infinite population limit. Finally, I extend these ideas to one-dimensional quantitative traits through a `stochastic field theory’ that yields frameworks such as Kimura's continuum-of-alleles and gradient dynamics in the infinite population limit. My work thus generalizes the formal structures of population biology to finite fluctuating populations and predicts a new evolutionary force unique to such populations.
 }
 
-\acknowledgments{Not more than 250 words}
+%The acknowledgements go here. IISER guidelines say it should be <= 250 words.
+\acknowledgments{
+Not more than 250 words
+}
 \allowdisplaybreaks %allow align envts to go across pages   
 
+%%%%%%%%%%%%%%%%%%%
+%  The Document   %
+%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\pagestyle{plain}
+\pagestyle{plain} %Don't make the initial frontmatter fancy
 \thesisfront
 \listoftables
 \addcontentsline{toc}{chapter}{List of Tables}
@@ -86,10 +97,13 @@ Population biology is built on a strong mathematical foundation developed during
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}} %gets rid of chapter number from header
 \renewcommand{\sectionmark}[1]{\markright{#1}} %gets rid of section number from header
 
+%From here on, we just need to import TeX files from the ind_files folder to include the actual content of the thesis
 
+%Intro
 \chapter{Introduction}
 \input{ind_files/01_Introduction}
 
+%The 'meat': Methods, results, theory, etc.
 \part{Theory}\label{part_theory}
 \chapter{Mathematical background and an expository example}\label{chap_math_background}
 \input{ind_files/02_math_background}
@@ -98,19 +112,22 @@ Population biology is built on a strong mathematical foundation developed during
 \chapter{Stochastic field equations for the evolution of quantitative traits}\label{chap_infD_processes}
 \input{ind_files/04_field_eqns}
 
+%Discussion and summary
 \part{Major Takeaways \& Discussion}\label{part_summary}
 \chapter{A unified view of population dynamics}\label{chap_unification}
 \input{ind_files/05_unification_discussion}
 
-%You need the below commands to elevate the appendix to 'Part' level in the TOC
+%You need the below commands to add a 'Part' level reference to the Appendices in the TOC
 %from https://tex.stackexchange.com/a/286452
 \cleardoublepage
 \phantomsection
 \appendix
 \addcontentsline{toc}{part}{Appendices}
 
-%make sure the title is 'Appendix' and not 'Chapter'
-\renewcommand{\chaptername}{Appendix} 
+%make sure the title of the appendices say 'Appendix' and not 'Chapter' even though we declare them at `chapter level' internally
+\renewcommand{\chaptername}{Appendix}
+
+%Import the Appendices
 \chapter{Deriving the Fokker-Planck equations for It\^{o} SDEs}\label{App_SDE_FPE}
 \input{ind_files/99_Appendix_A}
 \chapter{Deriving stochastic trait frequency dynamics using It\^{o}'s formula}\label{App_density_to_freq}
@@ -120,8 +137,12 @@ Population biology is built on a strong mathematical foundation developed during
 \chapter{Some Examples}\label{App_examples}
 \input{ind_files/99_Appendix_D_examples}
 
+%Add the bibliography and make an
+%entry in the table of contents
 \cleardoublepage
 \phantomsection
 \printbibliography
 \addcontentsline{toc}{part}{References}
+
+%And we're done :)
 \end{document}
