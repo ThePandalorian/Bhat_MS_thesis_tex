@@ -82,7 +82,14 @@ Not more than 250 words
 \listoffigures
 \addcontentsline{toc}{chapter}{List of Figures}
 
+%wrap the declaration of every new \part in the \clear and the group to ensure that the fresh page created by \part does not have a page number.
+% This hack-ey workaround is from https://tex.stackexchange.com/a/191189 and is needed because \part defines \pagestyle WITHIN the definition itself and so you cannot use \thispagestyle to mess with it
+\cleardoublepage
+\begingroup
+\makeatletter
+\let\ps@plain\ps@empty
 \part{Background}
+\endgroup
 
 
 %Implement the fancy headers for everything from here on out
@@ -104,7 +111,13 @@ Not more than 250 words
 \input{ind_files/01_Introduction}
 
 %The 'meat': Methods, results, theory, etc.
+\cleardoublepage
+\begingroup
+\makeatletter
+\let\ps@plain\ps@empty
 \part{Theory}\label{part_theory}
+\endgroup
+
 \chapter{Mathematical background and an expository example}\label{chap_math_background}
 \input{ind_files/02_math_background}
 \chapter{Population dynamics from stochastic first principles}\label{chap_BD}
@@ -113,9 +126,20 @@ Not more than 250 words
 \input{ind_files/04_field_eqns}
 
 %Discussion and summary
+\cleardoublepage
+\begingroup
+\makeatletter
+\let\ps@plain\ps@empty
 \part{Major Takeaways \& Discussion}\label{part_summary}
+\endgroup
+
 \chapter{A unified view of population dynamics}\label{chap_unification}
 \input{ind_files/05_unification_discussion}
+
+%Add a new page after all the chapters are done, just to separate the main text from the appendices. If adding a new page results in you being on an even page, add another new page, just to ensure that you always begin with text on an odd page (useful if you intend to print the thesis at some point).
+\cleardoublepage
+\null\thispagestyle{plain}\newpage
+\ifodd\value{page}\else\null\thispagestyle{plain}\newpage\fi
 
 %You need the below commands to add a 'Part' level reference to the Appendices in the TOC
 %from https://tex.stackexchange.com/a/286452
