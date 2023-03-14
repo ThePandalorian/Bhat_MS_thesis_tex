@@ -1,16 +1,20 @@
-\documentclass[twoside, 12pt]{iiser-thesis}
+\documentclass[twoside, 12pt]{iiser-thesis-modified}
 
-%Bio dept wants all font in Arial (ew)
-%Will keep it commented until the v end for my own sanity. I refuse to actively change a tex file to Arial permanently. Change compiler to XeLaTeX or LuaLaTeX for this to work
+%Bio dept guidelines say the font should be in Arial (ew).
+%Uncommenting out the below lines will do it, but I intend to keep them commented unless explicitly told to change font to Arial. Change compiler to XeLaTeX or LuaLaTeX for this to work
 %\usepackage{fontspec}
 %\setmainfont{Arial}
 
 %my own list of packages
 \input{head}
 
+%%%%%%%%
+
 %Add fancy headers with chapter/section titles
 \usepackage{fancyhdr}
 \setlength{\headsep}{1.8in} %add spacing between header and body text
+
+%%%%%%%%
 
 %this file contains the bibliography
 \addbibresource{refs.bib}
@@ -38,8 +42,9 @@
 
 %Details of supervisors and experts
 \supervisor{Vishwesha Guttal}
+\department{Centre for Ecological Sciences, Indian Institute of Science} %department of supervisor
 \cosupervisor{Rohini Balakrishnan}
-\department{Centre for Ecological Sciences, Indian Institute of Science} \reader{Sutirth Dey} %Expert
+\reader{Sutirth Dey} %Expert
 
 \dedication{This thesis is dedicated to ?}
 
@@ -50,7 +55,7 @@
 
 %The abstract goes here. IISER guidelines say it should be <= 250 words.
 \thesisabstract{
-Population biology is built on a strong mathematical foundation developed during the Modern Synthesis through fields such as theoretical population genetics, evolutionary game theory, and quantitative genetics. Historically, these formalisms have often worked with infinite populations, ignoring the effects of demographic stochasticity. Finite population models in population genetics usually assume a fixed population size and are of limited applicability in the real world, where population sizes routinely fluctuate. In this thesis, I use ideas from statistical physics to analytically describe evolving populations from biological first principles. Starting from a density-dependent ‘birth-death process’ describing an arbitrary closed population of individuals with discrete traits, I derive a set of stochastic differential equations (SDEs) for how trait frequencies change over time. Along with recovering the effects of the standard evolutionary forces of selection, mutation, and drift, these SDEs also reveal a new directional evolutionary force, ‘noise-induced selection’, that is particular to finite populations and has been largely overlooked in standard formulations of evolution. Noise-induced selection can reverse the direction of evolution predicted by infinite-population frameworks, with implications for simulation studies and real world populations. Well-known results such as the replicator-mutator equation and Fisher’s fundamental theorem are recovered in the infinite population limit. Finally, I extend these ideas to one-dimensional quantitative traits through a ‘stochastic field theory’ that yields frameworks such as Kimura's continuum-of-alleles and gradient dynamics in the infinite population limit. My work thus generalizes the formal structures of population biology to finite fluctuating populations and predicts a new evolutionary force unique to such populations.
+Population biology is built on a strong mathematical foundation developed during the Modern Synthesis through fields such as theoretical population genetics, evolutionary game theory, and quantitative genetics. Historically, these formalisms have often worked with infinite populations, ignoring the effects of demographic stochasticity. Finite population models in population genetics usually assume a fixed population size and are of limited applicability in the real world, where population sizes routinely fluctuate. In this thesis, I use ideas from statistical physics to analytically describe evolving populations from biological first principles. Starting from a density-dependent `birth-death process’ describing an arbitrary closed population of individuals with discrete traits, I derive a set of stochastic differential equations (SDEs) for how trait frequencies change over time. Along with recovering the effects of the standard evolutionary forces of selection, mutation, and drift, these SDEs also reveal a new directional evolutionary force, `noise-induced selection’, that is particular to finite populations and has been largely overlooked in standard formulations of evolution. Noise-induced selection can reverse the direction of evolution predicted by infinite-population frameworks, with implications for simulation studies and real world populations. Well-known results such as the replicator-mutator equation and Fisher’s fundamental theorem are recovered in the infinite population limit. Finally, I extend these ideas to one-dimensional quantitative traits through a `stochastic field theory’ that yields frameworks such as Kimura's continuum-of-alleles and gradient dynamics in the infinite population limit. My work thus generalizes the formal structures of population biology to finite fluctuating populations and predicts a new evolutionary force unique to such populations.
 }
 
 \acknowledgments{Not more than 250 words}
@@ -87,15 +92,15 @@ Population biology is built on a strong mathematical foundation developed during
 
 \part{Theory}\label{part_theory}
 \chapter{Mathematical background and an expository example}\label{chap_math_background}
-\input{ind_files/01.5_math_background}
+\input{ind_files/02_math_background}
 \chapter{Population dynamics from stochastic first principles}\label{chap_BD}
-\input{ind_files/02_BD_processes}
+\input{ind_files/03_BD_processes}
 \chapter{Stochastic field equations for the evolution of quantitative traits}\label{chap_infD_processes}
-\input{ind_files/03_field_eqns}
+\input{ind_files/04_field_eqns}
 
 \part{Major Takeaways \& Discussion}\label{part_summary}
 \chapter{A unified view of population dynamics}\label{chap_unification}
-\input{ind_files/04_unification_discussion}
+\input{ind_files/05_unification_discussion}
 
 %You need the below commands to elevate the appendix to 'Part' level in the TOC
 %from https://tex.stackexchange.com/a/286452
