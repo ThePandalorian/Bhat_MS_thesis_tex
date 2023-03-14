@@ -13,4 +13,4 @@ foo@bar:~ biber main
 foo@bar:~ pdflatex main.tex
 ```
 
-I have used a slightly modified version of the iiser-thesis.cls class file in which I have made minor changes to allow for co-supervisors and make chapter headings more aesthetic. The original iiser-thesis.cls file was created by [Dr. Anindya Goswami](https://sites.google.com/site/anindyagoswami/info) by modifying the [brandeis-dissertation.cls](https://ctan.org/tex-archive/macros/latex/contrib/brandeis-dissertation?lang=en) class.
+I have used a modified version of the iiser-thesis.cls class file in which I have made some changes to make some headings more aesthetic, import the certificate and declaration pages from precompiled PDFs, and allow for co-supervisors. The original iiser-thesis.cls file was created by [Dr. Anindya Goswami](https://sites.google.com/site/anindyagoswami/info) by modifying the [brandeis-dissertation.cls](https://ctan.org/tex-archive/macros/latex/contrib/brandeis-dissertation?lang=en) class.
