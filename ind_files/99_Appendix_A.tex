@@ -1,6 +1,6 @@
 Here, I present a simple (informal) derivation of the Fokker-Planck equation (FPE) for a one-dimensional It\^{o} process. The result for the multi-dimensional case follows from the same logic but is more notationally cumbersome.
 
-Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dW_t$ on a filtered probability space $\Omega \subseteq \mathbb{R}$ that admits a probability density function $P(x,t)$ on $\Omega \times [0,\infty)$. Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s formula, we have:
+Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dW_t$ that takes values in a subset $\Omega \subseteq \mathbb{R}$ and admits a probability density function $P(x,t)$ on $\Omega \times [0,\infty)$. Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s formula, we have:
 \begin{align*}
     df(X_t) = \left(\mu f' + \frac{\sigma^2}{2}f''\right)dt + \sigma f' dW_t
 \end{align*}
