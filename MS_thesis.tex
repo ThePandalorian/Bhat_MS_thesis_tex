@@ -1,4 +1,4 @@
-\documentclass[twoside, 12pt]{iiser-thesis-modified} %Use the custom .cls file we have
+\documentclass[twoside, 12pt,lot,lof]{iiser-thesis-modified} %Use the custom .cls file we have
 
 %Bio dept guidelines say the font should be in Arial (ew).
 %Uncommenting out the below lines will do it, but I intend to keep them commented unless explicitly told to change font to Arial. Change compiler to XeLaTeX or LuaLaTeX for this to work
@@ -76,10 +76,10 @@ Not more than 250 words
 
 \pagestyle{plain} %Don't make the initial frontmatter fancy
 \thesisfront
-\listoftables
-\addcontentsline{toc}{chapter}{List of Tables}
-\listoffigures
-\addcontentsline{toc}{chapter}{List of Figures}
+%\listoftables
+%\addcontentsline{toc}{chapter}{List of Tables}
+%\listoffigures
+%\addcontentsline{toc}{chapter}{List of Figures}
 
 %wrap the declaration of every new \part in the \clear and the group to ensure that the fresh page created by \part does not have a page number.
 % This hack-ey workaround is from https://tex.stackexchange.com/a/191189 and is needed because \part defines \pagestyle WITHIN the definition itself and so you cannot use \thispagestyle to mess with it
@@ -119,8 +119,10 @@ Not more than 250 words
 
 \chapter{Mathematical background and an expository example}\label{chap_math_background}
 \input{ind_files/02_math_background}
+
 \chapter{Population dynamics from stochastic first principles}\label{chap_BD}
 \input{ind_files/03_BD_processes}
+
 \chapter{Stochastic field equations for the evolution of quantitative traits}\label{chap_infD_processes}
 \input{ind_files/04_field_eqns}
 
@@ -134,6 +136,9 @@ Not more than 250 words
 
 \chapter{A unified view of population dynamics}\label{chap_unification}
 \input{ind_files/05_unification_discussion}
+
+\chapter{Discussion and Outlook}\label{sec_disc}
+\input{ind_files/06_nontechnical_discussion}
 
 %Add a new page after all the chapters are done, just to separate the main text from the appendices. If adding a new page results in you being on an even page, add another new page, just to ensure that you always begin with text on an odd page (useful if you intend to print the thesis at some point).
 \clearpage
@@ -164,8 +169,7 @@ Not more than 250 words
 \chapter{Some Examples}\label{App_examples}
 \input{ind_files/99_Appendix_D_examples}
 
-%Add the bibliography and make an
-%entry in the table of contents
+%Add the bibliography and make an entry in the table of contents
 \cleardoublepage
 \phantomsection
 \printbibliography
