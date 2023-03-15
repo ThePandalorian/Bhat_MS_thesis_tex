@@ -69,7 +69,11 @@ Using this, and the fact that the future path of the Brownian motion itself is i
 		\hline
 	\end{tabularx}
 \end{center}
-which becomes very useful for formal manipulation. One important consequence is that we can no longer rely on the normal rules of calculus when dealing with stochastic integrals. In regular calculus, if we had a quantity $x(t)$ satisfying $\dot{x} = f(x,t) + g(x,t)$ for two `nice'\footnote{We just need the solution $x(t)$ to be a continuous function} real functions $f$ and $g$, then, given any function $h(x)$, we have the chain rule of differentiation, which says that
+which becomes very useful for formal manipulation. One important consequence of this table is that we can no longer rely on the normal rules of calculus when dealing with stochastic integrals. In regular calculus, if we had a quantity $x(t)$ satisfying
+\begin{equation*}
+	\frac{dx}{dt} = f(x) + g(x)
+\end{equation*}
+for two `nice'\footnote{We just need the solution $x(t)$ to be a continuous function} real functions $f$ and $g$, then, given any real function $h$, we can calculate how teh quantity $h(x)$ changes using the chain rule of differentiation, which says that
 \begin{equation*}
 \frac{dh}{dt} = \frac{dh}{dx}\frac{dx}{dt} = h'(x)f(x) + h'(x)g(x)
 \end{equation*}
@@ -77,12 +81,16 @@ which becomes very useful for formal manipulation. One important consequence is 
 \begin{equation*}
 dh =  h'(x)f(x)dt + h'(x)g(x)dt
 \end{equation*}
-Naively, we may expect the same logic to still hold true for one-dimensional It\^o processes of the form \eqref{ito_SDE_diff} with $gdt$ simply being replaced by $GdW_t$ on the RHS. However, this does not work. The correct relation is instead given by 
+Naively, we may expect the same logic to still hold true for one-dimensional It\^o processes of the form
+\begin{equation*}
+dX_t = F(X_t)dt + G(X_t)dW_t
+\end{equation*}
+with $gdt$ simply being replaced by $GdW_t$ on the RHS. However, this does not work. The correct relation is instead given by 
 \emph{It\^o's formula}\footnote{It\^o's formula also additionally requires $h \in C^2(\mathbb{R})$, meaning that $h$ is continuous and the first and second derivatives of $h$ exist and are also continuous}:
 \begin{equation*}
 dh(X_t) = h'(X_t)F(X_t)dt + h'(X_t)G(X_t)dW_t  + \frac{h''(X_t)}{2}G^2(X_t)dt 
 \end{equation*}
-Note that there is now an extra $h''(X_t)G^2(X_t)/2$ term that does not exist in the deterministic setting. In some sense, this term is present because the random fluctuations of Brownian motion are `too erratic' and do not follow our deterministic intuitions. Using It\^o's formula and some simple algebra, one can then show that given any process $X_t$ taking values in $\mathbb{R}$ satisfying the SDE \eqref{ito_SDE_diff}, the associated probability density $P(x,t)$ of finding the process in a state $x \in \mathbb{R}$ satisfies the PDE
+There is now an extra $h''(X_t)G^2(X_t)/2$ term that does not exist in the deterministic setting(!). Using It\^o's formula and some simple algebra, one can then show that given any process $X_t$ taking values in $\mathbb{R}$ satisfying the SDE \eqref{ito_SDE_diff}, the associated probability density $P(x,t)$ of finding the process in a state $x \in \mathbb{R}$ satisfies the PDE
 \begin{equation}
 \label{ito_FPE}
 \frac{\partial P}{\partial t}(x,t) = -\frac{\partial}{\partial x}\{F(t,x)P(x,t)\} + \frac{1}{2}\frac{\partial^2}{\partial x^2}\{(G(t,x))^2P(x,t)\}
