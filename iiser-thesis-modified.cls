@@ -67,7 +67,7 @@
 \DeclareOption{openbib}{\PassOptionsToClass{book}{\currentoption}}
 \DeclareOption{openbib}{\def\bd@book@openbib{openbib}}
 \ExecuteOptions{12pt,openright,final,oneside,%
-   minmargins,nolot,lof}
+   minmargins,lot,lof}
 \ProcessOptions*
 \LoadClass[a4paper,\bd@book@size,\bd@book@side,%
    \bd@book@final,\bd@book@openrght]{book}
@@ -181,8 +181,14 @@ iiser-thesis class.}}%
   \cleardoublepage
   %List of tables
   \if@bd@lot{\listoftables\cleardoublepage}%
+  \listoftables
+  \addcontentsline{toc}{chapter}{List of Tables}
+  \cleardoublepage
   %List of figures
   \if@bd@lof{\listoffigures\cleardoublepage}%
+  \listoffigures
+  \addcontentsline{toc}{chapter}{List of Figures}
+  \cleardoublepage
   \mainmatter}
 \let\if@bd@onlinesubmission\@firstoftwo
 \newcommand{\bd@tf@onlinesubmission}{%
