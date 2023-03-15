@@ -29,16 +29,17 @@ Outflow is through births and deaths of individuals in the population $\mathbf{n
 \label{nD_rate_out}
 R_{\textrm{out}}(\mathbf{n},t) = \sum\limits_{j=1}^{m}b_{j}(\mathbf{n})P(\mathbf{n},t) + \sum\limits_{j=1}^{m}d_{j}(\mathbf{n})P(\mathbf{n},t)
 \end{equation}
-As before, we now define step operators, both for notational ease and in anticipation of the system size expansion. Note that now, we need $2m$ step operators. For each $i \in \{1,\ldots,m\}$, let us define two step operators $\mathcal{E}_{i}^{\pm}$ by their action on any function $f([n_1,\ldots,n_m],t)$ as:
+We will now define step operators, both for notational ease and in anticipation of the system size expansion. For each $i \in \{1,\ldots,m\}$, let us define two step operators $\mathcal{E}_{i}^{\pm}$ by their action on any function $f([n_1,\ldots,n_m],t)$ as:
 \begin{equation}
 \label{nD_step_operators}
-\mathcal{E}_{i}^{\pm}f([n_1,\ldots,n_m],t) = f([n_1,\ldots,n_i \pm 1, \ldots n_m],t)
+\mathcal{E}_{i}^{\pm}f([n_1,\ldots,n_i,\ldots,n_m],t) = f([n_1,\ldots,n_i \pm 1, \ldots n_m],t)
 \end{equation}
 In other words, $\mathcal{E}_{i}^{\pm}$ just changes the population through the addition or removal of one type $i$ individual. We can now the rate of change of $P(\mathbf{n},t)$ as
 \begin{equation}
+\label{nD_intermediate_for_M_eqn}
 \frac{\partial P}{\partial t}(\mathbf{n},t) = R_{\textrm{in}}(\mathbf{n},t) - R_{\textrm{out}}(\mathbf{n},t)
 \end{equation}
-Substituting \eqref{nD_rate_in}, \eqref{nD_rate_out}, and \eqref{nD_step_operators}, we obtain:
+Substituting \eqref{nD_rate_in}, \eqref{nD_rate_out}, and \eqref{nD_step_operators} into equation \eqref{nD_intermediate_for_M_eqn}, we obtain:
 \begin{equation}
 \label{nD_M_eqn}
 \frac{\partial P}{\partial t}(\mathbf{n},t) = \sum\limits_{j=1}^{m}\left[(\mathcal{E}_j^{-}-1)b_j(\mathbf{n})P(\mathbf{n},t) + (\mathcal{E}_j^{+}-1)d_j(\mathbf{n})P(\mathbf{n},t)\right]
@@ -214,7 +215,7 @@ where we have dropped the tildes and gone back from $s$ to $t$ for notational cl
 \frac{d}{dt}\mathbb{E}[y_i^n] &= \frac{d}{dt}\int\limits_{\mathbb{R}^m}y_i^nP(\mathbf{y},t)d\mathbf{y}\\
 &= \int\limits_{\mathbb{R}^m}y_i^n\frac{\partial P}{\partial t}(\mathbf{y},t)d\mathbf{y}\label{nD_change_of_moments_defn}
 \end{align}
-where we have assumed that $y_i^n$ and $P(\mathbf{y},t)$ vary sufficiently smoothly to allow us to interchange the order of derivatives and integrals and used the shorthand $\displaystyle \int\limits_{\mathbb{R}^m} \ f(\mathbf{y}) \ d\mathbf{y} = \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}\cdots\int\limits_{\mathbb{R}} \ f(\mathbf{y}) \ dy_1 dy_2 \ldots dy_m$. The one-dimensional integrals are over the entire real line and not just over $[0,\infty)$ because fluctuations can be either positive (greater than $\boldsymbol{\alpha}(t)$) or negative (lesser than $\boldsymbol{\alpha}(t)$). For notational brevity, let us use the shorthand $D_j = D_{\mathbf{y}}(A_j^-(\boldsymbol{\alpha}))(t)$. We can now substitute \eqref{nD_WNA} into \eqref{nD_change_of_moments_defn} to obtain
+where we have assumed that $y_i^n$ and $P(\mathbf{y},t)$ vary sufficiently smoothly to allow us to interchange the order of derivatives and integrals. By the Leibniz integral rule, this only requires the map $(\mathbf{y},t) \to y_i^nP(\mathbf{y},t)$ to be bounded and $C^1$ in an open subset of $\mathbb{R}^m \times [0,\infty)$. We have also used the notation $\displaystyle \int\limits_{\mathbb{R}^m} \ f(\mathbf{y}) \ d\mathbf{y} \coloneqq \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}\cdots\int\limits_{\mathbb{R}} \ f(\mathbf{y}) \ dy_1 dy_2 \ldots dy_m$. The one-dimensional integrals are over the entire real line and not just over $[0,\infty)$ because fluctuations can be either positive (greater than $\boldsymbol{\alpha}(t)$) or negative (lesser than $\boldsymbol{\alpha}(t)$). For notational brevity, let us use the shorthand $D_j \coloneqq D_{\mathbf{y}}(A_j^-(\boldsymbol{\alpha}))(t)$. We can now substitute \eqref{nD_WNA} into \eqref{nD_change_of_moments_defn} to obtain
 \begin{align}
 \frac{d}{dt}\mathbb{E}[y_i^n] &= \int\limits_{\mathbb{R}^m} y_i^n \left(\sum\limits_{j=1}^{m}\left(-\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}+\frac{1}{2}{A_j}^{+}(\boldsymbol{\alpha}(t))\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}\right)\right)d\mathbf{y}\\
 &= \sum\limits_{j=1}^{m}\left[-\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial}{\partial y_j}\left\{D_{j}P(\mathbf{y},t)\right\}d\mathbf{y} + \frac{{A_j}^{+}(\boldsymbol{\alpha}(t))}{2}\int\limits_{\mathbb{R}^m} y_i^n\frac{\partial^2}{\partial{y_j}^2}\{P(\mathbf{y},t)\}d\mathbf{y}\right]\label{nD_intermediate_for_moments}
