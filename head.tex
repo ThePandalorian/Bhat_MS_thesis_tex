@@ -47,12 +47,41 @@
 }
 
 %%%%%%%%%%%%%%
+% Use last name, initial. unless this is non-unique. If this is non-unique, use full first name.
+%From https://tex.stackexchange.com/a/631580
+\DeclareNameFormat{always-init}{%
+	\ifnumequal{\value{uniquename}}{2}
+	{\usebibmacro{name:family-given}
+		{\namepartfamily}
+		{\namepartgiven}
+		{\namepartprefix}
+		{\namepartsuffix}}
+	{\usebibmacro{name:family-given}
+		{\namepartfamily}
+		{\namepartgiveni}
+		{\namepartprefix}
+		{\namepartsuffix}}%
+	\usebibmacro{name:andothers}}
+
+
+
+\DeclareNameAlias{author}{always-init}
+\DeclareNameAlias{editor}{always-init}
+
+\ExecuteBibliographyOptions{useprefix=true}
+\DeclareSortingNamekeyTemplate{
+	\keypart{\namepart{family}}
+	\keypart{\namepart{prefix}}
+	\keypart{\namepart{given}}
+	\keypart{\namepart{suffix}}}
+
+
 %% Modify citations to follow the style of Cell
 %% from https://tex.stackexchange.com/a/404787
 \usepackage{xpatch}
 
 % Some general changes
-\DeclareNameAlias{sortname}{last-first}
+\DeclareNameAlias{sortname}{always-init}
 \renewcommand*{\bibinitdelim}{}
 \renewbibmacro*{in:}{%
     \iffieldequalstr{entrytype}{inproceedings}{%
