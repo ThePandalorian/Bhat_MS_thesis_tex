@@ -150,8 +150,10 @@ Not more than 250 words
 %make sure the title of the appendices say 'Appendix' and not 'Chapter' even though we declare them at `chapter level' internally
 \renewcommand{\chaptername}{Appendix}
 
+%For the headers of appendices (on odd pages), preface the appendix title with 'Appendix X', where X is the Appendix index (A,B,C,...)
+\fancyhead[CO]{  \rule[-4ex]{0pt}{4ex}\footnotesize\itshape{\chaptername~\thechapter: \nouppercase{\leftmark}}}
 %Import the Appendices
-\chapter{Deriving the Fokker-Planck equations for It\^{o} SDEs}\label{App_SDE_FPE}
+\chapter{From It\^{o} to Fokker-Planck}\label{App_SDE_FPE}
 \input{ind_files/99_Appendix_A}
 \chapter{Deriving stochastic trait frequency dynamics using It\^{o}'s formula}\label{App_density_to_freq}
 \input{ind_files/99_Appendix_B}
