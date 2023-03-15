@@ -33,8 +33,8 @@ In this thesis, we have seen how stochastic birth-death processes can be used to
     \end{minipage}
 \end{sideways}\par}
 \clearpage
-\section{Fundamental theorems of evolution in finite population}\label{sec_fun_theorems}
-\subsection{The fundamental theorem for changes in type frequencies in the population}\label{sec_fun_theorem_freq}
+\section{Fundamental equations for evolution in finite populations}\label{sec_fun_theorems}
+\subsection{The fundamental equation for changes in type frequencies}\label{sec_fun_theorem_freq}
 Equation \eqref{nD_eqn_for_frequencies}, which we derived in chapter \ref{chap_BD}, is a very general equation for how frequencies change over time in stochastic populations. To recap, we started with a population which can contain up to $m$ different types of individuals. The population as a whole is characterized by a vector $\mathbf{n}(t) = [n_1(t), \ldots, n_m(t)]$ indexing the number of individuals of each type in the population. Changes of the population are through either birth or death of single individuals. On ecological grounds, we postulated the existence of a `system-size' parameter $K>0$ that leads to density-dependent growth and prevents the population from growing infinitely large. We then moved from numbers $\mathbf{n}(t)$ to population densities $\mathbf{x}(t)$ by assuming that birth and death rates depend on population density $x$ and not only on population numbers $n$. In the regime where $K$ is not too small (corresponding to `medium sized' populations), we found a continuous description of how $x$ changes stochastically. We further assumed that each type has a per-capita birth rate $b^{\textrm{(ind)}}(\mathbf{x})$, a per-capita death rate $d^{\textrm{(ind)}}(\mathbf{x})$, and an additional term $\mu Q_{i}(\mathbf{x})$ representing mutational effects. All three of these functions may in general vary in an arbitrarily complicated frequency-dependent manner (or be frequency independent constants, of course). We then saw that $p_i$, the frequency of the $i\textsuperscript{th}$ type in the population, changes according to the stochastic differential equation:
 \begin{equation}
 \label{nD_stochastic_RM}
@@ -45,7 +45,7 @@ dp_i(t) &= \underbrace{\left[(w_i(\mathbf{x}) - \overline{w})p_i + \mu\left\{Q_i
 \end{aligned}
 \end{equation}
 where $N_K = \sum x_i$ is the total population size scaled by $K$ (and thus $KN_K$ is the total population size), $w_i(\mathbf{x}) = b^{\textrm{(ind)}}_{i}(\mathbf{x}) - d^{\textrm{(ind)}}_{i}(\mathbf{x})$ and $\tau_i(\mathbf{x}) = b^{\textrm{(ind)}}_{i}(\mathbf{x}) + d^{\textrm{(ind)}}_{i}(\mathbf{x})$ are respectively the Malthusian fitness and per-capita turnover rate of the $i\textsuperscript{th}$ type, and $A_i^{+} \coloneqq x_i\tau_i(\mathbf{x}) + \mu Q_i(\mathbf{x})$. Each $W^{(i)}_t$ is an independent one-dimensional Wiener process (standard Brownian motion). Letting $K \to \infty$  in \eqref{nD_stochastic_RM} recovers the replicator-mutator equation in the infinite population limit. The first term of \eqref{nD_stochastic_RM} represents the direct effects of forces captured in classic deterministic models, and reflects a selection-mutation balance. However, finite populations experience a new directional force dependent on $\tau_i(\mathbf{x})$, the per-capita turnover rate of type $i$, that cannot be captured in infinite population models~\citep{kuosmanen_turnover_2022}. Remarkably, this term acts in a way that is mathematically identical to the classical action of selection and mutation in infinite population models as captured by the first term in \eqref{nD_stochastic_RM}, but in the opposite direction - A higher relative $\tau_i$ leads to a decrease in frequency (Notice the minus sign before the second term in \eqref{nD_stochastic_RM}).
-\subsection{The fundamental theorem for the mean value of a type-level quantity in the population}\label{sec_fun_theorems_mean}
+\subsection{The fundamental equation for the mean value of a type-level quantity}\label{sec_fun_theorems_mean}
 
 We can also calculate how the statistical mean value of any type-level quantity (see section \ref{sec_stat_measures}) changes over time. Let $f$ be any type level quantity, with value $f_i(t)$ for the $i\textsuperscript{th}$ type. We allow for the possibility of $f_i$ to vary over time. By multiplying both sides of
 equation \eqref{nD_stochastic_RM} by $f_i$ and summing over all $i$ (The same steps as going from \eqref{nD_replicator_mutator} to \eqref{nD_Price_time_dependent}), we see that the statistical mean $\overline{f}$ of the quantity in the population varies as:
@@ -86,7 +86,7 @@ Carrying out the same steps with $f = \tau$ in \eqref{nD_stochastic_Price} yield
 \end{equation}
 The implications of this equation have been extensively discussed in~\cite{kuosmanen_turnover_2022}, which is where we refer the interested reader.
 
-\subsection{The fundamental theorem for the variance of a type-level quantity in the population}\label{sec_fun_theorems_var}
+\subsection{The fundamental equation for the variance of a type-level quantity}\label{sec_fun_theorems_var}
 Equation \eqref{nD_stochastic_Price} is a general equation for the mean value of an arbitrary type level quantity $f$ in the population. In many real-life situations, especially those pertaining to finite populations, we are interested in not just the mean, but also the variance of a type-level quantity. In Appendix \ref{App_stoch_var_eqns}, I show that the statistical variance of any type level quantity $f$ obeys
 \begin{equation}
 \label{nD_stochastic_Price_variance}
