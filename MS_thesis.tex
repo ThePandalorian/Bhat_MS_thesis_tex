@@ -147,6 +147,7 @@ Not more than 250 words
 
 %You need the below commands to add a 'Part' level reference to the Appendices in the TOC
 %from https://tex.stackexchange.com/a/286452
+%The \phantomsection is needed for hyperref to jump to the correct location
 \cleardoublepage
 \phantomsection
 \appendix
@@ -167,21 +168,20 @@ Not more than 250 words
 \chapter{A Price-like equation for the variance of a type-level quantity}\label{App_stoch_var_eqns}
 \input{ind_files/99_Appendix_C}
 \chapter{Some Examples}\label{App_examples}
-\input{ind_files/99_Appendix_D_examples}
+\input{ind_files/99_Appendix_D_examples}ne
 
 %Bibliography
+%Again, add the phantomsection so that hyperref knows where to go
 \cleardoublepage
 \phantomsection
-%I want the bibliography to be in two columns
-%The \printbibheading makes sure the heading is printed before the two column environment begins.
-\begin{multicols}{2}[\printbibheading]
-	%Change the font for the headings
-	\renewcommand*{\bibfont}{\footnotesize}
-	%Add the bibliography
-	\printbibliography[heading=none]
-	%Add an entry in the table of contents
-	\addcontentsline{toc}{part}{References}
-\end{multicols}
+\Huge\printbibheading
+%Putting \printbibheading up here makes sure the heading is printed before I change the font size below.
+%Change the font for the bibliography
+\renewcommand*{\bibfont}{\footnotesize}	
+%Add the bibliography
+\printbibliography[heading=none]
+%Add an entry in the table of contents
+\addcontentsline{toc}{part}{References}
 
 %And we're done :)
 \end{document}

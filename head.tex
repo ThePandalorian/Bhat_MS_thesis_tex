@@ -5,6 +5,10 @@
 \pdfinclusioncopyfonts=1
 \usepackage[utf8]{inputenc}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %References
 \usepackage[english]{babel}
 \usepackage{csquotes}
@@ -18,10 +22,12 @@
             maxnames=2,
             maxbibnames=99]{biblatex}
 
+
 %Make the title of the bibliography say 'References'
 \DefineBibliographyStrings{english}{%
 	bibliography = {References},
 }
+
 
 %Sort by name-year-cite order (biblatex default is to sort by name-year-title).
 \DeclareSortingTemplate{nyc}{
@@ -46,7 +52,6 @@
 	\sort{\citeorder}
 }
 
-%%%%%%%%%%%%%%
 % Use last name, initial. unless this is non-unique. If this is non-unique, use full first name.
 %From https://tex.stackexchange.com/a/631580
 \DeclareNameFormat{always-init}{%
@@ -119,7 +124,7 @@
 \DeclareFieldFormat[article]{pages}{#1}
 
 
-%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{titlesec} % Format chapter headings
 %from https://tex.stackexchange.com/a/52474
@@ -163,7 +168,8 @@
             citecolor = black,
             urlcolor = blue,
             breaklinks=true]{hyperref} % For hyperlinks in the PDF
-\usepackage{graphicx, multicol} % Enhanced support for graphics
+\usepackage{multicol} % Enable multiple columns in text
+\usepackage{graphicx} % Enhanced support for graphics
 \usepackage{xcolor} % Driver-independent color extensions
 \usepackage{physics} %some physics symbols
 \usepackage{framed}
