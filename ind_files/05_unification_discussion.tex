@@ -1,38 +1,7 @@
 \epigraph{\justifying Not only is algebraic reasoning exact; it imposes an exactness on the verbal postulates made before algebra can start which is usually lacking in the first verbal formulations of scientific principles.}{J.B.S. Haldane~\citep{haldane_defense_1964}}
 
-\justifying
-In this thesis, we have seen how stochastic birth-death processes can be used to construct and analyze mechanistic individual-based models for the dynamics of finite populations. In doing so, we have also seen that various well-known equations of evolutionary dynamics can be recovered in the infinite population size limit. In the finite-dimensional case, the infinite population limit corresponds to the equations of population genetics and evolutionary game theory. In the infinite-dimensional case, we instead obtain the equations of quantitative genetics. In both cases, the mean value of the trait in the population changes according to an equation resembling the Price equation. My derivation highlights the natural connections between various equations of population dynamics --- For example, the same procedures that lead to the replicator-mutator equation in the case of discretely varying traits yield Kimura's continuum-of-alleles model in the quantitative case --- and extends these similarities to finite, fluctuating populations (Table \ref{table_summary}).
+So far, we have seen a lot of relatively abstract formalism for describing evolution in finite populations. Some concrete and hopefully illustrative examples are also presented in Appendix \ref{App_examples}. Have we gained anything from this (re)formulation? I show below that the formalism developed in part \ref{part_theory} naturally yields some `fundamental equations' for evolutionary population dynamics that are very general, help us clearly understand how evolution operates in finite fluctuating populations, and recover well-known results in the infinite population limit, thus showing that I have generalized these infinite population results. 
 
-{\centering\begin{sideways}
-    \begin{minipage}{\textheight}
-        \resizebox{\textheight}{!}{%
-            \setstretch{1.5}
-            \begin{tabular}{ %I manually specified the width of each column by trial and error
-  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 1
-  |p{\dimexpr.27\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 2
-  |p{\dimexpr.33\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 3
-  |p{\dimexpr.25\linewidth-2\tabcolsep-1.3333\arrayrulewidth}% column 4
-  |p{\dimexpr.4\linewidth-2\tabcolsep-1.3333\arrayrulewidth}|% column 5
-  }
-            \hline
-         \centering \textbf{Number of possible distinct types/trait variants ($m$)} & \centering \textbf{State Space} &
-\centering \textbf{Model parameters} & \centering \textbf{Mesoscopic description} & \centering\arraybackslash \textbf{Infinite population limit} \\
-        \hline
-        $m = 1$ \newline (Identical individuals)  & $[0,1,2,3,\ldots]$ \newline (Population size) & Two non-negative functions, $b(n)$ and $d(n)$, describing the birth and death rate of individuals when the population size is $n$ & Univariate Fokker-Planck equation \newline (one-dimensional SDEs) & Dynamics of populations of identical individuals\\ 
-        \hline
-        $1 < m < \infty$ \newline (Discrete traits) & $[0,1,2,3,\ldots]^{m}$ \newline (Number of individuals of each trait variant) & $2m$ non-negative functions, $b_i(\mathbf{n})$ and $d_i(\mathbf{n})$ (for $1 \leq i \leq m$) describing the birth and death rate of trait variant $i$ when the population is $\mathbf{n}=[n_1,\ldots,n_m]$ & Multivariate Fokker-Planck equation \newline ($m$-dimensional SDEs) &  Evolutionary game theory \newline
-        Lotka-Volterra competition \newline Quasispecies equation \newline Price equation (discrete traits) \\
-        \hline
-        $m = \infty$ \newline (Quantitative traits) & $ \left\{\sum\limits_{i=1}^{n}\delta_{x_i} \ \bigg{|} \ n \in \mathbb{N}, \ x_i \in \mathcal{T} \subseteq \mathbb{R}\right\}$ \newline \newline (Each Dirac mass $\delta_{x_i}$ is an individual with trait value $x_i$ in the trait space $\mathcal{T}$) & Two non-negative functionals $b(x|\nu)$ and $d(x|\nu)$ describing the birth and death rate of trait variant $x$ when the population is the (stochastic) field/function $\nu$ & Functional Fokker-Planck equation/Field theory \newline (SPDEs) & Kimura's continuum-of-alleles model \newline~\cite{sasaki_oligomorphic_2011}'s Oligomorphic Dynamics \newline~\cite{wickman_theoretical_2022}'s Trait Space Equations for intraspecific trait variation \newline Gradient Dynamics \newline Price equation (quantitative traits)\\
-        \hline
-            \end{tabular}
-        }
-        %\renewcommand\thetable{1}
-        \captionof{table}{Summary of the various birth-death processes studied in this thesis}
-        \label{table_summary}
-    \end{minipage}
-\end{sideways}\par}
-\clearpage
 \section{Fundamental equations for evolution in finite populations}\label{sec_fun_theorems}
 \subsection{The fundamental equation for changes in type frequencies}\label{sec_fun_theorem_freq}
 Equation \eqref{nD_eqn_for_frequencies}, which we derived in chapter \ref{chap_BD}, is a very general equation for how frequencies change over time in stochastic populations. To recap, we started with a population which can contain up to $m$ different types of individuals. The population as a whole is characterized by a vector $\mathbf{n}(t) = [n_1(t), \ldots, n_m(t)]$ indexing the number of individuals of each type in the population. Changes of the population are through either birth or death of single individuals. On ecological grounds, we postulated the existence of a `system-size' parameter $K>0$ that leads to density-dependent growth and prevents the population from growing infinitely large. We then moved from numbers $\mathbf{n}(t)$ to population densities $\mathbf{x}(t)$ by assuming that birth and death rates depend on population density $x$ and not only on population numbers $n$. In the regime where $K$ is not too small (corresponding to `medium sized' populations), we found a continuous description of how $x$ changes stochastically. We further assumed that each type has a per-capita birth rate $b^{\textrm{(ind)}}(\mathbf{x})$, a per-capita death rate $d^{\textrm{(ind)}}(\mathbf{x})$, and an additional term $\mu Q_{i}(\mathbf{x})$ representing mutational effects. All three of these functions may in general vary in an arbitrarily complicated frequency-dependent manner (or be frequency independent constants, of course). We then saw that $p_i$, the frequency of the $i\textsuperscript{th}$ type in the population, changes according to the stochastic differential equation:
