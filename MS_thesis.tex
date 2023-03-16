@@ -1,4 +1,4 @@
-\documentclass[twoside, 12pt,lot,lof]{iiser-thesis-modified} %Use the custom .cls file we have
+\documentclass[twoside,12pt]{iiser-thesis-modified} %Use the custom .cls file we have with two sided paper and 12pt font
 
 %Bio dept guidelines say the font should be in Arial (ew).
 %Uncommenting out the below lines will do it, but I intend to keep them commented unless explicitly told to change font to Arial. Change compiler to XeLaTeX or LuaLaTeX for this to work
@@ -169,11 +169,19 @@ Not more than 250 words
 \chapter{Some Examples}\label{App_examples}
 \input{ind_files/99_Appendix_D_examples}
 
-%Add the bibliography and make an entry in the table of contents
+%Bibliography
 \cleardoublepage
 \phantomsection
-\printbibliography
-\addcontentsline{toc}{part}{References}
+%I want the bibliography to be in two columns
+%The \printbibheading makes sure the heading is printed before the two column environment begins.
+\begin{multicols}{2}[\printbibheading]
+	%Change the font for the headings
+	\renewcommand*{\bibfont}{\footnotesize}
+	%Add the bibliography
+	\printbibliography[heading=none]
+	%Add an entry in the table of contents
+	\addcontentsline{toc}{part}{References}
+\end{multicols}
 
 %And we're done :)
 \end{document}
