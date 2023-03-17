@@ -170,7 +170,10 @@ iiser-thesis class.}}%
   \contributionspage
   \cleardoublepage
   %Thesis abstract page
+  %For some reason the hyperref to the abstract doesnt work correctly unless there is also a \phantomsection just before it
+  \phantomsection
   \bd@abstract{\@thesisabstract}%
+  \addcontentsline{toc}{chapter}{Abstract}
   \cleardoublepage
   %Preface if present
   \bd@optpage{Preface}{\@preface}%
