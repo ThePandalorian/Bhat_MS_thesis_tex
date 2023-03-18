@@ -166,7 +166,7 @@ The eigenvalues of the first matrix on the RHS will tell us whether the fixed po
 
 In Chapter \ref{chap_infD_processes}, we used various approximations to arrive at the linear functional Fokker-Planck equation
 \begin{equation}
-\label{functional_WNE_chap_4}
+\label{functional_WNE_for_App}
     \frac{\partial P}{\partial t}(\zeta,t) = \int\limits_{\mathcal{T}}\left(-\frac{\delta}{\delta \zeta(x)}\left\{\mathcal{D}_{\zeta}[\mathcal{A}^{-}](x)P(\zeta,t)\right\}+\frac{1}{2}\mathcal{A}^{+}(x|\psi)\frac{\delta^2}{\delta\zeta(x)^2}\{P(\zeta,t)\}\right)dx
 \end{equation}
 for describing stochastic fluctuations $\zeta$ from the deterministic solution obtained by solving \eqref{deterministic_traj}. Our goal is now to find a method to effectively detect and describe evolutionary branches (modes in trait space, corresponding to individual morphs) for this process. Following the methods used by Tim Rogers and colleagues for various special cases~\citep{rogers_demographic_2012, rogers_spontaneous_2012, rogers_modes_2015}, we will do this in a general manner by measuring the autocorrelation of the distribution of the population over trait space, a task made easier by moving to Fourier space.
@@ -205,7 +205,7 @@ Lastly, by definition of Fourier modes, we have, for any differentiable real fun
 \frac{\partial}{\partial \zeta_j(t)}F(\zeta_i(t)) = \delta_{ij}F'(\zeta_j(t))
 \end{equation}
 where $\delta_{ij}$ is the Kronecker delta symbol.
-Using \eqref{fourier_representations_functions}, \eqref{fourier_representations_derivative}, and \eqref{fourier_representation_linear_operator} in \eqref{functional_WNE_zeroth_order}, we get, for the first term of the RHS:
+Using \eqref{fourier_representations_functions}, \eqref{fourier_representations_derivative}, and \eqref{fourier_representation_linear_operator} in \eqref{functional_WNE_for_App}, we get, for the first term of the RHS:
 \begin{gather}
 -\int\limits_{\mathcal{T}}\frac{\delta}{\delta \zeta(x)}\left\{L[\zeta(x,t)]P(\zeta,t)\right\}dx\nonumber\\
 = -\int\limits_{\mathcal{T}}\sum\limits_{k}e^{-ikx}\frac{\partial}{\partial \zeta_k}\{\sum\limits_{n}e^{inx}L_n\zeta_nP\}dx\nonumber\\
@@ -218,7 +218,7 @@ and for the second:
 = \int\limits_{\mathcal{T}}\sum\limits_{k}\sum\limits_{m}\sum\limits_{n}e^{i(k-m-n)x}A_k\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_n}\{P\}dx\nonumber\\
 = 2\pi\sum\limits_{m}\sum\limits_{n}A_{m+n}\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_{n}}\{P\}\label{fourier_FPE_second_term}
 \end{gather}
-Substituting \eqref{fourier_FPE_first_term} and \eqref{fourier_FPE_second_term} into \eqref{functional_FPE}, we see that the Fokker-Planck equation in Fourier space reads:
+Substituting \eqref{fourier_FPE_first_term} and \eqref{fourier_FPE_second_term} into \eqref{functional_WNE_for_App}, we see that the Fokker-Planck equation \eqref{functional_WNE_for_App} in Fourier space reads:
 \begin{equation}
 \label{fourier_FPE}
 \frac{\partial P}{\partial t} = -2\pi\sum\limits_{k}L_{k}\frac{\partial}{\partial \zeta_k}\{\zeta_kP\} + \pi\sum\limits_{m}\sum\limits_{n}A_{m+n}\frac{\partial}{\partial \zeta_m}\frac{\partial}{\partial \zeta_{n}}\{P\}
