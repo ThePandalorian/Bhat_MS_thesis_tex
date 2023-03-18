@@ -16,7 +16,7 @@ We will evaluate the RHS term by term. The first term is as simplified as can be
 &+\frac{1}{\sqrt{K}N_{K}(t)}\left(\sum\limits_{i=1}^{m}\left(f^2_i - \overline{f^2}\right)\sqrt{A_i^+}dW_{t}^{(i)}\right)
 \end{aligned}
 \end{equation}
-For the third term, we need to use It\^{o}'s formula. Here, the relevant version of It\^{o}'s formula is the one-dimensional version of \eqref{nD_Ito_formula}. Given a one-dimensional process $dX_t = S(X_t)dt + \sum D_j(X_t)dW^{(j)}_t$ with $S, D_j$ being suitable real functions and each $W^{(j)}_t$ being an independent Wiener process, It\^{o}'s formula says that given any $C^2(\mathbb{R})$ function $g(x)$, we have the relation:
+For the third term, we need to use It\^{o}'s formula. Here, the relevant version of It\^{o}'s formula is the one-dimensional version of \eqref{nD_Ito_formula}. Given a one-dimensional process $dX_t = S(X_t)dt + \sum_j D_j(X_t)dW^{(j)}_t$ with $S, D_j$ being suitable real functions and each $W^{(j)}_t$ being an independent Wiener process, It\^{o}'s formula says that given any $C^2(\mathbb{R})$ function $g(x)$, we have the relation:
 \begin{equation}
 \label{1D_Ito_formula}
 dg(X_t) = \left(S(X_t)g'(X_t) + \frac{g''(X_t)}{2}\sum\limits_{j}D_j^2(X_t)\right)dt + \sum\limits_{j}D_j(X_t)g'(X_t)dW^{(j)}_t 
