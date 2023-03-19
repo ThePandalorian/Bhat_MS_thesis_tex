@@ -1,6 +1,6 @@
 Here, I present a simple (informal) derivation of the Fokker-Planck equation (FPE) for a one-dimensional It\^{o} process. The result for the multi-dimensional case follows from the same logic but is more notationally cumbersome.
 
-Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dW_t$ that takes values in a subset $\Omega \subseteq \mathbb{R}$ and admits a probability density function $P(x,t)$ on $\Omega \times [0,\infty)$. Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s formula, we have:
+Consider a one-dimensional real It\^{o} process given by $dX_t = \mu(X_t,t)dt + \sigma(X_t,t)dW_t$ that takes values in an open set $\Omega \subseteq \mathbb{R}$ and admits a probability density function $P(x,t)$ with compact support\footnote{For our biological context you can think of this as just meaning that very extreme values in $\Omega$ are so unlikely that we disallow them entirely} in $\Omega$ at all times $t \in [0,\infty)$. Let $f:\mathbb{R}\to\mathbb{R}$ be an arbitrary $C^2(\mathbb{R})$ function. By It\^{o}'s formula, we have:
 \begin{align*}
     df(X_t) = \left(\mu f' + \frac{\sigma^2}{2}f''\right)dt + \sigma f' dW_t
 \end{align*}
@@ -18,11 +18,7 @@ Assuming derivatives and expectations commute\footnote{By the Leibniz integral r
 \label{eq_Ito_to_FPE_for_parts}
 \int\limits_{\Omega}f(X_t)\frac{\partial P}{\partial t}(x,t)dx = \underbrace{\int\limits_{\Omega}\mu f'P(x,t)dx}_{M(x,t)} + \underbrace{\int\limits_{\Omega}\frac{\sigma^2}{2}f''P(x,t)dx}_{N(x,t)}
 \end{equation}
-We will now use integration by parts to further evaluate the two parts $M(x,t)$ and $N(x,t)$. Recall that the general formula for integration by parts is given by:
-\begin{equation*}
-    \int\limits_{\Omega}u_{x_i}vdx = -\int\limits_{\Omega}uv_{x_i}dx + \int\limits_{\partial\Omega}uv\gamma_{i}dS(x)
-\end{equation*}
-where subscript indicates differentiation and $\gamma$ is the unit outward normal. In our case, assuming that $P(x,t) \equiv 0$ on $\partial \Omega$, the boundary term (second term of the RHS) vanishes and we can use integration by parts once on $M(x,t)$ to obtain
+We will now use integration by parts to further evaluate the two parts $M(x,t)$ and $N(x,t)$. Since $P(\cdot, t)$ has compact support within the open set $\Omega \subset \mathbb{R}$ for any given $t > 0$, the function $P(x,t) \equiv 0$ on $\partial \Omega$ and the boundary term of the formula vanishes. Thus, we can use integration by parts once on $M(x,t)$ to obtain
 \begin{equation}
 \label{eq_Ito_to_FPE_I_term}
     M(x,t) = - \int\limits_{\Omega}f(X_t)\left(\frac{\partial}{\partial x}\mu P(x,t)\right)dx

@@ -4,19 +4,19 @@ Theorists are often accused of presenting somewhat intuitive ideas in a highly i
 
 \section{Mathematical Background}\label{sec_math_background}
 
-Here, I provide a brief, informal introduction to basic notions in stochastic processes that will be helpful for some technical portions of this thesis. Interested readers looking for a more comprehensive source can refer to standard mathematics texts such as~\cite{oksendal_stochastic_1998} or~\cite{karatzas_brownian_1998} for a more rigorous treatment of the mathematical foundations, or physics-style texts such as~\cite{gardiner_stochastic_2009} or~\cite{van_kampen_stochastic_1981} for useful tools and techniques to study real systems.
+Here, I provide a brief, informal introduction to some basic notions in stochastic processes. I will make no attempt at rigor and will actively avoid jargon like `martingale' and `filtration'. Readers looking for a more comprehensive introduction can refer to standard mathematics texts such as~\cite{oksendal_stochastic_1998},~\cite{ethier_markov_1986}, or~\cite{karatzas_brownian_1998} for a rigorous treatment of the mathematical foundations, or physics-style texts such as~\cite{gardiner_stochastic_2009} or~\cite{van_kampen_stochastic_1981} for useful tools and techniques to study real systems.
 
 \subsection{Birth-death processes}
-Mathematically, a birth-death process is a so-called `continuous-time Markov chain' in which only transitions between local states are allowed. In other words, a birth-death process is a stochastic process unfolding in continuous time such that
+Mathematically, a birth-death process is a stochastic process unfolding in continuous time such that
 \begin{itemize}
-	\item The process is `Markov', meaning that the future is statistically independent of the past given the present. In more mathematical terms, if the value of the stochastic process at time $t$ is given by $X_t$, $\mathbb{P}(\cdot | E)$ denotes probability conditioned on $E$, and $u < s \leq t$, then
+	\item The process is `Markov', meaning that the future is statistically independent of the past given the present. In more mathematical terms, if the value of the stochastic process at time $t$ is given by $X_t$, $\mathbb{P}(\cdot | E)$ denotes probability conditioned on $E$, and $u < s \leq t$ are any three times, then
 	\begin{equation*}
 	\mathbb{P}(X_t | X_s, X_u) = \mathbb{P}(X_t | X_s)
 	\end{equation*}
 	This equation is simply saying that if we have the information about the state of a process at time $s$, then we do not gain any more predictive power about the process at a future time $t$ if we have additional knowledge about the process from some past time $u < s$. A series of tosses of a fair coin is a simple example of a Markov process, since knowing whether a coin landed on heads during a previous toss does not change your predictive power about whether the coin will land on heads the next time you toss it.
-	\item Direct transitions must be `local'. In one dimension, mathematicians usually reserve the phrase `birth-death process' to processes that take values in the non-negative integers $\{0,1,2,3,4,\ldots\}$. In this case, only direct transitions from $n$ to $n \pm 1$ are allowed to occur. Biologically, this is saying that we observe the population on a fine enough timescale that the probability of two or more births/deaths occurring at the exact same time is very low and we can disallow it entirely in our models. The conditions for higher dimensional birth-death processes look similar.
+	\item Transitions are in units of one individual. In one dimension, the phrase `birth-death process' is usually reserved for processes that take values in the non-negative integers $\{0,1,2,3,4,\ldots\}$ such that the only direct transitions are from $n$ to $n \pm 1$. Biologically, this is saying that we observe the population on a fine enough timescale that the probability of two or more births/deaths occurring at the exact same time is very low and we can disallow it entirely in our models. The conditions for higher dimensional birth-death processes look similar.
 \end{itemize}
-Since these processes unfold in continuous time, they are characterized not by transition probabilities but by transition \emph{rates}, which can be thought of as the probability of transition `per unit time'. The quantity of interest is usually the probability of being in a particular state at a given point in time. The entire birth-death process can be described in terms of such a quantity, through a so-called `Master equation'. The master equation is a partial differential equation (PDE) for the probability of being in a given state at a given time, However, in all but the simplest cases, we can't actually solve this PDE, because it is simply too hard. The primary source of difficulty is non-linearity in the transition rates and the fact that transitions occur in discrete, discontinuous `jumps'. It is much easier to describe and analyze systems that change `continuously', since one can then use tools from stochastic calculus and partial differential equations, as I describe below.
+Since these processes unfold in continuous time, they are characterized not by transition probabilities but by transition \emph{rates}, which can be thought of as the probability of transition `per unit time'. The quantity of interest is usually the probability of being in a particular state at a given point in time. The entire birth-death process can be described in terms of such a quantity, through a so-called `Master equation'. The master equation is a partial differential equation (PDE) for the probability of being in a given state at a given time, However, in all but the simplest cases, we can't actually solve this PDE, because it is simply too hard. The primary source of difficulty is non-linearity in the transition rates and the fact that transitions occur in discrete, discontinuous `jumps'. It is much easier to describe and analyze systems that change `continuously'.
 
 \subsection{SDEs and the Fokker-Planck equation}\label{intro_SDE}
 Stochastic systems which change continuously (in the state space) can be described in terms of a `stochastic differential equation' (SDE), which here is interchangeable with the phrase `It\^o process'. An SDE for a stochastic process $\{X_t\}_{t \geq 0}$ is an equation of the form
@@ -24,12 +24,14 @@ Stochastic systems which change continuously (in the state space) can be describ
 \label{ito_SDE_integral}
 X_t = \int\limits_{0}^{t} F(s,X_s)ds + \int\limits_{0}^{t} G(s,X_s)dW_s
 \end{equation}
-where $F(t,x)$ and $G(t,x)$ are `nice' functions\footnote{For the mathematically oriented reader, there are two requirements: Firstly, we require the functions to have `linear growth', meaning that we can find a constant $C > 0$ such that $\|F(t,x)\| + \|G(t,x)\| \leq C(1+\|x\|)$ for every $x \in \mathbb{R}^{d}$ and $t > 0$. We also require `Lipschitz continuity', which means that we can find a constant $L > 0$ such that $\|F(t,x) - F(t,y)\| + \|G(t,x)-G(t,y)\| \leq L\|x-y\|$ for every pair $x,y \in \mathbb{R}^d$ and $t > 0$. Here, $\|\cdot\|$ denotes the natural norm on the space under consideration and for our cases will usually be the Euclidean norm. For biological systems, both of these conditions will usually be satisfied, and so I assume going further that all our SDEs are always well-defined and admit solutions.}. In the math, physics, and related literature, $F$ and $G$ are often called the `drift' and `diffusion' terms of the process respectively. However, I will not use this terminology here to avoid potential confusion with genetic drift (which actually corresponds to the `diffusion' term in the math/physics terminology). $W_t$ is the so-called `Wiener process' or `standard Brownian motion'. Named after the botanist Robert Brown (who was looking at the random erratic motion of pollen grains in water under a microscope), $\{W_t\}_{t \geq 0}$ is a stochastic process that is supposed to model `random noise' or `undirected diffusion' of a particle. If one imagines $W_t$ as recording the position of a small pollen grain at time $t$, then $W_t$ can be formally thought of as a process that has the following properties:
+where $F(t,x)$ and $G(t,x)$ are `nice' functions. In the math, physics, and related literature, $F$ and $G$ are often called the `drift' and `diffusion' terms of the process respectively. However, I will not use this terminology here to avoid potential confusion with genetic/ecological drift (which actually manifests in the `diffusion' term $G$, whereas directional effects like selection manifest in $F$, the term called `drift' in the math/physics terminology. This can obviously be very confusing).
+
+$W_t$ denotes the so-called `Wiener process' or `standard Brownian motion'. Named after the botanist Robert Brown, who was looking at the random erratic motion of pollen grains in water, the (standard) Brownian motion $\{W_t\}_{t \geq 0}$ is a stochastic process that is supposed to model `random noise' or `undirected diffusion' of a particle in a medium. If one imagines $W_t$ as recording the position of a small pollen grain at time $t$, then $W_t$ can be formally thought of as a model with the following assumptions:
 \begin{itemize}
-	\item It starts at the origin, \emph{i.e} $W_0 = 0$. This is a harmless assumption made for convenience and amounts to a choice of coordinate system.
-	\item It moves continuously, without sudden jumps across regions of space, \emph{i.e} the map $t \to W_t$ is continuous. This simply says that our pollen grain moves short distances in short intervals of time.
-	\item The future movement is independent of past history. That is, given times $u < s < t$, the displacement $W_t - W_s$ is independent of the past position $W_u$.
-	\item The movement is directionless and random, and displacement is normally distributed. More precisely, given two times $s < t$, the displacement $W_t - W_s$ follows a normal distribution with a mean of $0$ (this is the `directionless' part) and a variance of $t-s$ (this is the `random' part).
+	\item The pollen grain starts at the origin, \emph{i.e} $W_0 = 0$. This is a harmless assumption made for convenience and amounts to a choice of coordinate system.
+	\item The pollen grain moves without discontinuous jumps across regions of space, \emph{i.e} the map $t \to W_t$ is continuous.
+	\item The future movement of the pollen grain is independent of its past history. That is, given any three times $u < s < t$, the displacement $W_t - W_s$ is independent of the past position $W_u$.
+	\item Between two observations, the pollen grain is equally likely to have moved in any direction, and the distance moved is normally distributed with variance corresponding to the time interval between the two observations (\emph{i.e.} your uncertainty regarding its position is greater if it has been longer since you last saw it). More precisely, given two times $s < t$, the displacement $W_t - W_s$ follows a normal distribution with a mean of $0$  and a variance of $t-s$.
 \end{itemize}
 It can then be shown that since the motion is equally likely to be in any direction, the expected position at any point of time is the same as the initial position, \emph{i.e} $\mathbb{E}[W_t | W_0] = W_0 = 0$.
 
@@ -37,24 +39,23 @@ The second integral in equation \eqref{ito_SDE_integral} is It\^o's `stochastic 
 \begin{equation*}
 \int\limits_{0}^{T} G(s,X_s)dW_s \coloneqq \lim_{n \to \infty} \sum\limits_{t_i \in \Pi_n}G(t_i,X_{t_i})(W_{t_{i+1}}-W_{t_i})  
 \end{equation*}
-That is to say, it is obtained by making successively finer partitions of the form $[t_i,t_{i+1}]$, and then computing the `area of the rectangle' formed with $W_{t_{i+1}}-W_{t_i}$ and $G(t_i,X_{t_i})$ as sides. This should look similar to the classic Riemann integral, with the uniform width $t_{i+1}-t_i$ of the Riemann integral replaced by a random width corresponding to the random displacement of a Brownian particle during the uniform time interval $[t_i,t_{i+1}]$.
+That is to say, it is obtained by making successively finer slices of the form $[t_i,t_{i+1}]$, and then computing the `area of the rectangle' formed with $W_{t_{i+1}}-W_{t_i}$ and $G(t_i,X_{t_i})$ as sides. This should look similar to the classic Riemann integral, with the uniform width $t_{i+1}-t_i$ of the Riemann integral replaced by a random width corresponding to the random displacement of a Brownian particle during the uniform time interval $[t_i,t_{i+1}]$.
 
-Equation \eqref{ito_SDE_integral} is often represented in the compact form:
+Equation \eqref{ito_SDE_integral} is often represented in the compact `differential' form:
 \begin{equation}
 \label{ito_SDE_diff}
 dX_t = F(t,X_t)dt + G(t,X_t)dW_t
 \end{equation}
-. The physics literature also often uses the `Langevin form':
+The physics literature also often uses the `Langevin form':
 \begin{equation}
 \label{ito_langevin}
 \frac{dx}{dt} = F(t,x) + G(t,x)\eta(t)
 \end{equation}
-where $\eta(t)$ is supposed to be `Gaussian white noise', defined indirectly such that $\int_0^{t}G(s,x)\eta(s)ds$ behaves identically to $\int_0^{t}G(s,X_s)dW_s$. However, it is important to remember that these are both purely formal expressions - Equation \eqref{ito_SDE_diff} is meaningless on its own and is really just shorthand for equation \eqref{ito_SDE_integral}, which is well-defined as explained above; Equation \eqref{ito_langevin} is even worse, because the Brownian motion is known to be non-differentiable, and as such, $\eta(t)$ cannot really exist - Both equations are thus to be interpreted as shorthand for equation \eqref{ito_SDE_integral}, which formally `makes sense'. SDEs are convenient because they satisfy several `nice' analytical properties. For example, using the fact that the Brownian motion has no expected change in value (\emph{i.e} $\mathbb{E}[W_t | W_0] = W_0 = 0$), it can be shown\footnote{We can actually prove something stronger: We can show under rather mild regularity assumptions on $X_t$ and $G(t,x)$ that the stochastic integral is a continuous square-integrable martingale starting at the origin - This means that the map $t \to \int_0^{t}G(s,X_s)dW_s$ is continuous, starts at the origin, and always has an expectation value of $0$.} that the stochastic integral also has an expectation value of $0$ for all $t$, \emph{i.e}:
+where $\eta(t)$ is supposed to be `Gaussian white noise', a `function' that is defined indirectly such that the integral $\int_0^{t}G(s,x)\eta(s)ds$ behaves identically to $\int_0^{t}G(s,X_s)dW_s$. However, it is important to remember that these are both purely formal\footnote{Perhaps confusingly, theoretical people often use `formal' to refer to notation or calculation that is devoid of semantic content, to contrast with things that have rigorous meaning. For example, a `formal calculation' can often mean just manipulating the symbols without any rigorous justifications for whether the terms being manipulated exist. Most normal people would probably call this an `informal' calculation :)} expressions - Equation \eqref{ito_SDE_diff} is meaningless on its own and is really just shorthand for equation \eqref{ito_SDE_integral}, which is well-defined as explained above; Equation \eqref{ito_langevin} is even worse, because the Brownian motion is known to be non-differentiable, and as such, $\eta(t)$ cannot really exist - Both equations are thus to be interpreted as shorthand for equation \eqref{ito_SDE_integral}. SDEs are convenient because they satisfy several `nice' analytical properties. For example, using the fact that the Brownian motion has no expected change in value (\emph{i.e} $\mathbb{E}[W_t | W_0] = W_0 = 0$), it can be shown that the stochastic integral also has an expectation value of $0$ for all $t$, \emph{i.e}:
 \begin{equation*}
 \mathbb{E}\left[\int\limits_{0}^{t} G(s,X_s)dW_s \bigg{|} X_0\right] = 0
 \end{equation*}
-Using this, and the fact that the future path of the Brownian motion itself is independent of its history, one can derive the following `notational algebra table' for manipulating products of formal expressions of the form \eqref{ito_SDE_diff}:
-\\
+Using this, and the fact that the future path of the Brownian motion itself is independent of its history, one can derive the following `multiplication table' for manipulating products of formal expressions of the form \eqref{ito_SDE_diff}:
 \begin{center}
 	\begin{tabularx}{0.4\textwidth}{ 
 			| >{\centering\arraybackslash}X 
@@ -69,11 +70,11 @@ Using this, and the fact that the future path of the Brownian motion itself is i
 		\hline
 	\end{tabularx}
 \end{center}
-which becomes very useful for formal manipulation. One important consequence of this table is that we can no longer rely on the normal rules of calculus when dealing with stochastic integrals. In regular calculus, if we had a quantity $x(t)$ satisfying
+One important but not immediately obvious consequence of this table is that we can no longer rely on the normal rules of calculus when dealing with stochastic integrals. In regular calculus, if we had a continuous quantity $x(t)$ satisfying
 \begin{equation*}
 	\frac{dx}{dt} = f(x) + g(x)
 \end{equation*}
-for two `nice'\footnote{We just need the solution $x(t)$ to be a continuous function} real functions $f$ and $g$, then, given any real function $h$, we can calculate how the quantity $h(x)$ changes using the chain rule of differentiation, which says that
+for two `nice' real functions $f$ and $g$, then, given any real function $h$, we can calculate how the quantity $h(x)$ changes using the chain rule of differentiation, which says that
 \begin{equation*}
 \frac{dh}{dt} = \frac{dh}{dx}\frac{dx}{dt} = h'(x)f(x) + h'(x)g(x)
 \end{equation*}
@@ -106,7 +107,7 @@ The fundamental idea behind the system-size expansion relates to the nature of t
 If the parameter $K$ is sufficiently large, then the Fokker-Planck equation obtained via the system-size expansion can be further simplified to obtain a linear Fokker-Planck equation. This is accomplished by viewing the stochastic dynamics as fluctuating about a deterministic trajectory (obtained by letting $K \to \infty$) and only works if $K$ is large enough to be able to neglect all but the highest-order terms. This is usually an excellent approximation for populations in which the deterministic trajectory has already reached an attractor (stable fixed point, stable limit cycle, etc.). Since many deterministic eco-evolutionary models are expected to relax to such attractors, such an approximation is a useful first step in increasing the generality of existing models (which are usually studied only in the equilibrium regime) to incorporate the dynamics of finite populations. Importantly, this approximation \emph{only} works if we can discard all but highest-order terms of $K$: Including higher-order terms leads to equations that do not form Fokker-Planck equations and do not even describe probability densities. As such, this approximation is best suited to describe populations that are `medium sized' - small enough that they cannot be assumed to be infinitely large, yet large enough that stochasticity is rather weak and the deterministic limit is somewhat predictive - A situation that occurs frequently in ecology and evolution.
 
 \section{Warm up: One-dimensional processes for population size}\label{sec_1D_processes}
-The simplest birth-death processes are those in which the state at any time can be characterized by a single number. Populations of identical individuals are an obvious example of such a system. I will use this toy system as an illustration of the techniques that will be used for the actual problems we intend to tackle in the next sections. The mathematics below are adapted from sections 6.3 and 7.2 of~\cite{gardiner_stochastic_2009}.
+The simplest birth-death processes are those in which the state at any time can be characterized by a single number. Populations of identical individuals are an obvious example of such a system. I will use this toy system as an illustration of the techniques that will be used for the actual problems we intend to tackle in the next sections. The mathematics below are adapted from sections 6.3 and 7.2 of~\cite{gardiner_stochastic_2009} to use biological language and more intuitive notation/explanations.
 
 \subsection{Description of the process and the Master Equation}
 
@@ -128,15 +129,13 @@ and the probability that the event was instead a death is given by
 \begin{equation*}
 \mathbb{P\big[\textrm{ death } \big{|} \textrm{ something happened }\big]} = \frac{d(n)}{b(n)+d(n)}
 \end{equation*}
-\\
-
 \begin{example}\label{ex_1D_stoch_logistic}
 	Consider the case where the per-capita birth rate is a constant $\lambda > 0$, \emph{i.e}, $b(n) = \lambda n$, and the per-capita death rate has the linear density-dependence $d(n) = \left(\mu + (\lambda-\mu)\frac{n}{K}\right)n$, where $\mu$ and $K$ are positive constants. Taking the difference between the birth and death rates, we obtain $b(n) - d(n) = (\lambda - \mu)n\left(1-\frac{n}{K}\right)$, where, identifying $r=\lambda-\mu$, we obtain the familiar logistic equation on the RHS. Note, however, that the population itself is stochastic, whereas the logistic equation is a deterministic description.
 \end{example}
 Now, let $P(n,t)$ be the probability that the population size is $n$ at time $t$. We wish to have an equation to describe how $P(n,t)$ changes with time - this will provide a probabilistic description of how we expect the population size to change over time.
-\myfig{0.5}{figures/2.1_BD_process_1D.png}{\textbf{Schematic description of a one-dimensional birth-death process}. Consider a population of identical individuals. The state of the system can be described by a single number, in this case, the population size. Births and deaths result in changes in the total population size, and the birth and death rates are dependent on the current population size.}{fig_1D_pop_description}
 
-To do this, we imagine a large ensemble of populations. In a large ensemble of copies evolving independently, a fraction $P(n,t)$ will have population size $n$ at time $t$ by definition of probability. We can now simply measure the `inflow' and `outflow' of copies of the population from each state. If a population has $n$ individuals, it could either have gotten there from a population of $n+1$ individuals, with a death rate of $d(n+1)$, or from a population of $n-1$ individuals, with a birth rate of $b(n-1)$. Thus, the rate of `inflow' to the state $n$ is given by
+\myfig{0.97}{figures/2.1_BD_process_1D.png}{\textbf{Schematic description of a one-dimensional birth-death process}. Consider a population of identical individuals. The state of the system can be described by a single number, the population size (numbers within the circles). Births and deaths result in changes in the total population size, and the birth and death rates (arrows) are dependent on the current population size. For a given state $n$, the \textcolor{blue}{blue} arrows depict the rate of `inflow' to the state (from the blue states), whereas the \textcolor{red}{red} arrows depict the rate of `outflow'.}{fig_1D_pop_description}
+To do this, we imagine a large ensemble of populations. In a large ensemble of copies evolving independently, a fraction $P(n,t)$ will have population size $n$ at time $t$ by definition of probability. We can now simply measure the `inflow' and `outflow' of copies of the population from each state~\ref{fig_1D_pop_description}. If a population has $n$ individuals, it could either have gotten there from a population of $n+1$ individuals, with a death rate of $d(n+1)$, or from a population of $n-1$ individuals, with a birth rate of $b(n-1)$. Thus, the rate of `inflow' to the state $n$ is given by
 \begin{equation}
 \label{1D_rate_in}
 R_{\textrm{in}}(n,t) = b(n-1)P(n-1,t) + d(n+1)P(n+1,t)
@@ -194,15 +193,14 @@ where
 \begin{equation*}
 A^{\pm}(x) = b_K(x) \pm d_K(x)
 \end{equation*}
-Equation \eqref{1D_FPE} has the form of a so-called `Fokker-Planck equation', and corresponds to the SDE:
+Equation \eqref{1D_FPE} is a Fokker-Planck equation and corresponds to the SDE:
 \begin{equation}
 \label{1D_SDE}
 dX_t = A^{-}(X_t)dt + \sqrt{\frac{A^{+}(X_t)}{K}}dW_t
 \end{equation}
-interpreted in the It\^{o} sense. Note that the deterministic component of this process depends on the difference between birth and death rates (a mechanistic measure of Malthusian fitness), whereas the stochastic part depends on their sum and scales inversely with $\sqrt{K}$.
+Note that the deterministic component of this process depends on the difference between birth and death rates (a mechanistic measure of Malthusian fitness), whereas the stochastic part depends on their sum (a measure of total turnover rate) and scales inversely with $\sqrt{K}$ and thus vanishes for infinitely large populations. As we will see, this general pattern will turn up repeatedly.
 
 \subsection{Stochastic fluctuations and the weak noise approximation}\label{sec_1D_WNA}
-% The mathematics in this section is taken from~\cite{gardiner_stochastic_2009} with minor modifications\footnote{Gardiner uses a parameter $\epsilon>0$ such that noise increases with an increase in $\epsilon$. I have used a parameter $K>0$ such that noise decreases with an increase in $K$, which is more biologically relevant. Gardiner's exact results can be recovered by substituting $\epsilon = \frac{1}{\sqrt{K}}$}.
 If we assume the noise is weak (this will be made precise shortly), then we can go still further with analytic techniques by measuring fluctuations from the deterministic expectations, albeit with some slightly cumbersome calculations to arrive at the final expressions. We will grit our teeth and get through the algebra below, with my promise that the final answer is neat and easy to handle. It is clear that as $K \to \infty$, equation \eqref{1D_SDE} describes a deterministic process, obtained as the solution to
 \begin{equation}
 \label{1D_det_limit}
