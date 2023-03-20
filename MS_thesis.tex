@@ -164,14 +164,17 @@ Not more than 250 words
 \chapter{A Price-like equation for the variance of a type-level quantity}\label{App_stoch_var_eqns}
 \input{ind_files/99_Appendix_C}
 \chapter{Some Examples}\label{App_examples}
-\input{ind_files/99_Appendix_D_examples}ne
+\input{ind_files/99_Appendix_D_examples}
 
 %Bibliography
-%Again, add the phantomsection so that hyperref knows where to go
+
+%You dont need the `Appendix X' prefix in the headers of the bibliography. 
+\fancyhead[CO]{\rule[-4ex]{0pt}{4ex}\footnotesize\itshape\nouppercase{\leftmark}}
+%Add the phantomsection so that hyperref knows where to go
 \cleardoublepage
 \phantomsection
 \Huge\printbibheading
-%Putting \printbibheading up here makes sure the heading is printed before I change the font size below.
+%Putting \printbibheading up here makes sure the heading is printed before I change the font size below. This should also be outside of multicol if you use a multi-column bibliography.
 %Change the font for the bibliography
 \renewcommand*{\bibfont}{\footnotesize}	
 %Add the bibliography
