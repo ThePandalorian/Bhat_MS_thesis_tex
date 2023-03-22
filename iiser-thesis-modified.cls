@@ -164,7 +164,7 @@ iiser-thesis class.}}%
   \cleardoublepage
   \egroup
   %Acknowledgements page
-  \bd@optpage*{Acknowledgments}{\@acknowledgments}%
+  \compactpage{Acknowledgements}{\@acknowledgments}%
   \cleardoublepage
   %CRediT contributions page
   \contributionspage
@@ -376,6 +376,22 @@ iiser-thesis class.}}%
      \expandafter\@iden
   \fi
   {\begin{#1}{#2}#3\end{#1}}}
+
+
+%I just made this up for a more compact option
+\newenvironment{compactpageenv}[1]{%
+	\section*{\Huge#1}}%
+{\clearpage}
+\newcommand{\compactpage}{%
+	\compactpage@i{compactpageenv}}
+\newcommand{\compactpage@i}[3]{%
+	\ifx\@empty#3
+	\expandafter\@gobble
+	\else
+	\expandafter\@iden
+	\fi
+  {\vspace{-5.3cm}\begin{#1}{#2}#3\end{#1}}}
+
 
 \endinput
 %%
