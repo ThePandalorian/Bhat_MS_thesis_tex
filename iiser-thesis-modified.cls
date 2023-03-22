@@ -390,7 +390,7 @@ iiser-thesis class.}}%
 	\else
 	\expandafter\@iden
 	\fi
-  {\vspace{-5.3cm}\begin{#1}{#2}#3\end{#1}}}
+  {\vspace{-5.4cm}\begin{#1}{#2}#3\end{#1}}}
 
 
 \endinput
