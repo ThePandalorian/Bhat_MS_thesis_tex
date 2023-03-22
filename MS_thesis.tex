@@ -76,7 +76,7 @@ Not more than 250 words
 %%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-
+\microtypesetup{disable}
 \pagestyle{plain} %Don't make the initial frontmatter fancy
 
 %Add the frontmatter
@@ -91,6 +91,8 @@ Not more than 250 words
 \part{Motivation \& Outline}
 \endgroup
 
+%Enable microtype from here on out
+\microtypesetup{enable}
 
 %Implement the fancy headers for everything from here on out
 \pagestyle{fancy}
