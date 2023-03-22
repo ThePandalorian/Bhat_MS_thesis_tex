@@ -12,6 +12,9 @@
 
 %%%%%%%%%%%%%%%%%%%
 
+\usepackage[final]{microtype} % microtype makes `subliminal improvements' in typesetting.
+%see http://www.khirevich.com/latex/microtype/
+
 \usepackage{fancyhdr} %For fancy page headers
 \setlength{\headsep}{1.8in} %add spacing between header and body text
 
@@ -174,13 +177,16 @@ Not more than 250 words
 \cleardoublepage
 \phantomsection
 \Huge\printbibheading
+%Add an entry in the table of contents
+\addcontentsline{toc}{part}{References}
 %Putting \printbibheading up here makes sure the heading is printed before I change the font size below. This should also be outside of multicol if you use a multi-column bibliography.
 %Change the font for the bibliography
 \renewcommand*{\bibfont}{\footnotesize}	
+%Typeset the bibliography little differently using ragged2e
+\begingroup
+\RaggedRight
 %Add the bibliography
 \printbibliography[heading=none]
-%Add an entry in the table of contents
-\addcontentsline{toc}{part}{References}
-
+\endgroup
 %And we're done :)
 \end{document}

@@ -18,9 +18,10 @@
             style=authoryear, %citation style
             uniquelist=false,
             natbib,
-            block=ragged,
-            maxnames=2,
-            maxbibnames=99]{biblatex}
+            block=space, % allow additional horizontal space between blocks
+            maxnames=2, % How many names show up in the in-text citation
+            maxbibnames=99 %How many names show up in the references/bibliography section
+            ]{biblatex}
 
 
 %Make the title of the bibliography say 'References'
@@ -99,11 +100,11 @@
 \renewbibmacro*{publisher+location+date}{%
     \printtext[parens]{\usebibmacro{publisher+location+date@orig}}
 }
-\DeclareFieldFormat[book]{title}{#1\printunit{\addspace}}
+\DeclareFieldFormat[book]{title}{\mkbibitalic{#1}\printunit{\addspace}}
 
 % Changes for inproceedings
 \DeclareFieldFormat[inproceedings]{title}{#1\isdot}
-\DeclareFieldFormat{booktitle}{#1\addcomma}
+\DeclareFieldFormat{booktitle}{\mkbibitalic{#1}\addcomma}
 \xpatchbibmacro{byeditor+others}{%
     \usebibmacro{byeditor+othersstrg}%
     \setunit{\addspace}%
@@ -119,10 +120,67 @@
 
 % Changes in Article
 \DeclareFieldFormat[article]{title}{#1}
-\DeclareFieldFormat[article]{journaltitle}{#1\isdot}
+\DeclareFieldFormat[article]{journaltitle}{\mkbibitalic{#1}\isdot}
 \DeclareFieldFormat[article]{volume}{\textit{#1}}
 \DeclareFieldFormat[article]{pages}{#1}
 
+
+% Changes for preprints
+\DeclareFieldFormat[misc]{title}{#1}
+\DeclareFieldFormat[misc]{publisher}{\mkbibitalic{#1}\isdot}
+
+%Don't put parentheses around the year in the bibliography
+%from https://tex.stackexchange.com/a/428193
+\xpatchbibmacro{date+extradate}{%
+	\printtext[parens]%
+}{%
+	\setunit*{\addcomma\space}%
+	\printtext%
+}{}{} 
+
+
+%Clear some things I dont want going into the bibliography
+%from https://tex.stackexchange.com/a/89848
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryBibitem{\clearfield{day}}
+\AtEveryBibitem{\clearfield{url}}
+\AtEveryBibitem{\clearfield{urlyear}}
+\AtEveryBibitem{\clearfield{note}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%Adjust some lengths related to bibliography
+%from https://tex.stackexchange.com/a/140153
+
+%space between consecutive entries in the bibliography
+\setlength{\bibitemsep}{0.5ex}
+
+%space between consecutive entries of authors with DIFFERENT names in the bibliography. This is called in place of \bibitemsep when the names are different.
+\setlength{\bibnamesep}{1.5ex}
+
+%The indent of follow up lines of the bibliography
+\setlength{\bibhang}{1.5\parindent}
+
+%%%%%%%%%%%%%%%%
+%Add a new command for citing things with possesive apostrophe. For example, if I want to write:  Smith's (2023) big idea, the apostrophe needs to go after the author but before the year
+%From https://tex.stackexchange.com/a/537765
+%The relevant command is \posscite
+\DeclareNameWrapperFormat{labelname:poss}{#1's}
+
+\newrobustcmd*{\posscitealias}{%
+	\AtNextCite{%
+		\DeclareNameWrapperAlias{labelname}{labelname:poss}}}
+
+\newrobustcmd*{\posscite}{%
+	\posscitealias
+	\textcite}
+
+\newrobustcmd*{\Posscite}{\bibsentence\posscite}
+
+\newrobustcmd*{\posscites}{%
+	\posscitealias
+	\textcites}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -177,6 +235,7 @@
 \usepackage{multicol}  %for double column text
 \usepackage{color,soul} %for colored text
 \usepackage{pdfpages} %for inserting PDFs
+\usepackage{ragged2e} %for formatting
 \usepackage{amsfonts}
 \usepackage{enumitem}
 \usepackage{mathtools}
