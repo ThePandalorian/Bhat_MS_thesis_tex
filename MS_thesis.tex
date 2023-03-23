@@ -183,20 +183,21 @@ Finally, I am eternally indebted to my parents, Raja and Vidya. They have unfail
 
 %Bibliography
 
-%You dont need the `Appendix X' prefix in the headers of the bibliography. 
-\fancyhead[CO]{\rule[-4ex]{0pt}{4ex}\footnotesize\itshape\nouppercase{\leftmark}}
+%Ask the bibliography headers to say 'References' 
+\fancyhead[CO]{\rule[-4ex]{0pt}{4ex}\footnotesize\itshape References}
 %Add the phantomsection so that hyperref knows where to go
 \cleardoublepage
 \phantomsection
-\Huge\printbibheading
+\vspace{-4.5cm}
+\Huge\textbf{References}
 %Add an entry in the table of contents
 \addcontentsline{toc}{part}{References}
-%Putting \printbibheading up here makes sure the heading is printed before I change the font size below. This should also be outside of multicol if you use a multi-column bibliography.
 %Change the font for the bibliography
 \renewcommand*{\bibfont}{\footnotesize}	
 %Typeset the bibliography little differently using ragged2e
 \begingroup
 \RaggedRight
+\vspace{2ex}
 %Add the bibliography
 \printbibliography[heading=none]
 \endgroup
