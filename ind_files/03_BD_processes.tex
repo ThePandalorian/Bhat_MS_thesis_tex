@@ -47,13 +47,13 @@ Substituting \eqref{nD_rate_in}, \eqref{nD_rate_out}, and \eqref{nD_step_operato
 This is the master equation of our $m$-dimensional process.
 
 \section{The system-size expansion}
-As before, we now assume we can find a system size parameter $K > 0$ such that we can make the substitutions
+As explained in Section \ref{sec_intuition_sys_size}, we will now assume (on ecological grounds) that there exists a system-size parameter $K > 0$ such that the discrete jumps between states happen in units of $1/K$ and the total population size is controlled by $K$, with $K = \infty$ corresponding to an infinitely large population. In particular, we assume that the birth and death rates scale such that we can make the substitutions
 \begin{align*}
-\mathbf{x} &= \frac{\mathbf{n}}{K}\\
-b^{(K)}_i(\mathbf{x}) &= \frac{1}{K}b_i(\mathbf{n})\\
-d^{(K)}_i(\mathbf{x}) &= \frac{1}{K}d_i(\mathbf{n})
+\mathbf{x} &\coloneqq \frac{\mathbf{n}}{K}\\
+b^{(K)}_i(\mathbf{x}) &\coloneqq \frac{1}{K}b_i(\mathbf{n})\\
+d^{(K)}_i(\mathbf{x}) &\coloneqq \frac{1}{K}d_i(\mathbf{n})
 \end{align*}
-and define new step operators $\Delta_{i}^{\pm}$ by their action on any real-valued function $f(\mathbf{x},t)$ as
+where $\mathbf{x} = \mathbf{n}/K$ measures population \emph{density} instead of population numbers. We now define new step operators $\Delta_{i}^{\pm}$ by their action on any real-valued function $f(\mathbf{x},t)$ as
 \begin{equation}
 \label{nD_step_operators_rescaled}
 \Delta_{i}^{\pm}f([x_1,\ldots,x_m],t) = f([x_1,\ldots,x_i \pm \frac{1}{K}, \ldots x_m],t)
@@ -67,7 +67,7 @@ If $K$ is large, we can once again Taylor expand the action of the step operator
 \begin{equation*}
 f([x_1,\ldots,x_i \pm \frac{1}{K}, \ldots x_m],t) = f(\mathbf{x},t) \pm \frac{1}{K}\frac{\partial f}{\partial x_i}(\mathbf{x},t) + \frac{1}{2K^2}\frac{\partial^2f}{\partial x_i^2}(\mathbf{x},t) + \mathcal{O}(K^{-3})
 \end{equation*}
-which, after substituting into \eqref{nd_M_eqn_rescaled}, yields the equation
+which, after substituting into \eqref{nd_M_eqn_rescaled} and neglecting $ \mathcal{O}(K^{-3})$ terms, yields the equation
 \begin{equation}
 \label{nD_FPE}
 \setlength{\fboxsep}{2\fboxsep}\boxed{\frac{\partial P}{\partial t}(\mathbf{x},t) = \sum\limits_{j=1}^{m}\left[-\frac{\partial}{\partial x_j}\{A_j^{-}(\mathbf{x})P(\mathbf{x},t)\} + \frac{1}{2K}\frac{\partial^2}{\partial x_j^2}\{A_j^{+}(\mathbf{x})P(\mathbf{x},t)\}\right]}

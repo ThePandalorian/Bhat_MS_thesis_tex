@@ -73,19 +73,19 @@ We can now use the same trick as in chapter \ref{chap_BD} and obtain a master eq
 \label{unnormalized_M_equation}
     \frac{\partial P}{\partial t}(\nu,t) = \int\limits_{\mathcal{T}}\left[(\mathcal{E}^{-}_{x}-1)b(x|\nu)P(\nu,t) + (\mathcal{E}^{+}_{x}-1)d(x|\nu)P(\nu,t)\right]dx
 \end{equation}
-This is the `Master equation' of our process.
+This is the master equation of our infinite-dimensional process.
 
 \section{The functional system-size expansion}
 
-To proceed, as before, I assume that there exists a system-size parameter $K > 0$ to obtain a new process $\{\phi^{(t)}\}_{t \geq 0}$ such that for any set $A \subset \mathcal{T}$, $\int_A\phi^{(t)}dx$ gives the `density' of individuals that have trait values that lie within the set $A$. Note that we expect this stochastic process to evolve continuously if $K$ is large since the contribution of each individual is negligible. Specifically, I assume that there exists a $K>0$ such that we can make the substitutions:
+To proceed, as before, I assume that there exists a system-size parameter $K > 0$ such the total population size is controlled by $K$, with $K = \infty$ corresponding to an infinitely large population. This allows us to obtain a new process $\{\phi^{(t)}\}_{t \geq 0}$ such that for any set $A \subset \mathcal{T}$, $\int_A\phi^{(t)}dx$ gives the `density' of individuals that have trait values that lie within the set $A$. Note that we expect this stochastic process to evolve continuously if $K$ is large since the contribution of each individual is negligible. Specifically, I assume we can make the substitutions:
 \begin{align*}
-    \phi^{(t)} = \frac{1}{K}\nu^{(t)} &= \frac{1}{K}\sum\limits_{i=1}^{N(t)}\delta_{x_i}\\
-    b_K(x|\phi^{(t)}) &= \frac{1}{K}b(x|\nu^{(t)})\\
-    d_K(x|\phi^{(t)}) &= \frac{1}{K}d(x|\nu^{(t)})
+    \phi^{(t)} \coloneqq \frac{1}{K}\nu^{(t)} &= \frac{1}{K}\sum\limits_{i=1}^{N(t)}\delta_{x_i}\\
+    b_K(x|\phi^{(t)}) &\coloneqq \frac{1}{K}b(x|\nu^{(t)})\\
+    d_K(x|\phi^{(t)}) &\coloneqq \frac{1}{K}d(x|\nu^{(t)})
 \end{align*}
 $\{\phi^{(t)}\}_{t\geq0}$ takes values in 
 \begin{equation*}
-    \mathcal{M}_{K}(\mathcal{T}) = \left\{\frac{1}{K}\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
+    \mathcal{M}_{K}(\mathcal{T}) \coloneqq \left\{\frac{1}{K}\sum\limits_{i=1}^{n}\delta_{x_i} \ | \ n \in \mathbb{N}, x_i \in \mathcal{T}\right\}
 \end{equation*}
 In terms of these new variables, we obtain the master equation:
 \begin{equation}
@@ -126,17 +126,13 @@ where
 \begin{align*}
    \mathcal{A}^{\pm}(x|\phi) &= b_K(x|\phi)\pm d_K(x|\phi) = \frac{1}{K}\left(b(x|\nu)\pm d(x|\nu)\right)
 \end{align*}
-
-This constitutes the `mesoscopic' description of our process. We can once again appeal to the link between Fokker-Planck equations and Langevins~\citep{lafuerza_role_2016} to say that \eqref{functional_FPE} corresponds to the Langevin equation:
+Equation \eqref{functional_FPE} constitutes the `mesoscopic' description of our process. We can once again appeal to the link between Fokker-Planck equations and It\^o processes to say that \eqref{functional_FPE} corresponds to the SPDE:
 \begin{equation}
 \label{functional_langevin}
-    \frac{\partial \phi}{\partial t}(x,t) = \mathcal{A}^{-}(x|\phi) + \frac{1}{\sqrt{K}}\eta(x,t)
+    \frac{\partial \phi}{\partial t}(x,t) = \mathcal{A}^{-}(x|\phi) + \frac{1}{\sqrt{K}}\mathcal{A}^{+}(x|\phi)\dot{W}(x,t)
 \end{equation}
-where $\eta(x,t)$  is the `Gaussian spacetime white noise' with zero mean and autocovariance function
-\begin{equation*}
-    \mathbb{E}[\eta(x,t)\eta(x',t')] = \sqrt{\mathcal{A}^{+}(x|\phi)\mathcal{A}^{+}(x'|\phi)}\delta(x-x')\delta(t-t')
-\end{equation*}
-If one wishes to be mathematically careful, the connection between \eqref{functional_FPE} and \eqref{functional_langevin} becomes somewhat tenuous. In particular, while the equivalence between Fokker-Planck equations and SDEs (Langevin equations) for finite-dimensional stochastic processes is part of the standard mathematical canon, the corresponding equivalence is much less well understood for the infinite-dimensional function-valued processes that we are dealing with, and the interpretation of any formal `Langevin equation' (corresponding now to a stochastic partial differential equation, or SPDE) that we write down is unclear for general measure spaces - We may need $\mathcal{M}_{K}(\mathcal{T})$ to have a considerable amount of structure (Ex: Seperable Hilbert space) for things to work out~\citep{da_prato_stochastic_2014,balan_gentle_2018}, and I do not know whether our domain is nice enough. For example, it is not immediately clear what conditions on $\mathcal{A}^{\pm}(x | \phi)$ are needed for \eqref{functional_langevin} to even admit a solution. Nevertheless, as I show below, we can recover some well-known deterministic equations from equation \eqref{deterministic_traj}, illustrating consistency with known models, and under certain assumptions, solutions to equations like \eqref{nD_eqn_for_frequencies} have been rigorously proven to exist.
+where $\dot{W}(x,t)$ is the so-called `spacetime white noise' process.
+If one wishes to be mathematically careful, the connection between \eqref{functional_FPE} and \eqref{functional_langevin} becomes somewhat tenuous. In particular, while the equivalence between Fokker-Planck equations and SDEs (Langevin equations) for finite-dimensional stochastic processes is part of the standard mathematical canon, the corresponding equivalence is much less well understood for the infinite-dimensional measure-valued processes we are dealing with - We may need $\mathcal{M}_{K}(\mathcal{T})$ to have a considerable amount of structure (Ex: seperable Hilbert space) for things to work out~\citep{da_prato_stochastic_2014,balan_gentle_2018}, and I do not know whether our domain is nice enough. For example, it is not immediately clear what conditions on $\mathcal{A}^{\pm}(x | \phi)$ are needed for \eqref{functional_langevin} to even admit a solution. Nevertheless, as I show below, we can recover some well-known deterministic equations from equation \eqref{functional_langevin} in the infinite population limit, illustrating consistency with known models. Under certain assumptions on the domain $\mathcal{M}_{K}(\mathcal{T})$ and the  birth-death operators $\mathcal{A}^{\pm}$, equivalences between functional Fokker-Planck equations and SPDEs are rigorously studied and understood (See chapter 10 in~\cite{bogachev_fokker-planck-kolmogorov_2015}).
 
 \section{The infinite population limit}
 Taking $K \to \infty$ in equation \eqref{functional_langevin} then yields a PDE:
