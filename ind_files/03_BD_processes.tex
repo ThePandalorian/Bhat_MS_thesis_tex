@@ -183,7 +183,7 @@ The first term of the RHS describes the statistical covariance between the quant
 
 \section{Stochastic fluctuations and the weak noise approximation}
 
-As in the one-dimensional case, we can go a little further if the noise is sufficiently weak. Let the deterministic trajectory obtained by solving \eqref{nD_det_limit} be given by $\boldsymbol{\alpha}(t)$.  We can once again track 
+As in the one-dimensional case, we can go a little further if the noise is sufficiently weak. Let the deterministic trajectory obtained by solving \eqref{nD_det_limit} be given by $\boldsymbol{\alpha}(t) = [\alpha_1(t), \alpha_2(t), \ldots, \alpha_m(t)]^{\mathrm{T}}$.  We can once again track 
 stochastic fluctuations from the deterministic trajectory by introducing the new variables
 \begin{equation}
 \begin{aligned}
@@ -254,12 +254,12 @@ and thus, from \eqref{nD_WNA_taylor_term}, we can calculate the directional deri
 \begin{align}
 D_i &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial A^{-}_i(\mathbf{x})}{\partial x_k}\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right)\\
 &= \sum\limits_{k=1}^{m} y_k\left(\frac{\partial}{\partial x_k}\left( w_i(\mathbf{x})x_i + \mu Q_i(\mathbf{x})\right)\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right)\\
-&= \sum\limits_{k=1}^{m} y_k\left(a_i\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right) + y_iw_i(\boldsymbol{\alpha}) + \mu\sum\limits_{k=1}^{m} y_k\left(\frac{\partial Q_i}{\partial x_k}(\mathbf{x})\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right)\\
-&= y_iw_i(\boldsymbol{\alpha}) + a_iD_{\mathbf{y}}(w_i(\boldsymbol{\alpha})) + \mu D_{\mathbf{y}}(Q_i(\boldsymbol{\alpha}))\label{nD_WNA_directional_derivative_for_replicator_eqns}
+&= \sum\limits_{k=1}^{m} y_k\left(\alpha_i\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right) + y_iw_i(\boldsymbol{\alpha}) + \mu\sum\limits_{k=1}^{m} y_k\left(\frac{\partial Q_i}{\partial x_k}(\mathbf{x})\bigg{|}_{\mathbf{x}=\boldsymbol{\alpha}(t)}\right)\\
+&= y_iw_i(\boldsymbol{\alpha}) + \alpha_iD_{\mathbf{y}}(w_i(\boldsymbol{\alpha})) + \mu D_{\mathbf{y}}(Q_i(\boldsymbol{\alpha}))\label{nD_WNA_directional_derivative_for_replicator_eqns}
 \end{align}
 Using this in \eqref{nD_moment_eqn_mean}, we see that the expected change of a fluctuation in the density of type $i$ individuals evolves as:
 \begin{equation}
 \label{nD_moment_eqn_mean_replicator}
-\frac{d}{dt}\mathbb{E}[y_i] = \underbrace{w_i(\boldsymbol{\alpha})\mathbb{E}[y_i]}_{\substack{\text{Current fitness of type $i$} \\ \text{at deterministic trajectory $\boldsymbol{\alpha}$} \\ \text{(scaled by expected density $\mathbb{E}[y_i]$)}}} + \underbrace{a_i\mathbb{E}[D_{\mathbf{y}}(w_i(\boldsymbol{\alpha}))]}_{\substack{\text{Expected change in fitness} \\ \text{ of type $i$ in going from $\boldsymbol{\alpha}$ to $\mathbf{y}$} \\ \text{(scaled by deterministic density $a_i$)}}} + \underbrace{\mu\mathbb{E}[D_{\mathbf{y}}(Q_i(\boldsymbol{\alpha}))]}_{\substack{\text{Expected effect of} \\ \text{mutations}}}
+\frac{d}{dt}\mathbb{E}[y_i] = \underbrace{w_i(\boldsymbol{\alpha})\mathbb{E}[y_i]}_{\substack{\text{Current fitness of type $i$} \\ \text{at deterministic trajectory $\boldsymbol{\alpha}$} \\ \text{(scaled by expected fluctuation $\mathbb{E}[y_i]$)}}} + \underbrace{\alpha_i\mathbb{E}[D_{\mathbf{y}}(w_i(\boldsymbol{\alpha}))]}_{\substack{\text{Expected change in fitness} \\ \text{ of type $i$ in going from $\boldsymbol{\alpha}$ to $\mathbf{y}$} \\ \text{(scaled by deterministic density $\alpha_i$)}}} + \underbrace{\mu\mathbb{E}[D_{\mathbf{y}}(Q_i(\boldsymbol{\alpha}))]}_{\substack{\text{Expected effect of} \\ \text{mutations}}}
 \end{equation}
 Thus, the expected behavior of fluctuations in the weak noise limit is controlled purely by fitness differences and mutational effects. If $\mathbb{E}[y_i] \equiv 0 \ \forall \ i$ is a stable fixed point for the system of equations defined by \eqref{nD_moment_eqn_mean_replicator}, then stochastic fluctuations are expected to decay, meaning that the deterministic point $\boldsymbol{\alpha}$ is a stable configuration for the complete dynamics when fluctuations are weak. In the case of 2-strategy matrix games (\emph{i.e.} when $m=2$ and the fitness functions $w_i(p)$ are of the form $w_i = \sum_j a_{ij}p_j$ for some constants $a_{ij}$), it has been shown that $\mathbb{E}[y_i] \equiv 0 \ \forall \ i$ is a stable fixed point for \eqref{nD_moment_eqn_mean_replicator} if and only if the population state $\boldsymbol{\alpha}$ is an evolutionarily stable strategy (ESS) for the determinstic game defined by \eqref{nD_det_limit} (which of course reduces to the replicator dynamics defined by \eqref{nD_replicator_mutator}), thus recovering a stochastic version of a classic result in evolutionary game theory~\citep{tao_stochastic_2007}.
