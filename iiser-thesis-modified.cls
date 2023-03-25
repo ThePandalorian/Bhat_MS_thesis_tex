@@ -166,6 +166,9 @@ iiser-thesis class.}}%
   %Acknowledgements page
   \compactpage{Acknowledgements}{\@acknowledgments}%
   \cleardoublepage
+  %Funding page
+  \noncompactpage{Funding \& Financial Support}{\@funding}%
+  \cleardoublepage
   %CRediT contributions page
   \contributionspage
   \cleardoublepage
@@ -174,9 +177,6 @@ iiser-thesis class.}}%
   \phantomsection
   \bd@abstract{\@thesisabstract}%
   \addcontentsline{toc}{chapter}{Abstract}
-  \cleardoublepage
-  %Preface if present
-  \bd@optpage{Preface}{\@preface}%
   \cleardoublepage
   %Table of contents
   \tableofcontents
@@ -225,6 +225,7 @@ iiser-thesis class.}}%
   \@mainmattertrue
   \pagenumbering{arabic}}
 \gdef\@acknowledgments{}
+\gdef\@funding{}
 \gdef\@supervisor{}
 \gdef\@cosupervisor{}
 \gdef\@sdesignation{}
@@ -239,6 +240,7 @@ iiser-thesis class.}}%
 \gdef\@preface{}
 \gdef\@thesisabstract{}
 \newcommand{\acknowledgments}[1]{\gdef\@acknowledgments{#1}}
+\newcommand{\funding}[1]{\gdef\@funding{#1}}
 \newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
 \newcommand{\cosupervisor}[1]{\gdef\@cosupervisor{#1}}
 \newcommand{\sdesignation}[1]{\gdef\@sdesignation{#1}}
@@ -361,26 +363,25 @@ iiser-thesis class.}}%
   \ifdim \wd0>\bd@comm@signline@lngth
     \global\bd@comm@signline@lngth=\wd0
   \fi}}
-\newenvironment{optionalpage}[1]{%
-  \chapter{#1}}%
-  {\clearpage}
-\newenvironment{optionalpage*}[1]{%
-  \chapter*{#1}}%
-  {\clearpage}
-\newcommand{\bd@optpage}{%
-  \@ifstar{\bd@optpage@i{optionalpage*}}{\bd@optpage@i{optionalpage}}}
-\newcommand{\bd@optpage@i}[3]{%
-  \ifx\@empty#3
-     \expandafter\@gobble
-  \else
-     \expandafter\@iden
-  \fi
-  {\begin{#1}{#2}#3\end{#1}}}
+
+%I just made this up
+\newenvironment{noncompactpageenv}[1]{%
+	\chapter*{\hfill{\centering #1}\hfill}}%
+{\clearpage}
+\newcommand{\noncompactpage}{%
+	\noncompactpage@i{noncompactpageenv}}
+\newcommand{\noncompactpage@i}[3]{%
+	\ifx\@empty#3
+	\expandafter\@gobble
+	\else
+	\expandafter\@iden
+	\fi
+	{\vspace{4cm}\begin{#1}{#2}#3\end{#1}}}
 
 
 %I just made this up for a more compact option
 \newenvironment{compactpageenv}[1]{%
-	\section*{\Huge#1}}%
+	\section*{\centering\Huge#1}}%
 {\clearpage}
 \newcommand{\compactpage}{%
 	\compactpage@i{compactpageenv}}
