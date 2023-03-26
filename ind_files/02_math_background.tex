@@ -39,14 +39,13 @@ The second integral in equation \eqref{ito_SDE_integral} is It\^o's `stochastic 
 \begin{equation*}
 \int\limits_{0}^{T} G(s,X_s)dW_s \coloneqq \lim_{n \to \infty} \sum\limits_{t_i \in \Pi_n}G(t_i,X_{t_i})(W_{t_{i+1}}-W_{t_i})  
 \end{equation*}
-That is to say, it is obtained by making successively finer slices of the form $[t_i,t_{i+1}]$, and then computing the `area of the rectangle' formed with $W_{t_{i+1}}-W_{t_i}$ and $G(t_i,X_{t_i})$ as sides. This should look similar to the classic Riemann integral, with the uniform width $t_{i+1}-t_i$ of the Riemann integral replaced by a random width corresponding to the random displacement of a Brownian particle during the uniform time interval $[t_i,t_{i+1}]$.
-
-Equation \eqref{ito_SDE_integral} is often represented in the compact `differential' form:
+That is to say, it is obtained by dividing our time interal into slices of the form $[t_i,t_{i+1}]$, computing the `area of the rectangle' formed with $W_{t_{i+1}}-W_{t_i}$ and $G(t_i,X_{t_i})$ as sides, and then taking the limit\footnote{If you know a little bit of mathematics, it bears noting that this limit is in $L^2(\mathbb{P})$, whereas the corresponding limit in the usual Riemann-Stieltjes integral is evaluated pointwise. If you don't know what this sentence means, just ignore it for the purposes of this thesis :)} of finer and finer slices of time. This should look similar to the classic Riemann integral, with the uniform width $t_{i+1}-t_i$ of the Riemann integral replaced by a random width $W_{t_{i+1}}-W_{t_i}$ corresponding to the (random) displacement of a Brownian particle during the uniform time interval $[t_i,t_{i+1}]$.\\
+Equation \eqref{ito_SDE_integral} is often represented in the `differential' form:
 \begin{equation}
 \label{ito_SDE_diff}
 dX_t = F(t,X_t)dt + G(t,X_t)dW_t
 \end{equation}
-The physics literature also often uses the `Langevin form':
+The physics literature also often uses the `Langevin' form:
 \begin{equation}
 \label{ito_langevin}
 \frac{dx}{dt} = F(t,x) + G(t,x)\eta(t)
