@@ -340,3 +340,15 @@
             }
     }
 }
+
+
+
+%Add a footer without a marker/reference in the main text
+%From https://tex.stackexchange.com/a/544121
+\newcommand\extrafootertext[1]{%
+	\bgroup
+	\renewcommand\thefootnote{\fnsymbol{footnote}}%
+	\renewcommand\thempfootnote{\fnsymbol{mpfootnote}}%
+	\footnotetext[0]{#1}%
+	\egroup
+}
