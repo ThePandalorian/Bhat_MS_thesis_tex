@@ -53,7 +53,7 @@ Conditioned on non-extinction, the solution to \eqref{ex_1D_stoch_logistic_full_
 
 The methods outlined in the above section have recently been used to study the population dynamics of a finite population playing a so-called `matrix game' (An evolutionary game for which you can write down a payoff matrix) with 2 pure strategies~\citep{tao_stochastic_2007}. Based on the interpretation of what each type represents, this is mathematically equivalent to studying frequency-dependent selection on a one-locus two-allele gene (with a bijective genotype-phenotype map and no mutations) or studying two-species competitive Lotka-Volterra dynamics, as we will show below. The stochastic Lotka-Volterra competition model shown below has also been proved to be equivalent to an $m$-allele Moran model under certain limits~\citep{constable_mapping_2017}.
 
-Let us imagine a population with $m$ types of individuals that are interacting according to some ecological rules. Let the state of the population be characterized by the vector $\mathbf{n}(t) = [n_1(t),n_2(t),\ldots,n_m(t)]$, where $n_i(t)$ is the number of type $i$ individuals at time $t$. Let the birth and death rates of the $i$th type be given by:
+Let us imagine a population with $m$ types of individuals that are interacting according to some ecological rules. Let the state of the population be characterized by the vector $\mathbf{n}(t) = [n_1(t),n_2(t),\ldots,n_m(t)]^{\mathrm{T}}$, where $n_i(t)$ is the number of type $i$ individuals at time $t$. Let the birth and death rates of the $i$th type be given by:
 \begin{equation}
 \label{nD_example_numbers_b_d_rates}
 \begin{aligned}
@@ -98,7 +98,7 @@ These are precisely the Lotka-Volterra equations for a system of $m$ species. By
 \label{nD_example_fitness}
 w_i(\mathbf{x}) = r + \sum\limits_{j=1}^{m}M_{ij}x_j
 \end{equation}
-If $p_i(t)$ is the frequency of type $i$ individuals in the population at time $t$ and $N_K(t) = \sum_i x_i(t)$, then the mean fitness is given by
+If $\mathbf{p}(t) = [p_1(t),\ldots,p_m(t)]^{\mathrm{T}}$ is the frequency vector at time $t$ and $N_K(t) = \sum_i x_i(t)$, then the mean fitness is given by
 \begin{align}
 \overline{w}(t) &= \sum\limits_{i=1}^{m}w_ip_i\\
 &= \sum\limits_{i=1}^{m}\left(r + \sum\limits_{j=1}^{m}M_{ij}x_j\right)p_i\\
@@ -110,7 +110,7 @@ where we have used the fact that $\sum_i p_i = 1$ in the last line. Using \eqref
 \end{equation}
 which is the familiar version of the replicator equation seen in most textbooks, with an extra $N_K(t)$ factor to account for the fact that $\sum_i x_i$ is allowed to fluctuate in our model. If instead $N_K$ was a constant for all time, it could simply be absorbed into the definition of the payoff matrix $M$ to obtain exactly the replicator equation as presented in most ecology/evolution textbooks. Both the stochastic dynamics \eqref{nD_example_SDE} and the deterministic limit \eqref{nD_example_det_limit} can be simplified from an $m$ dimensional system to an $m-1$ dimensional system by a coordinate transformation that projects the dynamics onto an appropriate curve: If we go from the variables $x_1,\ldots,x_m$ to the variables $p_1,\ldots,p_{m-1},N_K$, we can exploit the fact that $N_K$ varies much less than the $p_i$ terms to project the system onto a `slow manifold' in which $N_K$ is approximately constant, thus obtaining an $m-1$ dimensional system of equations and recovering the relation between the Lotka-Volterra equations for $m$ species and the replicator equation for $m-1$ tactics~\citep{constable_mapping_2017,parsons_dimension_2017}. However, I will not explore such dimensional reduction techniques further in this manuscript, and refer the reader to~\cite{constable_stochastic_2013} and~\cite{parsons_dimension_2017} for a review of the ideas of (stochastic) dynamics on slow manifolds.
 
-Let the solution to the equations \eqref{nD_example_det_limit} be given by $\mathbf{a}(t) = [a_1(t),\ldots,a_m(t)]$. For the weak noise approximation, we can Taylor expand $A^{\pm}_i$ and use \eqref{nD_WNA_directional_derivative_for_replicator_eqns} to compute the directional derivative as:
+Let the solution to the equations \eqref{nD_example_det_limit} be given by $\mathbf{a}(t) = [a_1(t),\ldots,a_m(t)]^{\mathrm{T}}$. For the weak noise approximation, we can Taylor expand $A^{\pm}_i$ and use \eqref{nD_WNA_directional_derivative_for_replicator_eqns} to compute the directional derivative as:
 \begin{align}
 D_i &= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_k\left(\frac{\partial w_i}{\partial x_k}\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
 &= y_iw_i(\mathbf{a}) + a_i\sum\limits_{k=1}^{m}y_k\left(\frac{\partial}{\partial x_k}(r+\sum\limits_{j=1}^{m}M_{ij}x_j)\bigg{|}_{\mathbf{x}=\mathbf{a}(t)}\right)\\
