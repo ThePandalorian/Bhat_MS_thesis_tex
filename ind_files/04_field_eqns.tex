@@ -158,12 +158,12 @@ Substituting equation \eqref{BD_for_kimura} into \eqref{deterministic_traj}, we 
 \label{PDE_for_kimura}
 \frac{\partial \psi}{\partial t}(x,t) = w(x|\psi)\psi(x,t) + \mu Q(x|\psi)
 \end{equation}
-where I have defined $w(x|\psi) \coloneqq b^{\textrm{(ind)}}(x|\psi) - d^{\textrm{(ind)}}(x|\psi)$, the (Malthusian) `fitness' of the phenotype $x$. To track population numbers and trait frequencies, let us define as before, the total population size and population frequency as
+where I have defined $w(x|\psi) \coloneqq b^{\textrm{(ind)}}(x|\psi) - d^{\textrm{(ind)}}(x|\psi)$, the (Malthusian) `fitness' of the phenotype $x$. To track population numbers and trait frequencies, let us define as before, the scaled population size and trait frequency as
 \begin{equation}
 \label{pop_size_and_freq_for_kimura}
 \begin{aligned}
-N_K(t) &\coloneqq \int\limits_{\mathcal{T}}\psi(x,t)dx\\
-p(x,t) &\coloneqq \frac{\psi(x,t)}{N_K(t)}
+N_K(t) &\coloneqq \int\limits_{\mathcal{T}}\psi(x,t)dx = \frac{1}{K} \int\limits_{\mathcal{T}}\nu(x,t)dx\\
+p(x,t) &\coloneqq \frac{\psi(x,t)}{N_K(t)} = \frac{\nu(x,t)}{\int\limits_{\mathcal{T}}\nu(y,t)dy}
 \end{aligned}
 \end{equation}
 The population mean fitness is:
@@ -188,7 +188,7 @@ where I have used the definition of $p(x,t)$ in the second line. Using \eqref{me
 \end{equation}
 This is a version of the replicator-mutator equation for continuous strategy spaces when each $x$ is viewed as a strategy~\citep{cressman_replicator_2014}.
 
-Equation \eqref{cts_replicator_mutator} also recovers~\posscite{kimura_stochastic_1965} continuum-of-alleles model when each $x$ is viewed as an allele, $Q(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, and the trait space is the entire real line, \emph{i.e.} $\mathcal{T} = \mathbb{R}$. To see this, let $Q(y|\psi) = \int\limits_{\mathbb{R}}m(y-z)\psi(z,t)dz$, where $m:\mathbb{R} \to [0,\infty)$ is a mutation kernel, which by definition is normalized such that $\int\limits_{\mathbb{R}}m(x)dx = 1$. Let us further note that I have implicitly been assuming\footnote{This actually need not be an assumption, and can be derived as a theorem under biologically reasonable conditions on the birth/death functionals upon taking the rigorous approach to both the system size expansion (rescaling) and the infinite population limit. See, for example,~\citet{etheridge_introduction_2000} or proposition 4.1 in~\citet{champagnat_individual_2008}} that the total number of individuals (scaled by $K$) remains finite at all times, \emph{i.e.} $N_K(t) = \int\limits_{\mathbb
+Equation \eqref{cts_replicator_mutator} also recovers~\posscite{kimura_stochastic_1965} continuum-of-alleles model when each $x$ is viewed as an allele, $Q(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, and the trait space is the entire real line, \emph{i.e.} $\mathcal{T} = \mathbb{R}$. To see this, let $Q(y|\psi) = \int\limits_{\mathbb{R}}m(y-z)\psi(z,t)dz$, where $m:\mathbb{R} \to [0,\infty)$ is a mutation kernel, which by definition is normalized such that $\int\limits_{\mathbb{R}}m(x)dx = 1$. Let us further note that I have implicitly been assuming\footnote{This actually need not be an assumption, and can be derived as a theorem under biologically reasonable conditions on the birth/death functionals upon taking the rigorous approach to both the system size expansion (rescaling) and the infinite population limit. See, for example,~\citet{etheridge_introduction_2000} or proposition 4.1 in~\citet{champagnat_individual_2008}} that even though the total number of individuals $\int \nu(x) dx \to \infty$ as $K \to \infty$, the \emph{scaled} population size $N_K = \int \nu(x) dx / K$ remains finite at all times, \emph{i.e.} $N_K(t) = \int\limits_{\mathbb
 R}\psi(x,t)dx < \infty \ \forall \ t$. Thus, for any fixed $t > 0$, we have
 \begin{equation*}
 \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}|m(y-z)\psi(z,t)|dydz =  \int\limits_{\mathbb{R}}\left(\int\limits_{\mathbb{R}}|m(y-z)|dy\right)|\psi(z,t)|dz
