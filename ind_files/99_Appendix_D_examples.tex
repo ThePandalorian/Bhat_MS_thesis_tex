@@ -162,7 +162,7 @@ or, in matrix form:
 \end{equation}
 The eigenvalues of the first matrix on the RHS will tell us whether the fixed point $\mathbb{E}[y_i] = 0 \ \forall \ i$ (the only fixed point of this system) is stable, or whether fluctuations are expected to grow (up to the point where the fluctuations are so large that the WNA is no longer valid). In the $m=2$ case,~\cite{tao_stochastic_2007} have shown that $\mathbb{E}[y_i] = 0 \ \forall \ i$ is a stable fixed point for this system iff the point $\mathbf{y}$ is an ESS (in the usual game-theoretic sense) for the matrix game defined by the payoff matrix $\mathbf{M}$.
 
-\section{An example of noise-induced selection causing deviations from neutrality despite equal fitness}
+\section{An example of noise-induced selection causing deviations from neutrality despite equal fitness}\label{App_deviation_from_neutrality}
 
 To illustrate the biasing effects of noise-induced selection in otherwise neutral dynamics, I will use a simple 2 species Lotka-Volterra competition-like model where the effects of competition are on birth rates of one species but on the death rates of the other.
 
@@ -200,13 +200,13 @@ However, if we now compute the per-capita turnover rates $\tau_i$  of each type,
 \end{align*}
 Thus, $\tau_{1} < \tau_{2}$, and from equation \eqref{nD_stochastic_RM}, we thus know that noise-induced selection favors type 1 over type 2.
 \myfig{1}{figures/App_stoch_LV_density_plots.png}{\textbf{(A)} Time series and \textbf{(B)} Density estimates for $p$, the fraction of type 1 individuals in the population for various values of $K$, obtained from a direct individual-based simulation of the model  conducted via the Gillespie algorithm. At high $K$, the population conforms to deterministic (infinite population) predictions. The time series are from single realizations. The density plots in panel $(B)$ are estimated from 100 independent realizations, each of which were run for $10^4$ timesteps. All simulations were initialized with $n_1 = n_2 = K/2$. In all simulations, $\mu = 0.05$.}{App_stoch_LV_dens_plots}
-Direct Gillespie simulations indeed reveal that for low values of $K$, the fraction of individuals in the population that are of type \textcolor{red}{1} is significantly biased to be greater than 0.5, showing the effect of noise-induced selection (Figure \ref{App_stoch_LV_dens_plots}). This bias disappears for high values of $K$, as expected.
+Direct Gillespie simulations indeed reveal that for low values of $K$, the fraction of individuals in the population that are of type 1 is significantly biased to be greater than 0.5, showing the effect of noise-induced selection (Figure \ref{App_stoch_LV_dens_plots}). This bias disappears for high values of $K$, as expected.
 
 For this model, we can in fact quantitatively derive the effects of noise-induced selection by explicitly calculating each term of equation \eqref{nD_stochastic_RM}. Let $p = x_1/(x_1 + x_2)$ be the frequency of type 1 individuals and let $q = 1-p$. Then, it is easy to check by direct substitution of our functional forms that \eqref{nD_stochastic_RM} becomes
 \begin{equation}
 	dp =  \frac{2}{K}p^2qdt + \mu\left(1-\frac{1}{KN_K}\right)\left(q-p\right) + q\sqrt{A^{+}_1}dW_t^{(1)} - p\sqrt{A^{+}_2}dW_t^{(2)}
 \end{equation}
-where $A_i^{+}$ is as defined throughout this thesis and each $W^{i}$ is an independent Wiener process. This equation clearly shows the biasing effect of noise-induced selection in the first term of the RHS. Since $p^2(1-p) > 0$ for $p \in (0,1)$, this term always tends to increase the fraction of type 1 individuals in the population. The second term is a mutational term, and simply reflects the fact that we assumed that $1 \to 2$ and $2 \to 1$ mutations are equally likely (and thus the net direction of mutational effects on frequency depends on the difference between the frequencies of type 1 and type 2 individuals).
+where $A_i^{+}$ is as defined throughout this thesis and each $W^{i}$ is an independent Wiener process. This equation clearly shows the biasing effect of noise-induced selection in the first term of the RHS. Since $p^2(1-p) > 0$ for $p \in (0,1)$, this term always tends to increase the fraction of type 1 individuals in the population. The second term is a mutational term, and simply reflects the fact that we assumed that $1 \to 2$ and $2 \to 1$ mutations are equally likely, and thus, the net effect of mutational effects depends on the difference between the frequencies of type 1 and type 2 individuals and flows towards the type with lower frequency, which is why it is $q-p$ and not $p-q$. Finally, the two $dW_t$ terms are non-directional and vanish upon taking an expectation over the probability space, and therefore have no net contribution other than `blurring out the results' if we look at the dynamics averaged over many realizations.
 
 \section{Interlude: Detecting modes in quantitative trait distributions through Fourier analysis}
 
