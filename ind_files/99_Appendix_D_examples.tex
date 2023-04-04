@@ -162,6 +162,52 @@ or, in matrix form:
 \end{equation}
 The eigenvalues of the first matrix on the RHS will tell us whether the fixed point $\mathbb{E}[y_i] = 0 \ \forall \ i$ (the only fixed point of this system) is stable, or whether fluctuations are expected to grow (up to the point where the fluctuations are so large that the WNA is no longer valid). In the $m=2$ case,~\cite{tao_stochastic_2007} have shown that $\mathbb{E}[y_i] = 0 \ \forall \ i$ is a stable fixed point for this system iff the point $\mathbf{y}$ is an ESS (in the usual game-theoretic sense) for the matrix game defined by the payoff matrix $\mathbf{M}$.
 
+\section{An example of noise-induced selection causing deviations from neutrality despite equal fitness}
+
+To illustrate the biasing effects of noise-induced selection in otherwise neutral dynamics, I will use a simple 2 species Lotka-Volterra competition-like model where the effects of competition are on birth rates of one species but on the death rates of the other.
+
+To motivate this, consider a community that contains two types of birds, say type 1 and type  2. These birds compete for limited resources, but in a peculiar manner: Though the two birds feed on different food sources, the trees that type 1 birds use for nesting are the same as those that the type 2 birds rely on for food. Both types are fiercely territorial and do not tolerate other individuals of either type on either their nesting or feeding sites. Thus, competition between the two types affects the \emph{birth rate} of type 1 birds (because they can't find good nesting sites) but the \emph{death rate} of type 2 birds (because of starvation), whereas intratype competition affects the death rate in both cases (due to competition for food sources). Occasionally, each type can give birth to babies of the other type due to mutations. Let us construct the simplest possible model for such a system.
+
+Let each type of bird have a constant per-capita intrinsic birth rate (rate of birth of individuals, not rate at which individuals give birth) of 1 due to reproduction. Additionally, type 1 birds face a reduction in birth rates due to competition with type 2 birds. Let us assume that the magnitude of this competition (per-capita) is equal to the per-capita competition experienced from other individuals of the same type. Both types have some additional birth rate due to rare mutations of the other type, parameterized by a mutation rate $\mu > 0$. Let $n_i$ be the number of type $i$ individuals (which may vary over time). Assuming trees and birds are both randomly distributed through the landscape, we arrive at the birth rates
+\begin{equation}
+\label{App_example_stoch_LV_birth_rates}
+\begin{aligned}
+	b_{1}({n_1},{n_2}) &= {n_1} + \mu n_2 - \frac{{n_1}{n_2}}{K}\\
+	b_{2}({n_1},{n_2}) &= {n_2} + \mu n_1
+\end{aligned}
+\end{equation}
+Here, the ${n_1}{n_2}/K$ term represents the effect of competition between types; The product ${n_1}{n_2}$ quantifies how often a type 1 bird and a type 2 bird are expected to interact, and $K$ is a carrying capacity for the habitat (in analogy to logistic growth or Lotka-Volterra competition), and can be thought of as a proxy for the amount of tree cover in the landscape.
+
+For the death rates, I assume that the effect of intra-type competition on the death rate is linearly density-dependent, and thus arrive at the equations:
+\begin{equation}
+\label{App_example_stoch_LV_death_rates}
+\begin{aligned}
+	d_{1}({n_1},{n_2}) &= \frac{{n_1^2}}{K}\\
+	d_{2}({n_1},{n_2}) &= \frac{{n_2^2}}{K} + \frac{{n_1}{n_2}}{K}
+\end{aligned}
+\end{equation}
+Note that the effect of competition between types manifests here in an increased death rate of type 2 birds due to starvation.
+
+Moving to density space via the change of variables $x_i = n_i/K$, letting $\mathbf{x} = [x_1, x_2]^{\mathrm{T}}$, and comparing terms with equations \eqref{nD_functional_forms_for_replicator}, we can see that the per-capita fitness $w_i$ of each type is:
+\begin{equation*}
+	w_{1}(\mathbf{x}) = w_{2}(\mathbf{x}) = 1 - x_1 - x_2
+\end{equation*}
+The two types of birds have the same fitness! This implies that $w_1 = w_2 = \overline{w}$ and the selection term in \eqref{nD_replicator_mutator} vanishes.
+However, if we now compute the per-capita turnover rates $\tau_i$  of each type, we see that we have
+\begin{align*}
+	\tau_{1}(\mathbf{x}) &= 1 + x_1 - x_2\\
+	\tau_{2}(\mathbf{x}) &= 1 + x_1 + x_2
+\end{align*}
+Thus, $\tau_{1} < \tau_{2}$, and from equation \eqref{nD_stochastic_RM}, we thus know that noise-induced selection favors type 1 over type 2.
+\myfig{1}{figures/App_stoch_LV_density_plots.png}{\textbf{(A)} Time series and \textbf{(B)} Density estimates for $p$, the fraction of type 1 individuals in the population for various values of $K$, obtained from a direct individual-based simulation of the model  conducted via the Gillespie algorithm. At high $K$, the population conforms to deterministic (infinite population) predictions. The time series are from single realizations. The density plots in panel $(B)$ are estimated from 100 independent realizations, each of which were run for $10^4$ timesteps. All simulations were initialized with $n_1 = n_2 = K/2$. In all simulations, $\mu = 0.05$.}{App_stoch_LV_dens_plots}
+Direct Gillespie simulations indeed reveal that for low values of $K$, the fraction of individuals in the population that are of type \textcolor{red}{1} is significantly biased to be greater than 0.5, showing the effect of noise-induced selection (Figure \ref{App_stoch_LV_dens_plots}). This bias disappears for high values of $K$, as expected.
+
+For this model, we can in fact quantitatively derive the effects of noise-induced selection by explicitly calculating each term of equation \eqref{nD_stochastic_RM}. Let $p = x_1/(x_1 + x_2)$ be the frequency of type 1 individuals and let $q = 1-p$. Then, it is easy to check by direct substitution of our functional forms that \eqref{nD_stochastic_RM} becomes
+\begin{equation}
+	dp =  \frac{2}{K}p^2qdt + \mu\left(1-\frac{1}{KN_K}\right)\left(q-p\right) + q\sqrt{A^{+}_1}dW_t^{(1)} - p\sqrt{A^{+}_2}dW_t^{(2)}
+\end{equation}
+where $A_i^{+}$ is as defined throughout this thesis and each $W^{i}$ is an independent Wiener process. This equation clearly shows the biasing effect of noise-induced selection in the first term of the RHS. Since $p^2(1-p) > 0$ for $p \in (0,1)$, this term always tends to increase the fraction of type 1 individuals in the population. The second term is a mutational term, and simply reflects the fact that we assumed that $1 \to 2$ and $2 \to 1$ mutations are equally likely (and thus the net direction of mutational effects on frequency depends on the difference between the frequencies of type 1 and type 2 individuals).
+
 \section{Interlude: Detecting modes in quantitative trait distributions through Fourier analysis}
 
 In Chapter \ref{chap_infD_processes}, we used various approximations to arrive at the linear functional Fokker-Planck equation
