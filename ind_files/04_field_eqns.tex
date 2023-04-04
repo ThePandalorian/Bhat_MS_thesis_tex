@@ -190,10 +190,10 @@ This is a version of the replicator-mutator equation for continuous strategy spa
 
 Equation \eqref{cts_replicator_mutator} also recovers~\posscite{kimura_stochastic_1965} continuum-of-alleles model when each $x$ is viewed as an allele, $Q(x|\psi)$ takes the form of a convolution of $\psi(x,t)$ with a mutation kernel, and the trait space is the entire real line, \emph{i.e.} $\mathcal{T} = \mathbb{R}$. To see this, let $Q(y|\psi) = \int\limits_{\mathbb{R}}m(y-z)\psi(z,t)dz$, where $m:\mathbb{R} \to [0,\infty)$ is a mutation kernel, which by definition is normalized such that $\int\limits_{\mathbb{R}}m(x)dx = 1$. Let us further note that I have implicitly been assuming\footnote{This actually need not be an assumption, and can be derived as a theorem under biologically reasonable conditions on the birth/death functionals upon taking the rigorous approach to both the system size expansion (rescaling) and the infinite population limit. See, for example,~\citet{etheridge_introduction_2000} or proposition 4.1 in~\citet{champagnat_individual_2008}} that even though the total number of individuals $\int \nu(x) dx \to \infty$ as $K \to \infty$, the \emph{scaled} population size $N_K = \int \nu(x) dx / K$ remains finite at all times, \emph{i.e.} $N_K(t) = \int\limits_{\mathbb
 R}\psi(x,t)dx < \infty \ \forall \ t$. Thus, for any fixed $t > 0$, we have
-\begin{equation*}
-\int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}|m(y-z)\psi(z,t)|dydz =  \int\limits_{\mathbb{R}}\left(\int\limits_{\mathbb{R}}|m(y-z)|dy\right)|\psi(z,t)|dz
-= \|m\|_{L^{1}(\mathbb{R})}\|\psi\|_{L^{1}(\mathbb{R})} < \infty
-\end{equation*}
+\begin{align*}
+\int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}|m(y-z)\psi(z,t)|dydz &=  \int\limits_{\mathbb{R}}\left(\int\limits_{\mathbb{R}}|m(y-z)|dy\right)|\psi(z,t)|dz\\
+&=\left(\int\limits_{\mathbb{R}}|m(x)|dx\right)\left(\int\limits_{\mathbb{R}}|\psi(z,t)|dz\right) < \infty
+\end{align*}
 We can therefore conclude that $m(y-z)\psi(z,t) \in  L^{1}(\mathbb{R}\times\mathbb{R})$ for any given $t>0$, meaning we can use the Fubini-Tonnelli theorem to interchange the order of integration of iterated integrals of $m(y-z)\psi(y)$. We are now ready to evaluate the rightmost integral of \eqref{cts_replicator_mutator}.
 
 We have: 
