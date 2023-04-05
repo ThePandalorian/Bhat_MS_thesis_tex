@@ -198,12 +198,19 @@ However, if we now compute the per-capita turnover rates $\tau_i$  of each type,
 	\tau_{1}(\mathbf{x}) &= 1 + x_1 - x_2\\
 	\tau_{2}(\mathbf{x}) &= 1 + x_1 + x_2
 \end{align*}
-Thus, $\tau_{1} < \tau_{2}$, and from equation \eqref{nD_stochastic_RM}, we thus know that noise-induced selection favors type 1 over type 2.
-\myfig{1}{figures/App_stoch_LV_density_plots.png}{\textbf{(A)} Time series and \textbf{(B)} Density estimates for $p$, the fraction of type 1 individuals in the population for various values of $K$, obtained from a direct individual-based simulation of the model defined by equations \eqref{App_example_stoch_LV_birth_rates} and \eqref{App_example_stoch_LV_death_rates}, simulated via the (exact) Gillespie algorithm. Dotted lines are at $p=0.5$. At high $K$, the population conforms to deterministic (infinite population) predictions, but at low K, the distribution is biased towards $p > 0.5$. The time series are from single realizations. The density plots in panel $(B)$ are estimated from 100 independent realizations, each of which were run for $10^4$ timesteps. All simulations were initialized with $n_1 = n_2 = K/2$. In all simulations, $\mu = 0.05$.}{App_stoch_LV_dens_plots}
+Thus, $\tau_{1} < \tau_{2}$, and from equation \eqref{nD_stochastic_RM}, we know that this means noise-induced selection favors type 1 over type 2.
 
 Direct simulations of the individual-based model indeed reveal that for low values of $K$, the fraction of individuals in the population that are of type 1 is significantly biased to be greater than 0.5, showing the effect of noise-induced selection (Figure \ref{App_stoch_LV_dens_plots}). This bias disappears for high values of $K$, as expected.
+\myfig{1}{figures/App_stoch_LV_density_plots.png}{\textbf{(A)} Time series and \textbf{(B)} Density estimates for $p$, the fraction of type 1 individuals in the population for various values of $K$, obtained from a direct individual-based simulation of the model defined by equations \eqref{App_example_stoch_LV_birth_rates} and \eqref{App_example_stoch_LV_death_rates}, simulated via the (exact) Gillespie algorithm. Dotted lines are at $p=0.5$. At high $K$, the population conforms to deterministic (infinite population) predictions, but at low K, the distribution is biased towards $p > 0.5$. The time series are from single realizations. The density plots in panel $(B)$ are estimated from 100 independent realizations, each of which were run for $10^4$ timesteps. All simulations were initialized with $n_1 = n_2 = K/2$. In all simulations, $\mu = 0.05$.}{App_stoch_LV_dens_plots}
 
-For this model, we can in fact quantitatively derive the effects of noise-induced selection by explicitly calculating each term of equation \eqref{nD_stochastic_RM}. Let $p = x_1/(x_1 + x_2)$ be the frequency of type 1 individuals and let $q = 1-p$. Then, it is easy to check by direct substitution of our functional forms that equation \eqref{nD_stochastic_RM} becomes
+For this model, we can in fact quantitatively derive the effects of noise-induced selection by explicitly calculating each term of equation \eqref{nD_stochastic_RM}. Let $p = x_1/(x_1 + x_2)$ be the frequency of type 1 individuals and let $q = 1-p$. Then, it is easy to check by direct substitution of our functional forms that we have
+\begin{align*}
+	\overline{w} &= w_1(\mathbf{x}) = w_2(\mathbf{x})\\
+	\overline{\tau} &= 1 + x_1 + x_2(q-p)\\
+	\mu Q_i(\mathbf{p}) &= \mu p_{j}\textrm{ , where $i \neq j$}\\
+	\mu(Q_1(\mathbf{p}) - p\left(\sum\limits_{j=1}^{2} Q_j(\mathbf{p})\right)) &= \mu(q-p)
+\end{align*}
+And thus, equation \eqref{nD_stochastic_RM} becomes
 \begin{equation}
 	\label{App_stoch_LV_RM_eqn}
 	dp =  \left[\frac{2}{K}p^2q + \mu\left(1-\frac{1}{KN_K}\right)\left(q-p\right)\right]dt + q\sqrt{A^{+}_1}dW_t^{(1)} - p\sqrt{A^{+}_2}dW_t^{(2)}
