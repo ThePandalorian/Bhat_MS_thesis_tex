@@ -75,29 +75,30 @@ Thus, we have
 \begin{equation*}
 A^{\pm}_{i} = x_i\left(\left(\lambda \pm \mu\right) + \sum\limits_{j=1}^{m}\left(\beta_{ij} \pm \delta_{ij}\right)x_j\right)
 \end{equation*}
-Defining $r \coloneqq \lambda - \mu$, $\nu \coloneqq \lambda + \mu$, and $T_{ij} \coloneqq \beta_{ij} + \delta_{ij}$, we see from equation \eqref{nD_Ito_SDE} that the mesoscopic view is the $m$ dimensional SDE given by
+Defining $r \coloneqq \lambda - \mu$, $\nu \coloneqq \lambda + \mu$, and $T_{ij} \coloneqq \beta_{ij} + \delta_{ij}$, and matching terms with equation \eqref{nD_functional_forms_for_replicator}, we can identify that we have $\mu = 0$ and
+\begin{align}
+	w_i(\mathbf{x}) &= r + \sum\limits_{j=1}^{m}M_{ij}x_j\label{nD_example_fitness}\\
+	\tau_i(\mathbf{x}) &= \nu + \sum\limits_{j=1}^{m}T_{ij}x_j\label{nD_example_turnover}
+\end{align}
+From equation \eqref{nD_Ito_SDE}, we see that the `mesoscopic' description of the system is the $m$ dimensional SDE given by
 \begin{equation}
 \label{nD_example_SDE}
 d\mathbf{X}_{t} = \mathbf{A^-}(\mathbf{X}_t)dt + \frac{1}{\sqrt{K}}\mathbf{D}(\mathbf{X}_t)d\mathbf{W}_t
 \end{equation}
 where 
 \begin{equation*}
-\mathbf{A^-}_i = {(\mathbf{X}_{t})}_i(r + \sum\limits_{j=1}^{m}M_{ij}{(\mathbf{X}_{t})}_j) 
+\mathbf{A^-}_i = {(\mathbf{X}_{t})}_iw_i(\mathbf{X}_{t})
 \end{equation*}
 and
 \begin{equation*}
-(\mathbf{D}\mathbf{D}^{\mathrm{T}})_i = {(\mathbf{X}_{t})}_i(\nu + \sum\limits_{j=1}^{m}T_{ij}{(\mathbf{X}_{t})}_j) 
+(\mathbf{D}\mathbf{D}^{\mathrm{T}})_i = {(\mathbf{X}_{t})}_i\tau_i(\mathbf{X}_{t})
 \end{equation*}
-From \eqref{nD_det_limit}, we see that the deterministic limit is a set of $m$ coupled ODEs given by
+From \eqref{nD_det_limit}, we see that the infinite population limit of our model is a set of $m$ coupled ODEs given by
 \begin{equation}
 \label{nD_example_det_limit}
-\frac{d x_i}{dt} = x_i\left(r + \sum\limits_{j=1}^{m}M_{ij}x_j\right)
+\frac{d x_i}{dt} = x_iw_i(\mathbf{x}) = x_i\left(r + \sum\limits_{j=1}^{m}M_{ij}x_j\right)
 \end{equation}
-These are precisely the Lotka-Volterra equations for a system of $m$ species. By matching the terms of \eqref{nD_example_density_b_d_rates} with those of \eqref{nD_functional_forms_for_replicator}, we can identify that we have $\mu = 0$ and
-\begin{equation}
-\label{nD_example_fitness}
-w_i(\mathbf{x}) = r + \sum\limits_{j=1}^{m}M_{ij}x_j
-\end{equation}
+These are precisely the Lotka-Volterra equations for a system of $m$ species.
 If $\mathbf{p}(t) = [p_1(t),\ldots,p_m(t)]^{\mathrm{T}}$ is the frequency vector at time $t$ and $N_K(t) = \sum_i x_i(t)$, then the mean fitness is given by
 \begin{align}
 \overline{w}(t) &= \sum\limits_{i=1}^{m}w_ip_i\\
