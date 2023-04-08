@@ -1,3 +1,5 @@
+# $\LaTeX$ source code for my (Shikhara Bhat's) MS thesis.
+
 <p align="justify">
 This repository contains the TeX files required for compiling my (Shikhara Bhat's) MS thesis, written as part of the BS-MS degree at the Indian Institute of Science Education and Research (IISER) Pune, India, in the year 2022-23. The thesis was conducted under the supervision of <a href='https://teelabiisc.wordpress.com/'>Prof. Vishwesha Guttal</a> and <a href='https://sites.google.com/view/rohinibalakrishnanlab/home'>Prof. Rohini Balakrishnan</a> at the Centre for Ecological Sciences in the Indian Institute of Science, Bengaluru. <a href='https://sites.google.com/a/acads.iiserpune.ac.in/sdlab/pbl-iiser-p'>Prof. Sutirth Dey</a> from IISER Pune acted as the internal expert for evaluating the thesis.
 </br>
