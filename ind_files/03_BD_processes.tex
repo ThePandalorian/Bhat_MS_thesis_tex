@@ -105,7 +105,7 @@ where $b^{\textrm{(ind)}}_{i}(\mathbf{x})$ and $d^{\textrm{(ind)}}_{i}(\mathbf{x
 
 \section{Statistical measures for population-level quantities}\label{sec_stat_measures}
 
-Though the causes of evolution are generally through ecological phenomena that occur at the \emph{individual} level like we have been working with, we are very often interested in tracking the effects of evolution on quantities described at a \emph{population} level, such as the mean fitness or mean phenotype in the population~\citep{bourrat_evolution_2019}. Furthermore, the relevant quantities at the individual level, such as individual fitness or phenotype, are typically equal for all individuals of the same type (in some sense this is our basis for defining different types in the first place). I use the term `type-level quantities' henceforth to refer to such quantities that are equal for all individuals that are of the same type. To facilitate the description of such quantities, given any state $\mathbf{x}(t)$ that describes our population at time $t$, let us first define the total (scaled) population size and the frequency of each type in the population as:
+Though the causes of evolution are generally described in terms of ecological phenomena affecting birth, death, and interactions, all of which operate at the \emph{individual} level like we have been working with, evolution itself is typically described at a \emph{population} level, in terms of type frequencies~\citep{bourrat_evolution_2019}. We are also often interested in describing the effect of evolutionary forces on population-level quantities, such as the mean fitness or the mean phenotype in the population. Furthermore, the relevant quantities at the individual level, such as individual fitness or phenotype, are typically equal for all individuals of the same type (in some sense this is our basis for defining different types in the first place). I use the term `type-level quantities' henceforth to refer to such quantities that are equal for all individuals that are of the same type. To facilitate the description of such quantities, given any state $\mathbf{x}(t)$ that describes our population at time $t$, let us first define the total (scaled) population size and the frequency of each type in the population as:
 \begin{equation}
 	\label{nD_tot_pop_and_prop_inds_defn}
 	\begin{aligned}
@@ -113,7 +113,7 @@ Though the causes of evolution are generally through ecological phenomena that o
 		p_i(t) &\coloneqq \frac{x_i(t)}{N_{K}(t)} = \frac{n_i(t)}{\sum\limits_{j=1}^{m}n_i(t)}
 	\end{aligned}
 \end{equation}
-Now, let $f$ be any type-level quantity with (possibly time-dependent) value $f_i$ for the $i\textsuperscript{th}$ type. For example, if each type is a phenotype for a trait such as height, which can be assigned a numerical value, then setting $f_i = \textit{value of $i\textsuperscript{th}$ phenotype}$ gives us the mean trait value in the population. We can compute the statistical mean value of any such quantity in the population as
+Now, let $f$ be any type-level quantity with (possibly time-dependent) value $f_i \in \mathbb{R}$ for the $i\textsuperscript{th}$ type. For example, if each type is a phenotype for a trait such as height, which can be assigned a numerical value, then setting $f_i = \textit{value of $i\textsuperscript{th}$ phenotype}$ gives us the mean trait value in the population. We can compute the statistical mean value of any such quantity in the population as
 \begin{equation}
 \label{nD_mean}
 \overline{f}(t) \coloneqq \sum\limits_{i=1}^{m}f_ip_{i}
