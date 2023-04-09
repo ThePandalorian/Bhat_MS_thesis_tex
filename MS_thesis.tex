@@ -207,8 +207,9 @@ and Research (IISER), Pune are gratefully acknowledged; However, it is worth exp
 %Add the phantomsection so that hyperref knows where to go
 \cleardoublepage
 \phantomsection
-\vspace{-4.5cm}
-\Huge\textbf{References}
+\vspace*{1.3cm}
+%Add a title for the bibliography
+{\noindent\fontsize{48}{60}\selectfont \textbf{References}}
 %Add an entry in the table of contents
 \addcontentsline{toc}{part}{References}
 %Change the font for the bibliography
@@ -216,7 +217,7 @@ and Research (IISER), Pune are gratefully acknowledged; However, it is worth exp
 %Typeset the bibliography little differently using ragged2e
 \begingroup
 \RaggedRight
-\vspace{2ex}
+\vspace{5ex}
 %Add the bibliography
 \printbibliography[heading=none]
 \endgroup
