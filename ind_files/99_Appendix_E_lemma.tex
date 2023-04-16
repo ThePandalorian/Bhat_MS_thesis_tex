@@ -44,7 +44,7 @@ By definition of our original process $X_t$, we can now conclude that
 \end{equation}
 thus completing the proof.
 \end{proof}
-Using this lemma, we can now calculate the stochastic integral terms of our equations. For the stochastic analog of the Price equation, we have:
+Using this lemma, we can now calculate the stochastic integral terms of our equations. For equation \eqref{nD_stochastic_Price}, the stochastic analog of the Price equation, we have:
 \begin{equation}
 dW_{\overline{f}} = \sum\limits_{i=1}^{m}\left(f_i-\overline{f}\right)\sqrt{A_i^+}dW_{t}^{(i)} = \left(\sum\limits_{i=1}^{m}\left(f_i-\overline{f}\right)^2A_i^+\right)^{1/2}dW_t
 \end{equation}
@@ -54,7 +54,7 @@ where $dW_t$ is now a single one-dimensional Wiener process. This is precisely t
 	dW_{\overline{f}} = \sqrt{N_K(t) \left(\textrm{Cov}(\tau,\left(f - \overline{f}\right)^2) + \overline{\tau}\sigma^2_{f} +\mu \sum\limits_{i=1}^{m}\left(f_i - \overline{f}\right)^2Q_i(\mathbf{p})\right)}dW_t
 \end{equation}
 
-Similarly, for the variance equation, we can use our lemma to write
+Similarly, for the variance equation \eqref{nD_stochastic_Price_variance}, we can use our lemma to write
 \begin{equation}
 dW_{\sigma^2_f} = \sum\limits_{i=1}^{m}\left(f_i - \overline{f}\right)^2\sqrt{A_i^+}dW_{t}^{(i)} = \left(\sum\limits_{i=1}^{m}\left(f_i - \overline{f}\right)^4 A_i^+\right)^{1/2}dW_t
 \end{equation}
