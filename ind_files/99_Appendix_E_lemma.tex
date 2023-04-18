@@ -27,7 +27,7 @@ By a simple corollary of the It\^o isometry, we can calculate the quadratic vari
 \bigg\langle \int\limits G(X_s) \cdot d\mathbf{W}_s \bigg\rangle_t &= \int\limits_{0}^{t} \bignorm{ G(X_s) }^2 d \langle \mathbf{W} \rangle_s \nonumber\\
 &= \int\limits_{0}^{t}  \frac{1}{g_1^2 + g_2^2} \cdot (g_1^2 + g_2^2) ds = \int\limits_{0}^{t} ds  = t \label{lemma_ito_isometry_step}
 \end{align}
-Further, since $\int G \cdot d\mathbf{W}$ is a stochastic integral, it is guaranteed to be a continuous square-integrable martingale.  But, by L\'evy's characterization of Brownian motion, the only continuous martingale $M_t$ that satisfies $\langle M \rangle_t = t$ is the Brownian motion. Thus, from equation \eqref{lemma_ito_isometry_step}, we are led to conclude that there is a one-dimensional Wiener process $W_t$ on the same probability space such that we can write
+Further, since $\int G \cdot d\mathbf{W}$ is a stochastic integral, the process $M_t = \int_0^t G(X_s) \cdot d\mathbf{W}_s$ is guaranteed to be a continuous square-integrable martingale.  But, by L\'evy's characterization of Brownian motion, the only continuous martingale $M_t$ that satisfies $\langle M \rangle_t = t$ is the Brownian motion. Thus, from equation \eqref{lemma_ito_isometry_step}, we are led to conclude that there is a one-dimensional Wiener process $W_t$ on the same probability space such that we can write
 \begin{equation}
 	\label{lemma_G_is_W}
 	G(X_t) \cdot d\mathbf{W}_t = dW_t
