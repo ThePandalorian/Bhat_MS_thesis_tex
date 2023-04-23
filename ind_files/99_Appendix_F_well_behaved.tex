@@ -23,16 +23,14 @@ which is what one would expect if things are working correctly.
 
 We can also look at the scenario $p_i \to 1$. Note that as $p_i \to 1$, we must obviously have $p_j \to 0 \ \forall \ j \neq i$ (\emph{i.e.} $\mathbf{p} \to e_i$, where $e_i = [0,\cdots,0,1,0,\cdots,0]$ is the $i$\textsuperscript{th} basis vector, with 1 in the $i$\textsuperscript{th} entry and 0 everywhere else). This means that $\overline{w} \to w_i$ and $\overline{\tau} \to \tau_i$, and thus both the selection terms in equation \eqref{App_well_behavedness_stoch_RM} vanish. We are left with
 \begin{equation*}
-	\begin{aligned}
-		\lim\limits_{p_i \to 1} dp_i(t) &= -\mu\left[\left(1 - \frac{1}{KN_K}\right)\left(\lim\limits_{\mathbf{p} \to e_i}\sum\limits_{j\neq i}^{m}Q_j(\mathbf{p})\right)\right]dt\\[15pt]
-		&+ \frac{1}{\sqrt{KN_{K}(t)}}\left[\mu\left(\lim\limits_{\mathbf{p} \to e_i} \sum\limits_{j\neq i}Q_j(\mathbf{p})\right)\right]^{1/2}dW_t
-	\end{aligned}
+		\lim\limits_{p_i \to 1} dp_i(t) = -\mu\left[\left(1 - \frac{1}{KN_K}\right)\left(\lim\limits_{\mathbf{p} \to e_i}\sum\limits_{j\neq i}^{m}Q_j(\mathbf{p})\right)\right]dt
+		+ \frac{1}{\sqrt{KN_{K}(t)}}\left[\mu\left(\lim\limits_{\mathbf{p} \to e_i} \sum\limits_{j\neq i}Q_j(\mathbf{p})\right)\right]^{1/2}dW_t
 \end{equation*}
-Since by definition, $\mu \geq 0$, $Q_j \geq 0$, and  $KN_K \geq 1$, we can conclude as before that we must have
+Since by definition, $\mu \geq 0$, $Q_j \geq 0$, and  $KN_K \geq 1$, we can conclude that we must have
 \begin{equation*}
 	\lim\limits_{p_i \to 1} \frac{dp_i}{dt} \leq 0 \ \textrm{a.s.}
 \end{equation*}
-which again is as expected. Note that just like before, the inequality is purely due to mutational effects. If we now impose $\mu \to 0$ (no mutation in the system) or $\lim\limits_{\mathbf{p} \to e_i} Q_j(\mathbf{p}) \to 0 \ \forall \ j$ (No mutations of type $i$ individuals into individuals of other types), we will once again get
+which again is as expected. Note that just like before, the inequality is purely due to mutational effects. If we now impose $\mu \to 0$ (no mutation in the system) or $Q_j(\mathbf{p}) \to 0 \ \forall \ j$ (No mutations of type $i$ individuals into individuals of other types), we will once again get
 \begin{equation*}
 	\lim_{\substack{p_i \to 1 \\ Q_j \to 0 \ \forall \ j}} \frac{dp_i}{dt} = 0
 \end{equation*}
