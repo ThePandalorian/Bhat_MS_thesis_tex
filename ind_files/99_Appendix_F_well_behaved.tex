@@ -30,8 +30,8 @@ Since by definition, $\mu \geq 0$, $Q_j \geq 0$, and  $KN_K \geq 1$, we can conc
 \begin{equation*}
 	\lim\limits_{p_i \to 1} \frac{dp_i}{dt} \leq 0 \ \textrm{a.s.}
 \end{equation*}
-which again is as expected. Note that just like before, the inequality is purely due to mutational effects. If we now impose $\mu \to 0$ (no mutation in the system) or $Q_j(\mathbf{p}) \to 0 \ \forall \ j$ (No mutations of type $i$ individuals into individuals of other types), we will once again get
+which again is as expected. Note that just like before, the inequality is purely due to mutational effects. If we now impose $\mu \to 0$ (no mutation in the system) or $Q_j(\mathbf{p}) \to 0 \ \forall \ j \neq i$ (No mutations of type $i$ individuals into individuals of other types), we will once again get
 \begin{equation*}
-	\lim_{\substack{p_i \to 1 \\ Q_j \to 0 \ \forall \ j}} \frac{dp_i}{dt} = 0
+	\lim_{\substack{p_i \to 1 \\ Q_j \to 0 \ \forall \ j \neq i}} \frac{dp_i}{dt} = 0
 \end{equation*}
 showing that our equations are always well-behaved.
