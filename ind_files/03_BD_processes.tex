@@ -139,13 +139,14 @@ dp_i(t) &= \left[(w_i(\mathbf{x}) - \overline{w})p_i + \mu\left\{Q_i(\mathbf{p})
 \end{aligned}
 \end{equation}
 where $W^{(1)}_t,W^{(2)}_t, \ldots, W^{(m)}_t$ are $m$ independent one-dimensional Wiener processes and I have used the notation $Q_i(\mathbf{p}) = Q_i(\mathbf{x})/N_K(t)$ for notational clarity. I will show below that the first term in this expression describes directional changes in the population composition due to `classical' evolutionary forces such as selection and mutation that occur in deterministic infinite population models. The second term is an additional directional force on population composition that is only seen in finite populations and can be thought of as a biasing `selection' for reduced turnover rate due to an effect similar to gambler's ruin in probability theory. The consequences of this term, as well as connections with previous studies, are discussed in detail in part \ref{part_summary}. Finally, the last term of equation \eqref{nD_eqn_for_frequencies} describes non-directional stochastic effects due to fluctuations and has a `spreading effect' \textcolor{blue}{(Also see equation} \eqref{nD_stoch_RM_noise_term_alt_representation} \textcolor{blue}{in Appendix} \ref{App_alternative_representation} \textcolor{blue}{for a more elegant representation of these noise terms as an integral against a single Wiener process)}. \textcolor{blue}{For the case $m=2, \mu = 0$ (two interacting types of individuals, no mutation), this expression, after using the representation of noise terms presented in Appendix} \ref{App_alternative_representation} \textcolor{blue}{and letting $p = p_1$, becomes the considerably simpler expression
-\begin{equation*}
+\begin{equation}
+	\label{two_species_stoch_RM}
 	\begin{aligned}
 		dp &= \left[(w_1 - w_2)p(1-p) - \frac{1}{KN_K}(\tau_1-\tau_2)p(1-p)\right]dt\\
 		&+ \frac{1}{\sqrt{KN_K}}\left(p(1-p)\left[\tau_1 + (\tau_2 - \tau_1)p\right]\right)^{1/2}dW_t
 	\end{aligned}
-\end{equation*}
-It is easy to see that if we start with an initial condition $p_0 \in [0,1]$, this system will always remain in $[0,1]$, and in that sense, it is `well-behaved'. Well-behavedness at the boundaries for the more general equation} \eqref{nD_eqn_for_frequencies} \textcolor{blue}{can also be checked directly, and has been carried out in Appendix} \ref{App_well_behaved}.
+\end{equation}
+It is easy to see that if we start with an initial condition $p_0 \in [0,1]$, the system defined by equation \eqref{two_species_stoch_RM} will always remain in $[0,1]$, and in that sense, it is `well-behaved'. Similar well-behavedness at the boundaries for the more general equation} \eqref{nD_eqn_for_frequencies} \textcolor{blue}{can also be checked directly, and has been carried out in Appendix} \ref{App_well_behaved}.
 
 \section{The infinite population limit}\label{sec_nD_det_limit}
 Like in \ref{sec_1D_processes}, we can once again take $K \to \infty$ in \eqref{nD_Ito_SDE} to obtain a deterministic expression. Here, the expression reads
