@@ -115,7 +115,7 @@ which is the familiar version of the replicator equation seen in most textbooks,
 
 In frequency space, the complete mesoscopic description for the stochastic dynamics can be similarly calculated in terms of the matrices $\mathbf{M}$ and $\mathbf{T}$, and will yield:
 \begin{equation}
-\resizebox{\textwidth}{!}{$\displaystyle dp_i =  N_K(t)\left( \left[(\mathbf{Mp})_i - \mathbf{p}\cdot\mathbf{Mp}\right]p_i - \frac{1}{KN_K}\left[(\mathbf{Tp})_i - \mathbf{p}\cdot\mathbf{Tp}\right]p_i\right)dt + \frac{1}{\sqrt{K}}\left(p_i(\mathbf{Tp})_i - p_i^2\sum\limits_{j=1}^{m}(\mathbf{Tp})_j\right)^{1/2}dW_t$} 
+\resizebox{\textwidth}{!}{$\displaystyle dp_i =  N_K(t)\left( \left[(\mathbf{Mp})_i - \mathbf{p}\cdot\mathbf{Mp}\right]p_i - \frac{1}{KN_K}\left[(\mathbf{Tp})_i - \mathbf{p}\cdot\mathbf{Tp}\right]p_i\right)dt + \frac{1}{\sqrt{K}}\left(p_i(\mathbf{Tp})_i + p_i^2\sum\limits_{j=1}^{m}(\mathbf{Tp})_j\right)^{1/2}dW_t$} 
 \end{equation}
 
 We can also carry out the weak noise approximation for this system. Let the solution to the equations \eqref{nD_example_det_limit} be given by $\mathbf{a}(t) = [a_1(t),\ldots,a_m(t)]^{\mathrm{T}}$. For the weak noise approximation, we can Taylor expand $A^{\pm}_i$ and use \eqref{nD_WNA_directional_derivative_for_replicator_eqns} to compute the directional derivative as:
