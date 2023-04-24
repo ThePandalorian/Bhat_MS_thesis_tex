@@ -1,0 +1,37 @@
+We begin with the stochastic generalization of the replicator-mutator equation, equation \eqref{nD_stochastic_RM}. Since the $p_i$s describe frequencies, if the system is well-behaved, then if it begins in $[0,1]^{m}$, it should remain inside $[0,1]^{m}$ for all time. We are thus interested in the behavior of this equation at the boundaries of $[0,1]^{m}$. Using the representation of the noise-term presented in equation \eqref{nD_stoch_RM_noise_term_alt_representation}, we can rewrite equation \eqref{nD_stochastic_RM} as
+\begin{equation}
+	\label{App_well_behavedness_stoch_RM}
+	\begin{aligned}
+		dp_i(t) &= \left[(w_i(\mathbf{x}) - \overline{w})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\[15pt]
+		&- \frac{1}{K}\frac{1}{N_{K}(t)}\left[(\tau_i(\mathbf{x}) - \overline{\tau})p_i + \mu\left\{Q_i(\mathbf{p}) - p_i\left(\sum\limits_{j=1}^{m}Q_j(\mathbf{p})\right)\right\}\right]dt\\[15pt]
+		&+ \frac{1}{\sqrt{KN_{K}(t)}}\left[p_i(1-p_i)\tau_i + p_i^2\left(\sum\limits_{j\neq i}\tau_j p_j\right) + \mu\left\{(1-p_i)^2Q_i(\mathbf{p}) + p_i^2 \sum\limits_{j\neq i}Q_j(\mathbf{p})\right\}\right]^{1/2}dW_t
+	\end{aligned}
+\end{equation}
+Now, if we let $p_i \to 0$ to look at the behavior at the $0$ boundary, we are left with
+\begin{equation*}
+	\lim\limits_{p_i \to 0} dp_i(t) = \lim\limits_{p_i \to 0}\left( \mu\left[\left(1-\frac{1}{KN_K}\right)Q_i(\mathbf{p})\right]dt+ \frac{1}{\sqrt{KN_{K}}}\sqrt{\mu Q_i(\mathbf{p})}dW_t\right)
+\end{equation*}
+Since $\mu \geq 0$, $Q_i \geq 0,$ and $KN_K \geq 1$ by definition, all terms on the RHS are non-negative. The strongest effect is from the $dt$ term due to the $1/\sqrt{K}$ pre-factor in the stochastic term, meaning that $dp_i$ will almost certainly be $\geq 0$. Thus, we can conclude that
+\begin{equation*}
+	\lim\limits_{p_i \to 0} \frac{dp_i}{dt} \geq 0 \ \textrm{a.s.}
+\end{equation*}
+where the inequality is due to mutational effects. Further, now letting $\mu \to 0$ (no mutation in the system) or $Q_i(\mathbf{p}) \to 0$ (No mutations of individuals of other types into type $i$ individuals), both terms entirely vanish, and we get
+\begin{equation*}
+	\lim_{\substack{p_i \to 0 \\ Q_i \to 0}} \frac{dp_i}{dt} = 0
+\end{equation*}
+which is what one would expect if things are working correctly.
+
+We can also look at the scenario $p_i \to 1$. Note that as $p_i \to 1$, we must obviously have $p_j \to 0 \ \forall \ j \neq i$ (\emph{i.e.} $\mathbf{p} \to e_i$, where $e_i = [0,\cdots,0,1,0,\cdots,0]$ is the $i$\textsuperscript{th} basis vector, with 1 in the $i$\textsuperscript{th} entry and 0 everywhere else). This means that $\overline{w} \to w_i$ and $\overline{\tau} \to \tau_i$, and thus both the selection terms in equation \eqref{App_well_behavedness_stoch_RM} vanish. We are left with
+\begin{equation*}
+		\lim\limits_{p_i \to 1} dp_i(t) = -\mu\left[\left(1 - \frac{1}{KN_K}\right)\left(\lim\limits_{\mathbf{p} \to e_i}\sum\limits_{j\neq i}^{m}Q_j(\mathbf{p})\right)\right]dt
+		+ \frac{1}{\sqrt{KN_{K}(t)}}\left[\mu\left(\lim\limits_{\mathbf{p} \to e_i} \sum\limits_{j\neq i}Q_j(\mathbf{p})\right)\right]^{1/2}dW_t
+\end{equation*}
+Since by definition, $\mu \geq 0$, $Q_j \geq 0$, and  $KN_K \geq 1$, we can conclude that we must have
+\begin{equation*}
+	\lim\limits_{p_i \to 1} \frac{dp_i}{dt} \leq 0 \ \textrm{a.s.}
+\end{equation*}
+which again is as expected. Note that just like before, the inequality is purely due to mutational effects. If we now impose $\mu \to 0$ (no mutation in the system) or $Q_j(\mathbf{p}) \to 0 \ \forall \ j \neq i$ (No mutations of type $i$ individuals into individuals of other types), we will once again get
+\begin{equation*}
+	\lim_{\substack{p_i \to 1 \\ Q_j \to 0 \ \forall \ j \neq i}} \frac{dp_i}{dt} = 0
+\end{equation*}
+showing that our equations are always well-behaved.

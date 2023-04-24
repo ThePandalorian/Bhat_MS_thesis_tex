@@ -183,15 +183,15 @@ iiser-thesis class.}}%
   \addcontentsline{toc}{chapter}{Contents}
   \cleardoublepage
   %List of tables
-  \if@bd@lot{\listoftables\cleardoublepage}%
-  \listoftables
-  \addcontentsline{toc}{chapter}{List of Tables}
-  \cleardoublepage
+  %\if@bd@lot{\listoftables\cleardoublepage}%
+  %\listoftables
+  %\addcontentsline{toc}{chapter}{List of Tables}
+  %\cleardoublepage
   %List of figures
-  \if@bd@lof{\listoffigures\cleardoublepage}%
-  \listoffigures
-  \addcontentsline{toc}{chapter}{List of Figures}
-  \cleardoublepage
+  %\if@bd@lof{\listoffigures\cleardoublepage}%
+  %\listoffigures
+  %\addcontentsline{toc}{chapter}{List of Figures}
+  %\cleardoublepage
   \mainmatter}
 \let\if@bd@onlinesubmission\@firstoftwo
 \newcommand{\bd@tf@onlinesubmission}{%
