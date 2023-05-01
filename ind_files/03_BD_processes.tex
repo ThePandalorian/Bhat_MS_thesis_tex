@@ -143,7 +143,7 @@ where $W^{(1)}_t,W^{(2)}_t, \ldots, W^{(m)}_t$ are $m$ independent one-dimension
 	\label{two_species_stoch_RM}
 	\begin{aligned}
 		dp &= \left[(w_1 - w_2)p(1-p) - \frac{1}{KN_K}(\tau_1-\tau_2)p(1-p)\right]dt\\
-		&+ \frac{1}{\sqrt{KN_K}}\left(p(1-p)\left[\tau_1 + (\tau_2 - \tau_1)p\right]\right)^{1/2}dW_t
+		&+ \frac{1}{\sqrt{KN_K}}\sqrt{p(1-p)\left[\tau_1 + (\tau_2 - \tau_1)p\right]}dW_t
 	\end{aligned}
 \end{equation}
 In this equation, if we start with an initial condition $p_0 \in [0,1]$, the system defined by equation \eqref{two_species_stoch_RM} will always remain in $[0,1]$, and in that sense, it is `well-behaved'. To see this, one can observe that the RHS of equation \eqref{two_species_stoch_RM} identically vanishes at both $p=0$ and $p=1$, since every term on the RHS contains the product $p(1-p)$. Further, since there is no mutation between types, $p=0$ (extinction of type 1 organisms) and $p=1$ (extinction of type 2 organisms) are both `absorbing states', \emph{i.e.} a system which reaches these states can never leave them. Well-behavedness at the boundaries for the more general equation \eqref{nD_eqn_for_frequencies} can be checked directly, and has been carried out in Appendix \ref{App_well_behaved}.
